@@ -25,7 +25,7 @@ $(document).ready(function() {
                 web3.utils.toHex(result[1]) +
                 "<br><br>Unix Date: " +
                 result[2] +
-                "<br>Readable date (dd:mm:yy) " +
+                "<br>Readable date (hours:min:sec dd:mm:yy) " +
                 unixTimeToDate(result[2]);
               $("#getVerifyDiv").html("Verification: " + verifyHtml);
             });

@@ -15,6 +15,7 @@ $(document).ready(function() {
             .send({ from: account })
             .then(function(result) {
               ajaxPost(result);
+              console.log(result);
               elementLoading.classList.remove("running");
             })
             .catch(function(error) {
