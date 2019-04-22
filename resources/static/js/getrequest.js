@@ -1,11 +1,11 @@
 $( document ).ready(function() {
-  
+
     // GET REQUEST
     $("#allUsers").click(function(event){
       event.preventDefault();
       ajaxGet();
     });
-    
+
     // DO GET
     function ajaxGet(){
       $.ajax({
@@ -14,7 +14,7 @@ $( document ).ready(function() {
         success: function(result){
           $('#getResultDiv ul').empty();
           $.each(result, function(i, user){
-            $('#getResultDiv .list-group').append("ID:" + user.id + " Measurement: " + user.measurement + "<br>")
+            $('#getResultDiv .list-group').append("ID:" + user.id + " Measurement: " + user.measurement + " Time: " + user.timestamp + "<br>")
           });
           console.log("Success: ", result);
         },
@@ -22,6 +22,6 @@ $( document ).ready(function() {
           $("#getResultDiv").html("<strong>Error</strong>");
           console.log("ERROR: ", e);
         }
-      });  
+      });
     }
   })
