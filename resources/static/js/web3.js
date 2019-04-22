@@ -50,7 +50,12 @@ window.addEventListener('load', () => {
 			}
 		],
 		"name": "dataWrite",
-		"outputs": [],
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -124,6 +129,6 @@ window.addEventListener('load', () => {
 		"stateMutability": "view",
 		"type": "function"
 	}
-],"0x4542b11573481d7b20e25816064e1f341d615973");
+],"0xe0dae256e61e354094d8502804d129aa99c1bfc6");
 
 });

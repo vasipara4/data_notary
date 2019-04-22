@@ -11,13 +11,10 @@ $(document).ready(function() {
         if (result == false) {
           elementLoading.classList.add("running");
           contract.methods
-            .dataWrite(
-              $("#measurement").val(),
-              $("#id").val()
-            )
+            .dataWrite($("#measurement").val(), $("#id").val())
             .send({ from: account })
             .then(function(result) {
-              ajaxPost();
+              ajaxPost(result);
               elementLoading.classList.remove("running");
             })
             .catch(function(error) {
@@ -31,11 +28,13 @@ $(document).ready(function() {
       });
   });
 
-  function ajaxPost() {
+  function ajaxPost(timestamp) {
     // PREPARE FORM DATA
     var formData = {
       measurement: $("#measurement").val(),
-      id: $("#id").val()
+      id: $("#id").val(),
+      timestamp: timestamp
+      // TODO: create timestamp variable all over the function
     };
 
     // DO POST
@@ -52,8 +51,10 @@ $(document).ready(function() {
             "Post Successfully! <br>" +
             "--> Measurement: " +
             user.measurement +
-            " , ID: " +
+            " ,ID: " +
             user.id +
+            " ,Time: " +
+            user.timestamp +
             "</p>"
         );
       },

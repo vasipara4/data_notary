@@ -18,9 +18,10 @@ contract Data {
       _;
   }
 
-    function dataWrite(string _data, uint _id) public dataNew(_id) {
+    function dataWrite(string _data, uint _id) public dataNew(_id) returns(uint){
         uint hashedData = uint(keccak256(_data, uint(now)));
         idToData[_id] = dataObject(msg.sender, hashedData, now);
+        return idToData[_id].date;
     }
 
     function verifyHash(string _data, uint _id) public view returns (bool) {
