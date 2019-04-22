@@ -24,8 +24,8 @@ contract Data {
     }
 
     function verifyHash(string _data, uint _id) public view returns (bool) {
-      uint hashedData = uint(keccak256(_data, idToData[_id.date]));
-      if (hashedData == idToData.[_id].data)
+      uint hashedData = uint(keccak256(_data, idToData[_id].date));
+      if (hashedData == idToData[_id].data)
           return true;
         return false;
     }

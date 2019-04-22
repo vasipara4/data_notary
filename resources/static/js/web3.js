@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
      }
     }).catch(console.error);
   } else {
-      if (window.confirm('No web3 detected! You should consider trying MetaMask!\nRedirect to their website?')) 
+      if (window.confirm('No web3 detected! You should consider trying MetaMask!\nRedirect to their website?'))
       {
       window.location.href='https://metamask.io/';
       }
@@ -28,14 +28,102 @@ window.addEventListener('load', () => {
     web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:8545'));
   }
 
-   
 
-   //console.log(web3.eth.net.getId()); 
-  
+
+   //console.log(web3.eth.net.getId());
+
   /*web3.eth.getAccounts().then((f) => {
     account = f[0];
    });*/
- 
-  contract = new web3.eth.Contract([ { "constant": false, "inputs": [ { "name": "data", "type": "uint256" }, { "name": "id", "type": "uint256" } ], "name": "dataWrite", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "id", "type": "uint256" } ], "name": "notDuplicates", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "hashToVerify", "type": "uint256" }, { "name": "id", "type": "uint256" } ], "name": "verify", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" } ],"0x048ae75c5927fc0ba7673fc61a870b58338166fb");
-  
+
+  contract = new web3.eth.Contract([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_data",
+				"type": "string"
+			},
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "dataWrite",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "dataExists",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getDataDetails",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_data",
+				"type": "string"
+			},
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "verifyHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+],"0x4c84f49c4dac5e1555e50357b5e0c3bbd1d7bdb2");
+
 });
