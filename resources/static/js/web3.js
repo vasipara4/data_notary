@@ -38,6 +38,33 @@ window.addEventListener('load', () => {
 
   contract = new web3.eth.Contract([
 	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToData",
+		"outputs": [
+			{
+				"name": "submitter",
+				"type": "address"
+			},
+			{
+				"name": "data",
+				"type": "uint256"
+			},
+			{
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -50,12 +77,7 @@ window.addEventListener('load', () => {
 			}
 		],
 		"name": "dataWrite",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -73,6 +95,25 @@ window.addEventListener('load', () => {
 			{
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getTimestamp",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -129,6 +170,6 @@ window.addEventListener('load', () => {
 		"stateMutability": "view",
 		"type": "function"
 	}
-],"0xe0dae256e61e354094d8502804d129aa99c1bfc6");
+],"0x8075c91f57eb260cf3df26d97335868ba49fabf1");
 
 });

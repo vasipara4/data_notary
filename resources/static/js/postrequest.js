@@ -4,6 +4,8 @@ $(document).ready(function() {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
     var elementLoading = document.getElementById("insertLoading");
+    var measurement_val = $("#measurement").val();
+    var id_val = $("#id").val();
     contract.methods
       .dataExists($("#id").val())
       .call({ from: account })
@@ -11,10 +13,13 @@ $(document).ready(function() {
         if (result == false) {
           elementLoading.classList.add("running");
           contract.methods
-            .dataWrite($("#measurement").val(), $("#id").val())
+            .dataWrite(measurement_val, id_val)
             .send({ from: account })
             .then(function(result) {
-              ajaxPost(result);
+              contract.methods.getTimestamp(id_val).call({ from: account })
+              .then(function(setTimestamp){
+                  ajaxPost(setTimestamp);
+              });
               console.log(result);
               elementLoading.classList.remove("running");
             })

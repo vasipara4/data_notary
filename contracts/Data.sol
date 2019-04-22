@@ -6,7 +6,7 @@ contract Data {
     uint date;
   }
 
-  mapping (uint => dataObject) idToData;
+  mapping (uint => dataObject) public idToData;
 
   modifier dataExisting(uint _id){
       require(idToData[_id].submitter != address(0));
@@ -18,10 +18,9 @@ contract Data {
       _;
   }
 
-    function dataWrite(string _data, uint _id) public dataNew(_id) returns(uint){
+    function dataWrite(string _data, uint _id) public dataNew(_id) {
         uint hashedData = uint(keccak256(_data, uint(now)));
         idToData[_id] = dataObject(msg.sender, hashedData, now);
-        return idToData[_id].date;
     }
 
     function verifyHash(string _data, uint _id) public view returns (bool) {
@@ -31,6 +30,9 @@ contract Data {
         return false;
     }
 
+    function getTimestamp(uint _id) public view dataExisting(_id) returns (uint) {
+      return idToData[_id].date;
+    }
 
 
     function dataExists(uint256 _id) public view returns(bool){
