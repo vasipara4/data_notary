@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
     var accountsPromise = web3.eth.getAccounts();
     var networkIdPromise = web3.eth.net.getId();// web3.version.network;
     Promise.all([networkIdPromise,accountsPromise]).then(function(result){
-      console.log(result[0]);
+      //console.log(result[0]);
       networkVersion=result[0];
       var accounts= result[1];
       account=accounts[0];
@@ -124,6 +124,6 @@ window.addEventListener('load', () => {
 		"stateMutability": "view",
 		"type": "function"
 	}
-],"0x4c84f49c4dac5e1555e50357b5e0c3bbd1d7bdb2");
+],"0x4542b11573481d7b20e25816064e1f341d615973");
 
 });

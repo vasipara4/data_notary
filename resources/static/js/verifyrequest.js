@@ -10,28 +10,26 @@ $(document).ready(function() {
       .verifyHash(testingData, testingId)
       .call({ from: account })
       .then(function(result) {
-        console.log(result);
+        //console.log(result);
         if (result) {
           contract.methods
             .getDataDetails(testingId)
             .call({ from: account })
             .then(function(result) {
-              console.log(result[0]);
+              //console.log(result[0]);
               verifyHtml =
                 "True" +
                 "<br>Account: " +
                 result[0] +
                 "<br>Hash: " +
-                result[1] +
+                web3.utils.toHex(result[1]) +
                 "<br>Unix Date: " +
                 result[2];
               $("#getVerifyDiv").html("Verification: " + verifyHtml);
-            })
-            .catch(function(error) {
-              $("#getVerifyDiv").html("Verification: " + verifyHtml);
             });
         }
-        //$("#getVerifyDiv").html("Verification: " + verifyHtml);
+        else
+          $("#getVerifyDiv").html("Verification: " + verifyHtml);
       });
   });
 });
