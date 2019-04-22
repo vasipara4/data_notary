@@ -45,7 +45,7 @@ $(document).ready(function() {
       data: JSON.stringify(formData),
       dataType: "json",
       success: function(user) {
-        console.log(contract);
+      //  console.log(contract);
         $("#postResultDiv").html(
           "<p>" +
             "Post Successfully! <br>" +
