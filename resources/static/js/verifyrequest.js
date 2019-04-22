@@ -21,11 +21,11 @@ $(document).ready(function() {
                 "True" +
                 "<br>Account: " +
                 result[0] +
-                "<br>Hash: " +
+                "<br><br>Data: " +
                 web3.utils.toHex(result[1]) +
-                "<br>Unix Date: " +
+                "<br><br>Unix Date: " +
                 result[2] +
-                "<br>Readable date (dd:mm:yy) : " +
+                "<br>Readable date (dd:mm:yy) " +
                 unixTimeToDate(result[2]);
               $("#getVerifyDiv").html("Verification: " + verifyHtml);
             });
@@ -49,16 +49,17 @@ function unixTimeToDate(unix_timestamp) {
 
   // Will display time in 10:30:23 format
   var formattedTime =
-    day.substr(-2) +
-    "/" +
-    month.substr(-2) +
-    "/" +
-    year +
     "<br>" +
     hours +
     ":" +
     minutes.substr(-2) +
     ":" +
-    seconds.substr(-2);
+    seconds.substr(-2) +
+    " " +
+    day.substr(-2) +
+    "/" +
+    month.substr(-2) +
+    "/" +
+    year ;
   return formattedTime;
 }
