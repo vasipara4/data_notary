@@ -11,7 +11,7 @@ $( document ).ready(function() {
         if (result) {
           contract.methods.getDataDetails(testingId).call({from: account}).then(function(results){
             verifyHtml = "True" +"<br>Account: " + results[0] + "<br>Hash: " + results[1] + "<br>Unix Date: " + results[2];
-          })
+          });
         }
         else {
           verifyHtml = "False";

@@ -50,7 +50,7 @@ $(document).ready(function() {
         $("#postResultDiv").html(
           "<p>" +
             "Post Successfully! <br>" +
-            "--> Measurement " +
+            "--> Measurement: " +
             user.measurement +
             " , ID: " +
             user.id +
