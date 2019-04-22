@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
     var accountsPromise = web3.eth.getAccounts();
     var networkIdPromise = web3.eth.net.getId();// web3.version.network;
     Promise.all([networkIdPromise,accountsPromise]).then(function(result){
-      console.log(result);
+      console.log(result[0]);
       networkVersion=result[0];
       var accounts= result[1];
       account=accounts[0];
