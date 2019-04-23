@@ -38,141 +38,141 @@ window.addEventListener("load", () => {
 
   const contract = new web3.eth.Contract(
     [
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "",
-            type: "uint256"
-          }
-        ],
-        name: "idToData",
-        outputs: [
-          {
-            name: "submitter",
-            type: "address"
-          },
-          {
-            name: "data",
-            type: "uint256"
-          },
-          {
-            name: "date",
-            type: "uint256"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            name: "_data",
-            type: "string"
-          },
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
-        name: "dataWrite",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
-        name: "dataExists",
-        outputs: [
-          {
-            name: "",
-            type: "bool"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
-        name: "getTimestamp",
-        outputs: [
-          {
-            name: "",
-            type: "uint256"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
-        name: "getDataDetails",
-        outputs: [
-          {
-            name: "",
-            type: "address"
-          },
-          {
-            name: "",
-            type: "uint256"
-          },
-          {
-            name: "",
-            type: "uint256"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_data",
-            type: "string"
-          },
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
-        name: "verifyHash",
-        outputs: [
-          {
-            name: "",
-            type: "bool"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      }
-    ],
-    "0x63c495af0dcc8cd7077e9b78910512008122a218"
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_data",
+				"type": "string"
+			},
+			{
+				"name": "_id",
+				"type": "int256"
+			}
+		],
+		"name": "dataWrite",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToData",
+		"outputs": [
+			{
+				"name": "submitter",
+				"type": "address"
+			},
+			{
+				"name": "data",
+				"type": "uint256"
+			},
+			{
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "dataExists",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getTimestamp",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getDataDetails",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_data",
+				"type": "string"
+			},
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "verifyHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+],
+    "0x653aee5011cbe1d1b5e20c204cdf8f1b031f8f00"
   );
 
   $("#userForm").submit(function(event) {

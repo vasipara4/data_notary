@@ -12,15 +12,19 @@ contract Data {
       require(idToData[_id].submitter != address(0));
       _;
   }
+  modifier greaterThanZero(int _id) {
+    require(_id >= 0);
+    _;
+  }
 
   modifier dataNew(uint _id){
       require(idToData[_id].submitter == address(0));
       _;
   }
 
-    function dataWrite(string _data, uint _id) public dataNew(_id) {
+    function dataWrite(string _data, int _id) public greaterThanZero(_id) dataNew(uint(_id))  {
         uint hashedData = uint(keccak256(_data, uint(now)));
-        idToData[_id] = dataObject(msg.sender, hashedData, now);
+        idToData[uint(_id)] = dataObject(msg.sender, hashedData, now);
     }
 
     function verifyHash(string _data, uint _id) public view returns (bool) {
