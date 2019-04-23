@@ -11,19 +11,23 @@ $(document).ready(function() {
       type: "GET",
       url: "/api/users/all",
       success: function(result) {
-        $("#getResultDiv ul").empty();
+        $("#getResultDiv").empty();
         $.each(result, function(i, user) {
-          $("#getResultDiv .list-group").append(
-            "ID:" +
+          $("#getResultDiv").append(
+            "<div class='card' style='width: 18rem;'><div class='card-body'> <h5 class='card-title'>ID: " +
               user.id +
-              " Measurement: " +
-              user.measurement +
-              " Time: " +
-              user.timestamp +
-              "<br>Submitter: " +
+              "</h5><h6 class='card-subtitle mb-2 text-muted'>" +
+              "Submitter: " +
               user.submitter +
-              " Gas Used: " +
-              user.gasUsed
+              " Gas: " +
+              user.gasUsed +
+              "</h6><p class='card-text'>" +
+              "Measurement: " +
+              user.measurement +
+              "</p><span class='card-link'>" +
+              "Unix Time: " +
+              user.timestamp +
+              "</span></div></div>"
           );
         });
         console.log("Success: ", result);
