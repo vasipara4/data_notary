@@ -32,7 +32,7 @@
       </div>
       <div class="form-group">
       <label for="id">ID:</label>
-      <input type="number" class="form-control" id="id" placeholder="Enter positive number" required/>
+      <input type="number" class="form-control" id="id" placeholder="Enter positive number" min="0" required/>
       </div>
       <button type="submit" id="insertLoading" class="btn btn-default ld-ext-right">Insert Data in Eth + Db<div class="ld ld-ring ld-spin"></div></button>
     </form>
@@ -61,7 +61,7 @@
       </div>
       <div class="form-group">
       <label for="lastname">Enter ID:</label>
-      <input type="number" class="form-control" id="verify_id" placeholder="Enter positive number" required/>
+      <input type="number" class="form-control" id="verify_id" placeholder="Enter positive number"  min="0" required/>
       </div>
       <button type="submit" id="verifyButton" class="btn btn-default">Verify</button>
       <div id="getVerifyDiv">
