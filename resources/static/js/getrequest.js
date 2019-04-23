@@ -14,20 +14,17 @@ $(document).ready(function() {
         $("#getResultDiv").empty();
         $.each(result, function(i, user) {
           $("#getResultDiv").append(
-            "<div class='card' style='width: 18rem;'><div class='card-body'> <h5 class='card-title'>ID: " +
-              user.id +
-              "</h5><h6 class='card-subtitle mb-2 text-muted'>" +
-              "Submitter: " +
+            "<div class='card card-default'><div class='card-header'>Submitter: " +
               user.submitter +
-              " Gas: " +
+              " Gas:" +
               user.gasUsed +
-              "</h6><p class='card-text'>" +
-              "Measurement: " +
+              "</div><div class='card-body card-6-6'><div class='card-body'><h3>ID: " +
+              user.id +
+              "</h3><p>Measurement: " +
               user.measurement +
-              "</p><span class='card-link'>" +
-              "Unix Time: " +
+              "</p></div></div><div class='card-footer'>Unix time:" +
               user.timestamp +
-              "</span></div></div>"
+              "</div></div>"
           );
         });
         console.log("Success: ", result);
