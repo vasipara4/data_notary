@@ -44,6 +44,7 @@ $(document).ready(function() {
       timestamp: timestamp
       // TODO: create timestamp variable all over the function
     };
+    console.log(timestamp);
 
     // DO POST
     $.ajax({
