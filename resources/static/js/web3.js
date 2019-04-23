@@ -170,6 +170,6 @@ window.addEventListener('load', () => {
 		"stateMutability": "view",
 		"type": "function"
 	}
-],"0x8075c91f57eb260cf3df26d97335868ba49fabf1");
+],"0x63c495af0dcc8cd7077e9b78910512008122a218");
 
 });
