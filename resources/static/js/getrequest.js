@@ -18,9 +18,9 @@ $(document).ready(function() {
               user.submitter +
               " Gas:" +
               user.gasUsed +
-              "</div><div class='card-body card-6-6'><div class='card-body'><h3>ID: " +
+              "</div><div class='card-body card-6-6'><div class='card-body'><h4>ID: " +
               user.id +
-              "</h3><p>Measurement: " +
+              "</h4><p>Measurement: " +
               user.measurement +
               "</p></div></div><div class='card-footer'>Unix time:" +
               user.timestamp +
