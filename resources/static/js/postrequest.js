@@ -44,7 +44,6 @@ $(document).ready(function() {
       timestamp: timestamp,
       submitter: account,
       gasUsed: gasUsed
-      // TODO: create timestamp variable all over the function
     };
     console.log(timestamp);
 
