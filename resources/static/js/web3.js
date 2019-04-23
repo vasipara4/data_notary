@@ -215,7 +215,7 @@ window.addEventListener("load", () => {
     // PREPARE FORM DATA
     var formData = {
       measurement: $("#measurement").val(),
-      id: $("#id").val(),
+      id: $("#id").valueOf(),
       timestamp: timestamp,
       submitter: account,
       gasUsed: gasUsed
