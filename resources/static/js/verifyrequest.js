@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  // VERIFY
+  // GET REQUEST
   $("#verifyForm").submit(function(event) {
     event.preventDefault();
     //var hashInEthereum;
