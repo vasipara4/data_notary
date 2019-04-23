@@ -1,6 +1,5 @@
 window.addEventListener("load", () => {
   var account;
-  var web3;
   const desiredNetwork = 3;
   var networkVersion;
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
