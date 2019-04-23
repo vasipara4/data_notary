@@ -8,7 +8,9 @@ exports.save = (req, res) => {
     const measurement = new Measurement({
         measurement: req.body.measurement,
         id: req.body.id,
-        timestamp: req.body.timestamp
+        timestamp: req.body.timestamp,
+        submitter: req.body.submitter,
+        gasUsed: req.body.gasUsed
     });
 
     // Save a Measurement in the MongoDB

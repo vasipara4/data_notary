@@ -20,7 +20,7 @@ $(document).ready(function() {
                 .getTimestamp(id_val)
                 .call({ from: account })
                 .then(function(setTimestamp) {
-                  ajaxPost(setTimestamp);
+                  ajaxPost(setTimestamp, result.gasUsed);
                 });
               console.log(result);
               elementLoading.classList.remove("running");
@@ -36,12 +36,14 @@ $(document).ready(function() {
       });
   });
 
-  function ajaxPost(timestamp) {
+  function ajaxPost(timestamp, gasUsed) {
     // PREPARE FORM DATA
     var formData = {
       measurement: $("#measurement").val(),
       id: $("#id").val(),
-      timestamp: timestamp
+      timestamp: timestamp,
+      submitter: account,
+      gasUsed: gasUsed
       // TODO: create timestamp variable all over the function
     };
     console.log(timestamp);
@@ -57,13 +59,13 @@ $(document).ready(function() {
         //  console.log(contract);
         $("#postResultDiv").html(
           "<p>" +
-            "Post Successfully! <br>" +
+          "Post Successfully!" /* <br>" +
             "--> Measurement: " +
             user.measurement +
             " ,ID: " +
             user.id +
             " ,Time: " +
-            user.timestamp +
+            user.timestamp*/ +
             "</p>"
         );
       },
