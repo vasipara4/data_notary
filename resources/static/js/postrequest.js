@@ -16,10 +16,12 @@ $(document).ready(function() {
             .dataWrite(measurement_val, id_val)
             .send({ from: account })
             .then(function(result) {
-              contract.methods.getTimestamp(id_val).call({ from: account })
-              .then(function(setTimestamp){
+              contract.methods
+                .getTimestamp(id_val)
+                .call({ from: account })
+                .then(function(setTimestamp) {
                   ajaxPost(setTimestamp);
-              });
+                });
               console.log(result);
               elementLoading.classList.remove("running");
             })
@@ -51,7 +53,7 @@ $(document).ready(function() {
       data: JSON.stringify(formData),
       dataType: "json",
       success: function(user) {
-      //  console.log(contract);
+        //  console.log(contract);
         $("#postResultDiv").html(
           "<p>" +
             "Post Successfully! <br>" +
