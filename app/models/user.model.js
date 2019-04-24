@@ -7,6 +7,7 @@ const UserSchema = mongoose.Schema({
     },
     id: {
       type: Number,
+      min: 0,
       unique: true,
       required: true
     },
@@ -20,6 +21,7 @@ const UserSchema = mongoose.Schema({
     },
     gasUsed: {
       type: Number,
+      min: 0,
       required: true
     }
 });
