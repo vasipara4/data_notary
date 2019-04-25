@@ -204,17 +204,7 @@ window.addEventListener("load", () => {
       dataType: "json",
       success: function(user) {
         //  console.log(contract);
-        $("#postResultDiv").html(
-          "<p>" +
-          "Post Successfully!" /* <br>" +
-          "--> Measurement: " +
-          user.measurement +
-          " ,ID: " +
-          user.id +
-          " ,Time: " +
-          user.timestamp*/ +
-            "</p>"
-        );
+        $("#postResultDiv").html("<p>" + "Post Successfully!" + "</p>");
       },
       error: function(e) {
         alert("Error!");
@@ -254,8 +244,8 @@ window.addEventListener("load", () => {
               user.id +
               "</h4><p>Measurement: " +
               user.measurement +
-              "</p></div></div><div class='card-footer'>Unix time:" +
-              user.timestamp +
+              "</p></div></div><div class='card-footer'>Time & Date:" +
+              unixTimeToDate(user.timestamp) +
               "</div></div>"
           );
         });
@@ -294,7 +284,7 @@ window.addEventListener("load", () => {
                 web3.utils.toHex(result[1]) +
                 "<br><br>Unix Date: " +
                 result[2] +
-                "<br>Readable date (hours:min:sec dd:mm:yy) " +
+                "<br>Time and Date :<br> " +
                 unixTimeToDate(result[2]);
               $("#getVerifyDiv").html("Verification: " + verifyHtml);
             });
@@ -317,7 +307,6 @@ window.addEventListener("load", () => {
 
     // Will display time in 10:30:23 format
     var formattedTime =
-      "<br>" +
       hours +
       ":" +
       minutes.substr(-2) +
