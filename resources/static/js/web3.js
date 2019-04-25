@@ -244,7 +244,7 @@ window.addEventListener("load", () => {
               user.id +
               "</h4><p>Measurement: " +
               user.measurement +
-              "</p></div></div><div class='card-footer'>Time & Date:" +
+              "</p></div></div><div class='card-footer'>Time & Date: " +
               unixTimeToDate(user.timestamp) +
               "</div></div>"
           );
