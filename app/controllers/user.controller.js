@@ -23,9 +23,9 @@ exports.save = (req, res) => {
 
 //upload file to Server
 var uploadedFile = req.files.pdf;
-uploadedFile.mv('/files/pdf/' + uploadedFile.name, function(err) {
+uploadedFile.mv(__basedir + '/files/pdf/' + uploadedFile.name, function(err) {
     if (err)
-      return res.status(500).send(err);
+      return res.status(500).send(err + " on directory");
   });
 
     // Create a Measurement
