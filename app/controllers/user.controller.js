@@ -8,7 +8,7 @@ exports.save = (req, res) => {
   console.log("Server Time:"+dateServer);
   console.log("Tx Time:"+ req.body.timestamp);
 
-  //RULERS:
+  //VALIDATION RULERS:
   //dateServer can't be smaller than block.timestamp
   //after 200 seconds the POST request is canceled
   if (dateServer<req.body.timestamp || dateServer > req.body.timestamp + 200 ) {
@@ -16,6 +16,17 @@ exports.save = (req, res) => {
         message: "Error: POST timeout"
     });
   }
+  if (Object.keys(req.files).length != 1) {
+    return res.status(400).send('Upload only one file, please');
+  }
+
+//upload file to Server
+var uploadedFile = req.files.pdf;
+uploadedFile.mv('/files/pdf/' + uploadedFile.name, function(err) {
+    if (err)
+      return res.status(500).send(err);
+  });
+
     // Create a Measurement
     const measurement = new Measurement({
         measurement: req.body.measurement,
