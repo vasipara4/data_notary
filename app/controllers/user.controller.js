@@ -1,5 +1,4 @@
 const Measurement = require('../models/user.model.js');
-const fileUpload = require('express-fileupload');
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
@@ -23,10 +22,9 @@ exports.save = (req, res) => {
 
 //upload file to Server
 var uploadedFile = req.files.pdf;
-console.log(__basedir);
-uploadedFile.mv('./files/pdf/' + req.files.pdf.name, function(err) {
+uploadedFile.mv('../files/pdf/' + req.files.pdf.name, function(err) {
     if (err)
-      return res.status(500).send(err + " on directory");
+      return res.status(500).send(err);
   });
 
     // Create a Measurement

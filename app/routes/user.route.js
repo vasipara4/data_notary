@@ -2,6 +2,7 @@
 module.exports = function(app) {
 
     var express = require("express");
+    const fileUpload = require('express-fileupload');
     var router = express.Router();
     const users = require('../controllers/user.controller.js');
     var path = __basedir + '/views/';
