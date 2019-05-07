@@ -2,7 +2,8 @@ const Measurement = require('../models/user.model.js');
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
-  console.log('Post a Measurement: ' + JSON.stringify(req.body));
+  //console.log('Post a Measurement: ' + JSON.stringify(req.body));
+
   // TODO: Validate that dateServer is close to req.body.timestamp
   var dateServer = Math.floor(new Date() / 1000);
   console.log("Server Time:"+dateServer);
@@ -11,21 +12,14 @@ exports.save = (req, res) => {
   //VALIDATION RULERS:
   //dateServer can't be smaller than block.timestamp
   //after 200 seconds the POST request is canceled
-  if (dateServer<req.body.timestamp || dateServer > req.body.timestamp + 200 ) {
+  /*if (dateServer<req.body.timestamp || dateServer > req.body.timestamp + 200 ) {
     res.status(500).send({
         message: "Error: POST timeout"
     });
   }
   if (Object.keys(req.files).length != 1) {
     return res.status(400).send('Upload only one file, please');
-  }
-
-//upload file to Server
-var uploadedFile = req.files.pdf;
-uploadedFile.mv('../files/pdf/' + req.files.pdf.name, function(err) {
-    if (err)
-      return res.status(500).send(err);
-  });
+  }*/
 
     // Create a Measurement
     const measurement = new Measurement({

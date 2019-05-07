@@ -1,30 +1,29 @@
-
 module.exports = function(app) {
+  var express = require("express");
+  var router = express.Router();
 
-    var express = require("express");
-    const fileUpload = require('express-fileupload');
-    var router = express.Router();
-    const users = require('../controllers/user.controller.js');
-    var path = __basedir + '/views/';
 
-    router.use(function (req,res,next) {
-      console.log("/" + req.method);
-      next();
-    });
+  const users = require("../controllers/user.controller.js");
+  var path = __basedir + "/views/";
 
-    app.get('/', (req,res) => {
-      res.sendFile(path + "index.html");
-    });
+  router.use(function(req, res, next) {
+    console.log("/" + req.method);
+    next();
+  });
 
-    // Save a User to MongoDB
-    app.post('/api/users/save', users.save);
+  app.get("/", (req, res) => {
+    res.sendFile(path + "index.html");
+  });
 
-    // Retrieve all Users
-    app.get('/api/users/all', users.findAll);
+  // Save a User to MongoDB
+  app.post("/api/users/save", upload.single("file"), users.save);
 
-    app.use("/",router);
+  // Retrieve all Users
+  app.get("/api/users/all", users.findAll);
 
-    app.use("*", (req,res) => {
-      res.sendFile(path + "404.html");
-    });
-  }
+  app.use("/", router);
+
+  app.use("*", (req, res) => {
+    res.sendFile(path + "404.html");
+  });
+};

@@ -186,22 +186,29 @@ window.addEventListener("load", () => {
 
   function ajaxPost(timestamp, gasUsed) {
     // PREPARE FORM DATA
-    var formData = {
+    /*var formData = {
       measurement: $("#measurement").val(),
       id: $("#id").val(),
       timestamp: timestamp,
       submitter: account,
       gasUsed: gasUsed
     };
-    console.log(timestamp);
+    formData = JSON.stringify(formData);*/
+    var form = $("#userForm")[0];
+    var formData = new FormData(form);
+    formData.append("timestamp",timestamp);
+    formData.append("submitter",account);
+    formData.append("gasUsed",gasUsed);
+  //  console.log(timestamp);
 
     // DO POST
     $.ajax({
       type: "POST",
-      contentType: "application/json",
+      enctype: 'multipart/form-data',
+      contentType: false,//"application/json",
       url: window.location + "api/users/save",
-      data: JSON.stringify(formData),
-      dataType: "json",
+      data: formData,//JSON.stringify(formData),
+      processData: false,//dataType: "json",
       success: function(user) {
         //  console.log(contract);
         $("#postResultDiv").html("<p>" + "Post Successfully!" + "</p>");

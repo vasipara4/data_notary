@@ -27,17 +27,17 @@
   <h3>Data Notary</h3><hr />
   <br />
   <div>
-    <form id="userForm">
+    <form id="userForm" enctype="multipart/form-data">
       <div class="form-group">
         <label for="measurement">Measurement:</label>
-        <input type="text" class="form-control" id="measurement" placeholder="Enter number/string" required/></div>
+        <input type="text" class="form-control" name="measurement" id="measurement" placeholder="Enter number/string" required/></div>
       <div class="form-group">
-        <input type="file" name="pdf" id="file" accept=".pdf"/>
+        <input type="file" name="file" id="file" accept=".pdf"/>
         <label for="file" class="btn-1">upload pdf file</label>
       </div>
       <div class="form-group">
         <label for="id">ID:</label>
-        <input type="number" class="form-control" id="id" placeholder="Enter positive number" min="0" required/>
+        <input type="number" name="id" class="form-control" id="id" placeholder="Enter positive number" min="0" required/>
       </div>
       <button type="submit" id="insertLoading" class="btn btn-default ld-ext-right">Insert Data in Eth + Db<div class="ld ld-ring ld-spin"></div></button>
     </form>
