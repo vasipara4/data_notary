@@ -7,7 +7,7 @@ module.exports = function(app) {
       cb(null, __basedir + "/uploads");
     },
     filename: function(req, file, cb) {
-      cb(null, file.originalname + "-" + Date.now());
+      cb(null, Date.now() + "-" + file.originalname );
     }
   });
 console.log(__dirname);
