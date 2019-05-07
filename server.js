@@ -21,6 +21,7 @@ app.use(busboy({
 
 
 app.use(express.static('resources'));
+app.use(express.static('uploads'));
 
 global.__basedir = __dirname;
 
