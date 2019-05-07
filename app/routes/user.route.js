@@ -1,7 +1,20 @@
 module.exports = function(app) {
   var express = require("express");
   var router = express.Router();
+  const multer = require("multer");
+  var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, "/uploads");
+    },
+    filename: function(req, file, cb) {
+      cb(null, file.fieldname + "-" + Date.now());
+    }
+  });
 
+  var upload = multer({
+    storage: storage,
+    limits: { fileSize: 16 * 1024 * 1024 }
+  });
 
   const users = require("../controllers/user.controller.js");
   var path = __basedir + "/views/";
