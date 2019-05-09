@@ -2,13 +2,13 @@ module.exports = function(app) {
   var express = require("express");
   var router = express.Router();
   const multer = require("multer");
-  //const Web3 = require('web3');
+
   var storage = multer.diskStorage({
     destination: function(req, file, cb) {
       cb(null, __basedir + "/uploads");
     },
     filename: function(req, file, cb) {
-      cb(null, Date.now() + "-" + file.originalname );
+      cb(null, req.body.timestamp + "-" + file.originalname );
     }
   });
   var upload = multer({

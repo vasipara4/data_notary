@@ -1,24 +1,9 @@
 var express = require('express');
 var app = express();
-//var bodyParser = require('body-parser');
-//const fileUpload = require('express-fileupload');
-//var busboy = require('connect-busboy');
 //const Web3 = require('web3');
 //const net = require('net');
-//app.use(bodyParser.json());
 
 //const multer = require('multer');
-//file size limit: 16MB
-/*app.use(fileUpload({
-  limits: { fileSize: 16 * 1024 * 1024 },
-}));*/
-/*
-app.use(busboy({
-  limits: {
-    fileSize: 10 * 1024 * 1024
-  }
-}));*/
-
 
 app.use(express.static('resources'));
 app.use(express.static('uploads'));
