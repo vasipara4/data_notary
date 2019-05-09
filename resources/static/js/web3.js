@@ -154,6 +154,9 @@ window.addEventListener("load", () => {
     var elementLoading = document.getElementById("insertLoading");
     var measurement_val = $("#measurement").val();
     var id_val = $("#id").val();
+
+
+
     contract.methods
       .dataExists($("#id").val())
       .call({ from: account })
@@ -321,15 +324,21 @@ window.addEventListener("load", () => {
   }
 });
 
-var openFile = function(event) {
-      var input = event.target;
-
-      var reader = new FileReader();
-
+async function openFile() {
+      var input = document.getElementById('file').files[0];
+    /*  var reader = new FileReader();
       reader.readAsText(input.files[0]);
       reader.onloadend = function(){
       console.log(reader.result);
       };
+      result = await reader.result*/
+var result = await readFile(input);
+return console.log(result);
+    }
 
-
-    };
+function readFile(file) {
+  return new Promise((resolve, reject) => {
+    let fr = new FileReader();
+    fr.onload = x=> resolve(fr.result);
+    fr.readAsText(file) // or readAsText(file) to get raw content
+})}
