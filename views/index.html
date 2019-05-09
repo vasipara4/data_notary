@@ -32,8 +32,8 @@
         <label for="measurement">Measurement:</label>
         <input type="text" class="form-control" name="measurement" id="measurement" placeholder="Enter number/string" required/></div>
       <div class="form-group">
-        <input type="file" name="file" id="file" accept=".pdf" required/>
-        <label for="file" class="btn-1">upload pdf file</label>
+        <input type="file" name="file" id="file" accept="text/plain" onchange='openFile(event)' required/>
+        <label for="file" class="btn-1">upload txt file</label>
       </div>
       <div class="form-group">
         <label for="id">ID:</label>

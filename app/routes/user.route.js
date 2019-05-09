@@ -2,6 +2,7 @@ module.exports = function(app) {
   var express = require("express");
   var router = express.Router();
   const multer = require("multer");
+  //const Web3 = require('web3');
   var storage = multer.diskStorage({
     destination: function(req, file, cb) {
       cb(null, __basedir + "/uploads");
@@ -10,7 +11,6 @@ module.exports = function(app) {
       cb(null, Date.now() + "-" + file.originalname );
     }
   });
-console.log(__dirname);
   var upload = multer({
     storage: storage,
     limits: { fileSize: 16 * 1024 * 1024 }

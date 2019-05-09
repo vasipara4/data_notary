@@ -171,7 +171,7 @@ window.addEventListener("load", () => {
                   ajaxPost(setTimestamp, result.gasUsed);
                 });
               console.log(result);
-              elementLoading.classList.remove("running");
+              //elementLoading.classList.remove("running");
             })
             .catch(function(error) {
               elementLoading.classList.remove("running");
@@ -182,6 +182,7 @@ window.addEventListener("load", () => {
           alert("ID already exists");
         }
       });
+      elementLoading.classList.remove("running");
   });
 
   function ajaxPost(timestamp, gasUsed) {
@@ -190,7 +191,7 @@ window.addEventListener("load", () => {
     formData.append("timestamp",timestamp);
     formData.append("submitter",account);
     formData.append("gasUsed",gasUsed);
-  
+
 
     // DO POST
     $.ajax({
@@ -318,4 +319,17 @@ window.addEventListener("load", () => {
       year;
     return formattedTime;
   }
+
+  var openFile = function(event) {
+        var input = event.target;
+
+        var reader = new FileReader();
+        reader.onload = function(){
+        console.log(reader.readAsText());
+        };
+        reader.readAsText(input.files[0]);
+      };
+
+
+
 });
