@@ -154,45 +154,43 @@ window.addEventListener("load", () => {
     var elementLoading = document.getElementById("insertLoading");
     var measurement_val = $("#measurement").val();
     var id_val = $("#id").val();
-    var txtString;// = openFile();
+    var txtString; // = openFile();
 
-    Promise.all([openFile()])
-      .then(function(result){
-        txtString=result[0];
-      });
+    Promise.all([openFile()]).then(function(result) {
+      txtString = result[0];
 
-    console.log(txtString);
+      console.log(txtString);
 
-    contract.methods
-      .dataExists($("#id").val())
-      .call({ from: account })
-      .then(function(result) {
-        if (result == false) {
-          elementLoading.classList.add("running");
-          contract.methods
-            .dataWrite(measurement_val, id_val)
-            .send({ from: account })
-            .then(function(result) {
-              contract.methods
-                .getTimestamp(id_val)
-                .call({ from: account })
-                .then(function(setTimestamp) {
-                  ajaxPost(setTimestamp, result.gasUsed);
-                  elementLoading.classList.remove("running");
-                });
-              console.log(result);
-              //elementLoading.classList.remove("running");
-            })
-            .catch(function(error) {
-              elementLoading.classList.remove("running");
-              alert(error);
-            });
-
-        } else {
-          console.log("Id already exists");
-          alert("ID already exists");
-        }
-      });
+      contract.methods
+        .dataExists($("#id").val())
+        .call({ from: account })
+        .then(function(result) {
+          if (result == false) {
+            elementLoading.classList.add("running");
+            contract.methods
+              .dataWrite(measurement_val, id_val)
+              .send({ from: account })
+              .then(function(result) {
+                contract.methods
+                  .getTimestamp(id_val)
+                  .call({ from: account })
+                  .then(function(setTimestamp) {
+                    ajaxPost(setTimestamp, result.gasUsed);
+                    elementLoading.classList.remove("running");
+                  });
+                console.log(result);
+                //elementLoading.classList.remove("running");
+              })
+              .catch(function(error) {
+                elementLoading.classList.remove("running");
+                alert(error);
+              });
+          } else {
+            console.log("Id already exists");
+            alert("ID already exists");
+          }
+        });
+    });
   });
 
   function ajaxPost(timestamp, gasUsed) {
@@ -341,7 +339,7 @@ async function openFile() {
   });
   var result = await readfile;
   return result;
-//  return
+  //  return
 }
 
 /*function readFile(file) {
