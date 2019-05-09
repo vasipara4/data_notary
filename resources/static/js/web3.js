@@ -319,17 +319,14 @@ window.addEventListener("load", () => {
       year;
     return formattedTime;
   }
-
-  var openFile = function(event) {
-        var input = event.target;
-
-        var reader = new FileReader();
-        reader.onload = function(){
-        console.log(reader.readAsText());
-        };
-        reader.readAsText(input.files[0]);
-      };
-
-
-
 });
+
+var openFile = function(event) {
+      var input = event.target;
+
+      var reader = new FileReader();
+      reader.onload = function(){
+      console.log(reader.readAsText());
+      };
+      reader.readAsText(input.files[0]);
+    };
