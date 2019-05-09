@@ -170,6 +170,7 @@ window.addEventListener("load", () => {
                 .call({ from: account })
                 .then(function(setTimestamp) {
                   ajaxPost(setTimestamp, result.gasUsed);
+                  elementLoading.classList.remove("running");
                 });
               console.log(result);
               //elementLoading.classList.remove("running");
@@ -178,7 +179,7 @@ window.addEventListener("load", () => {
               elementLoading.classList.remove("running");
               alert(error);
             });
-          elementLoading.classList.remove("running");
+
         } else {
           console.log("Id already exists");
           alert("ID already exists");
