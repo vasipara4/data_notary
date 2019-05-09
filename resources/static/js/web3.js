@@ -154,8 +154,9 @@ window.addEventListener("load", () => {
     var elementLoading = document.getElementById("insertLoading");
     var measurement_val = $("#measurement").val();
     var id_val = $("#id").val();
+    var txtString;
     Promise.all([openFile()]).then(results => {
-    var txtString = results[0];
+    txtString = results[0];
   });
 
     console.log(txtString);
