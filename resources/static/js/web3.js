@@ -154,6 +154,11 @@ window.addEventListener("load", () => {
     var elementLoading = document.getElementById("insertLoading");
     var measurement_val = $("#measurement").val();
     var id_val = $("#id").val();
+    Promise.all([openFile()]).then(results => {
+    var txtString = result[0];
+  });
+
+    console.log(txtString);
 
     contract.methods
       .dataExists($("#id").val())
@@ -326,14 +331,19 @@ window.addEventListener("load", () => {
 
 async function openFile() {
   var input = document.getElementById("file").files[0];
-  var result = await readFile(input);
+  var readfile = new Promise((resolve, reject) => {
+    let fr = new FileReader();
+    fr.onload = x => resolve(fr.result);
+    fr.readAsText(file); // or readAsText(file) to get raw content
+  });
+  var result = await readfile;
   return console.log(result);
 }
 
-function readFile(file) {
+/*function readFile(file) {
   return new Promise((resolve, reject) => {
     let fr = new FileReader();
     fr.onload = x => resolve(fr.result);
     fr.readAsText(file); // or readAsText(file) to get raw content
   });
-}
+}*/
