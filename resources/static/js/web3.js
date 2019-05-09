@@ -335,8 +335,6 @@ async function openFile() {
     fr.readAsText(input); // or readAsText(file) to get raw content
   });
   var result = await readfile;
-  console.log(result);
-  setTimeout(function(){},3000);
   return result;
 //  return
 }
