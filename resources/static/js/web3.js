@@ -334,10 +334,12 @@ async function openFile() {
   var readfile = new Promise((resolve, reject) => {
     let fr = new FileReader();
     fr.onload = x => resolve(fr.result);
-    fr.readAsText(file); // or readAsText(file) to get raw content
+    fr.readAsText(input); // or readAsText(file) to get raw content
   });
   var result = await readfile;
-  return console.log(result);
+  console.log(result);
+  return result;
+//  return
 }
 
 /*function readFile(file) {
