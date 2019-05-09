@@ -325,10 +325,11 @@ var openFile = function(event) {
       var input = event.target;
 
       var reader = new FileReader();
-      reader.onloadend = function(){
-      //console.log(reader.readAsText());
-      };
+
       reader.readAsText(input.files[0]);
+      reader.onloadend = function(){
       console.log(reader.result);
+      };
+
 
     };
