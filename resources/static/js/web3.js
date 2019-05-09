@@ -336,6 +336,7 @@ async function openFile() {
   });
   var result = await readfile;
   console.log(result);
+  setTImeout(function(){},3000);
   return result;
 //  return
 }
