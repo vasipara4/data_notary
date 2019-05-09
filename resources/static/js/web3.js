@@ -155,8 +155,6 @@ window.addEventListener("load", () => {
     var measurement_val = $("#measurement").val();
     var id_val = $("#id").val();
 
-
-
     contract.methods
       .dataExists($("#id").val())
       .call({ from: account })
@@ -180,33 +178,34 @@ window.addEventListener("load", () => {
               elementLoading.classList.remove("running");
               alert(error);
             });
+          elementLoading.classList.remove("running");
         } else {
           console.log("Id already exists");
           alert("ID already exists");
         }
       });
-      elementLoading.classList.remove("running");
   });
 
   function ajaxPost(timestamp, gasUsed) {
-      var form = $("#userForm")[0];
+    var form = $("#userForm")[0];
     var formData = new FormData(form);
-    formData.append("timestamp",timestamp);
-    formData.append("submitter",account);
-    formData.append("gasUsed",gasUsed);
-
+    formData.append("timestamp", timestamp);
+    formData.append("submitter", account);
+    formData.append("gasUsed", gasUsed);
 
     // DO POST
     $.ajax({
       type: "POST",
-      enctype: 'multipart/form-data',
-      contentType: false,//"application/json",
+      enctype: "multipart/form-data",
+      contentType: false, //"application/json",
       url: window.location + "api/users/save",
-      data: formData,//JSON.stringify(formData),
-      processData: false,//dataType: "json",
+      data: formData, //JSON.stringify(formData),
+      processData: false, //dataType: "json",
       success: function(user) {
         //  console.log(contract);
-        $("#postResultDiv").html("<p>" + "Post Successfully!<br>File uploaded!" + "</p>");
+        $("#postResultDiv").html(
+          "<p>" + "Post Successfully!<br>File uploaded!" + "</p>"
+        );
       },
       error: function(e) {
         alert("Error!");
@@ -325,20 +324,15 @@ window.addEventListener("load", () => {
 });
 
 async function openFile() {
-      var input = document.getElementById('file').files[0];
-    /*  var reader = new FileReader();
-      reader.readAsText(input.files[0]);
-      reader.onloadend = function(){
-      console.log(reader.result);
-      };
-      result = await reader.result*/
-var result = await readFile(input);
-return console.log(result);
-    }
+  var input = document.getElementById("file").files[0];
+  var result = await readFile(input);
+  return console.log(result);
+}
 
 function readFile(file) {
   return new Promise((resolve, reject) => {
     let fr = new FileReader();
-    fr.onload = x=> resolve(fr.result);
-    fr.readAsText(file) // or readAsText(file) to get raw content
-})}
+    fr.onload = x => resolve(fr.result);
+    fr.readAsText(file); // or readAsText(file) to get raw content
+  });
+}
