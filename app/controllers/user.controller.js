@@ -4,7 +4,7 @@ const Measurement = require('../models/user.model.js');
 exports.save = (req, res) => {
   //console.log('Post a Measurement: ' + JSON.stringify(req.body));
   // TODO: Validate that dateServer is close to req.body.timestamp
-  var url_start = "http://miletus.dynu.net:3008/uploads/"+ file.originalname;
+  var url_start = "http://miletus.dynu.net:3008/uploads/"+ req.file.originalname;
   var dateServer = Math.floor(new Date() / 1000);
   console.log("Server Time:"+dateServer);
   console.log("Tx Time:"+ req.body.timestamp);
