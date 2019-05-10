@@ -2,21 +2,13 @@ module.exports = function(app) {
   var express = require("express");
   var router = express.Router();
   const multer = require("multer");
-<<<<<<< HEAD
-//  var dateOfFile = Date.now();
-=======
 
->>>>>>> parent of e6d21e2... Name of upload
   var storage = multer.diskStorage({
     destination: function(req, file, cb) {
       cb(null, __basedir + "/public/uploads");
     },
     filename: function(req, file, cb) {
-<<<<<<< HEAD
-      cb(null, /*dateOfFile + "-" +*/ file.originalname );
-=======
-      cb(null, req.body.id + "-" + file.originalname );
->>>>>>> parent of e6d21e2... Name of upload
+      cb(null,  file.originalname );
     }
   });
   var upload = multer({
