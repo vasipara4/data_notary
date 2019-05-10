@@ -1,10 +1,11 @@
 const Measurement = require('../models/user.model.js');
+var pathFile = require('path');
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
   //console.log('Post a Measurement: ' + JSON.stringify(req.body));
   // TODO: Validate that dateServer is close to req.body.timestamp
-  var url_file = "http://miletus.dynu.net:3008/uploads/" + req.body.submitter + req.body.timestamp + pathFile.extname(file.originalname);
+  var url_file = "http://miletus.dynu.net:3008/uploads/" + req.body.submitter + req.body.timestamp + pathFile.extname(req.file.originalname);
   var dateServer = Math.floor(new Date() / 1000);
   console.log("Server Time:"+dateServer);
   console.log("Tx Time:"+ req.body.timestamp);
