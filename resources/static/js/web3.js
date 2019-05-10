@@ -194,11 +194,14 @@ window.addEventListener("load", () => {
   });
 
   function ajaxPost(timestamp, gasUsed) {
-    var form = $("#userForm")[0];
-    var formData = new FormData(form);
+    //var form = $("#userForm")[0];
+    var formData = new FormData();
+    formData.append("measurement",$("#measurement").val())
+    formData.append("id",$("#id").val())
     formData.append("timestamp", timestamp);
     formData.append("submitter", account);
     formData.append("gasUsed", gasUsed);
+    formData.append("file", document.getElementById("file").files[0]);
     // DO POST
     $.ajax({
       type: "POST",

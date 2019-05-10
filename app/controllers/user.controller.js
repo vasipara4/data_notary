@@ -4,16 +4,16 @@ const Measurement = require('../models/user.model.js');
 exports.save = (req, res) => {
   //console.log('Post a Measurement: ' + JSON.stringify(req.body));
   // TODO: Validate that dateServer is close to req.body.timestamp
-  var url_start = "http://miletus.dynu.net:3008/uploads/"+ req.file.originalname;
+  var url_file = "http://miletus.dynu.net:3008/uploads/" + req.body.submitter + req.body.timestamp + path.extname(file.originalname);
   var dateServer = Math.floor(new Date() / 1000);
   console.log("Server Time:"+dateServer);
   console.log("Tx Time:"+ req.body.timestamp);
 
   //VALIDATION RULERS:
   //dateServer can't be smaller than block.timestamp
-  //after 200 seconds the POST request is canceled
+  //after 150 seconds the POST request is canceled
   if (dateServer<req.body.timestamp || dateServer > req.body.timestamp + 200 ) {
-    res.status(500).send({
+    res.status(400).send({
         message: "Error: POST timeout"
     });
   }
@@ -25,7 +25,7 @@ exports.save = (req, res) => {
         timestamp: req.body.timestamp,
         submitter: req.body.submitter,
         gasUsed: req.body.gasUsed,
-        url: url_start
+        url: url_file
     });
 
     // Save a Measurement in the MongoDB
