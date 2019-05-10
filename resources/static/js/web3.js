@@ -159,7 +159,7 @@ window.addEventListener("load", () => {
     Promise.all([openFile("file")]).then(function(result) {
       txtFileAsString = result[0];
 
-      console.log(txtString);
+      console.log(txtFileAsString);
       //  measurement_val = txtString;
       contract.methods
         .dataExists($("#id").val())
