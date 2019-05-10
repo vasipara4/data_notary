@@ -2,14 +2,14 @@ module.exports = function(app) {
   var express = require("express");
   var router = express.Router();
   const multer = require("multer");
-  var path = require('path');
+  var pathFile = require('path');
 
   var storage = multer.diskStorage({
     destination: function(req, file, cb) {
       cb(null, __basedir + "/public/uploads");
     },
     filename: function(req, file, cb) {
-      cb(null, req.body.submitter + req.body.timestamp + path.extname(file.originalname) );
+      cb(null, req.body.submitter + req.body.timestamp + pathFile.extname(file.originalname) );
     }
   });
   var upload = multer({
