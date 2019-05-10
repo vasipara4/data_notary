@@ -273,8 +273,6 @@ window.addEventListener("load", () => {
   // VERIFY
   $("#verifyForm").submit(function(event) {
     event.preventDefault();
-    //var hashInEthereum;
-    console.log("Submit");
     var verifyHtml = "False";
     var testingData; //= $("#verify_measurement").val()
     var testingId = $("#verify_id").val();
