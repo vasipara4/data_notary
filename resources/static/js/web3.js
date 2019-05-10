@@ -276,11 +276,12 @@ window.addEventListener("load", () => {
     var testingId = $("#verify_id").val();
     Promise.all([openFile("uploadTestFile")]).then(function(result) {
       testingData = result[0];
+      console.log(testingData);
       contract.methods
         .verifyHash(testingData, testingId)
         .call({ from: account })
         .then(function(result) {
-          //console.log(result);
+          console.log(result);
           if (result) {
             contract.methods
               .getDataDetails(testingId)
