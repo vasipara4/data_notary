@@ -271,18 +271,18 @@ window.addEventListener("load", () => {
   $("#verifyForm").submit(function(event) {
     event.preventDefault();
     //var hashInEthereum;
+    console.log("Submit");
     var verifyHtml = "False";
     var testingData; //= $("#verify_measurement").val()
     var testingId = $("#verify_id").val();
-    console.log("Promise");
     Promise.all([openFile("uploadTestFile")]).then(function(result) {
       testingData = result[0];
-      console.log(testingData);
+
       contract.methods
         .verifyHash(testingData, testingId)
         .call({ from: account })
         .then(function(result) {
-          console.log(result);
+          //console.log(result);
           if (result) {
             contract.methods
               .getDataDetails(testingId)
