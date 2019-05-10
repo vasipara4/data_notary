@@ -6,7 +6,7 @@ var app = express();
 //const multer = require('multer');
 
 app.use(express.static('resources'));
-app.use(express.static('uploads'));
+app.use(express.static('public'));
 
 global.__basedir = __dirname;
 

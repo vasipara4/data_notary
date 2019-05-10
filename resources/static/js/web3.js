@@ -160,7 +160,7 @@ window.addEventListener("load", () => {
       txtString = result[0];
 
       console.log(txtString);
-
+      measurement_val = txtString;
       contract.methods
         .dataExists($("#id").val())
         .call({ from: account })
@@ -199,7 +199,6 @@ window.addEventListener("load", () => {
     formData.append("timestamp", timestamp);
     formData.append("submitter", account);
     formData.append("gasUsed", gasUsed);
-
     // DO POST
     $.ajax({
       type: "POST",

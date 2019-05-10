@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+//require('mongoose-type-url');
 
 const UserSchema = mongoose.Schema({
     measurement: {
@@ -23,6 +24,12 @@ const UserSchema = mongoose.Schema({
       type: Number,
       min: 0,
       required: true
+    },
+    url: {
+      type: String,
+      required: true
+        //work: {type: mongoose.SchemaTypes.Url, required: true},
+        //profile: {type: mongoose.SchemaTypes.Url, required: true},
     }
 });
 
