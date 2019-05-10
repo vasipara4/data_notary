@@ -156,11 +156,11 @@ window.addEventListener("load", () => {
     var id_val = $("#id").val();
     var txtString; // = openFile();
 
-    Promise.all([openFile()]).then(function(result) {
-      txtString = result[0];
+    Promise.all([openFile("file")]).then(function(result) {
+      txtFileAsString = result[0];
 
       console.log(txtString);
-      measurement_val = txtString;
+      //  measurement_val = txtString;
       contract.methods
         .dataExists($("#id").val())
         .call({ from: account })
@@ -168,7 +168,7 @@ window.addEventListener("load", () => {
           if (result == false) {
             elementLoading.classList.add("running");
             contract.methods
-              .dataWrite(measurement_val, id_val)
+              .dataWrite(txtFileAsString, id_val)
               .send({ from: account })
               .then(function(result) {
                 contract.methods
@@ -249,7 +249,9 @@ window.addEventListener("load", () => {
               user.gasUsed +
               "</div><div class='card-body card-6-6'><div class='card-body'><h4>ID: " +
               user.id +
-              "</h4><p>Measurement: " +
+              "</h4><p>URL:" +
+              user.url +
+              "</p><p>Description: " +
               user.measurement +
               "</p></div></div><div class='card-footer'>Time & Date: " +
               unixTimeToDate(user.timestamp) +
@@ -270,33 +272,36 @@ window.addEventListener("load", () => {
     event.preventDefault();
     //var hashInEthereum;
     var verifyHtml = "False";
-    var testingData = $("#verify_measurement").val();
+    var testingData; //= $("#verify_measurement").val()
     var testingId = $("#verify_id").val();
-    contract.methods
-      .verifyHash(testingData, testingId)
-      .call({ from: account })
-      .then(function(result) {
-        //console.log(result);
-        if (result) {
-          contract.methods
-            .getDataDetails(testingId)
-            .call({ from: account })
-            .then(function(result) {
-              //console.log(result[0]);
-              verifyHtml =
-                "True" +
-                "<br>Account: " +
-                result[0] +
-                "<br><br>Data: " +
-                web3.utils.toHex(result[1]) +
-                "<br><br>Unix Date: " +
-                result[2] +
-                "<br>Time and Date :<br> " +
-                unixTimeToDate(result[2]);
-              $("#getVerifyDiv").html("Verification: " + verifyHtml);
-            });
-        } else $("#getVerifyDiv").html("Verification: " + verifyHtml);
-      });
+    Promise.all([openFile("uploadTestFile")]).then(function(result) {
+      testingData = result[0];
+      contract.methods
+        .verifyHash(testingData, testingId)
+        .call({ from: account })
+        .then(function(result) {
+          //console.log(result);
+          if (result) {
+            contract.methods
+              .getDataDetails(testingId)
+              .call({ from: account })
+              .then(function(result) {
+                //console.log(result[0]);
+                verifyHtml =
+                  "True" +
+                  "<br>Account: " +
+                  result[0] +
+                  "<br><br>Data: " +
+                  web3.utils.toHex(result[1]) +
+                  "<br><br>Unix Date: " +
+                  result[2] +
+                  "<br>Time and Date :<br> " +
+                  unixTimeToDate(result[2]);
+                $("#getVerifyDiv").html("Verification: " + verifyHtml);
+              });
+          } else $("#getVerifyDiv").html("Verification: " + verifyHtml);
+        });
+    });
   });
 
   function unixTimeToDate(unix_timestamp) {
@@ -329,8 +334,8 @@ window.addEventListener("load", () => {
   }
 });
 
-async function openFile() {
-  var input = document.getElementById("file").files[0];
+async function openFile(id) {
+  var input = document.getElementById(id).files[0];
   var readfile = new Promise((resolve, reject) => {
     let fr = new FileReader();
     fr.onload = x => resolve(fr.result);
