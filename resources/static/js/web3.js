@@ -274,6 +274,7 @@ window.addEventListener("load", () => {
     var verifyHtml = "False";
     var testingData; //= $("#verify_measurement").val()
     var testingId = $("#verify_id").val();
+    console.log("Promise");
     Promise.all([openFile("uploadTestFile")]).then(function(result) {
       testingData = result[0];
       console.log(testingData);
