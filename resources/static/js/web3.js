@@ -39,29 +39,6 @@ window.addEventListener("load", () => {
   const contract = new web3.eth.Contract(
     [
       {
-        constant: true,
-        inputs: [
-          {
-            name: "_data",
-            type: "string"
-          },
-          {
-            name: "__id",
-            type: "int256"
-          }
-        ],
-        name: "verifyHash",
-        outputs: [
-          {
-            name: "",
-            type: "bool"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
         constant: false,
         inputs: [
           {
@@ -106,25 +83,6 @@ window.addEventListener("load", () => {
             type: "uint256"
           }
         ],
-        name: "getTimestamp",
-        outputs: [
-          {
-            name: "",
-            type: "uint256"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
         name: "getDataDetails",
         outputs: [
           {
@@ -143,9 +101,51 @@ window.addEventListener("load", () => {
         payable: false,
         stateMutability: "view",
         type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getTimestamp",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_data",
+            type: "string"
+          },
+          {
+            name: "__id",
+            type: "int256"
+          }
+        ],
+        name: "verifyHash",
+        outputs: [
+          {
+            name: "",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
       }
     ],
-    "0x797ffb081ef92aaadedba176741884475921d326"
+    "0x1d07ddca343f81beac96e0c9bd2be6f709a36378"
   );
 
   $("#userForm").submit(function(event) {
@@ -159,7 +159,7 @@ window.addEventListener("load", () => {
     Promise.all([openFile("file")]).then(function(result) {
       txtFileAsString = result[0];
 
-      console.log(txtFileAsString);
+      //console.log(txtFileAsString);
       //  measurement_val = txtString;
       contract.methods
         .dataExists($("#id").val())
@@ -196,8 +196,8 @@ window.addEventListener("load", () => {
   function ajaxPost(timestamp, gasUsed) {
     //var form = $("#userForm")[0];
     var formData = new FormData();
-    formData.append("measurement",$("#measurement").val())
-    formData.append("id",$("#id").val())
+    formData.append("measurement", $("#measurement").val());
+    formData.append("id", $("#id").val());
     formData.append("timestamp", timestamp);
     formData.append("submitter", account);
     formData.append("gasUsed", gasUsed);
@@ -348,13 +348,4 @@ async function openFile(id) {
   });
   var result = await readfile;
   return result;
-  //  return
 }
-
-/*function readFile(file) {
-  return new Promise((resolve, reject) => {
-    let fr = new FileReader();
-    fr.onload = x => resolve(fr.result);
-    fr.readAsText(file); // or readAsText(file) to get raw content
-  });
-}*/
