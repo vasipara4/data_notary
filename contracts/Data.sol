@@ -1,9 +1,15 @@
 pragma solidity >=0.4.18;
 contract Data {
+    address owner;
+
   struct dataObject {
     address submitter;
     uint256 data;
     uint date;
+  }
+
+  constructor() public{
+      owner = msg.sender;
   }
 
   mapping (uint => dataObject) private idToData;
@@ -23,14 +29,14 @@ contract Data {
       _;
   }
 
-  function dataWrite(string _data, int _id) public greaterThanZero(_id) dataNew(uint(_id))  {
-      uint hashedData = uint(keccak256(_data, uint(now)));
+  function dataWrite(uint _data, int _id) public greaterThanZero(_id) dataNew(uint(_id))  {
+      uint hashedData = uint(keccak256(abi.encodePacked(_data, uint(now))));
       idToData[uint(_id)] = dataObject(msg.sender, hashedData, now);
   }
 
-  function verifyHash(string _data, int __id) public view greaterThanZero(__id) returns (bool) {
+  function verifyHash(uint _data, int __id) public view greaterThanZero(__id) returns (bool) {
     uint _id = uint(__id);
-    uint hashedData = uint(keccak256(_data, idToData[_id].date));
+    uint hashedData = uint(keccak256(abi.encodePacked(_data, idToData[_id].date)));
     if (hashedData == idToData[_id].data)
         return true;
       return false;

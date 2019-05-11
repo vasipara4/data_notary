@@ -38,114 +38,120 @@ window.addEventListener("load", () => {
 
   const contract = new web3.eth.Contract(
     [
-      {
-        constant: false,
-        inputs: [
-          {
-            name: "_data",
-            type: "string"
-          },
-          {
-            name: "_id",
-            type: "int256"
-          }
-        ],
-        name: "dataWrite",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
-        name: "dataExists",
-        outputs: [
-          {
-            name: "",
-            type: "bool"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
-        name: "getDataDetails",
-        outputs: [
-          {
-            name: "",
-            type: "address"
-          },
-          {
-            name: "",
-            type: "uint256"
-          },
-          {
-            name: "",
-            type: "uint256"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_id",
-            type: "uint256"
-          }
-        ],
-        name: "getTimestamp",
-        outputs: [
-          {
-            name: "",
-            type: "uint256"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: "_data",
-            type: "string"
-          },
-          {
-            name: "__id",
-            type: "int256"
-          }
-        ],
-        name: "verifyHash",
-        outputs: [
-          {
-            name: "",
-            type: "bool"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      }
-    ],
-    "0x1d07ddca343f81beac96e0c9bd2be6f709a36378"
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_data",
+				"type": "uint256"
+			},
+			{
+				"name": "_id",
+				"type": "int256"
+			}
+		],
+		"name": "dataWrite",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "dataExists",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getDataDetails",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getTimestamp",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_data",
+				"type": "uint256"
+			},
+			{
+				"name": "__id",
+				"type": "int256"
+			}
+		],
+		"name": "verifyHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+],
+    "0xaa49bc59b627f7a46ae015ebda7798b000fb2798"
   );
 
   $("#userForm").submit(function(event) {
@@ -158,6 +164,7 @@ window.addEventListener("load", () => {
 
     Promise.all([openFile("file")]).then(function(result) {
       txtFileAsString = result[0];
+      txtFileAsString = web3.utils.keccak256(txtFileAsString);
 
       //console.log(txtFileAsString);
       //  measurement_val = txtString;
@@ -278,7 +285,7 @@ window.addEventListener("load", () => {
     var testingId = $("#verify_id").val();
     Promise.all([openFile("uploadTestFile")]).then(function(result) {
       testingData = result[0];
-
+      testingData = web3.utils.keccak256(testingData);
       contract.methods
         .verifyHash(testingData, testingId)
         .call({ from: account })
