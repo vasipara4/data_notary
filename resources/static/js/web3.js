@@ -259,9 +259,7 @@ window.addEventListener("load", () => {
               user.gasUsed +
               "</div><div class='card-body card-6-6'><div class='card-body'><h4>ID: " +
               user.id +
-              "</h4><p>URL:" +
-              user.url +
-              "</p><p>Description: " +
+              "</h4><p><a href='" + user.url + "'>URL of file </a></p><p>Description: " +
               user.measurement +
               "</p></div></div><div class='card-footer'>Time & Date: " +
               unixTimeToDate(user.timestamp) +
