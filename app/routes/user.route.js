@@ -48,7 +48,7 @@ module.exports = function(app) {
     res.sendFile(path + "index.html");
   });
 
-  app.get("/ipfs.html", (req, res) => {
+  app.get("/ipfs", (req, res) => {
     res.sendFile(path + "ipfs.html");
   });
 
