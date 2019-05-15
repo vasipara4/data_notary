@@ -52,6 +52,10 @@ module.exports = function(app) {
     res.sendFile(path + "ipfs.html");
   });
 
+  app.get("/index.html", (req, res) => {
+    res.sendFile(path + "index.html");
+  });
+
   // Save a User's Info to MongoDB
   app.post("/api/users/save", upload.single("file"), users.save);
 
