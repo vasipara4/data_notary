@@ -305,12 +305,40 @@ window.addEventListener("load", () => {
                   result[2] +
                   "<br>Time and Date :<br> " +
                   unixTimeToDate(result[2]);
-                $("#getVerifyDiv").html("Verification: " + verifyHtml);
+                $("#getVerifyDiv").html("Data	Integrity: " + verifyHtml);
               });
-          } else $("#getVerifyDiv").html("Verification: " + verifyHtml);
+          } else $("#getVerifyDiv").html("Data Integrity: " + verifyHtml);
         });
     });
   });
+
+//IPFS ADD FILES
+  $("#IPFSform").submit(function(event) {
+    // Prevent the form from submitting via the browser.
+    event.preventDefault();
+    var form = $("#IPFSform")[0];
+    var ipfsData = new FormData(form);
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      contentType: false,
+      url: window.location + "api/ipfs/save",
+      data: ipfsData,
+      processData: false,
+      success: function(result) {
+        //  console.log(contract);
+        $("#resultIPFS").html(
+          "<p>IPFS address: " + result.hash + "</p>"
+        );
+      },
+      error: function(e) {
+        alert("Error!");
+        console.log("ERROR: ", e);
+      }
+    });
+
+  });
+
 
   function unixTimeToDate(unix_timestamp) {
     var date = new Date(unix_timestamp * 1000);

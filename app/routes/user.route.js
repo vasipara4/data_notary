@@ -1,15 +1,29 @@
 module.exports = function(app) {
+//  const ipfsAPI = require("ipfs-api");
+  const multer = require("multer");
+  const pathFile = require("path");
+  const fs = require("fs");
+
+  const ipfs = ipfsAPI({
+    host: "127.0.0.1",
+    port: 5001,
+    protocol: "http"
+  });
+
   var express = require("express");
   var router = express.Router();
-  const multer = require("multer");
-  var pathFile = require('path');
 
   var storage = multer.diskStorage({
     destination: function(req, file, cb) {
       cb(null, __basedir + "/public/uploads");
     },
     filename: function(req, file, cb) {
-      cb(null, req.body.submitter + req.body.timestamp + pathFile.extname(file.originalname) );
+      cb(
+        null,
+        req.body.submitter +
+          req.body.timestamp +
+          pathFile.extname(file.originalname)
+      );
     }
   });
   var upload = multer({
@@ -17,7 +31,12 @@ module.exports = function(app) {
     limits: { fileSize: 16 * 1024 * 1024 }
   });
 
+  var uploadIPFS = multer({
+    limits: { fileSize: 16 * 1024 * 1024 }
+  });
+
   const users = require("../controllers/user.controller.js");
+  const saveIpfs = require("../controllers/user.ipfs.js");
   var path = __basedir + "/views/";
 
   router.use(function(req, res, next) {
@@ -29,10 +48,17 @@ module.exports = function(app) {
     res.sendFile(path + "index.html");
   });
 
-  // Save a User to MongoDB
+  app.get("/ipfs.html", (req, res) => {
+    res.sendFile(path + "ipfs.html");
+  });
+
+  // Save a User's Info to MongoDB
   app.post("/api/users/save", upload.single("file"), users.save);
 
-  // Retrieve all Users
+  //Attach a file to IPFS
+  app.post("/api/ipfs/save", uploadIPFS.single("ipfs_file"), saveIpfs.save);
+
+  // Retrieve all Users' Info
   app.get("/api/users/all", users.findAll);
 
   app.use("/", router);

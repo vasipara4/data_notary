@@ -22,8 +22,14 @@
 
 <body>
 <div class="container">
+  <nav class="navbar">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a href="#">Data Notary</a></li>
+      <li role="presentation"><a href="ipfs.html">IPFS</a></li>
+    </ul>
+  </nav>
 <div class="col-sm-4">
-  <h3>Data Notary</h3><hr />
+  <h3>Ethereum + Db</h3><hr />
   <br />
   <div>
     <form id="userForm" enctype="multipart/form-data">
@@ -31,7 +37,7 @@
         <label for="measurement">Description:</label>
         <input type="text" class="form-control" name="measurement" id="measurement" placeholder="Enter file's description" required/></div>
       <div class="form-group">
-        <label for="file">Text file:</label>
+        <label for="file">Text file <font size="2">(size limit 16MB)</font>: </label>
         <input type="file" name="file" id="file" accept="text/plain" required/>
         <label for="file" class="btn-1">Upload</label>
       </div>
@@ -53,10 +59,12 @@
   </div>
 </div>
 
-<div class="col-sm-3"></div>
+<div class="col-sm-3">
+
+</div>
 
 <div class="col-sm-5">
-  <h3>Verify if data exists in Ethereum without altering</h3><hr />
+  <h3>Check Data Integrity in Ethereum</h3><hr />
   <br />
   <div>
     <form id="verifyForm">
