@@ -4,11 +4,11 @@ module.exports = function(app) {
   const pathFile = require("path");
   const fs = require("fs");
 
-  const ipfs = ipfsAPI({
+  /*const ipfs = ipfsAPI({
     host: "127.0.0.1",
     port: 5001,
     protocol: "http"
-  });
+  });*/
 
   var express = require("express");
   var router = express.Router();
@@ -50,10 +50,6 @@ module.exports = function(app) {
 
   app.get("/ipfs.html", (req, res) => {
     res.sendFile(path + "ipfs.html");
-  });
-
-  app.get("/index.html", (req, res) => {
-    res.sendFile(path + "index.html");
   });
 
   // Save a User's Info to MongoDB
