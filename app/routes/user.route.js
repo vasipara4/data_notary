@@ -48,8 +48,12 @@ module.exports = function(app) {
     res.sendFile(path + "index.html");
   });
 
-  app.get("/ipfs", (req, res) => {
+  app.get("/ipfs.html", (req, res) => {
     res.sendFile(path + "ipfs.html");
+  });
+
+  app.get("/index.html", (req, res) => {
+    res.sendFile(path + "index.html");
   });
 
   // Save a User's Info to MongoDB
