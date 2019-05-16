@@ -70,7 +70,9 @@ module.exports = function(app) {
   app.post("/api/ipfs/save", uploadIPFS.single("file"), (req, res) => {
     //MAX_SIZE of file: 16MB
     const MAX_SIZE = 16777216;
-    const pathOfUpload = "http://miletus.dynu.net:3008/upload/IPFS/IPFS" + pathFile.extname(req.file.originalname);
+    const pathOfUpload =
+      "http://miletus.dynu.net:3008/upload/IPFS/IPFS" +
+      pathFile.extname(req.file.originalname);
     const fileSize = req.file.size;
     if (fileSize > MAX_SIZE) {
       fs.unlink(pathOfUpload);
@@ -94,11 +96,14 @@ module.exports = function(app) {
       }
       //fs.unlink(pathOfUpload);
       console.log(result);
-      ipfs.pin.add(result.hash, function (err) {});
+      ipfs.pin.add(result.hash, function(err) {});
       //res.send(result.hash);
     });
-    console.log(await resultIPFS);
-    res.send(await resultIPFS);
+
+    resultIPFS.then(response => {
+      console.log(response);
+      res.send(response.hash);
+    });
 
   });
 
