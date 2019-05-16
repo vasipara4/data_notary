@@ -21,7 +21,7 @@ exports.save = (req, res) => {
 
   const data = fs.readFileSync(req.file.path);
 
-/*  return ipfs.add(data, (err, files) => {
+  return ipfs.add(data, (err, files) => {
     fs.unlink(req.file.path);
     if (files) {
       return res.json({
@@ -32,5 +32,5 @@ exports.save = (req, res) => {
     return res.status(500).json({
       error: err
     });
-  });*/
+  });
 };

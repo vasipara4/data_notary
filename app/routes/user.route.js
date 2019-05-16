@@ -1,14 +1,10 @@
 module.exports = function(app) {
-//  const ipfsAPI = require("ipfs-api");
+  const ipfsClient = require("ipfs-http-client");
   const multer = require("multer");
   const pathFile = require("path");
   const fs = require("fs");
 
-  /*const ipfs = ipfsAPI({
-    host: "127.0.0.1",
-    port: 5001,
-    protocol: "http"
-  });*/
+  var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
 
   var express = require("express");
   var router = express.Router();
