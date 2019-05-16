@@ -94,10 +94,12 @@ module.exports = function(app) {
       }
       //fs.unlink(pathOfUpload);
       console.log(result);
+      ipfs.pin.add(result.hash, function (err) {});
       //res.send(result.hash);
     });
-    console.log(resultIPFS);
-    ipfs.pin.add(resultIPFS.hash, function (err) {});
+    console.log(await resultIPFS);
+    res.send(await resultIPFS);
+
   });
 
   // Retrieve all Users' Info
