@@ -96,14 +96,16 @@ module.exports = function(app) {
       }
       //fs.unlink(pathOfUpload);
       console.log(result);
-      ipfs.pin.add(result.hash, function(err) {});
+      ipfs.pin.add(result.hash, function(err,result) {
+        res.send(result);
+      });
       //res.send(result.hash);
     });
 
-    resultIPFS.then(response => {
-      console.log(response);
-      res.send(response.hash);
-    });
+    // resultIPFS.then(response => {
+    //   console.log(response);
+    //   res.send(response.hash);
+    // });
 
   });
 
