@@ -18,9 +18,10 @@ exports.save = (req, res) => {
     });
   }
 
+console.log("Before IPFS progress");
   //const data = fs.readFileSync(req.file.path);
 //  var uploadData = new Buffer(data);
-ipfs.addFromURL(pathOfUpload, (err, result) => {
+var resultFile = ipfs.addFromURL(pathOfUpload, (err, result) => {
   if (err) {
     throw err
   }
