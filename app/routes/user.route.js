@@ -22,12 +22,27 @@ module.exports = function(app) {
       );
     }
   });
+
+  var storage_IPFS = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, __basedir + "/public/IPFS");
+    },
+    filename: function(req, file, cb) {
+      cb(
+        null, Date.now() +
+          pathFile.extname(file.originalname)
+      );
+    }
+  });
+
+
   var upload = multer({
     storage: storage,
     limits: { fileSize: 16 * 1024 * 1024 }
   });
 
   var uploadIPFS = multer({
+    storage: storage_IPFS,
     limits: { fileSize: 16 * 1024 * 1024 }
   });
 

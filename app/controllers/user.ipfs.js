@@ -20,14 +20,15 @@ exports.save = (req, res) => {
 
   //const data = fs.readFileSync(req.file.path);
 //  var uploadData = new Buffer(data);
-var result = ipfs.addFromURL(pathOfUpload, (err, result) => {
+ipfs.addFromURL(pathOfUpload, (err, result) => {
   if (err) {
     throw err
   }
-  fs.unlink(pathOfUpload);
+  //fs.unlink(pathOfUpload);
   console.log(result)
+  res.send(result.hash);
 });
 
-res.send(result);
+
 
 };
