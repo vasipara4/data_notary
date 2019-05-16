@@ -326,7 +326,7 @@ window.addEventListener("load", () => {
       data: ipfsData,
       processData: false,
       success: function(result) {
-        //  console.log(contract);
+          console.log(result);
         $("#resultIPFS").html(
           "<p>IPFS address: " + result + "</p>"
         );

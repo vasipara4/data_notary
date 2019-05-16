@@ -94,9 +94,10 @@ module.exports = function(app) {
       if (err) {
         throw err;
       }
+       console.log(result);
        res.send(result.hash);
       //fs.unlink(pathOfUpload);
-      // console.log(result);
+
       // ipfs.pin.add(result.hash, function(err,resultHash) {
       //   res.send(resultHash);
       // });
