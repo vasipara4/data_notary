@@ -88,14 +88,16 @@ module.exports = function(app) {
     console.log("Before IPFS progress");
     //const data = fs.readFileSync(req.file.path);
     //  var uploadData = new Buffer(data);
-    var resultFile = ipfs.addFromURL(pathOfUpload, (err, result) => {
+    var resultIPFS = ipfs.addFromURL(pathOfUpload, (err, result) => {
       if (err) {
         throw err;
       }
       //fs.unlink(pathOfUpload);
       console.log(result);
-      res.send(result.hash);
+      //res.send(result.hash);
     });
+    console.log(resultIPFS);
+    ipfs.pin.add(resultIPFS.hash, function (err) {})
   });
 
   // Retrieve all Users' Info
