@@ -214,7 +214,7 @@ window.addEventListener("load", () => {
       type: "POST",
       enctype: "multipart/form-data",
       contentType: false, //"application/json",
-      url: window.location + "api/users/save",
+      url: window.location.origin + "/api/users/save",
       data: formData, //JSON.stringify(formData),
       processData: false, //dataType: "json",
       success: function(user) {
@@ -248,7 +248,7 @@ window.addEventListener("load", () => {
   function ajaxGet() {
     $.ajax({
       type: "GET",
-      url: "/api/users/all",
+      url: window.location.origin + "/api/users/all",
       success: function(result) {
         $("#getResultDiv").empty();
         $.each(result, function(i, user) {
@@ -322,7 +322,7 @@ window.addEventListener("load", () => {
       type: "POST",
       enctype: "multipart/form-data",
       contentType: false,
-      url: window.location + "api/ipfs/save",
+      url: window.location.origin + "/api/ipfs/save",
       data: ipfsData,
       processData: false,
       success: function(result) {

@@ -71,7 +71,7 @@ module.exports = function(app) {
   app.post("/api/users/save", upload.single("file"), users.save);
 
   //Attach a file to IPFS
-  app.post("/api/ipfs/save", uploadIPFS.single("ipfs_file"), saveIpfs.save);
+  app.post("/api/ipfs/save", uploadIPFS.single("file"), saveIpfs.save);
 
   // Retrieve all Users' Info
   app.get("/api/users/all", users.findAll);
