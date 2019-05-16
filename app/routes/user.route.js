@@ -28,13 +28,9 @@ module.exports = function(app) {
       cb(null, __basedir + "/public/IPFS");
     },
     filename: function(req, file, cb) {
-      cb(
-        null, Date.now() +
-          pathFile.extname(file.originalname)
-      );
+      cb(null, "IPFS" + pathFile.extname(file.originalname));
     }
   });
-
 
   var upload = multer({
     storage: storage,
@@ -72,18 +68,16 @@ module.exports = function(app) {
 
   //Attach a file to IPFS
   app.post("/api/ipfs/save", uploadIPFS.single("file"), (req, res) => {
-
     //MAX_SIZE of file: 16MB
     const MAX_SIZE = 16777216;
-    const pathOfUpload = req.file.path;
+    const pathOfUpload = "http://miletus.dynu.net:3008/upload/IPFS/IPFS" + pathFile.extname(file.originalname);
     const fileSize = req.file.size;
-      if (fileSize > MAX_SIZE) {
-        fs.unlink(pathOfUpload);
-        return res.status(422).json({
-          error: `File needs to be smaller than ${MAX_SIZE} bytes.`,
-        });
-      }
-
+    if (fileSize > MAX_SIZE) {
+      fs.unlink(pathOfUpload);
+      return res.status(422).json({
+        error: `File needs to be smaller than ${MAX_SIZE} bytes.`
+      });
+    }
 
     if (!req.file) {
       return res.status(422).json({
@@ -91,20 +85,17 @@ module.exports = function(app) {
       });
     }
 
-  console.log("Before IPFS progress");
+    console.log("Before IPFS progress");
     //const data = fs.readFileSync(req.file.path);
-  //  var uploadData = new Buffer(data);
-  var resultFile = ipfs.addFromURL(pathOfUpload, (err, result) => {
-    if (err) {
-      throw err
-    }
-    //fs.unlink(pathOfUpload);
-    console.log(result)
-    res.send(result.hash);
-  });
-
-
-
+    //  var uploadData = new Buffer(data);
+    var resultFile = ipfs.addFromURL(pathOfUpload, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      //fs.unlink(pathOfUpload);
+      console.log(result);
+      res.send(result.hash);
+    });
   });
 
   // Retrieve all Users' Info
