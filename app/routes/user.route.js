@@ -43,7 +43,7 @@ module.exports = function(app) {
   });
 
   const users = require("../controllers/user.controller.js");
-  const saveIpfs = require("../controllers/user.ipfs.js");
+//  const saveIpfs = require("../controllers/user.ipfs.js");
   var path = __basedir + "/views/";
 
   router.use(function(req, res, next) {
@@ -72,6 +72,7 @@ module.exports = function(app) {
     const MAX_SIZE = 16777216;
     const pathOfUpload =
       "http://miletus.dynu.net:3008/upload/IPFS/"+ req.file.filename;
+      console.log(pathOfUpload);
     const fileSize = req.file.size;
     if (fileSize > MAX_SIZE) {
       fs.unlink(pathOfUpload);
