@@ -21,11 +21,11 @@ exports.save = (req, res) => {
 
   const data = fs.readFileSync(req.file.path);
 
-  return ipfs.add(data, (err, files) => {
+  const result = await ipfs.add(data, (err, result) => {
     fs.unlink(req.file.path);
-    if (files) {
+    if (!err) {
       return res.json({
-        hash: files[0].hash
+        hash: result.hash
       });
     }
 
