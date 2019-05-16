@@ -328,7 +328,7 @@ window.addEventListener("load", () => {
       success: function(result) {
         //  console.log(contract);
         $("#resultIPFS").html(
-          "<p>IPFS address: " + result.hash + "</p>"
+          "<p>IPFS address: " + result + "</p>"
         );
       },
       error: function(e) {

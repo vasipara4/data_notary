@@ -96,8 +96,8 @@ module.exports = function(app) {
       }
       //fs.unlink(pathOfUpload);
       console.log(result);
-      ipfs.pin.add(result.hash, function(err,result) {
-        res.send(result);
+      ipfs.pin.add(result.hash, function(err,resultHash) {
+        res.send(resultHash);
       });
       //res.send(result.hash);
     });
