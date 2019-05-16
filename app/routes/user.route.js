@@ -1,10 +1,14 @@
 module.exports = function(app) {
-  const ipfsClient = require("ipfs-http-client");
+  //const ipfsClient = require("ipfs-http-client");
   const multer = require("multer");
   const pathFile = require("path");
   const fs = require("fs");
-
-  var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
+  const IPFS = require("ipfs");
+  const node = new IPFS();
+  node.on("ready", () => {
+    console.log(node);
+  });
+  //  var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
 
   var express = require("express");
   var router = express.Router();
@@ -90,12 +94,12 @@ module.exports = function(app) {
     console.log("Before IPFS progress");
     //const data = fs.readFileSync(req.file.path);
     //  var uploadData = new Buffer(data);
-    var resultIPFS = ipfs.addFromURL(pathOfUpload, (err, result) => {
+    var resultIPFS = node.addFromURL(pathOfUpload, (err, result) => {
       if (err) {
         throw err;
       }
-       console.log(result);
-       res.json(result);
+      console.log(result);
+      res.json(result);
       //fs.unlink(pathOfUpload);
 
       // ipfs.pin.add(result.hash, function(err,resultHash) {
@@ -108,7 +112,6 @@ module.exports = function(app) {
     //   console.log(response);
     //   res.send(response.hash);
     // });
-
   });
 
   // Retrieve all Users' Info
