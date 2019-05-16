@@ -97,7 +97,7 @@ module.exports = function(app) {
       //res.send(result.hash);
     });
     console.log(resultIPFS);
-    ipfs.pin.add(resultIPFS.hash, function (err) {})
+    ipfs.pin.add(resultIPFS.hash, function (err) {});
   });
 
   // Retrieve all Users' Info
