@@ -28,7 +28,7 @@ module.exports = function(app) {
       cb(null, __basedir + "/public/IPFS");
     },
     filename: function(req, file, cb) {
-      cb(null, "IPFS" + pathFile.extname(file.originalname));
+      cb(null, Date.now()+ "IPFS" + pathFile.extname(file.originalname));
     }
   });
 
@@ -71,8 +71,7 @@ module.exports = function(app) {
     //MAX_SIZE of file: 16MB
     const MAX_SIZE = 16777216;
     const pathOfUpload =
-      "http://miletus.dynu.net:3008/upload/IPFS/IPFS" +
-      pathFile.extname(req.file.originalname);
+      "http://miletus.dynu.net:3008/upload/IPFS/"+ req.file.filename;
     const fileSize = req.file.size;
     if (fileSize > MAX_SIZE) {
       fs.unlink(pathOfUpload);
