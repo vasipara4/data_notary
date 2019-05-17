@@ -44,7 +44,7 @@ module.exports = function(app) {
 
   const users = require("../controllers/user.controller.js");
 //  const saveIpfs = require("../controllers/user.ipfs.js");
-  var path = __basedir + "/views/";
+  var pathOfHtml = __basedir + "/views/";
 
   router.use(function(req, res, next) {
     console.log("/" + req.method);
@@ -52,15 +52,15 @@ module.exports = function(app) {
   });
 
   app.get("/", (req, res) => {
-    res.sendFile(path + "index.html");
+    res.sendFile(pathOfHtml + "index.html");
   });
 
   app.get("/ipfs.html", (req, res) => {
-    res.sendFile(path + "ipfs.html");
+    res.sendFile(pathOfHtml + "ipfs.html");
   });
 
   app.get("/index.html", (req, res) => {
-    res.sendFile(path + "index.html");
+    res.sendFile(pathOfHtml + "index.html");
   });
 
   // Save a User's Info to MongoDB
@@ -71,7 +71,7 @@ module.exports = function(app) {
     //MAX_SIZE of file: 16MB
     const MAX_SIZE = 16777216;
     const pathOfUpload =
-      "http://miletus.dynu.net:3008/upload/IPFS/"+ req.file.filename;
+      "http://miletus.dynu.net:3008/IPFS/"+ req.file.filename;
       console.log(pathOfUpload);
     const fileSize = req.file.size;
     if (fileSize > MAX_SIZE) {
@@ -96,18 +96,7 @@ module.exports = function(app) {
       }
        console.log(result);
        res.json(result);
-      //fs.unlink(pathOfUpload);
-
-      // ipfs.pin.add(result.hash, function(err,resultHash) {
-      //   res.send(resultHash);
-      // });
-      //res.send(result.hash);
     });
-
-    // resultIPFS.then(response => {
-    //   console.log(response);
-    //   res.send(response.hash);
-    // });
 
   });
 
@@ -117,6 +106,6 @@ module.exports = function(app) {
   app.use("/", router);
 
   app.use("*", (req, res) => {
-    res.sendFile(path + "404.html");
+    res.sendFile(pathOfHtml + "404.html");
   });
 };
