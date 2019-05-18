@@ -410,8 +410,7 @@ var infoArea = document.getElementById('file-upload-filename');
 
 input.addEventListener('change', showFileName());
 
-function showFileName(event) {
-  var input = event.srcElement;
+function showFileName() {
   var fileName = input.files[0].name;
   infoArea.textContent = 'Selected: ' + fileName;
 }
