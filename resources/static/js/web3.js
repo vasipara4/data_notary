@@ -350,7 +350,7 @@ window.addEventListener("load", () => {
 
         $("#getResultDiv").empty();
         $.each(result, function(i, user) {
-          var addressIPFS = "";
+          var addressIPFS = "None";
           contract.methods
             .getDataAddressIPFS(user.id)
             .call({ from: account })
