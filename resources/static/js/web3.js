@@ -355,26 +355,28 @@ window.addEventListener("load", () => {
             .call({ from: account })
             .then(function(result) {
               addressIPFS =
-                ethers.utils.parseBytes32String(result[0]) +
-                ethers.utils.parseBytes32String(result[1]);
+                ethers.utils.parseBytes32String(result[0]) === ""
+                  ? "No File"
+                  : ethers.utils.parseBytes32String(result[0]) +
+                    ethers.utils.parseBytes32String(result[1]);
+              $("#getResultDiv").append(
+                "<div class='card card-default'><div class='card-header'>Submitter: " +
+                  user.submitter +
+                  " Gas:" +
+                  user.gasUsed +
+                  "</div><div class='card-body card-6-6'><div class='card-body'><h4>ID: " +
+                  user.id +
+                  "</h4><p><a href='" +
+                  user.url +
+                  "'>URL of file </a></p><p>Description: " +
+                  user.measurement +
+                  "</p><p>IPFS public file: " +
+                  addressIPFS +
+                  "</div></div><div class='card-footer'>Time & Date: " +
+                  unixTimeToDate(user.timestamp) +
+                  "</div></div>"
+              );
             });
-          $("#getResultDiv").append(
-            "<div class='card card-default'><div class='card-header'>Submitter: " +
-              user.submitter +
-              " Gas:" +
-              user.gasUsed +
-              "</div><div class='card-body card-6-6'><div class='card-body'><h4>ID: " +
-              user.id +
-              "</h4><p><a href='" +
-              user.url +
-              "'>URL of file </a></p><p>Description: " +
-              user.measurement +
-              "</p><p>IPFS public file: " +
-              addressIPFS +
-              "</div></div><div class='card-footer'>Time & Date: " +
-              unixTimeToDate(user.timestamp) +
-              "</div></div>"
-          );
         });
         console.log("Success: ", result);
       },
@@ -406,9 +408,10 @@ window.addEventListener("load", () => {
               .then(function(result) {
                 //console.log(result[0]);
                 var IPFSstring =
-                   (ethers.utils.parseBytes32String(result[3]) === "")
+                  ethers.utils.parseBytes32String(result[3]) === ""
                     ? "No File"
-                    :  ethers.utils.parseBytes32String(result[3]) +  ethers.utils.parseBytes32String(result[4]);
+                    : ethers.utils.parseBytes32String(result[3]) +
+                      ethers.utils.parseBytes32String(result[4]);
                 verifyHtml =
                   "True" +
                   "<br>Account: " +
