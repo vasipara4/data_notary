@@ -37,7 +37,7 @@
             <input type="text" class="form-control" name="measurement" id="measurement" placeholder="Enter file's description" required /></div>
           <div class="form-group">
             <label for="file">Text file <font size="2">(size limit 16MB)</font>: </label>
-            <input type="file" name="file" id="file" accept="text/plain" required />
+            <input type="file" name="file" id="file" onchange="showFileName()" accept="text/plain" required />
             <label for="file" class="btn-1">Upload</label>
             <div id="file-upload-filename"> </div>
           </div>

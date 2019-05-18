@@ -405,12 +405,10 @@ async function openFile(id) {
   return result;
 }
 
-var input = document.getElementById('file');
-var infoArea = document.getElementById('file-upload-filename');
-
-input.addEventListener('change', showFileName());
 
 function showFileName() {
+  var input = document.getElementById('file');
+  var infoArea = document.getElementById('file-upload-filename');
   var fileName = input.files[0].name;
   infoArea.textContent = 'Selected: ' + fileName;
 }

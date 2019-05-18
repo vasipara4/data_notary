@@ -34,7 +34,7 @@
       <form id="IPFSform" enctype="multipart/form-data">
         <div class="form-group">
           <label>File <font size="2">(size limit 16MB)</font>:</label>
-          <input type="file" name="file" id="file" required />
+          <input type="file" name="file" id="file" onchange="showFileName()" required />
           <label for="file" class="btn-1">IPFS Upload</label>
           <div id="file-upload-filename"> </div>
         </div>
