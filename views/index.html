@@ -1,101 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Data Notary</title>
-  <link rel="shortcut icon" type="image/png" href="static/images/favicon.png"/>
-  <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie-edge">
-    <meta charset="utf-8" />
+  <link rel="shortcut icon" type="image/png" href="static/images/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie-edge">
+  <meta charset="utf-8" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="/static/js/web3.js"></script>
-  <link rel="stylesheet" type="text/css" href="/static/css/loading.css"/>
-  <link rel="stylesheet" type="text/css" href="/static/css/loading-btn.css"/>
-  <link rel="stylesheet" type="text/css" href="/static/css/cards.css"/>
-  <link rel="stylesheet" type="text/css" href="/static/css/component.css"/>
-  </head>
+  <link rel="stylesheet" type="text/css" href="/static/css/loading.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/loading-btn.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/cards.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/component.css" />
+</head>
 
 <body>
-<div class="container">
-  <nav class="navbar">
-    <ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="#">Data Notary</a></li>
-      <li role="presentation"><a href="ipfs.html">IPFS</a></li>
-    </ul>
-  </nav>
-<div class="col-sm-4">
-  <h3>Ethereum + Db</h3><hr />
-  <br />
-  <div>
-    <form id="userForm" enctype="multipart/form-data">
-      <div class="form-group">
-        <label for="measurement">Description:</label>
-        <input type="text" class="form-control" name="measurement" id="measurement" placeholder="Enter file's description" required/></div>
-      <div class="form-group">
-        <label for="file">Text file <font size="2">(size limit 16MB)</font>: </label>
-        <input type="file" name="file" id="file" accept="text/plain" required/>
-        <label for="file" class="btn-1">Upload</label>
-      </div>
-      <div class="form-group">
-        <label for="id">ID:</label>
-        <input type="number" name="id" class="form-control" id="id" placeholder="Enter positive number" min="0" required/>
-      </div>
-      <button type="submit" id="insertLoading" class="btn btn-default ld-ext-right">Insert Data in Eth + Db<div class="ld ld-ring ld-spin"></div></button>
-    </form>
-  </div>
-  <div id="postResultDiv">
-  </div>
-  <br>
-  <div>
-    <button id="allUsers" type="button" class="btn btn-default ">Show Data in Database</button>
-    <div id="getResultDiv" style="margin-top:10px;">
-
-      </div>
-  </div>
-</div>
-
-<div class="col-sm-3">
-
-</div>
-
-<div class="col-sm-5">
-  <h3>Check Data Integrity in Ethereum</h3><hr />
-  <br />
-  <div>
-    <form id="verifyForm">
-      <div class="form-group">
-      <label for="uploadTestFile">Text file:</label>
-      <input type="file" id="uploadTestFile" accept="text/plain" required/>
-      <label for="uploadTestFile" class="btn-1">Upload</label>
-      </div>
-      <div class="form-group">
-      <label for="verify_id">Enter ID:</label>
-      <input type="number" class="form-control" id="verify_id" placeholder="Enter positive number"  min="0" required/>
-      </div>
-      <button type="submit" id="verifyButton" class="btn btn-default">Verify</button>
-      <div id="getVerifyDiv">
-        <ul class="list-group">
+  <div class="container">
+    <nav class="navbar">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Data Notary</a></li>
+        <li role="presentation"><a href="ipfs.html">IPFS</a></li>
       </ul>
-    </div>
-    </form>
-  </div>
-
-  <br>
-  <div>
-    <div id="getVerifyDiv">
-          <ul class="list-group">
-        </ul>
+    </nav>
+    <div class="col-sm-4">
+      <h3>Ethereum + Db</h3>
+      <hr />
+      <br />
+      <div>
+        <form id="userForm" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="measurement">Description:</label>
+            <input type="text" class="form-control" name="measurement" id="measurement" placeholder="Enter file's description" required /></div>
+          <div class="form-group">
+            <label for="file">Text file <font size="2">(size limit 16MB)</font>: </label>
+            <input type="file" name="file" id="file" accept="text/plain" required />
+            <label for="file" class="btn-1">Upload</label>
+          </div>
+          <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="number" name="id" class="form-control" id="id" placeholder="Enter positive number" min="0" required />
+          </div>
+          <button type="submit" id="insertLoading" class="btn btn-default ld-ext-right">Insert Data in Eth + Db<div class="ld ld-ring ld-spin"></div></button>
+        </form>
       </div>
-  </div>
-</div>
+      <div id="postResultDiv">
+      </div>
+      <br>
+      <div>
+        <button id="allUsers" type="button" class="btn btn-default ">Show Data in Database</button>
+        <div id="getResultDiv" style="margin-top:10px;">
 
-</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+
+    </div>
+
+    <div class="col-sm-5">
+      <h3>Check Data Integrity in Ethereum</h3>
+      <hr />
+      <br />
+      <div>
+        <form id="verifyForm">
+          <div class="form-group">
+            <label for="uploadTestFile">Text file:</label>
+            <input type="file" id="uploadTestFile" accept="text/plain" required />
+            <label for="uploadTestFile" class="btn-1">Upload</label>
+          </div>
+          <div class="form-group">
+            <label for="verify_id">Enter ID:</label>
+            <input type="number" class="form-control" id="verify_id" placeholder="Enter positive number" min="0" required />
+          </div>
+          <button type="submit" id="verifyButton" class="btn btn-default">Verify</button>
+          <div id="getVerifyDiv">
+            <ul class="list-group">
+            </ul>
+          </div>
+        </form>
+      </div>
+
+      <br>
+      <div>
+        <div id="getVerifyDiv">
+          <ul class="list-group">
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 
 </body>
+
 </html>

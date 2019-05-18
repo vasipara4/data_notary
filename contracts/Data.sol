@@ -6,6 +6,7 @@ contract Data {
     address submitter;
     uint256 data;
     uint date;
+    bytes32[2] addressIPFS;
   }
 
   constructor() public{
@@ -15,13 +16,11 @@ contract Data {
   mapping (uint => dataObject) private idToData;
 
 
+
+  //MODIFIERS SECTION
   modifier dataExisting(uint _id){
       require(idToData[_id].submitter != address(0));
       _;
-  }
-  modifier greaterThanZero(int _id) {
-    require(_id >= 0);
-    _;
   }
 
   modifier dataNew(uint _id){
@@ -29,23 +28,33 @@ contract Data {
       _;
   }
 
-  function dataWrite(uint _data, int _id) public greaterThanZero(_id) dataNew(uint(_id))  {
-      uint hashedData = uint(keccak256(abi.encodePacked(_data, uint(now))));
-      idToData[uint(_id)] = dataObject(msg.sender, hashedData, now);
+  modifier onlySubmitter(uint _id) {
+    require(msg.sender == idToData[_id].submitter);
+    _;
+  }
+  modifier onlyOwner(){
+    require(msg.sender == owner);
+    _;
   }
 
-  function verifyHash(uint _data, int __id) public view greaterThanZero(__id) returns (bool) {
-    uint _id = uint(__id);
+
+  //FUNCTIONS SECTION
+  function dataWrite(uint _data, uint _id) public dataNew(_id)  {
+      bytes32[2] memory ipfsAddress;
+      uint hashedData = uint(keccak256(abi.encodePacked(_data, uint(now))));
+      idToData[_id] = dataObject(msg.sender, hashedData, now, ipfsAddress);
+  }
+
+  function addAddressIPFS(bytes32[2] memory _addressIPFS, uint _id) public onlySubmitter(_id){
+    (idToData[_id].addressIPFS[0], idToData[_id].addressIPFS[1]) = (_addressIPFS[0],_addressIPFS[1]);
+  }
+
+  function verifyHash(uint _data, uint _id) public view  returns (bool) {
     uint hashedData = uint(keccak256(abi.encodePacked(_data, idToData[_id].date)));
     if (hashedData == idToData[_id].data)
         return true;
       return false;
   }
-
-  function getTimestamp(uint _id) public view dataExisting(_id) returns (uint) {
-    return idToData[_id].date;
-  }
-
 
   function dataExists(uint256 _id) public view returns(bool){
       if(idToData[_id].submitter != address(0))
@@ -53,7 +62,16 @@ contract Data {
       return false;
   }
 
-  function getDataDetails(uint _id) public view dataExisting(_id) returns(address,uint,uint){
-      return (idToData[_id].submitter, idToData[_id].data, idToData[_id].date);
+  function getTimestamp(uint _id) public view dataExisting(_id) returns (uint) {
+    return idToData[_id].date;
   }
+
+  function getDataDetails(uint _id) public view dataExisting(_id) returns(address, uint, uint, bytes32, bytes32){
+      return (idToData[_id].submitter, idToData[_id].data, idToData[_id].date, idToData[_id].addressIPFS[0], idToData[_id].addressIPFS[1]);
+  }
+
+  function deleteContract () public onlyOwner {
+    selfdestruct(owner);
+  }
+
 }

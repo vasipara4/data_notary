@@ -3,7 +3,10 @@ window.addEventListener("load", () => {
   const desiredNetwork = 3;
   var networkVersion;
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== "undefined") {
+  if (
+    typeof window.ethereum !== "undefined" ||
+    typeof window.web3 !== "undefined"
+  ) {
     web3 = new Web3(web3.currentProvider);
     var accountsPromise = web3.eth.getAccounts();
     var networkIdPromise = web3.eth.net.getId(); // web3.version.network;
@@ -16,6 +19,15 @@ window.addEventListener("load", () => {
         if (networkVersion != desiredNetwork) {
           alert("Please switch to ropsten network.");
         }
+        ethereum
+          .enable()
+          .then(function(accounts) {
+            account = accounts[0];
+          })
+          .catch(function(reason) {
+            // Handle error. Likely the user rejected the login:
+            console.log(reason === "User rejected provider access");
+          });
       })
       .catch(console.error);
   } else {
@@ -30,6 +42,11 @@ window.addEventListener("load", () => {
     web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:8545"));
   }
 
+  ethereum.on("accountsChanged", function(accounts) {
+    // Time to reload your interface with accounts[0]!
+    account = accounts[0];
+  });
+
   //console.log(web3.eth.net.getId());
 
   /*web3.eth.getAccounts().then((f) => {
@@ -38,120 +55,120 @@ window.addEventListener("load", () => {
 
   const contract = new web3.eth.Contract(
     [
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_data",
-				"type": "uint256"
-			},
-			{
-				"name": "_id",
-				"type": "int256"
-			}
-		],
-		"name": "dataWrite",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "dataExists",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getDataDetails",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getTimestamp",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_data",
-				"type": "uint256"
-			},
-			{
-				"name": "__id",
-				"type": "int256"
-			}
-		],
-		"name": "verifyHash",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	}
-],
-    "0xaa49bc59b627f7a46ae015ebda7798b000fb2798"
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "dataExists",
+        outputs: [
+          {
+            name: "",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getTimestamp",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_data",
+            type: "uint256"
+          },
+          {
+            name: "__id",
+            type: "int256"
+          }
+        ],
+        name: "verifyHash",
+        outputs: [
+          {
+            name: "",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getDataDetails",
+        outputs: [
+          {
+            name: "",
+            type: "address"
+          },
+          {
+            name: "",
+            type: "uint256"
+          },
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "_data",
+            type: "uint256"
+          },
+          {
+            name: "_id",
+            type: "int256"
+          }
+        ],
+        name: "dataWrite",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        inputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "constructor"
+      }
+    ],
+    "0x5014f1cddc82a1a0cd71e83a2d9e1bad3ea2c45a"
   );
 
   $("#userForm").submit(function(event) {
@@ -259,7 +276,9 @@ window.addEventListener("load", () => {
               user.gasUsed +
               "</div><div class='card-body card-6-6'><div class='card-body'><h4>ID: " +
               user.id +
-              "</h4><p><a href='" + user.url + "'>URL of file </a></p><p>Description: " +
+              "</h4><p><a href='" +
+              user.url +
+              "'>URL of file </a></p><p>Description: " +
               user.measurement +
               "</p></div></div><div class='card-footer'>Time & Date: " +
               unixTimeToDate(user.timestamp) +
@@ -295,6 +314,10 @@ window.addEventListener("load", () => {
               .call({ from: account })
               .then(function(result) {
                 //console.log(result[0]);
+                var IPFSstring =
+                  result[3].toString == ""
+                    ? "No File"
+                    : result[3].toString + result[4].toString;
                 verifyHtml =
                   "True" +
                   "<br>Account: " +
@@ -304,7 +327,9 @@ window.addEventListener("load", () => {
                   "<br><br>Unix Date: " +
                   result[2] +
                   "<br>Time and Date :<br> " +
-                  unixTimeToDate(result[2]);
+                  unixTimeToDate(result[2]) +
+                  "<br>IPFS file: " +
+                  IPFSstring;
                 $("#getVerifyDiv").html("Data	Integrity: " + verifyHtml);
               });
           } else $("#getVerifyDiv").html("Data Integrity: " + verifyHtml);
@@ -312,7 +337,7 @@ window.addEventListener("load", () => {
     });
   });
 
-//IPFS ADD FILES
+  //IPFS ADD FILES
   $("#IPFSform").submit(function(event) {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
@@ -326,19 +351,15 @@ window.addEventListener("load", () => {
       data: ipfsData,
       processData: false,
       success: function(result) {
-          console.log(result);
-        $("#resultIPFS").html(
-          "<p>IPFS address: " + result[0].hash + "</p>"
-        );
+        console.log(result);
+        $("#resultIPFS").html("<p>IPFS address: " + result[0].hash + "</p>");
       },
       error: function(e) {
         alert("Error!");
         console.log("ERROR: ", e);
       }
     });
-
   });
-
 
   function unixTimeToDate(unix_timestamp) {
     var date = new Date(unix_timestamp * 1000);
