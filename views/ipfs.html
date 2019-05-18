@@ -13,6 +13,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="/static/js/web3.js"></script>
   <link rel="stylesheet" type="text/css" href="/static/css/loading.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/cards.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/loading-btn.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/component.css" />
 </head>
@@ -27,14 +28,14 @@
     </nav>
     <h3>building IPFS</h3>
     <hr />
-    <div class="col-sm-4">
-      <h3>Insert Public File in your existing Ethereum Submission through IPFS</h3>
+    <div class="col-sm-5">
+      <h3>Public File in your existing Ethereum Submission</h3>
       <hr />
       <form id="IPFSform" enctype="multipart/form-data">
         <div class="form-group">
           <label>File <font size="2">(size limit 16MB)</font>:</label>
           <input type="file" name="file" id="file" required />
-          <label for="file" class="btn-1">Upload</label>
+          <label for="file" class="btn-1">IPFS Upload</label>
         </div>
         <button type="submit" id="insertIPFS" class="btn btn-default ld-ext-right">
           Insert
@@ -42,11 +43,23 @@
       </form>
       <div id="resultIPFS"></div>
     </div>
-    <div class="col-sm-4">
-      <h3>Be part of decentralized Web</h3>
+    <div class="col-sm-2">
     </div>
+    <div class="col-sm-5">
 
-  </div>
+      <div class="card card-default">
+        <a href="#" class="card-link">
+          <span class="card-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/IPFS_logo.png" class="img-responsive">
+          </span>
+          <span class="card-body">
+            <span class="h3 heading">IPFS</span>
+            <p>Be part of Decentralized Web. Start your own node. Click for details</p>
+          </span>
+        </a>
+      </div>
+
+    </div>
 </body>
 
 </html>

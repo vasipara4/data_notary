@@ -20,15 +20,17 @@ window.addEventListener("load", () => {
         if (networkVersion != desiredNetwork) {
           alert("Please switch to ropsten network.");
         }
-        ethereum
-          .enable()
-          .then(function(accounts) {
-            account = accounts[0];
-          })
-          .catch(function(reason) {
-            // Handle error. Likely the user rejected the login:
-            console.log(reason === "User rejected provider access");
-          });
+        if (web3.currentProvider.isMetaMask) {
+          ethereum
+            .enable()
+            .then(function(accounts) {
+              account = accounts[0];
+            })
+            .catch(function(reason) {
+              // Handle error. Likely the user rejected the login:
+              console.log(reason === "User rejected provider access");
+            });
+        }
       })
       .catch(console.error);
   } else {
