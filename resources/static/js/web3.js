@@ -405,8 +405,8 @@ async function openFile(id) {
   return result;
 }
 
-var input = document.getElementById( 'file' );
-var infoArea = document.getElementById( 'file-upload-filename' );
+var input = document.getElementById('file');
+var infoArea = document.getElementById('file-upload-filename');
 
 input.addEventListener( 'change', showFileName );
 
