@@ -7,7 +7,8 @@ window.addEventListener("load", () => {
     typeof window.ethereum !== "undefined" ||
     typeof window.web3 !== "undefined"
   ) {
-    web3 = new Web3(web3.currentProvider);
+    const provider = window["ethereum"] || window.web3.currentProvider;
+    web3 = new Web3(provider);
     var accountsPromise = web3.eth.getAccounts();
     var networkIdPromise = web3.eth.net.getId(); // web3.version.network;
     Promise.all([networkIdPromise, accountsPromise])
