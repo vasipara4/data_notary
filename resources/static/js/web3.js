@@ -347,7 +347,6 @@ window.addEventListener("load", () => {
       type: "GET",
       url: window.location.origin + "/api/users/all",
       success: function(result) {
-
         $("#getResultDiv").empty();
         $.each(result, function(i, user) {
           var addressIPFS = "";
@@ -356,8 +355,8 @@ window.addEventListener("load", () => {
             .call({ from: account })
             .then(function(result) {
               addressIPFS =
-                web3.utils.hexToAscii(result[0]) +
-                web3.utils.hexToAscii(result[1]);
+                ethers.utils.parseBytes32String(result[0]) +
+                ethers.utils.parseBytes32String(result[1]);
             });
           $("#getResultDiv").append(
             "<div class='card card-default'><div class='card-header'>Submitter: " +
@@ -521,8 +520,8 @@ function showFileName() {
   var fileName = input.files[0].name;
   infoArea.textContent = "Selected: " + fileName;
 }
-function ipfsHashToBytes32(hash){
-  var hashPart1 = ethers.utils.formatBytes32String(hash.slice(0,31));
-  var hashPart2 = ethers.utils.formatBytes32String(hash.slice(31,hash.length));
-  return new Array(hashPart1,hashPart2);
+function ipfsHashToBytes32(hash) {
+  var hashPart1 = ethers.utils.formatBytes32String(hash.slice(0, 31));
+  var hashPart2 = ethers.utils.formatBytes32String(hash.slice(31, hash.length));
+  return new Array(hashPart1, hashPart2);
 }
