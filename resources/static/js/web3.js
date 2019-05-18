@@ -405,8 +405,13 @@ async function openFile(id) {
   return result;
 }
 
-$('#file').change(function() {
-  var i = $(this).next('label').clone();
-  var file = $('#file')[0].files[0].name;
-  $(this).next('label').text(file);
-});
+var input = document.getElementById( 'file' );
+var infoArea = document.getElementById( 'file-upload-filename' );
+
+input.addEventListener( 'change', showFileName );
+
+function showFileName( event ) {
+  var input = event.srcElement;
+  var fileName = input.files[0].name;
+  infoArea.textContent = 'Selected: ' + fileName;
+}
