@@ -404,3 +404,9 @@ async function openFile(id) {
   var result = await readfile;
   return result;
 }
+
+$('#file').change(function() {
+  var i = $(this).prev('label').clone();
+  var file = $('#file')[0].files[0].name;
+  $(this).next('label').text(file);
+});
