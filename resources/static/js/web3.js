@@ -406,9 +406,9 @@ window.addEventListener("load", () => {
               .then(function(result) {
                 //console.log(result[0]);
                 var IPFSstring =
-                  result[3].toString == ""
+                   (ethers.utils.parseBytes32String(result[3]) === "")
                     ? "No File"
-                    : result[3].toString + result[4].toString;
+                    :  ethers.utils.parseBytes32String(result[3]) +  ethers.utils.parseBytes32String(result[4]);
                 verifyHtml =
                   "True" +
                   "<br>Account: " +
