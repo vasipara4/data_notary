@@ -26,7 +26,7 @@
         <li role="presentation" class="active"><a href="#">IPFS</a></li>
       </ul>
     </nav>
-    <h3>building IPFS</h3>
+    <h3>building Eth.Method</h3>
     <hr />
     <div class="col-sm-5">
       <h3>Public File in your existing Ethereum Submission</h3>
@@ -37,6 +37,10 @@
           <input type="file" name="file" id="file" onchange="showFileName()" required />
           <label for="file" class="btn-1">IPFS Upload</label>
           <div id="file-upload-filename"> </div>
+        </div>
+        <div class="form-group">
+          <label for="id">Your Submission ID:</label>
+          <input type="number" name="idOfIPFS" class="form-control" id="idOfIPFS" placeholder="Enter positive number" min="0" required />
         </div>
         <button type="submit" id="insertIPFS" class="btn btn-default ld-ext-right">
           Insert in Ethereum

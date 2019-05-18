@@ -59,6 +59,116 @@ window.addEventListener("load", () => {
   const contract = new web3.eth.Contract(
     [
       {
+        constant: false,
+        inputs: [
+          {
+            name: "_data",
+            type: "uint256"
+          },
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "dataWrite",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [],
+        name: "deleteContract",
+        outputs: [],
+        payable: true,
+        stateMutability: "payable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "dataIsYourData",
+        outputs: [
+          {
+            name: "",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getDataAddressIPFS",
+        outputs: [
+          {
+            name: "",
+            type: "bytes32"
+          },
+          {
+            name: "",
+            type: "bytes32"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "_addressIPFS",
+            type: "bytes32[2]"
+          },
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "addAddressIPFS",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_data",
+            type: "uint256"
+          },
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "verifyHash",
+        outputs: [
+          {
+            name: "",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
         constant: true,
         inputs: [
           {
@@ -100,29 +210,6 @@ window.addEventListener("load", () => {
         constant: true,
         inputs: [
           {
-            name: "_data",
-            type: "uint256"
-          },
-          {
-            name: "__id",
-            type: "int256"
-          }
-        ],
-        name: "verifyHash",
-        outputs: [
-          {
-            name: "",
-            type: "bool"
-          }
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: true,
-        inputs: [
-          {
             name: "_id",
             type: "uint256"
           }
@@ -140,28 +227,18 @@ window.addEventListener("load", () => {
           {
             name: "",
             type: "uint256"
+          },
+          {
+            name: "",
+            type: "bytes32"
+          },
+          {
+            name: "",
+            type: "bytes32"
           }
         ],
         payable: false,
         stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            name: "_data",
-            type: "uint256"
-          },
-          {
-            name: "_id",
-            type: "int256"
-          }
-        ],
-        name: "dataWrite",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
         type: "function"
       },
       {
@@ -171,7 +248,7 @@ window.addEventListener("load", () => {
         type: "constructor"
       }
     ],
-    "0x5014f1cddc82a1a0cd71e83a2d9e1bad3ea2c45a"
+    "0xeb44c7202af341d3af753e65be915ddae31a173d"
   );
 
   $("#userForm").submit(function(event) {
@@ -270,6 +347,15 @@ window.addEventListener("load", () => {
       type: "GET",
       url: window.location.origin + "/api/users/all",
       success: function(result) {
+        var addressIPFS = "";
+        contract.methods
+          .getDataAddressIPFS(user.id)
+          .call({ from: account })
+          .then(function(result) {
+            addressIPFS =
+              web3.utils.hexToAscii(result[0]) +
+              web3.utils.hexToAscii(result[1]);
+          });
         $("#getResultDiv").empty();
         $.each(result, function(i, user) {
           $("#getResultDiv").append(
@@ -283,7 +369,9 @@ window.addEventListener("load", () => {
               user.url +
               "'>URL of file </a></p><p>Description: " +
               user.measurement +
-              "</p></div></div><div class='card-footer'>Time & Date: " +
+              "</p><p>IPFS public file: " +
+              addressIPFS +
+              "</div></div><div class='card-footer'>Time & Date: " +
               unixTimeToDate(user.timestamp) +
               "</div></div>"
           );
@@ -344,24 +432,45 @@ window.addEventListener("load", () => {
   $("#IPFSform").submit(function(event) {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
+    var id = $("#idOfIPFS").val();
     var form = $("#IPFSform")[0];
     var ipfsData = new FormData(form);
-    $.ajax({
-      type: "POST",
-      enctype: "multipart/form-data",
-      contentType: false,
-      url: window.location.origin + "/api/ipfs/save",
-      data: ipfsData,
-      processData: false,
-      success: function(result) {
-        console.log(result);
-        $("#resultIPFS").html("<p>IPFS address: " + result[0].hash + "</p>");
-      },
-      error: function(e) {
-        alert("Error!");
-        console.log("ERROR: ", e);
-      }
-    });
+    contract.methods
+      .dataIsYourData(id)
+      .call({ from: account })
+      .then(function(result) {
+        if (result) {
+          $.ajax({
+            type: "POST",
+            enctype: "multipart/form-data",
+            contentType: false,
+            url: window.location.origin + "/api/ipfs/save",
+            data: ipfsData,
+            processData: false,
+            success: function(resultIPFS) {
+              var addressIPFS = web3.utils.asciiToHex(resultIPFS[0].hash);
+              contract.methods
+                .addAddressIPFS(addressIPFS, id)
+                .send({ from: account })
+                .then(function(result) {
+                  $("#resultIPFS").html(
+                    "<p>IPFS address: " + resultIPFS[0].hash + "</p>"
+                  );
+                  console.log(resultIPFS);
+                })
+                .catch(function(error) {
+                  alert(error);
+                });
+            },
+            error: function(e) {
+              alert("Error!");
+              console.log("ERROR: ", e);
+            }
+          });
+        } else {
+          alert("Insert only on your Ethereum Submission");
+        }
+      });
   });
 
   function unixTimeToDate(unix_timestamp) {
@@ -405,10 +514,9 @@ async function openFile(id) {
   return result;
 }
 
-
 function showFileName() {
-  var input = document.getElementById('file');
-  var infoArea = document.getElementById('file-upload-filename');
+  var input = document.getElementById("file");
+  var infoArea = document.getElementById("file-upload-filename");
   var fileName = input.files[0].name;
-  infoArea.textContent = 'Selected: ' + fileName;
+  infoArea.textContent = "Selected: " + fileName;
 }

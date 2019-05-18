@@ -1,4 +1,4 @@
-pragma solidity >=0.4.18;
+pragma solidity >=0.5.2;
 contract Data {
     address owner;
 
@@ -62,16 +62,28 @@ contract Data {
       return false;
   }
 
+  function dataIsYourData(uint _id)  public view returns(bool){
+      if(idToData[_id].submitter == msg.sender)
+          return true;
+      return false;
+  }
+
   function getTimestamp(uint _id) public view dataExisting(_id) returns (uint) {
     return idToData[_id].date;
+  }
+
+  function getDataAddressIPFS(uint _id) public view dataExisting(_id) returns(bytes32,bytes32) {
+    return (idToData[_id].addressIPFS[0],idToData[_id].addressIPFS[1]);
   }
 
   function getDataDetails(uint _id) public view dataExisting(_id) returns(address, uint, uint, bytes32, bytes32){
       return (idToData[_id].submitter, idToData[_id].data, idToData[_id].date, idToData[_id].addressIPFS[0], idToData[_id].addressIPFS[1]);
   }
 
-  function deleteContract () public onlyOwner {
-    selfdestruct(owner);
+  function deleteContract() public onlyOwner payable{
+      //casting to address payable for solidity v5
+      address payable addr = address(uint160(owner));
+    selfdestruct(addr);
   }
 
 }
