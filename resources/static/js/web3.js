@@ -522,10 +522,7 @@ function showFileName() {
   infoArea.textContent = "Selected: " + fileName;
 }
 function ipfsHashToBytes32(hash){
-  var bytes32;
   var hashPart1 = ethers.utils.formatBytes32String(hash.slice(0,31));
   var hashPart2 = ethers.utils.formatBytes32String(hash.slice(31,hash.length));
-  bytes32.push(hashPart1);
-  bytes32.push(hashPart2);
-  return bytes32;
+  return new Array(hashPart1,hashPart2);
 }
