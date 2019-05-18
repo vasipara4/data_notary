@@ -347,17 +347,18 @@ window.addEventListener("load", () => {
       type: "GET",
       url: window.location.origin + "/api/users/all",
       success: function(result) {
-        var addressIPFS = "";
-        contract.methods
-          .getDataAddressIPFS(user.id)
-          .call({ from: account })
-          .then(function(result) {
-            addressIPFS =
-              web3.utils.hexToAscii(result[0]) +
-              web3.utils.hexToAscii(result[1]);
-          });
+
         $("#getResultDiv").empty();
         $.each(result, function(i, user) {
+          var addressIPFS = "";
+          contract.methods
+            .getDataAddressIPFS(user.id)
+            .call({ from: account })
+            .then(function(result) {
+              addressIPFS =
+                web3.utils.hexToAscii(result[0]) +
+                web3.utils.hexToAscii(result[1]);
+            });
           $("#getResultDiv").append(
             "<div class='card card-default'><div class='card-header'>Submitter: " +
               user.submitter +
