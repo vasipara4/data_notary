@@ -55,7 +55,7 @@ window.addEventListener("load", () => {
     account = f[0];
    });*/
 
-  const contract = web3.eth.Contract(
+  const contract = new web3.eth.Contract(
     [
       {
         constant: false,
