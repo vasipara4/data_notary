@@ -408,9 +408,9 @@ async function openFile(id) {
 var input = document.getElementById('file');
 var infoArea = document.getElementById('file-upload-filename');
 
-input.addEventListener( 'change', showFileName );
+input.addEventListener('change', showFileName());
 
-function showFileName( event ) {
+function showFileName(event) {
   var input = event.srcElement;
   var fileName = input.files[0].name;
   infoArea.textContent = 'Selected: ' + fileName;
