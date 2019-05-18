@@ -406,7 +406,7 @@ async function openFile(id) {
 }
 
 $('#file').change(function() {
-  var i = $(this).prev('label').clone();
+  var i = $(this).next('label').clone();
   var file = $('#file')[0].files[0].name;
   $(this).next('label').text(file);
 });
