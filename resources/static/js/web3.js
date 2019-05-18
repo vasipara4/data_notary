@@ -10,13 +10,12 @@ window.addEventListener("load", () => {
     const provider = window["ethereum"] || window.web3.currentProvider;
     web3 = new Web3(provider);
     var accountsPromise = web3.eth.getAccounts();
-    var networkIdPromise = web3.eth.net.getId(); // web3.version.network;
-    Promise.all([networkIdPromise, accountsPromise])
+    //var networkIdPromise = web3.eth.net.getId(); // web3.version.network;
+    Promise.all([accountsPromise])
       .then(function(result) {
         //console.log(result[0]);
-        networkVersion = result[0];
-        var accounts = result[1];
-        account = accounts[0];
+        networkVersion = ethereum.networkVersion;
+        account = result[0];
         if (networkVersion != desiredNetwork) {
           alert("Please switch to ropsten network.");
         }
