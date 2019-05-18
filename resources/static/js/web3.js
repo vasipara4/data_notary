@@ -449,9 +449,9 @@ window.addEventListener("load", () => {
             data: ipfsData,
             processData: false,
             success: function(resultIPFS) {
-              var addressIPFS = web3.utils.asciiToHex(resultIPFS[0].hash);
+              var addressIPFS = resultIPFS[0].hash;
               contract.methods
-                .addAddressIPFS(addressIPFS, id)
+                .addAddressIPFS(ipfsHashToBytes32(addressIPFS), id)
                 .send({ from: account })
                 .then(function(result) {
                   $("#resultIPFS").html(
@@ -520,4 +520,12 @@ function showFileName() {
   var infoArea = document.getElementById("file-upload-filename");
   var fileName = input.files[0].name;
   infoArea.textContent = "Selected: " + fileName;
+}
+function ipfsHashToBytes32(hash){
+  var bytes32;
+  var hashPart1 = ethers.utils.formatBytes32String(hash.slice(0,32));
+  var hashPart2 = ethers.utils.formatBytes32String(hash.slice(33,hash.length));
+  bytes32.push(hashPart1);
+  bytes32.push(hashPart2);
+  return bytes32;
 }
