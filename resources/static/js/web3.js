@@ -438,6 +438,7 @@ window.addEventListener("load", () => {
   $("#IPFSform").submit(function(event) {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
+    $("#resultIPFS").html("");
     var ipfsElementLoading = document.getElementById("insertIPFS");
     var id = $("#idOfIPFS").val();
     var form = $("#IPFSform")[0];
