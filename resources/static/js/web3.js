@@ -251,6 +251,8 @@ window.addEventListener("load", () => {
     "0xeb44c7202af341d3af753e65be915ddae31a173d"
   );
 
+
+  //POST Ethereum & Db
   $("#userForm").submit(function(event) {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
@@ -270,6 +272,7 @@ window.addEventListener("load", () => {
         .call({ from: account })
         .then(function(result) {
           if (result == false) {
+            $("#postResultDiv").html("Do not close the window until transaction is confirmed");
             elementLoading.classList.add("running");
             contract.methods
               .dataWrite(txtFileAsString, id_val)
@@ -435,6 +438,7 @@ window.addEventListener("load", () => {
   $("#IPFSform").submit(function(event) {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
+    var ipfsElementLoading = document.getElementById("insertIPFS");
     var id = $("#idOfIPFS").val();
     var form = $("#IPFSform")[0];
     var ipfsData = new FormData(form);
@@ -443,6 +447,7 @@ window.addEventListener("load", () => {
       .call({ from: account })
       .then(function(result) {
         if (result) {
+          ipfsElementLoading.classList.add("running");
           $.ajax({
             type: "POST",
             enctype: "multipart/form-data",
@@ -456,16 +461,19 @@ window.addEventListener("load", () => {
                 .addAddressIPFS(ipfsHashToBytes32(addressIPFS), id)
                 .send({ from: account })
                 .then(function(result) {
+                  ipfsElementLoading.classList.remove("running");
                   $("#resultIPFS").html(
                     "<p>IPFS address: " + resultIPFS[0].hash + "</p>"
                   );
                   console.log(resultIPFS);
                 })
                 .catch(function(error) {
+                  ipfsElementLoading.classList.remove("running");
                   alert(error);
                 });
             },
             error: function(e) {
+              ipfsElementLoading.classList.remove("running");
               alert("Error!");
               console.log("ERROR: ", e);
             }

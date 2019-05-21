@@ -92,10 +92,12 @@ module.exports = function(app) {
     //  var uploadData = new Buffer(data);
     var resultIPFS = ipfs.addFromURL(pathOfUpload, (err, result) => {
       if (err) {
+        fs.unlink(pathOfUpload);
         throw err;
       }
        console.log(result);
        res.json(result);
+       fs.unlink(pathOfUpload);
     });
 
   });

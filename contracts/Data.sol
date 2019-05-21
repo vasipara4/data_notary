@@ -1,6 +1,10 @@
 pragma solidity >=0.5.2;
+
+// Enable the ABI v2 Coder
+pragma experimental ABIEncoderV2;
+
 contract Data {
-    address owner;
+    address private owner;
 
   struct dataObject {
     address submitter;
