@@ -1,5 +1,6 @@
 const Measurement = require('../models/user.model.js');
 var pathFile = require('path');
+//const Web3 = require('web3');
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
@@ -10,7 +11,7 @@ exports.save = (req, res) => {
   console.log("Server Time:"+dateServer);
   console.log("Tx Time:"+ req.body.timestamp);
 
-  //VALIDATION RULERS:
+  //VALIDATION RULES:
   //dateServer can't be smaller than block.timestamp
   //after 150 seconds the POST request is canceled
   if (dateServer<req.body.timestamp || dateServer > req.body.timestamp + 200 ) {
@@ -18,6 +19,14 @@ exports.save = (req, res) => {
         message: "Error: POST timeout"
     });
   }
+
+  //Account must be a valid Ethereum Address
+  // if (!web3.utils.isAddress(req.body.submitter)) {
+  //   res.status(400).send({
+  //       message: "Error"
+  //   });
+  // }
+
 
     // Create a Measurement
     const measurement = new Measurement({
@@ -28,6 +37,7 @@ exports.save = (req, res) => {
         gasUsed: req.body.gasUsed,
         url: url_file
     });
+
 
     // Save a Measurement in the MongoDB
     measurement.save()

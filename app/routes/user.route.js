@@ -3,6 +3,10 @@ module.exports = function(app) {
   const multer = require("multer");
   const pathFile = require("path");
   const fs = require("fs");
+  const Web3 = require('web3');
+
+  //var web3 = new Web3('http://localhost:8545');
+  console.log("Connected to Ropsten");
 
   var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
 
@@ -23,14 +27,14 @@ module.exports = function(app) {
     }
   });
 
-  var storage_IPFS = multer.diskStorage({
-    destination: function(req, file, cb) {
-      cb(null, __basedir + "/public/IPFS");
-    },
-    filename: function(req, file, cb) {
-      cb(null, Date.now() + "IPFS" + pathFile.extname(file.originalname));
-    }
-  });
+ var storage_IPFS = multer.memoryStorage(); //multer.diskStorage({
+  //   destination: function(req, file, cb) {
+  //     cb(null, __basedir + "/public/IPFS");
+  //   },
+  //   filename: function(req, file, cb) {
+  //     cb(null, Date.now() + "IPFS" + pathFile.extname(file.originalname));
+  //   }
+  // });
 
   var upload = multer({
     storage: storage,
@@ -75,7 +79,7 @@ module.exports = function(app) {
     console.log(pathOfUpload);
     const fileSize = req.file.size;
     if (fileSize > MAX_SIZE) {
-      fs.unlink(pathOfUpload);
+      //fs.unlink(pathOfUpload);
       return res.status(422).json({
         error: `File needs to be smaller than ${MAX_SIZE} bytes.`
       });
@@ -87,16 +91,15 @@ module.exports = function(app) {
       });
     }
 
-    console.log("Before IPFS progress");
     //const data = fs.readFileSync(req.file.path);
     //  var uploadData = new Buffer(data);
-    var resultIPFS = ipfs.addFromURL(pathOfUpload, (err, result) => {
+    var resultIPFS = ipfs.add(req.file.buffer, (err, result) => {
       if (err) {
-        fs.unlink(pathOfUpload);
+        //fs.unlink(pathOfUpload);
         throw err;
       }
       console.log(result);
-      fs.unlink(pathOfUpload);
+      //fs.unlink(pathOfUpload);
       res.json(result);
     });
   });
