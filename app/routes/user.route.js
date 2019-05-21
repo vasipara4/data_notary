@@ -79,7 +79,6 @@ module.exports = function(app) {
     console.log(pathOfUpload);
     const fileSize = req.file.size;
     if (fileSize > MAX_SIZE) {
-      //fs.unlink(pathOfUpload);
       return res.status(422).json({
         error: `File needs to be smaller than ${MAX_SIZE} bytes.`
       });
@@ -91,15 +90,11 @@ module.exports = function(app) {
       });
     }
 
-    //const data = fs.readFileSync(req.file.path);
-    //  var uploadData = new Buffer(data);
-    var resultIPFS = ipfs.add(req.file.buffer,options={onlyHash: true}, (err, result) => {
+    var resultIPFS = ipfs.add(req.file.buffer,{progress: (prog) => {console.log(`received: ${prog}`);} }, (err, result) => {
       if (err) {
-        //fs.unlink(pathOfUpload);
         throw err;
       }
       console.log(result);
-      //fs.unlink(pathOfUpload);
       res.json(result);
     });
   });
