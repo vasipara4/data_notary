@@ -28,7 +28,7 @@ module.exports = function(app) {
       cb(null, __basedir + "/public/IPFS");
     },
     filename: function(req, file, cb) {
-      cb(null, Date.now()+ "IPFS" + pathFile.extname(file.originalname));
+      cb(null, Date.now() + "IPFS" + pathFile.extname(file.originalname));
     }
   });
 
@@ -43,7 +43,7 @@ module.exports = function(app) {
   });
 
   const users = require("../controllers/user.controller.js");
-//  const saveIpfs = require("../controllers/user.ipfs.js");
+  //  const saveIpfs = require("../controllers/user.ipfs.js");
   var pathOfHtml = __basedir + "/views/";
 
   router.use(function(req, res, next) {
@@ -71,8 +71,8 @@ module.exports = function(app) {
     //MAX_SIZE of file: 16MB
     const MAX_SIZE = 16777216;
     const pathOfUpload =
-      "http://miletus.dynu.net:3008/IPFS/"+ req.file.filename;
-      console.log(pathOfUpload);
+      "http://miletus.dynu.net:3008/IPFS/" + req.file.filename;
+    console.log(pathOfUpload);
     const fileSize = req.file.size;
     if (fileSize > MAX_SIZE) {
       fs.unlink(pathOfUpload);
@@ -95,11 +95,10 @@ module.exports = function(app) {
         fs.unlink(pathOfUpload);
         throw err;
       }
-       console.log(result);
-       res.json(result);
-       fs.unlink(pathOfUpload);
+      console.log(result);
+      fs.unlink(pathOfUpload);
+      res.json(result);
     });
-
   });
 
   // Retrieve all Users' Info
