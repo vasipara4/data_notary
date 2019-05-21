@@ -93,7 +93,7 @@ module.exports = function(app) {
 
     //const data = fs.readFileSync(req.file.path);
     //  var uploadData = new Buffer(data);
-    var resultIPFS = ipfs.add(req.file.buffer, (err, result) => {
+    var resultIPFS = ipfs.add(req.file.buffer,options={onlyHash: true}, (err, result) => {
       if (err) {
         //fs.unlink(pathOfUpload);
         throw err;
