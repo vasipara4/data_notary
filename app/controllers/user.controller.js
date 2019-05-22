@@ -1,6 +1,7 @@
 const Measurement = require('../models/user.model.js');
 var pathFile = require('path');
-//const Web3 = require('web3');
+const Web3 = require('web3');
+var web3 = new Web3('http://localhost:8545');
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
@@ -21,12 +22,12 @@ exports.save = (req, res) => {
   }
 
   //Account must be a valid Ethereum Address
-  // if (!web3.utils.isAddress(req.body.submitter)) {
-  //   res.status(400).send({
-  //       message: "Error"
-  //   });
-  // }
-
+  if (!web3.utils.isAddress(req.body.submitter)) {
+    res.status(400).send({
+        message: "Error"
+    });
+  }
+  console.log(web3.utils.isAddress(req.body.submitter));
 
     // Create a Measurement
     const measurement = new Measurement({
