@@ -6,13 +6,16 @@ module.exports = function(app) {
   const Web3 = require('web3');
 
   var web3 = new Web3('http://localhost:8545');
-  console.log(web3);
+  console.log(web3.utils.keccak256("IPFS"));
+  //console.log(web3);
 
   var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
 
   var express = require("express");
   var router = express.Router();
 
+
+//Storage options
   var storage = multer.diskStorage({
     destination: function(req, file, cb) {
       cb(null, __basedir + "/public/uploads");
@@ -26,15 +29,7 @@ module.exports = function(app) {
       );
     }
   });
-
- var storage_IPFS = multer.memoryStorage(); //multer.diskStorage({
-  //   destination: function(req, file, cb) {
-  //     cb(null, __basedir + "/public/IPFS");
-  //   },
-  //   filename: function(req, file, cb) {
-  //     cb(null, Date.now() + "IPFS" + pathFile.extname(file.originalname));
-  //   }
-  // });
+ var storage_IPFS = multer.memoryStorage();
 
   var upload = multer({
     storage: storage,
