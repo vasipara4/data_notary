@@ -1,3 +1,4 @@
+ const node = new Ipfs({ repo: 'ipfs-' + Math.random() });
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
@@ -438,16 +439,24 @@ window.addEventListener("load", () => {
   $("#IPFSform").submit(function(event) {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
+
     $("#resultIPFS").html("");
     var ipfsElementLoading = document.getElementById("insertIPFS");
     var id = $("#idOfIPFS").val();
     var form = $("#IPFSform")[0];
     var ipfsData = new FormData(form);
+    node.add(new Buffer($("idOfIPFS")), (err, filesAdded) => {
+      if (err) {
+        return console.error('Error - ipfs add', err, res)
+      }
+
+      filesAdded.forEach((file) => console.log('successfully stored', file.hash))
+    });
     contract.methods
       .dataIsYourData(id)
       .call({ from: account })
       .then(function(result) {
-        if (result) {
+        if (!result) {
           ipfsElementLoading.classList.add("running");
           $.ajax({
             type: "POST",
