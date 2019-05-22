@@ -90,7 +90,7 @@ module.exports = function(app) {
       });
     }
 
-    var resultIPFS = ipfs.add(req.file.buffer,{progress: (prog) => {console.log(`received: ${prog}`);} }, (err, result) => {
+    var resultIPFS = ipfs.add(req.file.buffer,{progress: (prog) => {console.log(`received: ${prog}`)} }, (err, result) => {
       if (err) {
         throw err;
       }
