@@ -5,8 +5,8 @@ module.exports = function(app) {
   const fs = require("fs");
   const Web3 = require('web3');
 
-  //var web3 = new Web3('http://localhost:8545');
-  console.log("Connected to Ropsten");
+  var web3 = new Web3('http://localhost:8545');
+  console.log(web3);
 
   var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
 
@@ -90,7 +90,8 @@ module.exports = function(app) {
       });
     }
 
-    var resultIPFS = ipfs.add(req.file.buffer,{progress: (prog) => {console.log(`received: ${prog}`)} }, (err, result) => {
+    //options: {onlyHash: true, progress: (prog) => {console.log(`received: ${prog}`)}}
+    var resultIPFS = ipfs.add(req.file.buffer, (err, result) => {
       if (err) {
         throw err;
       }
