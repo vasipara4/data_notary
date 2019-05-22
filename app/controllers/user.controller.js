@@ -1,13 +1,10 @@
 const Measurement = require('../models/user.model.js');
-var pathFile = require('path');
-const Web3 = require('web3');
-var web3 = new Web3('http://localhost:8545');
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
   //console.log('Post a Measurement: ' + JSON.stringify(req.body));
   // TODO: Validate that dateServer is close to req.body.timestamp
-  var url_file = "http://miletus.dynu.net:3008/uploads/" + req.body.submitter + req.body.timestamp + pathFile.extname(req.file.originalname);
+  var url_file = "http://miletus.dynu.net:3008/uploads/" + req.file.fileName;
   var dateServer = Math.floor(new Date() / 1000);
   console.log("Server Time:"+dateServer);
   console.log("Tx Time:"+ req.body.timestamp);
@@ -15,7 +12,7 @@ exports.save = (req, res) => {
   //VALIDATION RULES:
   //dateServer can't be smaller than block.timestamp
   //after 150 seconds the POST request is canceled
-  if (dateServer<req.body.timestamp || dateServer > req.body.timestamp + 200 ) {
+  if (dateServer<req.body.timestamp || dateServer > req.body.timestamp + 150 ) {
     res.status(400).send({
         message: "Error: POST timeout"
     });
@@ -28,6 +25,12 @@ exports.save = (req, res) => {
   //   });
   // }
   // console.log(web3.utils.isAddress(req.body.submitter));
+
+  if (!req.file) {
+    return res.status(422).json({
+      error: "File needs to be provided."
+    });
+  }
 
     // Create a Measurement
     const measurement = new Measurement({

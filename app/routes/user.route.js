@@ -2,10 +2,7 @@ module.exports = function(app) {
   const ipfsClient = require("ipfs-http-client");
   const multer = require("multer");
   const pathFile = require("path");
-  const fs = require("fs");
-  const Web3 = require('web3');
 
-  var web3 = new Web3('http://localhost:8545');
   //console.log(web3.utils.keccak256("IPFS"));
   //console.log(web3);
 
