@@ -376,6 +376,7 @@ window.addEventListener("load", () => {
     var elementLoading = document.getElementById("insertLoading");
     var measurement_val = $("#measurement").val();
     var id_val = $("#id").val();
+    var weiValue = $("#weiValue").val();
     var txtFileAsString; // = openFile();
 
     Promise.all([openFile("file")]).then(function(result) {
@@ -391,7 +392,7 @@ window.addEventListener("load", () => {
             );
             elementLoading.classList.add("running");
             contract.methods
-              .dataWrite(txtFileAsString, id_val)
+              .dataWrite(txtFileAsString, id_val, weiValue)
               .send({ from: account })
               .then(function(result) {
                 contract.methods
