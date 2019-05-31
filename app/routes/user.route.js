@@ -51,6 +51,14 @@ module.exports = function(app) {
     res.sendFile(pathOfHtml + "index.html");
   });
 
+  app.get("/profile.html", (req, res) => {
+    res.sendFile(pathOfHtml + "profile.html");
+  });
+
+  app.get("/marketplace.html", (req, res) => {
+    res.sendFile(pathOfHtml + "marketplace.html");
+  });
+
   app.get("/ipfs.html", (req, res) => {
     res.sendFile(pathOfHtml + "ipfs.html");
   });
