@@ -86,8 +86,8 @@ contract Data {
   // VIEW FUNCTIONS
 
   function verifyHash(uint _data, uint _id) public view  returns (bool) {
-    uint hashedData = uint(keccak256(abi.encodePacked(_data, idToData[_id].date)));
-    if (hashedData == idToData[_id].data)
+    //uint hashedData = uint(keccak256(abi.encodePacked(_data, idToData[_id].date)));
+    if (_data == idToData[_id].data)
         return true;
       return false;
   }
@@ -132,6 +132,10 @@ contract Data {
 
   function getBalance (address _from) public view returns (uint){
      return balances[_from];
+  }
+
+  function getDataShareFromAddressID(address _owner, uint _id) public view returns (uint) {
+    return  addressToCopyrights[_owner][_id].data;
   }
 
 

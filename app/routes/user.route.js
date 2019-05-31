@@ -3,20 +3,17 @@ module.exports = function(app) {
   const multer = require("multer");
   const pathFile = require("path");
 
-  //console.log(web3.utils.keccak256("IPFS"));
-  //console.log(web3);
-
   var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
 
   var express = require("express");
   var router = express.Router();
 
-
-//Storage options
+  //Storage options
   var storage = multer.diskStorage({
     destination: function(req, file, cb) {
       cb(null, __basedir + "/public/uploads");
     },
+    // TODO: Create a random name via crypto!
     filename: function(req, file, cb) {
       cb(
         null,
@@ -26,19 +23,24 @@ module.exports = function(app) {
       );
     }
   });
- var storage_IPFS = multer.memoryStorage();
 
   var upload = multer({
     storage: storage,
     limits: { fileSize: 16 * 1024 * 1024 }
   });
 
+  //Memory Storage for IPFS files
+  var storage_IPFS = multer.memoryStorage();
+
   var uploadIPFS = multer({
     storage: storage_IPFS,
     limits: { fileSize: 16 * 1024 * 1024 }
   });
 
+
+
   const users = require("../controllers/user.controller.js");
+  const sign = require("../controllers/sign.download.js");
   //  const saveIpfs = require("../controllers/user.ipfs.js");
   var pathOfHtml = __basedir + "/views/";
 
@@ -69,6 +71,8 @@ module.exports = function(app) {
 
   // Save a User's Info to MongoDB
   app.post("/api/users/save", upload.single("file"), users.save);
+
+  app.post("/api/sign/download", upload.none(), sign.download);
 
   //Attach a file to IPFS
   app.post("/api/ipfs/save", uploadIPFS.single("file"), (req, res) => {

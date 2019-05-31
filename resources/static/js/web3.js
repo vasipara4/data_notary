@@ -251,7 +251,6 @@ window.addEventListener("load", () => {
     "0xeb44c7202af341d3af753e65be915ddae31a173d"
   );
 
-
   //POST Ethereum & Db
   $("#userForm").submit(function(event) {
     // Prevent the form from submitting via the browser.
@@ -264,15 +263,14 @@ window.addEventListener("load", () => {
     Promise.all([openFile("file")]).then(function(result) {
       txtFileAsString = result[0];
       txtFileAsString = web3.utils.keccak256(txtFileAsString);
-
-      //console.log(txtFileAsString);
-      //  measurement_val = txtString;
       contract.methods
         .dataExists($("#id").val())
         .call({ from: account })
         .then(function(result) {
           if (result == false) {
-            $("#postResultDiv").html("Do not close the window until transaction is confirmed");
+            $("#postResultDiv").html(
+              "Do not close the window until transaction is confirmed"
+            );
             elementLoading.classList.add("running");
             contract.methods
               .dataWrite(txtFileAsString, id_val)
@@ -393,43 +391,50 @@ window.addEventListener("load", () => {
   // VERIFY
   $("#verifyForm").submit(function(event) {
     event.preventDefault();
-    var verifyHtml = "False";
+    var verifyHtml = "Hash of File does NOT match. ";
     var testingData; //= $("#verify_measurement").val()
     var testingId = $("#verify_id").val();
     Promise.all([openFile("uploadTestFile")]).then(function(result) {
       testingData = result[0];
       testingData = web3.utils.keccak256(testingData);
       contract.methods
-        .verifyHash(testingData, testingId)
+        .dataExists(testingId)
         .call({ from: account })
-        .then(function(result) {
-          //console.log(result);
-          if (result) {
+        .then(function(idExists) {
+          if (idExists) {
             contract.methods
-              .getDataDetails(testingId)
+              .verifyHash(testingData, testingId)
               .call({ from: account })
               .then(function(result) {
-                //console.log(result[0]);
-                var IPFSstring =
-                  ethers.utils.parseBytes32String(result[3]) === ""
-                    ? "No File"
-                    : ethers.utils.parseBytes32String(result[3]) +
-                      ethers.utils.parseBytes32String(result[4]);
-                verifyHtml =
-                  "True" +
-                  "<br>Account: " +
-                  result[0] +
-                  "<br><br>Data: " +
-                  web3.utils.toHex(result[1]) +
-                  "<br><br>Unix Date: " +
-                  result[2] +
-                  "<br>Time and Date :<br> " +
-                  unixTimeToDate(result[2]) +
-                  "<br>IPFS file: " +
-                  IPFSstring;
-                $("#getVerifyDiv").html("Data	Integrity: " + verifyHtml);
+                //console.log(result);
+                if (result) {
+                  contract.methods
+                    .getDataDetails(testingId)
+                    .call({ from: account })
+                    .then(function(result) {
+                      //console.log(result[0]);
+                      var IPFSstring =
+                        ethers.utils.parseBytes32String(result[3]) === ""
+                          ? "No File"
+                          : ethers.utils.parseBytes32String(result[3]) +
+                            ethers.utils.parseBytes32String(result[4]);
+                      verifyHtml =
+                        "True" +
+                        "<br>Account: " +
+                        result[0] +
+                        "<br><br>Data: " +
+                        web3.utils.toHex(result[1]) +
+                        "<br><br>Unix Date: " +
+                        result[2] +
+                        "<br>Time and Date :<br> " +
+                        unixTimeToDate(result[2]) +
+                        "<br>IPFS file: " +
+                        IPFSstring;
+                      $("#getVerifyDiv").html("Data	Integrity: " + verifyHtml);
+                    });
+                } else $("#getVerifyDiv").html("Data Integrity: " + verifyHtml);
               });
-          } else $("#getVerifyDiv").html("Data Integrity: " + verifyHtml);
+          } else $("#getVerifyDiv").html("Data Integrity: ID doesn't exists");
         });
     });
   });
