@@ -10,7 +10,7 @@ web3.eth.net
   .getNetworkType()
   .then(result => console.log("Ethereum network:" + result));
 //const net = require('net');
-gloal.contract = new web3.eth.Contract(
+global.contract = new web3.eth.Contract(
   [{
       constant: false,
       inputs: [{
