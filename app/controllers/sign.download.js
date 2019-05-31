@@ -28,7 +28,8 @@ exports.download = (req, res) => {
   }
 
   //var pendingFile = mongoose.model('File', )
-FindFile.find({id: id}).then(result => {
-  var link = result.url;
-  res.send(link);
-});
+  FindFile.find({ id: id }).then(result => {
+    var link = result.url;
+    res.send(link);
+  });
+};
