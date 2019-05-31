@@ -62,11 +62,34 @@ window.addEventListener("load", () => {
         constant: false,
         inputs: [
           {
+            name: "amount",
+            type: "uint256"
+          }
+        ],
+        name: "withdrawFunds",
+        outputs: [
+          {
+            name: "success",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          {
             name: "_data",
             type: "uint256"
           },
           {
             name: "_id",
+            type: "uint256"
+          },
+          {
+            name: "_valueGwei",
             type: "uint256"
           }
         ],
@@ -74,15 +97,6 @@ window.addEventListener("load", () => {
         outputs: [],
         payable: false,
         stateMutability: "nonpayable",
-        type: "function"
-      },
-      {
-        constant: false,
-        inputs: [],
-        name: "deleteContract",
-        outputs: [],
-        payable: true,
-        stateMutability: "payable",
         type: "function"
       },
       {
@@ -149,6 +163,29 @@ window.addEventListener("load", () => {
         constant: true,
         inputs: [
           {
+            name: "_owner",
+            type: "address"
+          },
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getDataShareFromAddressID",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
             name: "_data",
             type: "uint256"
           },
@@ -181,6 +218,70 @@ window.addEventListener("load", () => {
           {
             name: "",
             type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "takeCopyrights",
+        outputs: [],
+        payable: true,
+        stateMutability: "payable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: "getAllIndexes",
+        outputs: [
+          {
+            name: "",
+            type: "uint256[]"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: "getItemsBuyable",
+        outputs: [
+          {
+            components: [
+              {
+                name: "submitter",
+                type: "address"
+              },
+              {
+                name: "data",
+                type: "uint256"
+              },
+              {
+                name: "date",
+                type: "uint256"
+              },
+              {
+                name: "valueGwei",
+                type: "uint256"
+              },
+              {
+                name: "addressIPFS",
+                type: "bytes32[2]"
+              }
+            ],
+            name: "",
+            type: "tuple[]"
           }
         ],
         payable: false,
@@ -230,6 +331,10 @@ window.addEventListener("load", () => {
           },
           {
             name: "",
+            type: "uint256"
+          },
+          {
+            name: "",
             type: "bytes32"
           },
           {
@@ -242,13 +347,26 @@ window.addEventListener("load", () => {
         type: "function"
       },
       {
-        inputs: [],
+        constant: true,
+        inputs: [
+          {
+            name: "_from",
+            type: "address"
+          }
+        ],
+        name: "getBalance",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
         payable: false,
-        stateMutability: "nonpayable",
-        type: "constructor"
+        stateMutability: "view",
+        type: "function"
       }
     ],
-    "0xeb44c7202af341d3af753e65be915ddae31a173d"
+    "0xb1154a02ad28cc12e640af6bf2b6d5a08fa7dc36"
   );
 
   //POST Ethereum & Db
