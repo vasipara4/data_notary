@@ -9,6 +9,16 @@ exports.save = (req, res) => {
   console.log("Server Time:" + dateServer);
   console.log("Tx Time:" + req.body.timestamp);
 
+  // Create a Measurement
+  const measurement = new Measurement({
+    measurement: req.body.measurement,
+    id: req.body.id,
+    timestamp: req.body.timestamp,
+    submitter: req.body.submitter,
+    gasUsed: req.body.gasUsed,
+    url: url_file
+  });
+
   //VALIDATION RULES:
   //dateServer can't be smaller than block.timestamp
   //after 150 seconds the POST request is canceled
@@ -21,53 +31,44 @@ exports.save = (req, res) => {
     });
   }
 
-  var ethereumTimestamp;
-  contract.methods
-    .getDataDetails(req.body.id)
-    .call({ from: '0xc5bc9893289dfb4549646f7e176bb3f479100518' })
-    .then(function(result) {
-      ethereumTimestamp = result[2];
-    });
-  //timestamp must be the same as in Ethereum
-  if (req.body.timestamp != ethereumTimestamp) {
-    res.status(400).send({
-      message: "Error"
-    });
-  }
-
-  //Account must be a valid Ethereum Address
-  if (!web3.utils.isAddress(req.body.submitter)) {
-    res.status(400).send({
-      message: "Error"
-    });
-  }
-
   if (!req.file) {
     return res.status(422).json({
       error: "File needs to be provided."
     });
   }
 
-  // Create a Measurement
-  const measurement = new Measurement({
-    measurement: req.body.measurement,
-    id: req.body.id,
-    timestamp: req.body.timestamp,
-    submitter: req.body.submitter,
-    gasUsed: req.body.gasUsed,
-    url: url_file
-  });
+  //Account must be a valid Ethereum Address
+  if (!web3.utils.isAddress(req.body.submitter)) {
+    res.status(400).send({
+      message: "Address Error"
+    });
+  }
 
-  // Save a Measurement in the MongoDB
-  measurement
-    .save()
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message
-      });
+  var ethereumTimestamp;
+  contract.methods
+    .getDataDetails(req.body.id)
+    .call({ from: req.body.submitter })
+    .then(function(result) {
+      ethereumTimestamp = result[2];
+
+      //timestamp must be the same as in Ethereum
+      if (req.body.timestamp != ethereumTimestamp) {
+        res.status(400).send({
+          message: "Valid Error"
+        });
+      }
+
+      // Save a Measurement in the MongoDB
+      measurement
+        .save()
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: err.message
+          });
+        });
     });
 };
 
