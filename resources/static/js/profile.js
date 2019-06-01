@@ -459,8 +459,8 @@ window.addEventListener("load", () => {
 //   console.log(items);
 // })();
 
-contract.methods.getOwnItems(account).call({from:account}).then(console.log());
-
+//contract.methods.getOwnItems(account).call({from:account}).then(console.log());
+contractEtherJS.getAllIndexes().then(result => console.log(result));
 
 
   function unixTimeToDate(unix_timestamp) {
