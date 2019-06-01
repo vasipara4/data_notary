@@ -456,7 +456,7 @@ window.addEventListener("load", () => {
   //Generate User Profile
 
 (async function() {
-  let items = await contractEtherJS.getOwnItems(account);
+  let items = await contractEtherJS.functions.getOwnItems(account);
   console.log(items);
 })();
 
