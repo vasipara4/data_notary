@@ -9,16 +9,6 @@ exports.save = (req, res) => {
   console.log("Server Time:" + dateServer);
   console.log("Tx Time:" + req.body.timestamp);
 
-  // Create a Measurement
-  const measurement = new Measurement({
-    measurement: req.body.measurement,
-    id: req.body.id,
-    timestamp: req.body.timestamp,
-    submitter: req.body.submitter,
-    gasUsed: req.body.gasUsed,
-    url: url_file
-  });
-
   //VALIDATION RULES:
   //dateServer can't be smaller than block.timestamp
   //after 150 seconds the POST request is canceled
@@ -26,7 +16,7 @@ exports.save = (req, res) => {
     dateServer < req.body.timestamp ||
     dateServer > req.body.timestamp + 150
   ) {
-    res.status(400).send({
+    return res.status(400).send({
       message: "Error: POST timeout"
     });
   }
@@ -37,13 +27,24 @@ exports.save = (req, res) => {
     });
   }
 
+  console.log(typeof req.body.timestamp);
+  console.log(req.file.fileName);
+
   //Account must be a valid Ethereum Address
   if (!web3.utils.isAddress(req.body.submitter)) {
-    res.status(400).send({
+    return res.status(400).send({
       message: "Address Error"
     });
   }
-
+  // Create a Measurement
+  const measurement = new Measurement({
+    measurement: req.body.measurement,
+    id: req.body.id,
+    timestamp: req.body.timestamp,
+    submitter: req.body.submitter,
+    gasUsed: req.body.gasUsed,
+    url: url_file
+  });
   var ethereumTimestamp;
   contract.methods
     .getDataDetails(req.body.id)
@@ -53,7 +54,7 @@ exports.save = (req, res) => {
 
       //timestamp must be the same as in Ethereum
       if (req.body.timestamp != ethereumTimestamp) {
-        res.status(400).send({
+        return res.status(400).send({
           message: "Valid Error"
         });
       }
