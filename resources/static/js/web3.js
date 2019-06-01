@@ -531,13 +531,11 @@ window.addEventListener("load", () => {
                     .getDataDetails(testingId)
                     .call({ from: account })
                     .then(function(result) {
-                      console.log(result[3]);
-                      console.log(ethers.utils.parseBytes32String("0x"+result[3]));
                       var IPFSstring =
-                        ethers.utils.parseBytes32String(result[3]) == ""
+                        ethers.utils.parseBytes32String(result[4]) === ""
                           ? "No File"
-                          : ethers.utils.parseBytes32String(result[3]) +
-                            ethers.utils.parseBytes32String(result[4]);
+                          : ethers.utils.parseBytes32String(result[4]) +
+                            ethers.utils.parseBytes32String(result[5]);
                       verifyHtml =
                         "True" +
                         "<br>Account: " +
