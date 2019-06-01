@@ -48,7 +48,7 @@
           </div>
           <div class="form-group">
             <label for="weiValue">Enter Price of Copyrights in Wei:</label>
-            <input type="number" name="weiValue" class="form-control" id="weiValue" placeholder="Enter positive number" min="0" value="0" step="1000000" oninput="weiEther()" required />
+            <input type="number" name="weiValue" class="form-control" id="weiValue" min="0" max="100000000000000000000000000000000" value="0" oninput="weiEther()" required />
             <details>
               <summary id="weiSummary">Price: 0</summary>
               <p id="weiDescription">The file is not going to be in Marketplace (Notary Mode Only)</p>
