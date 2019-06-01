@@ -454,16 +454,13 @@ window.addEventListener("load", () => {
   });
 
   //Generate User Profile
-  (function() {
 
-  let items = await contractEtherJS.getOwnItems(account);
+
+  let items = await contractEtherJS.getBalance(account);
   //  for (var item in items) {
             console.log(items);
           //}
-  });
 
-
-  })();
 
   function unixTimeToDate(unix_timestamp) {
     var date = new Date(unix_timestamp * 1000);
