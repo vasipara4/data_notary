@@ -456,7 +456,7 @@ window.addEventListener("load", () => {
   //Generate User Profile
 
 
-  let itemsPromise =  contractEtherJS.getBalance(account);
+  let itemsPromise =  contractEtherJS.getOwnItems(account);
   //  for (var item in items) {
   itemsPromise.then(function(result){
   console.log(result);
