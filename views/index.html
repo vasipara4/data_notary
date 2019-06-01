@@ -128,17 +128,18 @@
       }
       else if (wei < 1000000) {
         $("#weiSummary").html("Price: " + wei);
-      }else if (wei >= 1000000) {
-        var gwei = wei/1000000;
-        $("#weiSummary").html("Price: " + gwei + " Gwei (approximately)");
+      }
+      else if (wei >= 1000000000000000000) {
+        var ether = wei/1000000000000000000;
+        $("#weiSummary").html("Price: " + ether + " Ether (approximately)");
       }
       else if (wei >= 1000000000000) {
         var pwei = wei/1000000000000;
         $("#weiSummary").html("Price: " + pwei + " Pwei (approximately)");
       }
-      else if (wei >= 1000000000000000000) {
-        var ether = wei/1000000000000000000;
-        $("#weiSummary").html("Price: " + ether + " Ether (approximately)");
+      else if (wei >= 1000000) {
+        var gwei = wei/1000000;
+        $("#weiSummary").html("Price: " + gwei + " Gwei (approximately)");
       }
 
   $("#weiDescription").html("The file is going to be in Marketplace (Notary and Marketplace Mode)");
