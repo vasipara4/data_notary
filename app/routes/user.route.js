@@ -78,9 +78,6 @@ module.exports = function(app) {
   app.post("/api/ipfs/save", uploadIPFS.single("file"), (req, res) => {
     //MAX_SIZE of file: 16MB
     const MAX_SIZE = 16777216;
-    const pathOfUpload =
-      "http://miletus.dynu.net:3008/IPFS/" + req.file.filename;
-    console.log(pathOfUpload);
     const fileSize = req.file.size;
     if (fileSize > MAX_SIZE) {
       return res.status(422).json({
