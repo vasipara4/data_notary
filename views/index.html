@@ -23,16 +23,16 @@
       var wei = $("#weiValue").val();
 
       if (wei == 0) {
-        $("#weiSummary").val("Price: 0");
-        $("#weiDescription").val("The file is not going to be in Marketplace (Notary Mode Only)");
+        $("#weiSummary").html("Price: 0");
+        $("#weiDescription").html("The file is not going to be in Marketplace (Notary Mode Only)");
       } else if (wei >= 1000000) {
         var gwei = wei/1000000;
-        $("#weiSummary").val("Price: " + gwei + " Gwei (approximately)");
-        $("#weiDescription").val("The file is going to be in Marketplace (Notary and Marketplace Mode)");
+        $("#weiSummary").html("Price: " + gwei + " Gwei (approximately)");
+        $("#weiDescription").html("The file is going to be in Marketplace (Notary and Marketplace Mode)");
       }
       else {
-        $("#weiSummary").val("Price: " + wei)
-        $("#weiDescription").val("The file is going to be in Marketplace (Notary and Marketplace Mode)");
+        $("#weiSummary").html("Price: " + wei);
+        $("#weiDescription").html("The file is going to be in Marketplace (Notary and Marketplace Mode)");
       }
 
     }
