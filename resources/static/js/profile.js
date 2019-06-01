@@ -420,7 +420,7 @@ window.addEventListener("load", () => {
 
 
   // Connect to the network
-  let providerEtherJS = new ethers.providers.Web3Provider(window.eb3.currentProvider);
+  let providerEtherJS = new ethers.providers.Web3Provider(window.web3.currentProvider);
 
   let contractEtherJS = new ethers.Contract(contractAddress, abi, providerEtherJS);
 
