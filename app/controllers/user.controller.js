@@ -11,7 +11,8 @@ exports.save = (req, res) => {
   //VALIDATION RULES:
   //dateServer can be smaller than block.timestamp for 10 seconds
   //after 150 seconds the POST request is canceled
-  if ( dateServer < req.body.timestamp + 10 ||
+  // MUST: req.body.timestamp -50 < dateServer OR dateServer < req.body.timestamp + 150 to be valid
+  if ( dateServer < req.body.timestamp - 50 ||
     dateServer > req.body.timestamp + 150 ) {
     return res.status(400).send({
       message: "Error: POST timeout"

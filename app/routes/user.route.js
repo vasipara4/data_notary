@@ -2,11 +2,20 @@ module.exports = function(app) {
   const ipfsClient = require("ipfs-http-client");
   const multer = require("multer");
   const pathFile = require("path");
+  var crypto = require("crypto");
 
   var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
 
   var express = require("express");
   var router = express.Router();
+
+  //random Value Generator
+  function randomValueHex(len) {
+    return crypto
+      .randomBytes(Math.ceil(len / 2))
+      .toString("hex") // convert to hexadecimal format
+      .slice(0, len); // return required number of characters
+  }
 
   //Storage options
   var storage = multer.diskStorage({
@@ -17,8 +26,10 @@ module.exports = function(app) {
     filename: function(req, file, cb) {
       cb(
         null,
-        req.body.submitter +
-          req.body.timestamp +
+        randomValueHex(40) +
+          req.body.submitter +
+          randomValueHex(5) +
+          req.body.id +
           pathFile.extname(file.originalname)
       );
     }
@@ -37,8 +48,6 @@ module.exports = function(app) {
     limits: { fileSize: 16 * 1024 * 1024 }
   });
 
-
-
   const users = require("../controllers/user.controller.js");
   const sign = require("../controllers/sign.download.js");
   //  const saveIpfs = require("../controllers/user.ipfs.js");
@@ -54,6 +63,9 @@ module.exports = function(app) {
   });
 
   app.get("/profile.html", (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    res.header("Expires", "-1");
+    res.header("Pragma", "no-cache");
     res.sendFile(pathOfHtml + "profile.html");
   });
 
