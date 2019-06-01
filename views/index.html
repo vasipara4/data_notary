@@ -50,8 +50,11 @@
           </div>
             <div class="form-group">
               <label for="weiValue">Enter Price of Copyrights in Wei:</label>
-              <input type="number" name="weiValue" class="form-control" id="weiValue" placeholder="Enter positive number" min="0" value="0" step="1000000" required />
-              Price 0: The file is not going to be in Marketplace (Notary Mode Only)
+              <input type="number" name="weiValue" class="form-control" id="weiValue" placeholder="Enter positive number" min="0" value="0" step="1000000" onchange="weiEther()"required />
+              <details>
+  <summary id="weiSummary">Price: 0</summary>
+  <p id="weiDescription">The file is not going to be in Marketplace (Notary Mode Only)</p>
+</details>
             </div>
           <div class="form-group">
             <label for="id">ID:</label>
@@ -115,7 +118,18 @@
     </div>
 
   </div>
+<script>function weiEther(){
+  var wei = $("#weiValue").val();
 
+  if(wei == 0){
+$("#weiSummary").val("Price: 0");
+$("#weiDescription").val("The file is not going to be in Marketplace (Notary Mode Only)");
+  }
+  else if( wei > 1000000){
+    $("#weiSummary").val("Price: "+ wei/1000000 + " Gwei");
+  }
+  $("#weiDescription").val("The file is going to be in Marketplace (Notary and Marketplace Mode)");
+}</script>
 
 </body>
 
