@@ -4,17 +4,15 @@ const Measurement = require("../models/user.model.js");
 exports.save = (req, res) => {
 
   var url_file = "http://miletus.dynu.net:3008/uploads/" + req.file.filename;
-  var dateServer = Math.floor(new Date() / 1000);
+  var dateServer = Math.floor( Date().now / 1000);
   console.log("Server Time:" + dateServer);
   console.log("Tx Time:" + req.body.timestamp);
 
   //VALIDATION RULES:
-  //dateServer can't be smaller than block.timestamp
+  //dateServer can be smaller than block.timestamp for 10 seconds
   //after 150 seconds the POST request is canceled
-  if (
-    dateServer < req.body.timestamp ||
-    dateServer > req.body.timestamp + 150
-  ) {
+  if ( dateServer < req.body.timestamp + 10 ||
+    dateServer > req.body.timestamp + 150 ) {
     return res.status(400).send({
       message: "Error: POST timeout"
     });
