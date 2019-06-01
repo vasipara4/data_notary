@@ -1,4 +1,6 @@
 var express = require("express");
+var helmet = require('helmet');
+
 var app = express();
 
 //Connecting to ropsten
@@ -281,6 +283,8 @@ global.contract = new web3.eth.Contract(
   "0xb1154a02ad28cc12e640af6bf2b6d5a08fa7dc36"
 );
 
+app.use(helmet());
+app.use(helmet.noCache());
 app.use(express.static("resources"));
 app.use(express.static("public"));
 

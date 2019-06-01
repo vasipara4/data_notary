@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="X-UA-Compatible" content="ie-edge" />
   <meta charset="utf-8" />
+  <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache" />
+  <meta HTTP-EQUIV="Expires" CONTENT="-1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -41,7 +44,7 @@
     <div class="col-sm-6" id="PropertiesContainer">
       Download a Purchased Copyright File
       <hr />
-      <form id="downloadForm" enctype="multipart/form-data">
+      <form id="downloadForm" enctype="multipart/form-data" autocomplete="off">
         <div class="form-group">
           <label for="idOfFile">ID of your file: </label>
           <input type="number" class="form-control" name="downloadId" id="downloadId" placeholder="Enter file's ID" required />
@@ -52,7 +55,7 @@
               for calculating your Digital Signature and verify your
               Identity</font>
           </label>
-          <input type="text" class="form-control" name="digitalSignature" id="digitalSignature" placeholder="Your Private Key" required />
+          <input type="password" class="form-control" name="digitalSignature" id="digitalSignature" placeholder="Your Private Key" required />
         </div>
         <button type="submit" id="downloadButton" class="btn btn-default">
           Download
