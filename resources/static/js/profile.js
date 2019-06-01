@@ -456,10 +456,12 @@ window.addEventListener("load", () => {
   //Generate User Profile
   (function() {
 
-  let items = await contractEtherJS.getOwnItems();
-  for (var item in items) {
-          console.log(item);
-        }
+  let items = contractEtherJS.getOwnItems().then(function(items){
+    for (var item in items) {
+            console.log(item);
+          }
+  });
+
 
   })();
 
