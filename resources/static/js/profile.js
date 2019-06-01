@@ -421,8 +421,8 @@ window.addEventListener("load", () => {
 
   // Connect to the network
   let providerEtherJS = new ethers.providers.Web3Provider(window.web3.currentProvider);
-
-  let contractEtherJS = new ethers.Contract(contractAddress, abi, providerEtherJS);
+  signer = providerEtherJS.getSigner(0);
+  let contractEtherJS = new ethers.Contract(contractAddress, abi, signer);
 
 
   $("#downloadForm").submit(function(event) {
