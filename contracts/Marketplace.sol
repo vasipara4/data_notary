@@ -129,6 +129,18 @@ contract Data {
     }
     return items;
   }
+  function getOwnItems(address _owner)public view returns (dataObject[] memory) {
+    dataObject[] memory items = new dataObject[](idIndexes.length);
+    for(uint i=0; i < idIndexes.length;i++){
+      if(idToData[idIndexes[i]].submitter == _owner)
+        items[i]= idToData[idIndexes[i]];
+      else if(addressToCopyrights[_owner][idIndexes[i]].date != 0){
+        items[i]= idToData[idIndexes[i]];
+        items[i].date = addressToCopyrights[_owner][idIndexes[i]].date;
+      }
+    }
+    return items;
+  }
 
   function getBalance (address _from) public view returns (uint){
      return balances[_from];

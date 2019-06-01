@@ -406,6 +406,7 @@ window.addEventListener("load", () => {
                 //elementLoading.classList.remove("running");
               })
               .catch(function(error) {
+                $("#postResultDiv").html("");
                 elementLoading.classList.remove("running");
                 alert(error);
               });
@@ -442,6 +443,7 @@ window.addEventListener("load", () => {
       },
       error: function(e) {
         alert("Error!");
+        $("#postResultDiv").html("");
         console.log("ERROR: ", e);
       }
     });

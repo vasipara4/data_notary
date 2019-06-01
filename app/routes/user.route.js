@@ -63,7 +63,7 @@ module.exports = function(app) {
   });
 
   app.get("/profile.html", (req, res) => {
-    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate, proxy-revalidate");
     res.header("Expires", "-1");
     res.header("Pragma", "no-cache");
     res.sendFile(pathOfHtml + "profile.html");

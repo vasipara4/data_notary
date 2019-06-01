@@ -25,8 +25,6 @@ exports.save = (req, res) => {
     });
   }
 
-  console.log(typeof req.body.timestamp);
-  console.log(req.file.fileName);
 
   //Account must be a valid Ethereum Address
   if (!web3.utils.isAddress(req.body.submitter)) {
