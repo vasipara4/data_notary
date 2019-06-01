@@ -456,10 +456,12 @@ window.addEventListener("load", () => {
   //Generate User Profile
 
 
-  let items = await contractEtherJS.getBalance(account);
+  let itemsPromise =  contractEtherJS.getBalance(account);
   //  for (var item in items) {
-            console.log(items);
-          //}
+  itemsPromise.then(function(result){
+  console.log(result);
+});
+
 
 
   function unixTimeToDate(unix_timestamp) {
