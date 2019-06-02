@@ -469,7 +469,6 @@ window.addEventListener("load", () => {
         for (var i = 0; i < items[0].length; i++) {
           if (items[1][i]) {
             emptyWallet = 0;
-            console.log(items[2][i]);
             var pendingId = items[2][i].toString();
 
             var ipfsAddress =
