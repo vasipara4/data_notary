@@ -34,7 +34,6 @@ exports.download = (req, res) => {
         .then(function(originalHash) {
           //Getting Hash of original file
           dataOriginal = originalHash[1];
-            console.log(dataOriginal);
           if (dataOriginal.toString() != dataToBeVerified.toString()) {
             return res.status(400).send({
               message: "Error"
