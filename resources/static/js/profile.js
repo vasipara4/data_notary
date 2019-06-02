@@ -467,7 +467,7 @@ window.addEventListener("load", () => {
       .then(function(items) {
         if(!items[1]){
           $("#showYourData").html(
-            `<li class="list-group-item"><strong>Empty Copyrights Waller</strong></li>`
+            `<li class="list-group-item"><strong>Empty Copyrights Wallet</strong></li>`
           );
           return;
         }
@@ -501,6 +501,21 @@ window.addEventListener("load", () => {
           `<li class="list-group-item"><strong>Error</strong></li>`
         );
       });
+
+      // TODO: create withdraw how much
+      contractEtherJS
+        .getBalance(account[0])
+        .then(function(item) {
+          $("#withdrawEtherNumber").append(item.toString() + " Wei");
+        }).catch(e => console.log(e));
+
+
+
+
+      // TODO: withdraw input and transaction
+
+
+
   })();
 
   function unixTimeToDate(unix_timestamp) {
