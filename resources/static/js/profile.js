@@ -8,10 +8,13 @@ window.addEventListener("load", () => {
   ) {
     const provider = window["ethereum"] || window.web3.currentProvider;
     web3 = new Web3(provider);
-    web3.version.getNetwork(function(err, networkId){
+    web3.eth.net.getId().then(function(networkId){
       console.log(networkId);
       if (networkId != desiredNetwork)
         alert("Please switch to ropsten network.");});
+    });
+
+
 
 
     if (web3.currentProvider.isMetaMask) {
