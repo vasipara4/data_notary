@@ -473,7 +473,7 @@ window.addEventListener("load", () => {
           var valueWei =
             ethers.utils.formatUnits(items[i].valueWei, 3) == "0.0"
               ? "Notary Mode"
-              : ethers.utils.formatUnits(items[i].valueWei, 9) + "Gwei";
+              : ethers.utils.formatUnits(items[i].valueWei, 9) + " Gwei";
           $("#showYourData").append(
             `<li class="list-group-item"><p>Data hash: ` +
               items[i].data.toHexString() +
@@ -482,7 +482,7 @@ window.addEventListener("load", () => {
               `</p><p>IPFS Address: ` +
               ipfsAddress +
               `</p><p>Date: ` +
-              items[i].data.toString() + `</p>`
+              unixTimeToDate(items[i].date.toString()) + `</p>`
           );
 
           $("#showYourData").append(`</li>`);
