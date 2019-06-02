@@ -43,8 +43,8 @@ a {
   text-decoration: none;
 }
 
-[type="submit"] {
-  background: #f15d22;
+[type="submit"].btn-1 {
+  background: #347AB6;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -61,7 +61,7 @@ a {
   vertical-align: middle;
 
   &:hover {
-    background-color: darken(#f15d22, 10%);
+    background-color: darken(#347AB6, 10%);
   }
 
   &.btn-1 {
