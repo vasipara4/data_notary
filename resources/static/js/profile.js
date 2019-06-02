@@ -464,6 +464,7 @@ window.addEventListener("load", () => {
     contractEtherJS
       .getOwnItems(account[0])
       .then(function(items) {
+        console.log(items);
         for (var i = 0; i < items.length; i++) {
           var ipfsAddress =
             ethers.utils.parseBytes32String(items[i].addressIPFS[0]) == ""
