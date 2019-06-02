@@ -7,7 +7,7 @@ contract Data {
     address submitter;
     uint256 data;
     uint date;
-    uint valueGwei;
+    uint valueWei;
     bytes32[2] addressIPFS;
   }
 
@@ -45,7 +45,7 @@ contract Data {
     _;
   }
   modifier canYouBuyCopyrights(uint _id) {
-    require(idToData[_id].valueGwei != 0);
+    require(idToData[_id].valueWei != 0);
     _;
   }
 
@@ -54,7 +54,7 @@ contract Data {
 
   //send to contract
   function takeCopyrights(uint _id) canYouBuyCopyrights(_id) newCopyrightsAddressEmpty(_id) public payable {
-    if ( msg.value == idToData[_id].valueGwei && (msg.value +  balances[idToData[_id].submitter] >= balances[idToData[_id].submitter])){
+    if ( msg.value == idToData[_id].valueWei && (msg.value +  balances[idToData[_id].submitter] >= balances[idToData[_id].submitter])){
       addressToCopyrights[msg.sender][_id].data = idToData[_id].data;
       addressToCopyrights[msg.sender][_id].date = now;
       balances[idToData[_id].submitter] += msg.value;
@@ -70,10 +70,10 @@ contract Data {
 
 
   //FUNCTIONS SECTION
-  function dataWrite(uint _data, uint _id, uint _valueGwei) public originalDataNew(_id)  {
+  function dataWrite(uint _data, uint _id, uint _valueWei) public originalDataNew(_id)  {
       bytes32[2] memory ipfsAddress;
       //uint hashedData = uint(keccak256(abi.encodePacked(_data, uint(now))));
-      idToData[_id] = dataObject(msg.sender, _data, now, _valueGwei, ipfsAddress);
+      idToData[_id] = dataObject(msg.sender, _data, now, _valueWei, ipfsAddress);
       idIndexes.push(_id);
   }
 
@@ -113,7 +113,7 @@ contract Data {
   }
 
   function getDataDetails(uint _id) public view originalDataExisting(_id) returns(address, uint, uint,uint, bytes32, bytes32){
-      return (idToData[_id].submitter, idToData[_id].data, idToData[_id].date, idToData[_id].valueGwei, idToData[_id].addressIPFS[0], idToData[_id].addressIPFS[1]);
+      return (idToData[_id].submitter, idToData[_id].data, idToData[_id].date, idToData[_id].valueWei, idToData[_id].addressIPFS[0], idToData[_id].addressIPFS[1]);
   }
 
   function getAllIndexes() public view returns (uint[] memory){
@@ -124,7 +124,7 @@ contract Data {
      dataObject[] memory items = new dataObject[](indexes.length);
 
     for(uint i=0; i < indexes.length;i++){
-      if(idToData[indexes[i]].valueGwei != 0)
+      if(idToData[indexes[i]].valueWei != 0)
         items[i]= idToData[indexes[i]];
     }
     return items;
@@ -137,10 +137,12 @@ contract Data {
       else if(addressToCopyrights[_owner][idIndexes[i]].date != 0){
         items[i]= idToData[idIndexes[i]];
         items[i].date = addressToCopyrights[_owner][idIndexes[i]].date;
+        items[i].valueWei = 0;
       }
     }
     return items;
   }
+
 
   function getBalance (address _from) public view returns (uint){
      return balances[_from];

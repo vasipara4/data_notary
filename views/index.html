@@ -134,12 +134,16 @@
         var ether = wei/1000000000000000000;
         $("#weiSummary").html("Price: " + Math.round(ether) + " Ether (approximately)");
       }
+      else if (wei >= 1000000000000000) {
+        var pwei = wei/1000000000000000;
+        $("#weiSummary").html("Price: " + Math.round(pwei) + " MilliEther (approximately)");
+      }
       else if (wei >= 1000000000000) {
         var pwei = wei/1000000000000;
-        $("#weiSummary").html("Price: " + Math.round(pwei) + " Pwei (approximately)");
+        $("#weiSummary").html("Price: " + Math.round(pwei) + " MicroEther (approximately)");
       }
-      else if (wei >= 1000000) {
-        var gwei = wei/1000000;
+      else if (wei >= 1000000000) {
+        var gwei = wei/1000000000;
         $("#weiSummary").html("Price: " + Math.round(gwei) + " Gwei (approximately)");
       }
 
