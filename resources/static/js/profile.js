@@ -433,7 +433,7 @@ window.addEventListener("load", () => {
         : $("#digitalSignature").val()
     );
     $('#digitalSignature').val('');
-    var sendData = { id: downloadID, signature: signature.signature };
+    var sendData = {'account':account, 'id': downloadID, 'signature': signature.signature };
     $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
@@ -441,7 +441,9 @@ window.addEventListener("load", () => {
       url: window.location.origin + "/api/sign/download",
       data: sendData, //JSON.stringify(formData),
       processData: false, //dataType: "json",
-      success: function(user) {},
+      success: function(user) {
+        console.log(user);
+      },
       error: function(e) {
         alert("Error!");
         console.log("ERROR: ", e);
