@@ -1,12 +1,11 @@
-const mongoose = require("mongoose");
 const FindFile = require("../models/user.model.js");
+const ethers = require('ethers');
 
 exports.download = (req, res) => {
   var id = req.body.id;
   var signature = req.body.signature;
   var account = req.body.account;
   if (typeof id != "string" || typeof account != "string") {
-    console.log("typeof error");
     return res.status(400).send({
       message: "Error"
     });
@@ -15,7 +14,6 @@ exports.download = (req, res) => {
   var accountToBeVerified = web3.eth.accounts.recover(id, signature);
 
   if (account != accountToBeVerified) {
-    console.log("accountToBeVerified");
     return res.status(400).send({
       message: "Error"
     });
@@ -37,8 +35,7 @@ exports.download = (req, res) => {
           //Getting Hash of original file
           dataOriginal = originalHash[1];
             console.log(dataOriginal);
-          if (dataOriginal != dataToBeVerified) {
-            console.log("dataOriginal != dataToBeVerified");
+          if (dataOriginal.toString() != dataToBeVerified.toString()) {
             return res.status(400).send({
               message: "Error"
             });
