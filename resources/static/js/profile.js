@@ -482,7 +482,7 @@ window.addEventListener("load", () => {
                 ? "Notary Mode"
                 : ethers.utils.formatUnits(items[0][i].valueWei, 9) + " Gwei";
             $("#showYourData").append(
-              `<li class="list-group-item"><p>Data hash: ` +
+              `<li class="list-group-item"><p>ID:`+ pendingId +`</p><p>Data hash: ` +
                 items[0][i].data.toHexString() +
                 `</p><p>Price: ` +
                 valueWei +
