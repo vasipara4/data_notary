@@ -28,7 +28,6 @@ exports.download = (req, res) => {
     .then(function(result) {
       //Getting the data hash of buyer
       dataToBeVerified = result;
-      console.log(dataToBeVerified);
       contract.methods
         .getDataDetails(id)
         .call({ from: "0xc5bc9893289dfb4549646f7e176bb3f479100518" })
@@ -42,9 +41,9 @@ exports.download = (req, res) => {
           }
 
           FindFile.find({ id: id }).then(result => {
-            var link = result[0].url;
+            var url = result[0].url;
             console.log(result);
-            res.download( __basedir + link, 'download'+ path.extname(link))
+            res.download( __basedir + "/public" + url, 'download'+ path.extname(url))
           });
         });
     });
