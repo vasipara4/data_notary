@@ -1,7 +1,6 @@
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
-  var networkVersion;
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (
     typeof window.ethereum !== "undefined" ||
@@ -9,9 +8,11 @@ window.addEventListener("load", () => {
   ) {
     const provider = window["ethereum"] || window.web3.currentProvider;
     web3 = new Web3(provider);
-    networkVersion = await web3.eth.net.getId();
-    if (networkVersion != desiredNetwork)
-      alert("Please switch to ropsten network.");
+    web3.version.getNetwork(function(err, networkId){
+      console.log(networkId);
+      if (networkId != desiredNetwork)
+        alert("Please switch to ropsten network.");});
+
 
     if (web3.currentProvider.isMetaMask) {
       ethereum
