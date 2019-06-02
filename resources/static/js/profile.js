@@ -48,6 +48,7 @@ window.addEventListener("load", () => {
   ethereum.on("accountsChanged", function(accounts) {
     // Time to reload your interface with accounts[0]!
     account = accounts[0];
+    console.log(account);
   });
 
   /*web3.currentProvider.publicConfigStore.on('update', function(accountsChanged){
