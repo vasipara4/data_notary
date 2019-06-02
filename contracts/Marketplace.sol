@@ -129,22 +129,24 @@ contract Data {
     }
     return items;
   }
-  function getOwnItems(address _owner)public view returns (dataObject[] memory, bool _isNotEmpty) {
+  function getOwnItems(address _owner)public view returns (dataObject[] memory, bool[] memory, uint[] memory) {
     dataObject[] memory items = new dataObject[](idIndexes.length);
-    _isNotEmpty = false;
+    uint[] memory ids = new uint[](idIndexes.length);
+    bool[] memory _isNotEmpty = new bool[](idIndexes.length);
     for(uint i=0; i < idIndexes.length;i++){
+        _isNotEmpty[i] = false;
       if(idToData[idIndexes[i]].submitter == _owner){
         items[i]= idToData[idIndexes[i]];
-        _isNotEmpty = true;
+        _isNotEmpty[i] = true;
       }
       else if(addressToCopyrights[_owner][idIndexes[i]].date != 0){
         items[i]= idToData[idIndexes[i]];
         items[i].date = addressToCopyrights[_owner][idIndexes[i]].date;
         items[i].valueWei = 0;
-        _isNotEmpty = true;
+        _isNotEmpty[i] = true;
       }
     }
-    return (items, _isNotEmpty);
+    return (items, _isNotEmpty, ids);
   }
 
 
