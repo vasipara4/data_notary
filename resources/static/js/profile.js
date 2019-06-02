@@ -25,7 +25,11 @@ window.addEventListener("load", () => {
           console.log(reason === "User rejected provider access");
         });
     }
+
+    (async function(){
     account = await web3.eth.getAccounts();
+    })();
+
   } else {
     if (
       window.confirm(
