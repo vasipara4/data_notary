@@ -507,7 +507,7 @@ window.addEventListener("load", () => {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
 
-    var withdrawValueWei = $("#withdrawValueWei");
+    var withdrawValueWei = $("#withdrawValueWei").val();
     contract.methods
       .withdrawFunds(withdrawValueWei)
       .send({ from: account })
