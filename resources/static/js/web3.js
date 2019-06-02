@@ -537,7 +537,7 @@ window.addEventListener("load", () => {
                   user.gasUsed +
                   "</div><div class='card-body card-6-6'><div class='card-body'><h4>ID: " +
                   user.id +
-                  "</h4><p><a href='" +
+                  "</h4><p><a href='http://miletus.dynu.net:3008" +
                   user.url +
                   "'>URL of file </a></p><p>Description: " +
                   user.measurement +

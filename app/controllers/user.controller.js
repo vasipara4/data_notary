@@ -3,7 +3,7 @@ const Measurement = require("../models/user.model.js");
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
 
-  var url_file = "http://miletus.dynu.net:3008/uploads/" + req.file.filename;
+  var url_file = "/uploads/" + req.file.filename;
   var dateServer = Math.floor( new Date() / 1000);
   console.log("Server Time:" + dateServer);
   console.log("Tx Time:" + req.body.timestamp);

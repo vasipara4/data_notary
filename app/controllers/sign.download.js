@@ -1,5 +1,6 @@
 const FindFile = require("../models/user.model.js");
 const ethers = require('ethers');
+const path = require("path");
 
 exports.download = (req, res) => {
   var id = req.body.id;
@@ -39,11 +40,10 @@ exports.download = (req, res) => {
               message: "Error"
             });
           }
-          res.json("is working");
-          //var pendingFile = mongoose.model('File', )
+
           FindFile.find({ id: id }).then(result => {
             var link = result.url;
-            res.send(link);
+            res.download( __basedir + link, 'download'+ path.extname(link))
           });
         });
     });

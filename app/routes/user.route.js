@@ -1,7 +1,7 @@
 module.exports = function(app) {
   const ipfsClient = require("ipfs-http-client");
   const multer = require("multer");
-  const pathFile = require("path");
+  const path = require("path");
   var crypto = require("crypto");
 
   var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
@@ -30,7 +30,7 @@ module.exports = function(app) {
           req.body.submitter +
           randomValueHex(5) +
           req.body.id +
-          pathFile.extname(file.originalname)
+          path.extname(file.originalname)
       );
     }
   });
