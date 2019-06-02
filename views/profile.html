@@ -43,8 +43,11 @@
         <div class="panel panel-primary">
           <div class="panel-heading">Your Ether Wallet</div>
           <div class="panel-body"><span id="withdrawEtherNumber">You can withdraw: </span>
-            <div><br><input type="number" class="form-control" name="valueInWei" id="withdrawValueWei" min="0" placeholder="Value in Wei" required />
-              <br> <input type="submit" class="btn-1" value="Withdraw">
+            <div>
+              <form id="withdrawForm" enctype="multipart/form-data">
+                <br><input type="number" class="form-control" name="valueInWei" id="withdrawValueWei" min="0" placeholder="Value in Wei" required />
+                <br> <input type="submit" class="btn-1" value="Withdraw">
+              </form>
             </div>
           </div>
         </div>

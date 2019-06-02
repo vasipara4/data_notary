@@ -39,7 +39,7 @@ window.addEventListener("load", () => {
   ethereum.on("accountsChanged", function(accounts) {
     // Time to reload your interface with accounts[0]!
     account = accounts[0];
-    console.log(account);
+    location.reload();
   });
 
   /*web3.currentProvider.publicConfigStore.on('update', function(accountsChanged){
@@ -52,360 +52,360 @@ window.addEventListener("load", () => {
     account = f[0];
    });*/
   let abi = [
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawFunds",
-		"outputs": [
-			{
-				"name": "success",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_data",
-				"type": "uint256"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			},
-			{
-				"name": "_valueWei",
-				"type": "uint256"
-			}
-		],
-		"name": "dataWrite",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "dataIsYourData",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getDataAddressIPFS",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bytes32"
-			},
-			{
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_addressIPFS",
-				"type": "bytes32[2]"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "addAddressIPFS",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "getOwnItems",
-		"outputs": [
-			{
-				"components": [
-					{
-						"name": "submitter",
-						"type": "address"
-					},
-					{
-						"name": "data",
-						"type": "uint256"
-					},
-					{
-						"name": "date",
-						"type": "uint256"
-					},
-					{
-						"name": "valueWei",
-						"type": "uint256"
-					},
-					{
-						"name": "addressIPFS",
-						"type": "bytes32[2]"
-					}
-				],
-				"name": "",
-				"type": "tuple[]"
-			},
-			{
-				"name": "_isNotEmpty",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getDataShareFromAddressID",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_data",
-				"type": "uint256"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "verifyHash",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "dataExists",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "takeCopyrights",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getAllIndexes",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getItemsBuyable",
-		"outputs": [
-			{
-				"components": [
-					{
-						"name": "submitter",
-						"type": "address"
-					},
-					{
-						"name": "data",
-						"type": "uint256"
-					},
-					{
-						"name": "date",
-						"type": "uint256"
-					},
-					{
-						"name": "valueWei",
-						"type": "uint256"
-					},
-					{
-						"name": "addressIPFS",
-						"type": "bytes32[2]"
-					}
-				],
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getTimestamp",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getDataDetails",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "bytes32"
-			},
-			{
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_from",
-				"type": "address"
-			}
-		],
-		"name": "getBalance",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	}
-];
-
+    {
+      constant: false,
+      inputs: [
+        {
+          name: "amount",
+          type: "uint256"
+        }
+      ],
+      name: "withdrawFunds",
+      outputs: [
+        {
+          name: "success",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          name: "_data",
+          type: "uint256"
+        },
+        {
+          name: "_id",
+          type: "uint256"
+        },
+        {
+          name: "_valueWei",
+          type: "uint256"
+        }
+      ],
+      name: "dataWrite",
+      outputs: [],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "dataIsYourData",
+      outputs: [
+        {
+          name: "",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "getDataAddressIPFS",
+      outputs: [
+        {
+          name: "",
+          type: "bytes32"
+        },
+        {
+          name: "",
+          type: "bytes32"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          name: "_addressIPFS",
+          type: "bytes32[2]"
+        },
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "addAddressIPFS",
+      outputs: [],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_owner",
+          type: "address"
+        }
+      ],
+      name: "getOwnItems",
+      outputs: [
+        {
+          components: [
+            {
+              name: "submitter",
+              type: "address"
+            },
+            {
+              name: "data",
+              type: "uint256"
+            },
+            {
+              name: "date",
+              type: "uint256"
+            },
+            {
+              name: "valueWei",
+              type: "uint256"
+            },
+            {
+              name: "addressIPFS",
+              type: "bytes32[2]"
+            }
+          ],
+          name: "",
+          type: "tuple[]"
+        },
+        {
+          name: "_isNotEmpty",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_owner",
+          type: "address"
+        },
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "getDataShareFromAddressID",
+      outputs: [
+        {
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_data",
+          type: "uint256"
+        },
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "verifyHash",
+      outputs: [
+        {
+          name: "",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "dataExists",
+      outputs: [
+        {
+          name: "",
+          type: "bool"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "takeCopyrights",
+      outputs: [],
+      payable: true,
+      stateMutability: "payable",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "getAllIndexes",
+      outputs: [
+        {
+          name: "",
+          type: "uint256[]"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "getItemsBuyable",
+      outputs: [
+        {
+          components: [
+            {
+              name: "submitter",
+              type: "address"
+            },
+            {
+              name: "data",
+              type: "uint256"
+            },
+            {
+              name: "date",
+              type: "uint256"
+            },
+            {
+              name: "valueWei",
+              type: "uint256"
+            },
+            {
+              name: "addressIPFS",
+              type: "bytes32[2]"
+            }
+          ],
+          name: "",
+          type: "tuple[]"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "getTimestamp",
+      outputs: [
+        {
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_id",
+          type: "uint256"
+        }
+      ],
+      name: "getDataDetails",
+      outputs: [
+        {
+          name: "",
+          type: "address"
+        },
+        {
+          name: "",
+          type: "uint256"
+        },
+        {
+          name: "",
+          type: "uint256"
+        },
+        {
+          name: "",
+          type: "uint256"
+        },
+        {
+          name: "",
+          type: "bytes32"
+        },
+        {
+          name: "",
+          type: "bytes32"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          name: "_from",
+          type: "address"
+        }
+      ],
+      name: "getBalance",
+      outputs: [
+        {
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    }
+  ];
+  //Web3 Init Contract
   let contractAddress = "0x5d056470d9fd9164125a2bf18da3bbefa9ff9b55";
   const contract = new web3.eth.Contract(abi, contractAddress);
 
@@ -456,7 +456,7 @@ window.addEventListener("load", () => {
     contractEtherJS
       .getOwnItems(account[0])
       .then(function(items) {
-        if(!items[1]){
+        if (!items[1]) {
           $("#showYourData").html(
             `<li class="list-group-item"><strong>Empty Copyrights Wallet</strong></li>`
           );
@@ -480,7 +480,8 @@ window.addEventListener("load", () => {
               `</p><p>IPFS Address: ` +
               ipfsAddress +
               `</p><p>Date: ` +
-              unixTimeToDate(items[0][i].date.toString()) + `</p>`
+              unixTimeToDate(items[0][i].date.toString()) +
+              `</p>`
           );
 
           $("#showYourData").append(`</li>`);
@@ -493,16 +494,31 @@ window.addEventListener("load", () => {
         );
       });
 
-      // Your Balance
-      contractEtherJS
-        .getBalance(account[0])
-        .then(function(item) {
-          $("#withdrawEtherNumber").append(item.toString() + " Wei");
-        }).catch(e => console.log(e));
-
+    // Your Balance
+    contractEtherJS
+      .getBalance(account[0])
+      .then(function(item) {
+        $("#withdrawEtherNumber").append(item.toString() + " Wei");
+      })
+      .catch(e => console.log(e));
   })();
 
-  // TODO: Withdraw button 
+  // TODO: Withdraw button
+  $("#withdrawForm").submit(function(event) {
+    // Prevent the form from submitting via the browser.
+    event.preventDefault();
+
+    var withdrawValueWei = $("#withdrawValueWei");
+    contract.methods
+      .withdrawFunds(withdrawValueWei)
+      .send({ from: account })
+      .then(function(res) {
+        location.reload();
+      })
+      .catch(e => console.log(e));
+  });
+
+  // TODO: download button with Ajax POST
 
   function unixTimeToDate(unix_timestamp) {
     var date = new Date(unix_timestamp * 1000);
