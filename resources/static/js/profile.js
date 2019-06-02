@@ -8,14 +8,11 @@ window.addEventListener("load", () => {
   ) {
     const provider = window["ethereum"] || window.web3.currentProvider;
     web3 = new Web3(provider);
-    web3.eth.net.getId().then(function(networkId){
+    web3.eth.net.getId().then(function(networkId) {
       console.log(networkId);
       if (networkId != desiredNetwork)
-        alert("Please switch to ropsten network.");});
+        alert("Please switch to ropsten network.");
     });
-
-
-
 
     if (web3.currentProvider.isMetaMask) {
       ethereum
@@ -29,10 +26,9 @@ window.addEventListener("load", () => {
         });
     }
 
-    (async function(){
-    account = await web3.eth.getAccounts();
+    (async function() {
+      account = await web3.eth.getAccounts();
     })();
-
   } else {
     if (
       window.confirm(
