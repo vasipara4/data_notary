@@ -462,7 +462,7 @@ window.addEventListener("load", () => {
     console.log(account);
     //Number(Object)
     contractEtherJS
-      .getOwnItems(account[0]])
+      .getOwnItems(account[0])
       .then(function(items) {
         for (var i = 0; i < items.length; i++) {
           var ipfsAddress =
