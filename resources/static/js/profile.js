@@ -437,9 +437,9 @@ window.addEventListener("load", () => {
     );
     $("#digitalSignature").val("");
     var sendData = {
-      account: account,
-      id: downloadID,
-      signature: signature.signature
+      "account": account,
+      "id": downloadID,
+      "signature": signature.signature
     };
     $.ajax({
       type: "POST",
