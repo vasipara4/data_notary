@@ -452,8 +452,9 @@ window.addEventListener("load", () => {
   // Your Copyrights Wallet
   (async function() {
     account = await web3.eth.getAccounts();
+    account = account[0];
     contractEtherJS
-      .getOwnItems(account[0])
+      .getOwnItems(account)
       .then(function(items) {
         if (!items[1]) {
           $("#showYourData").html(
