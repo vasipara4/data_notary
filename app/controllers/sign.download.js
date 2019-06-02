@@ -40,7 +40,7 @@ exports.download = (req, res) => {
               message: "Error"
             });
           }
-
+          res.json("is working");
           //var pendingFile = mongoose.model('File', )
           FindFile.find({ id: id }).then(result => {
             var link = result.url;
