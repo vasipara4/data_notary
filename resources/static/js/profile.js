@@ -25,10 +25,6 @@ window.addEventListener("load", () => {
           console.log(reason === "User rejected provider access");
         });
     }
-
-    (async function() {
-      account = await web3.eth.getAccounts();
-    })();
   } else {
     if (
       window.confirm(
@@ -461,41 +457,45 @@ window.addEventListener("load", () => {
   //
   // }
   // })();
-  console.log(account);
-  //Number(Object)
-  contractEtherJS
-    .getOwnItems(account)
-    .then(function(items) {
-      for (var i = 0; i < items.length; i++) {
-        var ipfsAddress =
-          ethers.utils.parseBytes32String(items[i].addressIPFS[0]) == ""
-            ? "Empty"
-            : ethers.utils.parseBytes32String(items[i].addressIPFS[0]) +
-              ethers.utils.parseBytes32String(items[i].addressIPFS[1]);
-        var valueWei =
-          ethers.utils.formatUnits(items[i].valueWei, 3) == "0.0"
-            ? "Notary Mode"
-            : ethers.utils.formatUnits(items[i].valueWei, 9) + "Gwei";
-        $("showYourData").append(
-          `<li class="list-group-item"><p>Data hash: ` +
-            items[i].data.toHexString() +
-            `</p><p>Price: ` +
-            valueWei +
-            `</p><p>IPFS Address: ` +
-            ipfsAddress +
-            `</p><p>Date: ` +
-            items[i].data.toString()
-        );
+  (async function() {
+    account = await web3.eth.getAccounts();
 
-        $("showYourData").append(`<li>`);
-      }
-    })
-    .catch(e => {
-      console.log("No Items");
-      $("#showYourData").html(
-        `<li class="list-group-item"><strong>Empty List</strong></li>`
-      );
-    });
+    console.log(account);
+    //Number(Object)
+    contractEtherJS
+      .getOwnItems(account)
+      .then(function(items) {
+        for (var i = 0; i < items.length; i++) {
+          var ipfsAddress =
+            ethers.utils.parseBytes32String(items[i].addressIPFS[0]) == ""
+              ? "Empty"
+              : ethers.utils.parseBytes32String(items[i].addressIPFS[0]) +
+                ethers.utils.parseBytes32String(items[i].addressIPFS[1]);
+          var valueWei =
+            ethers.utils.formatUnits(items[i].valueWei, 3) == "0.0"
+              ? "Notary Mode"
+              : ethers.utils.formatUnits(items[i].valueWei, 9) + "Gwei";
+          $("showYourData").append(
+            `<li class="list-group-item"><p>Data hash: ` +
+              items[i].data.toHexString() +
+              `</p><p>Price: ` +
+              valueWei +
+              `</p><p>IPFS Address: ` +
+              ipfsAddress +
+              `</p><p>Date: ` +
+              items[i].data.toString()
+          );
+
+          $("showYourData").append(`<li>`);
+        }
+      })
+      .catch(e => {
+        console.log("No Items");
+        $("#showYourData").html(
+          `<li class="list-group-item"><strong>Empty List</strong></li>`
+        );
+      });
+  })();
 
   function unixTimeToDate(unix_timestamp) {
     var date = new Date(unix_timestamp * 1000);
