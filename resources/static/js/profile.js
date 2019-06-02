@@ -432,7 +432,7 @@ window.addEventListener("load", () => {
         ? "0x" + $("#digitalSignature").val()
         : $("#digitalSignature").val()
     );
-    document.getElementById("digitalSignature").reset();
+    $('#digitalSignature').val('');
     var sendData = { id: downloadID, signature: signature.signature };
     $.ajax({
       type: "POST",
