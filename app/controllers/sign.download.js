@@ -6,6 +6,7 @@ exports.download = (req, res) => {
   var signature = req.body.signature;
   var account = req.body.account;
   if (typeof id != "string" || typeof account != "string") {
+    console.log("typeof error");
     return res.status(400).send({
       message: "Error"
     });
@@ -14,6 +15,7 @@ exports.download = (req, res) => {
   var accountToBeVerified = web3.eth.accounts.recover(id, signature);
 
   if (account != accountToBeVerified) {
+    console.log("accountToBeVerified");
     return res.status(400).send({
       message: "Error"
     });
@@ -36,6 +38,7 @@ exports.download = (req, res) => {
           dataOriginal = originalHash[1];
 
           if (dataOriginal != dataToBeVerified) {
+            console.log("dataOriginal != dataToBeVerified");
             return res.status(400).send({
               message: "Error"
             });
