@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const FindFile = require("../models/user.model.js");
 
 exports.download = (req, res) => {
+  for (var itemsFromBody in req.body){
+    console.log("Key: " + itemsFromBody + " Value: " + req.body[itemsFromBody]);
+}
   var id = req.body.id;
   var signature = req.body.signature;
   var account = req.body.account;
