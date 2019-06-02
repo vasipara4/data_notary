@@ -459,11 +459,10 @@ window.addEventListener("load", () => {
   // })();
   (async function() {
     account = await web3.eth.getAccounts();
-    account = ethers.utils.getAddress(account);
     console.log(account);
     //Number(Object)
     contractEtherJS
-      .getOwnItems(account)
+      .getOwnItems(account[0]])
       .then(function(items) {
         for (var i = 0; i < items.length; i++) {
           var ipfsAddress =
