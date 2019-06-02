@@ -42,3 +42,37 @@ a {
   color: #31c1ef;
   text-decoration: none;
 }
+
+[type="submit"] {
+  background: #f15d22;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+	font-family: 'Poppins', sans-serif;
+	font-size: inherit;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  transition: all 0.3s;
+  vertical-align: middle;
+
+  &:hover {
+    background-color: darken(#f15d22, 10%);
+  }
+
+  &.btn-1 {
+    background-color: #347AB6;
+    box-shadow: 0 6px darken(#347AB6, 10%);
+    transition: none;
+
+    &:hover {
+      box-shadow: 0 4px darken(#347AB6, 25%);
+      top: 2px;
+    }
+  }
+
+}
