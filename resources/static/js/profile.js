@@ -9,7 +9,6 @@ window.addEventListener("load", () => {
     const provider = window["ethereum"] || window.web3.currentProvider;
     web3 = new Web3(provider);
     web3.eth.net.getId().then(function(networkId) {
-      console.log(networkId);
       if (networkId != desiredNetwork)
         alert("Please switch to ropsten network.");
     });
@@ -463,14 +462,12 @@ window.addEventListener("load", () => {
   // })();
   (async function() {
     account = await web3.eth.getAccounts();
-    console.log(account);
-    //Number(Object)
     contractEtherJS
       .getOwnItems(account[0])
       .then(function(items) {
         if(!items[1]){
           $("#showYourData").html(
-            `<li class="list-group-item"><strong>Empty List</strong></li>`
+            `<li class="list-group-item"><strong>Empty Copyrights Waller</strong></li>`
           );
           return;
         }
@@ -499,9 +496,9 @@ window.addEventListener("load", () => {
         }
       })
       .catch(e => {
-        console.log("No Items");
+        console.log("Error");
         $("#showYourData").html(
-          `<li class="list-group-item"><strong>Empty List</strong></li>`
+          `<li class="list-group-item"><strong>Error</strong></li>`
         );
       });
   })();
