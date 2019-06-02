@@ -450,16 +450,7 @@ window.addEventListener("load", () => {
     });
   });
 
-  //Generate User Profile
-  // WORKS!
-  // (async function(){
-  //
-  // var indexes = await contractEtherJS.getAllIndexes();
-  // indexes = Number(indexes));
-  // for(var i=0;i<indexes.length;i++){
-  //
-  // }
-  // })();
+  // Your Copyrights Wallet
   (async function() {
     account = await web3.eth.getAccounts();
     contractEtherJS
@@ -502,21 +493,16 @@ window.addEventListener("load", () => {
         );
       });
 
-      // TODO: create withdraw how much
+      // Your Balance
       contractEtherJS
         .getBalance(account[0])
         .then(function(item) {
           $("#withdrawEtherNumber").append(item.toString() + " Wei");
         }).catch(e => console.log(e));
 
-
-
-
-      // TODO: withdraw input and transaction
-
-
-
   })();
+
+  // TODO: Withdraw button 
 
   function unixTimeToDate(unix_timestamp) {
     var date = new Date(unix_timestamp * 1000);
