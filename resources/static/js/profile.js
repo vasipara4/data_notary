@@ -482,10 +482,10 @@ window.addEventListener("load", () => {
               `</p><p>IPFS Address: ` +
               ipfsAddress +
               `</p><p>Date: ` +
-              items[i].data.toString()
+              items[i].data.toString() + `</p>`
           );
 
-          $("#showYourData").append(`<li>`);
+          $("#showYourData").append(`</li>`);
         }
       })
       .catch(e => {
