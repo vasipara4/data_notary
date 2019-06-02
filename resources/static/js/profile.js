@@ -474,7 +474,7 @@ window.addEventListener("load", () => {
             ethers.utils.formatUnits(items[i].valueWei, 3) == "0.0"
               ? "Notary Mode"
               : ethers.utils.formatUnits(items[i].valueWei, 9) + "Gwei";
-          $("showYourData").append(
+          $("#showYourData").append(
             `<li class="list-group-item"><p>Data hash: ` +
               items[i].data.toHexString() +
               `</p><p>Price: ` +
@@ -485,7 +485,7 @@ window.addEventListener("load", () => {
               items[i].data.toString()
           );
 
-          $("showYourData").append(`<li>`);
+          $("#showYourData").append(`<li>`);
         }
       })
       .catch(e => {
