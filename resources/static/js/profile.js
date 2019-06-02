@@ -464,7 +464,7 @@ window.addEventListener("load", () => {
   //
   // }
   // })();
-
+console.log(account);
   //Number(Object)
   contractEtherJS
     .getOwnItems(account)
