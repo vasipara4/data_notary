@@ -459,7 +459,7 @@ window.addEventListener("load", () => {
   // })();
   (async function() {
     account = await web3.eth.getAccounts();
-    acount = ethers.utils.getAddress(account);
+    account = ethers.utils.getAddress(account);
     console.log(account);
     //Number(Object)
     contractEtherJS
