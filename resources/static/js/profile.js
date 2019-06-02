@@ -496,7 +496,7 @@ window.addEventListener("load", () => {
 
     // Your Balance
     contractEtherJS
-      .getBalance(account[0])
+      .getBalance(account)
       .then(function(item) {
         $("#withdrawEtherNumber").append(item.toString() + " Wei");
       })
