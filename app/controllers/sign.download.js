@@ -42,7 +42,7 @@ exports.download = (req, res) => {
           }
 
           FindFile.find({ id: id }).then(result => {
-            var link = result.url;
+            var link = result[0].url;
             res.download( __basedir + link, 'download'+ path.extname(link))
           });
         });
