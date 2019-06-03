@@ -467,7 +467,7 @@ window.addEventListener("load", () => {
     account = await web3.eth.getAccounts();
     account = account[0];
     console.log(account);
-    contractEtherJS
+    await contractEtherJS
       .getOwnItems(account)
       .then(function(items) {
         var emptyWallet = 1;
