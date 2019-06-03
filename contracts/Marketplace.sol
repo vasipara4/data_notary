@@ -124,8 +124,9 @@ contract Data {
     }
      return _numBuyable;
   }
-  function getItemsBuyable() public view returns (dataObject[] memory,uint[] memory) {
+  function getItemsBuyable(address _owner) public view returns (dataObject[] memory, uint[] memory, bool[] memory) {
     uint _numIndexes = getNumBuyable();
+    bool[] memory _isYours = new bool[](_numIndexes);
     dataObject[] memory items = new dataObject[](_numIndexes);
     uint[] memory _id = new uint[](_numIndexes);
     for(uint i=0; i < idIndexes.length; i++){
@@ -133,9 +134,11 @@ contract Data {
         _numIndexes--;
         items[_numIndexes]= idToData[idIndexes[i]];
         _id[_numIndexes]=idIndexes[i];
+        if(idToData[idIndexes[i]].submitter == _owner || addressToCopyrights[_owner][idIndexes[i]].date != 0)
+          _isYours[_numIndexes] = true;
       }
     }
-    return (items,_id);
+    return (items, _id, _isYours);
   }
 
   function getOwnItems(address _owner)public view returns (dataObject[] memory, bool[] memory, uint[] memory) {
