@@ -512,7 +512,7 @@ window.addEventListener("load", () => {
           i +
           `Value">` +
           valueWei +
-          `</span>Wei></div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
+          `</span>Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
             </div></div></form></div>`
       );
       if (i % 3 == 2) $("#marketplaceContainer").append(`</div>`);
