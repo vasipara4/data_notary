@@ -283,20 +283,6 @@ window.addEventListener("load", () => {
     {
       constant: true,
       inputs: [],
-      name: "getAllIndexes",
-      outputs: [
-        {
-          name: "",
-          type: "uint256[]"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [],
       name: "getItemsBuyable",
       outputs: [
         {
@@ -324,6 +310,10 @@ window.addEventListener("load", () => {
           ],
           name: "",
           type: "tuple[]"
+        },
+        {
+          name: "",
+          type: "uint256[]"
         }
       ],
       payable: false,
@@ -390,6 +380,20 @@ window.addEventListener("load", () => {
     },
     {
       constant: true,
+      inputs: [],
+      name: "getNumBuyable",
+      outputs: [
+        {
+          name: "",
+          type: "uint256"
+        }
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function"
+    },
+    {
+      constant: true,
       inputs: [
         {
           name: "_from",
@@ -409,7 +413,7 @@ window.addEventListener("load", () => {
     }
   ];
   //Web3 Init Contract
-  let contractAddress = "0x45a53a4434c2cc9ff66b0d0fd7f75ce786e8b3db";
+  let contractAddress = "0xab4e31088762c483a32bbcec5b81486bc3da9b7d";
   const contract = new web3.eth.Contract(abi, contractAddress);
 
   //EtherJS SECTION

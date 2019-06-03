@@ -116,19 +116,28 @@ contract Data {
       return (idToData[_id].submitter, idToData[_id].data, idToData[_id].date, idToData[_id].valueWei, idToData[_id].addressIPFS[0], idToData[_id].addressIPFS[1]);
   }
 
-  function getAllIndexes() public view returns (uint[] memory){
-     return idIndexes;
-  }
-  function getItemsBuyable() public view returns (dataObject[] memory) {
-     uint[] memory indexes = getAllIndexes();
-     dataObject[] memory items = new dataObject[](indexes.length);
-
-    for(uint i=0; i < indexes.length;i++){
-      if(idToData[indexes[i]].valueWei != 0)
-        items[i]= idToData[indexes[i]];
+  function getNumBuyable() public view returns (uint){
+      uint _numBuyable = 0;
+     for(uint i=0; i < idIndexes.length;i++){
+      if(idToData[idIndexes[i]].valueWei != 0)
+        _numBuyable++;
     }
-    return items;
+     return _numBuyable;
   }
+  function getItemsBuyable() public view returns (dataObject[] memory,uint[] memory) {
+    uint _numIndexes = getNumBuyable();
+    dataObject[] memory items = new dataObject[](_numIndexes);
+    uint[] memory _id = new uint[](_numIndexes);
+    for(uint i=0; i < idIndexes.length; i++){
+      if(idToData[idIndexes[i]].valueWei != 0){
+        _numIndexes--;
+        items[_numIndexes]= idToData[idIndexes[i]];
+        _id[_numIndexes]=idIndexes[i];
+      }
+    }
+    return (items,_id);
+  }
+
   function getOwnItems(address _owner)public view returns (dataObject[] memory, bool[] memory, uint[] memory) {
     dataObject[] memory items = new dataObject[](idIndexes.length);
     uint[] memory _id = new uint[](idIndexes.length);
