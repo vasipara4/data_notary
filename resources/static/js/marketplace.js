@@ -430,9 +430,8 @@ window.addEventListener("load", () => {
 
   //Print the marketplace
   (async function() {
-    account = await web3.eth.getAccounts();
-    account = account[0];
-    console.log(account);
+  let getItems = await contractEtherJS.getItemsBuyable();
+  console.log(getItems);
 
     await contractEtherJS
       .getItemsBuyable()
