@@ -1,10 +1,9 @@
-const Measurement = require("../models/user.model.js");
+const UserModelDB = require("../models/user.model.js");
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
-
   var url_file = "/uploads/" + req.file.filename;
-  var dateServer = Math.floor( new Date() / 1000);
+  var dateServer = Math.floor(new Date() / 1000);
   console.log("Server Time:" + dateServer);
   console.log("Tx Time:" + req.body.timestamp);
 
@@ -12,8 +11,10 @@ exports.save = (req, res) => {
   //dateServer can be smaller than block.timestamp for 10 seconds
   //after 150 seconds the POST request is canceled
   // MUST: req.body.timestamp -50 < dateServer OR dateServer < req.body.timestamp + 150 to be valid
-  if ( dateServer < req.body.timestamp - 50 ||
-    dateServer > req.body.timestamp + 150 ) {
+  if (
+    dateServer < req.body.timestamp - 50 ||
+    dateServer > req.body.timestamp + 150
+  ) {
     return res.status(400).send({
       message: "Error: POST timeout"
     });
@@ -25,16 +26,16 @@ exports.save = (req, res) => {
     });
   }
 
-
   //Account must be a valid Ethereum Address
   if (!web3.utils.isAddress(req.body.submitter)) {
     return res.status(400).send({
       message: "Address Error"
     });
   }
-  // Create a Measurement
-  const measurement = new Measurement({
-    measurement: req.body.measurement,
+  // Create a new User model
+  const saveToDB = new UserModelDB({
+    title: req.body.title,
+    description: req.body.description,
     id: req.body.id,
     timestamp: req.body.timestamp,
     submitter: req.body.submitter,
@@ -55,8 +56,8 @@ exports.save = (req, res) => {
         });
       }
 
-      // Save a Measurement in the MongoDB
-      measurement
+      // Save in the MongoDB
+      saveToDB
         .save()
         .then(data => {
           res.send(data);
@@ -72,8 +73,35 @@ exports.save = (req, res) => {
 // Fetch all Users
 exports.findAll = (req, res) => {
   console.log("Fetch all Users");
+  var usersProjection = {
+    __v: false,
+    _id: false
+  };
 
-  Measurement.find()
+  UserModelDB.find({}, usersProjection)
+    .then(users => {
+      res.send(users);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+};
+
+// Fetch only Title/Desc/ID
+exports.findStrings = (req, res) => {
+  console.log("Fetch Title/Desc/ID");
+  var usersProjection = {
+    __v: false,
+    _id: false,
+    timestamp: false,
+    submitter: false,
+    gasUsed: false,
+    url: false
+  };
+
+  UserModelDB.find({}, usersProjection)
     .then(users => {
       res.send(users);
     })

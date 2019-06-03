@@ -384,7 +384,7 @@ global.contract = new web3.eth.Contract(
 		"type": "function"
 	}
 ],
-  "0xfb08c5d80097cf86f9cba24599e0b360bc5ce114"
+  "0x468678792dab4bf18ca6729cd840961675ea9992"
 );
 
 app.use(helmet());

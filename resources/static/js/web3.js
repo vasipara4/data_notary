@@ -428,7 +428,7 @@ window.addEventListener("load", () => {
 		"type": "function"
 	}
 ],
-    "0xfb08c5d80097cf86f9cba24599e0b360bc5ce114"
+    "0x468678792dab4bf18ca6729cd840961675ea9992"
   );
 
   //POST Ethereum & Db
@@ -436,7 +436,6 @@ window.addEventListener("load", () => {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
     var elementLoading = document.getElementById("insertLoading");
-    var measurement_val = $("#measurement").val();
     var id_val = $("#id").val();
     var weiValue = $("#weiValue").val();
     var txtFileAsString; // = openFile();
@@ -461,11 +460,10 @@ window.addEventListener("load", () => {
                   .getTimestamp(id_val)
                   .call({ from: account })
                   .then(function(setTimestamp) {
-                    ajaxPost(setTimestamp, result.gasUsed);
+                    ajaxPost(setTimestamp, result.gasUsed, id_val);
                     elementLoading.classList.remove("running");
                   });
                 console.log(result);
-                //elementLoading.classList.remove("running");
               })
               .catch(function(error) {
                 $("#postResultDiv").html("");
@@ -480,11 +478,11 @@ window.addEventListener("load", () => {
     });
   });
 
-  function ajaxPost(timestamp, gasUsed) {
-    //var form = $("#userForm")[0];
+  function ajaxPost(timestamp, gasUsed, id) {
     var formData = new FormData();
-    formData.append("measurement", $("#measurement").val());
-    formData.append("id", $("#id").val());
+    formData.append("title", $("#title").val());
+    formData.append("description", $("#description").val());
+    formData.append("id", id);
     formData.append("timestamp", timestamp);
     formData.append("submitter", account);
     formData.append("gasUsed", gasUsed);
@@ -493,12 +491,11 @@ window.addEventListener("load", () => {
     $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
-      contentType: false, //"application/json",
+      contentType: false,
       url: window.location.origin + "/api/users/save",
-      data: formData, //JSON.stringify(formData),
-      processData: false, //dataType: "json",
+      data: formData,
+      processData: false,
       success: function(user) {
-        //  console.log(contract);
         $("#postResultDiv").html(
           "<p>" + "Post Successfully!<br>File uploaded!" + "</p>"
         );
@@ -515,8 +512,11 @@ window.addEventListener("load", () => {
   }
 
   function resetData() {
-    $("#measurement").val("");
+    $("#title").val("");
+    $("#description").val("");
     $("#id").val("");
+    $("#weiValue").val("0");
+
   }
 
   // GET REQUEST
@@ -553,7 +553,7 @@ window.addEventListener("load", () => {
                   "</h4><p><a href='http://miletus.dynu.net:3008" +
                   user.url +
                   "'>URL of file </a></p><p>Description: " +
-                  user.measurement +
+                  user.description +
                   "</p><p>IPFS public file: " +
                   addressIPFS +
                   "</div></div><div class='card-footer'>Time & Date: " +
@@ -575,7 +575,7 @@ window.addEventListener("load", () => {
   $("#verifyForm").submit(function(event) {
     event.preventDefault();
     var verifyHtml = "Hash of File does NOT match. ";
-    var testingData; //= $("#verify_measurement").val()
+    var testingData;
     var testingId = $("#verify_id").val();
     Promise.all([openFile("uploadTestFile")]).then(function(result) {
       testingData = result[0];

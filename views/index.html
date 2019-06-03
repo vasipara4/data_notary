@@ -38,8 +38,10 @@
       <div>
         <form id="userForm" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="measurement">Description:</label>
-            <input type="text" class="form-control" name="measurement" id="measurement" placeholder="Enter file's description" required /></div>
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="Enter file's title" required />
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Enter file's description" required /></div>
           <div class="form-group">
             <label for="file">Text file <font size="2">(size limit 16MB)</font>: </label>
             <input type="file" name="file" id="file" onchange="showFileName()" accept="text/plain" required />
@@ -99,8 +101,6 @@
           </div>
         </form>
       </div>
-
-      <br>
       <div>
         <div id="getVerifyDiv">
           <ul class="list-group">
@@ -108,7 +108,7 @@
         </div>
       </div>
       <div>
-        <h3>Check Your Data Integrity from Database</h3>
+        <h3>Check Data Integrity from Hash</h3>
         <hr />
         <br />
         On progress...
@@ -123,8 +123,8 @@
       var wei = $("#weiValue").val();
 
       if (wei == 0) {
-        $("#weiSummary").html("Price: 0");
-        $("#weiDescription").html("The file is not going to be in Marketplace (Notary Mode Only)");
+        $("#weiSummary").html("Price: 0 (Notary Mode Only)");
+        $("#weiDescription").html("The file is not going to be in Marketplace");
         return;
       }
       else if (wei < 1000000) {
