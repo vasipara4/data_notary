@@ -429,16 +429,22 @@ window.addEventListener("load", () => {
   );
 
 
-  $('.formdataBuy').each(function() {
-      $(this).on("submit", function(e) { // submit button pressed
-          // prevent form from doing what it normally does when submit button is pressed
-          e.preventDefault();
 
-          // do anything else that you want to do when the submit button is pressed
-          alert( "Hi");
+  $('body').on('submit', '.formdataBuy', function submit(e) {
+       e.preventDefault();
+       console.log($(this));
+    });
 
-      });
-  });
+  // $('.formdataBuy').each(function() {
+  //     $(this).on("submit", function(e) { // submit button pressed
+  //         // prevent form from doing what it normally does when submit button is pressed
+  //         e.preventDefault();
+  //
+  //         // do anything else that you want to do when the submit button is pressed
+  //         alert( "Hi");
+  //
+  //     });
+  // });
   //Buy Request
   // $(".formdataBuy").submit(function(e) {
   //   // var currentThis = this;
