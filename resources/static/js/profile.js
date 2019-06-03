@@ -510,7 +510,7 @@ window.addEventListener("load", () => {
         }
       })
       .catch(e => {
-        console.log("Error");
+        console.log(e);
         $("#showYourData").html(
           `<li class="list-group-item"><strong>Error</strong></li>`
         );
