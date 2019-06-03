@@ -429,26 +429,35 @@ window.addEventListener("load", () => {
   );
 
 
+  $('.formdataBuy').each(function() {
+      $(this).on("submit", function(e) { // submit button pressed
+          // prevent form from doing what it normally does when submit button is pressed
+          e.preventDefault();
 
-  //Buy Request
-  $(".formdataBuy").submit(function(e) {
-    // var currentThis = this;
-    // alert(this.id);
+          // do anything else that you want to do when the submit button is pressed
+          alert( "Hi");
 
-    e.preventDefault(); // breaks this
-    console.log("Is in form");
-    var formId =   $(this).attr('id');//currentThis.id;
-    console.log(formId);
-    var weiValueForm = formId + "Value";
-    var idItemForm = formId + "ID";
-    var weiToPay = $("#" + weiValueForm).val();
-    var idRequest = $("#" + idItemForm).val();
-    contract.methods
-      .takeCopyrights(idRequest)
-      .send({ from: account, value: weiToPay })
-      .then(console.log("Transaction Completed!"))
-      .catch(e => console.log(e));
+      });
   });
+  //Buy Request
+  // $(".formdataBuy").submit(function(e) {
+  //   // var currentThis = this;
+  //   // alert(this.id);
+  //
+  //   e.preventDefault(); // breaks this
+  //   console.log("Is in form");
+  //   var formId =   $(this).attr('id');//currentThis.id;
+  //   console.log(formId);
+  //   var weiValueForm = formId + "Value";
+  //   var idItemForm = formId + "ID";
+  //   var weiToPay = $("#" + weiValueForm).val();
+  //   var idRequest = $("#" + idItemForm).val();
+  //   contract.methods
+  //     .takeCopyrights(idRequest)
+  //     .send({ from: account, value: weiToPay })
+  //     .then(console.log("Transaction Completed!"))
+  //     .catch(e => console.log(e));
+  // });
 
 
   //Convert Unix Time to Human Readable Version
