@@ -428,46 +428,21 @@ window.addEventListener("load", () => {
     providerEtherJS
   );
 
-
-
-  $('body').on('submit', '.formdataBuy', function submit(e) {
-       e.preventDefault();
-       console.log($(this));
-       var formId =   $(this).attr('id');//currentThis.id;
-        console.log(formId);
-        var weiValueForm = formId + "Value";
-        var idItemForm = formId + "ID";
-        var weiToPay = $("#" + weiValueForm).val();
-        var idRequest = $("#" + idItemForm).val();
-        contract.methods
-          .takeCopyrights(idRequest)
-          .send({ from: account, value: weiToPay })
-          .then(console.log("Transaction Completed!"))
-          .catch(e => console.log(e));
-
-
-    });
-
-
   //Buy Request
-  // $(".formdataBuy").submit(function(e) {
-  //   // var currentThis = this;
-  //   // alert(this.id);
-  //
-  //   e.preventDefault(); // breaks this
-  //   console.log("Is in form");
-  //   var formId =   $(this).attr('id');//currentThis.id;
-  //   console.log(formId);
-  //   var weiValueForm = formId + "Value";
-  //   var idItemForm = formId + "ID";
-  //   var weiToPay = $("#" + weiValueForm).val();
-  //   var idRequest = $("#" + idItemForm).val();
-  //   contract.methods
-  //     .takeCopyrights(idRequest)
-  //     .send({ from: account, value: weiToPay })
-  //     .then(console.log("Transaction Completed!"))
-  //     .catch(e => console.log(e));
-  // });
+  $("body").on("submit", ".formdataBuy", function submit(e) {
+    e.preventDefault();
+    var formId = $(this).attr("id"); //currentThis.id;
+    console.log(formId);
+    var weiValueForm = formId + "Value";
+    var idItemForm = formId + "ID";
+    var weiToPay = $("#" + weiValueForm).val();
+    var idRequest = $("#" + idItemForm).val();
+    contract.methods
+      .takeCopyrights(idRequest)
+      .send({ from: account, value: weiToPay })
+      .then(console.log("Transaction Completed!"))
+      .catch(e => console.log(e));
+  });
 
 
   //Convert Unix Time to Human Readable Version
@@ -505,6 +480,7 @@ window.addEventListener("load", () => {
     let items = await contractEtherJS.getItemsBuyable();
     for (var i = 0; i < items[1].length; i++) {
       if (i % 3 == 0) $("#marketplaceContainer").append(`<div class="row">`);
+      console.log(items[1][i]);
       var idOfItem = items[1][i].toString();
       var data = items[0][i].data.toHexString();
       var date = unixTimeToDate(items[0][i].date.toString());
@@ -525,7 +501,7 @@ window.addEventListener("load", () => {
           `</li><li> Date Inserted: ` +
           date +
           `</li><li>ID of File: ` +
-              i +
+          i +
           `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
           idOfItem +
           `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
@@ -536,6 +512,4 @@ window.addEventListener("load", () => {
       if (i % 3 == 2) $("#marketplaceContainer").append(`</div>`);
     }
   })();
-
-
 });
