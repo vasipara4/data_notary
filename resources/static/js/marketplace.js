@@ -432,7 +432,9 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    contractEtherJS
+    console.log(account);
+
+    await contractEtherJS
       .getItemsBuyable()
       .then(function(items) {
         for (var i = 0; i < items[0].length; i++) {
