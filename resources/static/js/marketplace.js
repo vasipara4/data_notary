@@ -492,7 +492,15 @@ window.addEventListener("load", () => {
     for (var i = 0; i < items[1].length; i++) {
       if (i % 3 == 0) $("#marketplaceContainer").append(`<div class="row">`);
       var idOfItem = items[1][i].toString();
-      console.log(items[2][i]);
+      var _isYours = items[2][i]);
+      var submitButton;
+      if(_isYours){
+        _isYours = `onsubmit="return false;"`
+        submitButton = "You have it"
+      } else {
+        _isYours="";
+        submitButton = "Buy Now";
+      }
       var data = items[0][i].data.toHexString();
       var date = unixTimeToDate(items[0][i].date.toString());
       var ipfsAddress =
@@ -505,7 +513,7 @@ window.addEventListener("load", () => {
         `<div class="col-sm-4">
           <form id="buyItem` +
           i +
-          `" class="formdataBuy"> <div class="card card-price">
+          `" class="formdataBuy" ${_isYours}> <div class="card card-price">
             <div class="card-img"></div><div class="card-body"><div class="lead">Title will ADDED</div><ul class="details"><li>Description</li><li>
             Extra Content: ` +
           ipfsAddress +
@@ -517,7 +525,7 @@ window.addEventListener("load", () => {
           idOfItem +
           `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
           valueWei +
-          ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
+          ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="${submitButton}">
             </div></div></form></div>`
       );
       if (i % 3 == 2) $("#marketplaceContainer").append(`</div>`);
