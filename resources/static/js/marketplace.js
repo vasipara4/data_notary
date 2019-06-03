@@ -434,8 +434,9 @@ window.addEventListener("load", () => {
   $(".formdataBuy").submit(function(e) {
     // var currentThis = this;
     // alert(this.id);
-    e.preventDefault(); // breaks this
 
+    e.preventDefault(); // breaks this
+    console.log("Is in form");
     var formId =   $(this).attr('id');//currentThis.id;
     console.log(formId);
     var weiValueForm = formId + "Value";
