@@ -430,56 +430,43 @@ window.addEventListener("load", () => {
 
   //Print the marketplace
   (async function() {
-  let getItems = await contractEtherJS.getItemsBuyable();
-  console.log(getItems);
-
-    await contractEtherJS
-      .getItemsBuyable()
-      .then(function(items) {
-        for (var i = 0; i < items[0].length; i++) {
-          if (i % 3 == 0)
-            $("#marketplaceContainer").append(`<div class="row">`);
-          var idOfItem = items[1][i].toString();
-          var data = items[0][i].data.toHexString();
-          var date = unixTimeToDate(items[0][i].date.toString());
-          var ipfsAddress =
-            ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
-              ? "Empty"
-              : ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) +
-                ethers.utils.parseBytes32String(items[0][i].addressIPFS[1]);
-          var valueWei = items[0][i].valueWei.toString();
-          $("#marketplaceContainer").append(
-            `<div class="col-sm-4">
+    let items = await contractEtherJS.getItemsBuyable();
+    for (var i = 0; i < items[1].length; i++) {
+      if (i % 3 == 0) $("#marketplaceContainer").append(`<div class="row">`);
+      var idOfItem = items[1][i].toString();
+      var data = items[0][i].data.toHexString();
+      var date = unixTimeToDate(items[0][i].date.toString());
+      var ipfsAddress =
+        ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
+          ? "Empty"
+          : ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) +
+            ethers.utils.parseBytes32String(items[0][i].addressIPFS[1]);
+      var valueWei = items[0][i].valueWei.toString();
+      $("#marketplaceContainer").append(
+        `<div class="col-sm-4">
           <form id="buyItem` +
-              i +
-              `" class="formdataBuy"> <div class="card card-price">
+          i +
+          `" class="formdataBuy"> <div class="card card-price">
             <div class="card-img"></div><div class="card-body"><div class="lead">Title will ADDED</div><ul class="details"><li>Description</li><li>
             Extra Content: ` +
-              ipfsAddress +
-              `</li><li> Date Inserted: ` +
-              date +
-              `</li><li>ID of File: ` +
-              `<span id="buyItem` +
-              i +
-              `ID">` +
-              idOfItem +
-              `</span>` +
-              `</li></ul><div class="price"><span id="buyItem` +
-              i +
-              `Value">` +
-              valueWei +
-              `</span>``Wei></div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
+          ipfsAddress +
+          `</li><li> Date Inserted: ` +
+          date +
+          `</li><li>ID of File: ` +
+          `<span id="buyItem` +
+          i +
+          `ID">` +
+          idOfItem +
+          `</span>` +
+          `</li></ul><div class="price"><span id="buyItem` +
+          i +
+          `Value">` +
+          valueWei +
+          `</span>``Wei></div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
             </div></div></form></div>`
-          );
-          if (i % 3 == 2) $("#marketplaceContainer").append(`</div>`);
-        }
-      })
-      .catch(e => {
-        console.log("Error");
-        $("#marketplaceContainer").html(
-          `<li class="list-group-item"><strong>Error</strong></li>`
-        );
-      });
+      );
+      if (i % 3 == 2) $("#marketplaceContainer").append(`</div>`);
+    }
   })();
 
   //Buy Request
