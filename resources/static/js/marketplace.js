@@ -432,10 +432,12 @@ window.addEventListener("load", () => {
 
   //Buy Request
   $(".formdataBuy").submit(function(e) {
-    var currentThis = this;
-    alert(this.id);
+    // var currentThis = this;
+    // alert(this.id);
     e.preventDefault(); // breaks this
-    var formId = currentThis.id;
+
+    var formId =   $(this).attr('id');//currentThis.id;
+    console.log(formId);
     var weiValueForm = formId + "Value";
     var idItemForm = formId + "ID";
     var weiToPay = $("#" + weiValueForm).val();
@@ -512,7 +514,7 @@ window.addEventListener("load", () => {
           i +
           `Value">` +
           valueWei +
-          `</span>Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
+          `</span> Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
             </div></div></form></div>`
       );
       if (i % 3 == 2) $("#marketplaceContainer").append(`</div>`);
