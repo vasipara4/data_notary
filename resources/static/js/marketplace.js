@@ -490,6 +490,7 @@ window.addEventListener("load", () => {
     for (var i = 0; i < items[1].length; i++) {
       if (i % 3 == 0) $("#marketplaceContainer").append(`<div class="row">`);
       var idOfItem = items[1][i].toString();
+      console.log(items[2][i]);
       var data = items[0][i].data.toHexString();
       var date = unixTimeToDate(items[0][i].date.toString());
       var ipfsAddress =
