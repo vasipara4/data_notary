@@ -433,18 +433,22 @@ window.addEventListener("load", () => {
   $('body').on('submit', '.formdataBuy', function submit(e) {
        e.preventDefault();
        console.log($(this));
+       var formId =   $(this).attr('id');//currentThis.id;
+        console.log(formId);
+        var weiValueForm = formId + "Value";
+        var idItemForm = formId + "ID";
+        var weiToPay = $("#" + weiValueForm).val();
+        var idRequest = $("#" + idItemForm).val();
+        contract.methods
+          .takeCopyrights(idRequest)
+          .send({ from: account, value: weiToPay })
+          .then(console.log("Transaction Completed!"))
+          .catch(e => console.log(e));
+
+
     });
 
-  // $('.formdataBuy').each(function() {
-  //     $(this).on("submit", function(e) { // submit button pressed
-  //         // prevent form from doing what it normally does when submit button is pressed
-  //         e.preventDefault();
-  //
-  //         // do anything else that you want to do when the submit button is pressed
-  //         alert( "Hi");
-  //
-  //     });
-  // });
+
   //Buy Request
   // $(".formdataBuy").submit(function(e) {
   //   // var currentThis = this;
