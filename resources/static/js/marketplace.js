@@ -428,6 +428,25 @@ window.addEventListener("load", () => {
     providerEtherJS
   );
 
+
+
+  //Buy Request
+  $(".formdataBuy").submit(function(e) {
+    var currentThis = this;
+    alert(this.id);
+    e.preventDefault(); // breaks this
+    var formId = currentThis.id;
+    var weiValueForm = formId + "Value";
+    var idItemForm = formId + "ID";
+    var weiToPay = $("#" + weiValueForm).val();
+    var idRequest = $("#" + idItemForm).val();
+    contract.methods
+      .takeCopyrights(idRequest)
+      .send({ from: account, value: weiToPay })
+      .then(console.log("Transaction Completed!"))
+      .catch(e => console.log(e));
+  });
+
   //Print the marketplace
   (async function() {
     let items = await contractEtherJS.getItemsBuyable();
@@ -469,20 +488,5 @@ window.addEventListener("load", () => {
     }
   })();
 
-  //Buy Request
-  $(".formdataBuy").submit(function(e) {
-    var currentThis = this;
-    alert(this.id);
-    e.preventDefault(); // breaks this
-    var formId = currentThis.id;
-    var weiValueForm = formId + "Value";
-    var idItemForm = formId + "ID";
-    var weiToPay = $("#" + weiValueForm).val();
-    var idRequest = $("#" + idItemForm).val();
-    contract.methods
-      .takeCopyrights(idRequest)
-      .send({ from: account, value: weiToPay })
-      .then(console.log("Transaction Completed!"))
-      .catch(e => console.log(e));
-  });
+
 });
