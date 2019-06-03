@@ -515,16 +515,12 @@ window.addEventListener("load", () => {
           `</li><li> Date Inserted: ` +
           date +
           `</li><li>ID of File: ` +
-          `<span id="buyItem` +
-          i +
-          `ID">` +
+              i +
+          `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
           idOfItem +
-          `</span>` +
-          `</li></ul><div class="price"><span id="buyItem` +
-          i +
-          `Value">` +
+          `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
           valueWei +
-          `</span> Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
+          ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="Buy now">
             </div></div></form></div>`
       );
       if (i % 3 == 2) $("#marketplaceContainer").append(`</div>`);
