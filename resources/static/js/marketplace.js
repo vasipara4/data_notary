@@ -486,7 +486,9 @@ window.addEventListener("load", () => {
 
   //Print the marketplace
   (async function() {
-    let items = await contractEtherJS.getItemsBuyable();
+    account = await web3.eth.getAccounts();
+    account = account[0];
+    let items = await contractEtherJS.getItemsBuyable(account);
     for (var i = 0; i < items[1].length; i++) {
       if (i % 3 == 0) $("#marketplaceContainer").append(`<div class="row">`);
       var idOfItem = items[1][i].toString();
