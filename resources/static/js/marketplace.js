@@ -492,7 +492,7 @@ window.addEventListener("load", () => {
     for (var i = 0; i < items[1].length; i++) {
       if (i % 3 == 0) $("#marketplaceContainer").append(`<div class="row">`);
       var idOfItem = items[1][i].toString();
-      var _isYours = items[2][i]);
+      var _isYours = items[2][i];
       var submitButton;
       if(_isYours){
         _isYours = `onsubmit="return false;"`
