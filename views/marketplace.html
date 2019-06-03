@@ -1,58 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Marketplace</title>
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="static/images/favicon.png"
-    />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie-edge" />
-    <meta charset="utf-8" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script
-      src="https://cdn.ethers.io/scripts/ethers-v4.min.js"
-      charset="utf-8"
-      type="text/javascript"
-    ></script>
-    <script src="/static/js/web3.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/loading.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/loading-btn.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/cards.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/component.css" />
-  </head>
 
-  <body>
-    <div class="container">
-      <nav class="navbar">
-        <ul class="nav nav-tabs">
-          <li role="presentation"><a href="index.html">Data Notary</a></li>
-          <li role="presentation"><a href="ipfs.html">IPFS</a></li>
-          <li role="presentation" class="active">
-            <a href="#">Marketplace</a>
-          </li>
-          <li role="presentation">
-            <a href="profile.html">Profile</a>
-          </li>
-        </ul>
-      </nav>
-      <hr />
-      <h3>The Copyrights Marketplace</h3>
-      <hr />
-      <div class="col-sm-12" id="marketplaceContainer">
+<head>
+  <title>Marketplace</title>
+  <link rel="shortcut icon" type="image/png" href="static/images/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript"></script>
+  <script src="/static/js/marketplace.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/css/loading.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/loading-btn.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/cards.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/component.css" />
+</head>
 
-      </div>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <ul class="nav nav-tabs">
+        <li role="presentation"><a href="index.html">Data Notary</a></li>
+        <li role="presentation"><a href="ipfs.html">IPFS</a></li>
+        <li role="presentation" class="active">
+          <a href="#">Marketplace</a>
+        </li>
+        <li role="presentation">
+          <a href="profile.html">Profile</a>
+        </li>
+      </ul>
+    </nav>
+    <hr />
+    <h3>The Copyrights Marketplace</h3>
+    <hr />
+    <div class="col-sm-12" id="marketplaceContainer">
 
     </div>
-  </body>
+
+  </div>
+</body>
+
 </html>
