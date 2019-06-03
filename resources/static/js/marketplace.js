@@ -496,10 +496,10 @@ window.addEventListener("load", () => {
       var submitButton;
       if(_isYours){
         _isYours = `onsubmit="return false;"`
-        submitButton = "You have it"
+        submitButton = `"You have it" disabled`
       } else {
         _isYours="";
-        submitButton = "Buy Now";
+        submitButton = `"Buy Now"`;
       }
       var data = items[0][i].data.toHexString();
       var date = unixTimeToDate(items[0][i].date.toString());
@@ -525,7 +525,7 @@ window.addEventListener("load", () => {
           idOfItem +
           `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
           valueWei +
-          ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value="${submitButton}">
+          ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value=${submitButton}>
             </div></div></form></div>`
       );
       if (i % 3 == 2) $("#marketplaceContainer").append(`</div>`);
