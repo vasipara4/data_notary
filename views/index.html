@@ -37,7 +37,7 @@
     <div class="col-sm-4">
       <h3>Ethereum + Db</h3>
       <hr />
-      <br />
+
       <div>
         <form id="userForm" enctype="multipart/form-data">
           <div class="form-group">
@@ -57,7 +57,7 @@
             <label for="weiValue">Enter Price of Copyrights in Wei:</label>
             <input type="number" name="weiValue" class="form-control" id="weiValue" min="0" value="0" oninput="weiEther()" required />
             <details>
-              <summary id="weiSummary">Price: 0  (Notary Mode Only)</summary>
+              <summary id="weiSummary">Price: 0 (Notary Mode Only)</summary>
               <p id="weiDescription">
                 The file is not going to be in Marketplace
               </p>
@@ -89,7 +89,6 @@
     <div class="col-sm-5">
       <h3>Check Data Integrity from file</h3>
       <hr />
-      <br />
       <div>
         <form id="verifyForm">
           <div class="form-group">
@@ -117,7 +116,6 @@
       <div>
         <h3>Check Data Integrity from Hash</h3>
         <hr />
-        <br />
         <form id="verifyHash">
           <div class="form-group">
             <label for="verify_hashId">Enter ID:</label>
@@ -127,8 +125,8 @@
             <label for="verify_hashValue">Enter Hash:</label>
             <input type="text" class="form-control" id="verify_hashValue" placeholder="Hex Representration" required />
           </div>
-          <button type="submit" class="btn btn-default" >Verify
-        </button>
+          <button type="submit" class="btn btn-default">Verify
+          </button>
         </form>
         <div id="getVerifyHashDiv">
           <ul class="list-group"></ul>
