@@ -487,13 +487,12 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    var stringsTitleDescID = (async () => {
-      const resultOfAjax = await ajaxGet();
-      return resultOfAjax;
-    })();
+    const stringsTitleDescID = await $.ajax({
+      type: "GET",
+      url: window.location.origin + "/api/users/strings"
+    });
     const items = await contractEtherJS.getItemsBuyable(account);
-    console.log("before loop");
-    console.log(stringsTitleDescID);
+
     for (var i = 0; i < items[1].length; i++) {
       var title;
       var description;
@@ -504,16 +503,12 @@ window.addEventListener("load", () => {
         if (user.id === idOfItem) {
           title = user.title;
           description = user.description;
-          console.log(title);
         }
       });
-
-      console.log("In loop");
-      console.log(stringsTitleDescID);
       //if user hasn't added contents to our contract through our app => don't show his contents
-      if (typeof title === "undefined") continue;
+      if(typeof title === 'undefined') continue;
 
-      //if content is yours => make submit disabled
+      //if content is yours => make submit disable
       if (_isYours) {
         _isYours = `onsubmit="return false;"`;
         submitButton = `"You have it" disabled`;
@@ -529,62 +524,38 @@ window.addEventListener("load", () => {
           : ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) +
             ethers.utils.parseBytes32String(items[0][i].addressIPFS[1]);
       var valueWei = items[0][i].valueWei.toString();
-      printMarketplace(
-        i,
-        _isYours,
-        title,
-        description,
-        ipfsAddress,
-        date,
-        idOfItem,
-        valueWei,
-        submitButton
-      );
+      printMarketplace(i, _isYours, title, description, ipfsAddress, date, idOfItem, valueWei, submitButton);
     }
   })();
 
-
+  // DO GET
+  async function ajaxGet() {
+    const result = await $.ajax({
+      type: "GET",
+      url: window.location.origin + "/api/users/strings"
+    });
+    return result;
+  }
 });
 
-// DO GET
-async function ajaxGet() {
-  const result = await $.ajax({
-    type: "GET",
-    url: window.location.origin + "/api/users/strings"
-  });
-  return result;
-}
-
-
-function printMarketplace(
-  i,
-  _isYours,
-  title,
-  description,
-  ipfsAddress,
-  date,
-  idOfItem,
-  valueWei,
-  submitButton
-) {
+function printMarketplace(i, _isYours, title, description, ipfsAddress, date, idOfItem, valueWei, submitButton) {
   if (i % 3 === 0) $("#marketplaceContainer").append(`<div class="row">`);
-  $("#marketplaceContainer").append(
-    `<div class="col-sm-4">
+$("#marketplaceContainer").append(
+  `<div class="col-sm-4">
     <form id="buyItem` +
-      i +
-      `" class="formdataBuy" ${_isYours}> <div class="card card-price">
+    i +
+    `" class="formdataBuy" ${_isYours}> <div class="card card-price">
       <div class="card-img"></div><div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
       Extra Content (IPFS): ` +
-      ipfsAddress +
-      `</li><li> Date Inserted: ` +
-      date +
-      `</li><li>ID of File: ` +
-      `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
-      idOfItem +
-      `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
-      valueWei +
-      ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value=${submitButton}>
+    ipfsAddress +
+    `</li><li> Date Inserted: ` +
+    date +
+    `</li><li>ID of File: ` +
+    `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
+    idOfItem +
+    `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
+    valueWei +
+    ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value=${submitButton}>
       </div></div></form></div>`
-  );
-  if (i % 3 === 2) $("#marketplaceContainer").append(`</div>`);
-}
+);
+if (i % 3 === 2) $("#marketplaceContainer").append(`</div>`);}
