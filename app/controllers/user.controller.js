@@ -29,7 +29,7 @@ exports.save = (req, res) => {
   //Account must be a valid Ethereum Address
   if (!web3.utils.isAddress(req.body.submitter)) {
     return res.status(400).send({
-      message: "Address Error"
+      message: "Error"
     });
   }
   // Create a new User model
@@ -40,7 +40,9 @@ exports.save = (req, res) => {
     timestamp: req.body.timestamp,
     submitter: req.body.submitter,
     gasUsed: req.body.gasUsed,
-    url: url_file
+    url: url_file,
+    transactionHash: req.body.transactionHash,
+    blockHash: req.body.blockHash
   });
   var ethereumTimestamp;
   contract.methods
@@ -109,5 +111,73 @@ exports.findStrings = (req, res) => {
       res.status(500).send({
         message: err.message
       });
+    });
+};
+
+
+exports.buy = (req, res) => {
+  var url_file = "PurchasedItem";
+  var dateServer = Math.floor(new Date() / 1000);
+  console.log("Server Time:" + dateServer);
+  console.log("Tx Time:" + req.body.timestamp);
+
+  //VALIDATION RULES:
+  //dateServer can be smaller than block.timestamp for 10 seconds
+  //after 150 seconds the POST request is canceled
+  // MUST: req.body.timestamp -50 < dateServer OR dateServer < req.body.timestamp + 150 to be valid
+  if (
+    dateServer < req.body.timestamp - 50 ||
+    dateServer > req.body.timestamp + 150
+  ) {
+    return res.status(400).send({
+      message: "Error: POST timeout"
+    });
+  }
+
+  //Account must be a valid Ethereum Address
+  if (!web3.utils.isAddress(req.body.submitter)) {
+    return res.status(400).send({
+      message: "Error"
+    });
+  }
+
+  var id = req.body.id + req.body.submitter;
+  // Create a new User model
+  const saveToDBbuy = new UserModelDB({
+    title: "PurchasedItem",
+    description: "PurchasedItem",
+    id: id,
+    timestamp: req.body.timestamp,
+    submitter: req.body.submitter,
+    gasUsed: req.body.gasUsed,
+    url: url_file,
+    transactionHash: req.body.transactionHash,
+    blockHash: req.body.blockHash
+  });
+  var ethereumTimestamp;
+  contract.methods
+    .getDataShareFromAddressID(req.body.submitter, req.body.id)
+    .call({ from: req.body.submitter })
+    .then(function(result) {
+      ethereumTimestamp = result[1];
+
+      //timestamp must be the same as in Ethereum
+      if (req.body.timestamp != ethereumTimestamp) {
+        return res.status(400).send({
+          message: "Valid Error"
+        });
+      }
+
+      // Save in the MongoDB
+      saveToDBbuy
+        .save()
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: err.message
+          });
+        });
     });
 };

@@ -5,14 +5,13 @@
   <title>Data Notary</title>
   <link rel="shortcut icon" type="image/png" href="static/images/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta http-equiv="X-UA-Compatible" content="ie-edge">
+  <meta http-equiv="X-UA-Compatible" content="ie-edge" />
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript">
-  </script>
+  <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript"></script>
   <script src="/static/js/web3.js"></script>
   <link rel="stylesheet" type="text/css" href="/static/css/loading.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/loading-btn.css" />
@@ -24,9 +23,13 @@
   <div class="container">
     <nav class="navbar">
       <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">Data Notary</a></li>
+        <li role="presentation" class="active">
+          <a href="#">Data Notary</a>
+        </li>
         <li role="presentation"><a href="ipfs.html">IPFS</a></li>
-        <li role="presentation"><a href="marketplace.html">Marketplace</a></li>
+        <li role="presentation">
+          <a href="marketplace.html">Marketplace</a>
+        </li>
         <li role="presentation"><a href="profile.html">Profile</a></li>
       </ul>
     </nav>
@@ -41,43 +44,47 @@
             <label for="title">Title:</label>
             <input type="text" class="form-control" name="title" id="title" placeholder="Enter file's title" required />
             <label for="description">Description:</label>
-            <input type="text" class="form-control" name="description" id="description" placeholder="Enter file's description" required /></div>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Enter file's description" required />
+          </div>
           <div class="form-group">
-            <label for="file">Text file <font size="2">(size limit 16MB)</font>: </label>
+            <label for="file">Text file <font size="2">(size limit 16MB)</font>:
+            </label>
             <input type="file" name="file" id="file" onchange="showFileName()" accept="text/plain" required />
             <label for="file" class="btn-1">Upload</label>
-            <div id="file-upload-filename"> </div>
+            <div id="file-upload-filename"></div>
           </div>
           <div class="form-group">
             <label for="weiValue">Enter Price of Copyrights in Wei:</label>
-            <input type="number" name="weiValue" class="form-control" id="weiValue" min="0" max="100000000000000000000000000000000" value="0" oninput="weiEther()" required />
+            <input type="number" name="weiValue" class="form-control" id="weiValue" min="0" value="0" oninput="weiEther()" required />
             <details>
-              <summary id="weiSummary">Price: 0</summary>
-              <p id="weiDescription">The file is not going to be in Marketplace (Notary Mode Only)</p>
-              <p>Max Price: 10^32 Wei</p>
+              <summary id="weiSummary">Price: 0  (Notary Mode Only)</summary>
+              <p id="weiDescription">
+                The file is not going to be in Marketplace
+              </p>
+              <p>Max Price: (2^256 -1) Wei</p>
             </details>
           </div>
           <div class="form-group">
             <label for="id">ID:</label>
             <input type="number" name="id" class="form-control" id="id" placeholder="Enter positive number" min="0" required />
           </div>
-          <button type="submit" id="insertLoading" class="btn btn-default ld-ext-right">Insert Data in Eth + Db<div class="ld ld-ring ld-spin"></div></button>
+          <button type="submit" id="insertLoading" class="btn btn-default ld-ext-right">
+            Insert Data in Eth + Db
+            <div class="ld ld-ring ld-spin"></div>
+          </button>
         </form>
       </div>
-      <div id="postResultDiv">
-      </div>
-      <br>
+      <div id="postResultDiv"></div>
+      <br />
       <div>
-        <button id="allUsers" type="button" class="btn btn-default ">Show Data in Database</button>
-        <div id="getResultDiv" style="margin-top:10px;word-break:break-all;">
-
-        </div>
+        <button id="allUsers" type="button" class="btn btn-default ">
+          Show Data in Database
+        </button>
+        <div id="getResultDiv" style="margin-top:10px;word-break:break-all;"></div>
       </div>
     </div>
 
-    <div class="col-sm-3">
-
-    </div>
+    <div class="col-sm-3"></div>
 
     <div class="col-sm-5">
       <h3>Check Data Integrity from file</h3>
@@ -94,28 +101,39 @@
             <label for="verify_id">Enter ID:</label>
             <input type="number" class="form-control" id="verify_id" placeholder="Enter positive number" min="0" required />
           </div>
-          <button type="submit" id="verifyButton" class="btn btn-default">Verify</button>
+          <button type="submit" class="btn btn-default">
+            Verify
+          </button>
           <div id="getVerifyDiv">
-            <ul class="list-group">
-            </ul>
+            <ul class="list-group"></ul>
           </div>
         </form>
       </div>
       <div>
         <div id="getVerifyDiv">
-          <ul class="list-group">
-          </ul>
+          <ul class="list-group"></ul>
         </div>
       </div>
       <div>
         <h3>Check Data Integrity from Hash</h3>
         <hr />
         <br />
-        On progress...
+        <form id="verifyHash">
+          <div class="form-group">
+            <label for="verify_hashId">Enter ID:</label>
+            <input type="number" class="form-control" id="verify_hashId" placeholder="ID file" required />
+          </div>
+          <div class="form-group">
+            <label for="verify_hashValue">Enter Hash:</label>
+            <input type="text" class="form-control" id="verify_hashValue" placeholder="Hex Representration" required />
+          </div>
+          <button type="submit" class="btn btn-default">
+        </form>
+        <div id="getVerifyHashDiv">
+          <ul class="list-group"></ul>
+        </div>
       </div>
-
     </div>
-
   </div>
 
   <script>
@@ -124,30 +142,37 @@
 
       if (wei == 0) {
         $("#weiSummary").html("Price: 0 (Notary Mode Only)");
-        $("#weiDescription").html("The file is not going to be in Marketplace");
+        $("#weiDescription").html(
+          "The file is not going to be in Marketplace"
+        );
         return;
-      }
-      else if (wei < 1000000) {
+      } else if (wei < 1000000) {
         $("#weiSummary").html("Price: " + wei + " Wei");
-      }
-      else if (wei >= 1000000000000000000) {
-        var ether = wei/1000000000000000000;
-        $("#weiSummary").html("Price: " + Math.round(ether) + " Ether (approximately)");
-      }
-      else if (wei >= 1000000000000000) {
-        var pwei = wei/1000000000000000;
-        $("#weiSummary").html("Price: " + Math.round(pwei) + " MilliEther (approximately)");
-      }
-      else if (wei >= 1000000000000) {
-        var pwei = wei/1000000000000;
-        $("#weiSummary").html("Price: " + Math.round(pwei) + " MicroEther (approximately)");
-      }
-      else if (wei >= 1000000000) {
-        var gwei = wei/1000000000;
-        $("#weiSummary").html("Price: " + Math.round(gwei) + " Gwei (approximately)");
+      } else if (wei >= 1000000000000000000) {
+        var ether = wei / 1000000000000000000;
+        $("#weiSummary").html(
+          "Price: " + Math.round(ether) + " Ether (approximately)"
+        );
+      } else if (wei >= 1000000000000000) {
+        var pwei = wei / 1000000000000000;
+        $("#weiSummary").html(
+          "Price: " + Math.round(pwei) + " MilliEther (approximately)"
+        );
+      } else if (wei >= 1000000000000) {
+        var pwei = wei / 1000000000000;
+        $("#weiSummary").html(
+          "Price: " + Math.round(pwei) + " MicroEther (approximately)"
+        );
+      } else if (wei >= 1000000000) {
+        var gwei = wei / 1000000000;
+        $("#weiSummary").html(
+          "Price: " + Math.round(gwei) + " Gwei (approximately)"
+        );
       }
 
-  $("#weiDescription").html("The file is going to be in Marketplace (Notary and Marketplace Mode)");
+      $("#weiDescription").html(
+        "The file is going to be in Marketplace (Notary and Marketplace Mode)"
+      );
     }
     //var weiInput = document.getElementById("weiValue");
     //weiInput.addEventListener("change", weiEther());

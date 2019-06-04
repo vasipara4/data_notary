@@ -33,6 +33,14 @@ const UserSchema = mongoose.Schema({
   url: {
     type: String,
     required: true
+  },
+  transactionHash: {
+    type: String,
+    required: true
+  },
+  blockHash: {
+    type: String,
+    required: true
   }
 });
 

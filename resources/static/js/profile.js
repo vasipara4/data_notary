@@ -437,6 +437,8 @@ window.addEventListener("load", () => {
     providerEtherJS
   );
 
+
+  // Download button with Ajax POST
   $("#downloadForm").submit(function(event) {
     event.preventDefault();
     var downloadID = $("#downloadId").val();
@@ -457,10 +459,10 @@ window.addEventListener("load", () => {
     $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
-      contentType: false, //"application/json",
+      contentType: false,
       url: window.location.origin + "/api/sign/download",
-      data: sendData, //JSON.stringify(formData),
-      processData: false, //dataType: "json",
+      data: sendData,
+      processData: false,
       success: function(user) {
         console.log(user);
       },
@@ -471,10 +473,15 @@ window.addEventListener("load", () => {
     });
   });
 
-  // Your Copyrights Wallet
+  //Init Your Copyrights Wallet
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
+    $("#accountName").val(account);
+    // const stringsIDtxBlockHash = await $.ajax({
+    //   type: "GET",
+    //   url: window.location.origin + "/api/users/strings"
+    // });
     contractEtherJS
       .getOwnItems(account)
       .then(function(items) {
@@ -482,8 +489,14 @@ window.addEventListener("load", () => {
         for (var i = 0; i < items[0].length; i++) {
           if (items[1][i]) {
             emptyWallet = 0;
+            var txHash, blockHash;
             var pendingId = items[2][i].toString();
-
+            // $.each(stringsIDtxBlockHash, function(i, user) {
+            //   if (user.id.toString() === pendingId || user.id.toString() === pendingId+account) {
+            //     txHash = user.transactionHash;
+            //     blockHash = user.blockHash;
+            //   }
+            // });
             var ipfsAddress =
               ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
                 ? "Empty"
@@ -534,7 +547,7 @@ window.addEventListener("load", () => {
       .catch(e => console.log(e));
   })();
 
-  // TODO: Withdraw button
+  //Withdraw button
   $("#withdrawForm").submit(function(event) {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
@@ -549,9 +562,8 @@ window.addEventListener("load", () => {
       .catch(e => console.log(e));
   });
 
-  // TODO: download button with Ajax POST
-
-  function unixTimeToDate(unix_timestamp) {
+//convert Unix Time to Date
+    function unixTimeToDate(unix_timestamp) {
     var date = new Date(unix_timestamp * 1000);
     var day = "0" + date.getDate();
     var month = "0" + (date.getMonth() + 1);

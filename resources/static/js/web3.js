@@ -27,7 +27,6 @@ function unixTimeToDate(unix_timestamp) {
   return formattedTime;
 }
 
-
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
@@ -490,7 +489,13 @@ window.addEventListener("load", () => {
                   .getTimestamp(id_val)
                   .call({ from: account })
                   .then(function(setTimestamp) {
-                    ajaxPost(setTimestamp, result.gasUsed, id_val);
+                    ajaxPost(
+                      setTimestamp,
+                      result.gasUsed,
+                      id_val,
+                      result.transactionHash,
+                      result.blockHash
+                    );
                     elementLoading.classList.remove("running");
                   });
                 console.log(result);
@@ -508,7 +513,7 @@ window.addEventListener("load", () => {
     });
   });
 
-  function ajaxPost(timestamp, gasUsed, id) {
+  function ajaxPost(timestamp, gasUsed, id, transactionHash, blockHash) {
     var formData = new FormData();
     formData.append("title", $("#title").val());
     formData.append("description", $("#description").val());
@@ -516,6 +521,8 @@ window.addEventListener("load", () => {
     formData.append("timestamp", timestamp);
     formData.append("submitter", account);
     formData.append("gasUsed", gasUsed);
+    formData.append("transactionHash", transactionHash);
+    formData.append("blockHash", blockHash);
     formData.append("file", document.getElementById("file").files[0]);
     // DO POST
     $.ajax({
@@ -625,7 +632,7 @@ window.addEventListener("load", () => {
                             ethers.utils.parseBytes32String(result[5]);
                       verifyHtml =
                         "True" +
-                        "<br>Account: " +
+                        "<br>Account Original: " +
                         result[0] +
                         "<br><br>Data: " +
                         web3.utils.toHex(result[1]) +
@@ -642,6 +649,48 @@ window.addEventListener("load", () => {
           } else $("#getVerifyDiv").html("Data Integrity: ID doesn't exists");
         });
     });
+  });
+
+  $("#verifyHash").submit(function(event) {
+    event.preventDefault();
+    var verifyHtml = "Hash does NOT match. ";
+    var testingData = $("#verify_hashValue").val();
+    var testingId = $("#verify_hashId").val();
+    contract.methods
+      .dataExists(testingId)
+      .call({ from: account })
+      .then(function(idExists) {
+        if (idExists) {
+          contract.methods
+            .verifyHash(testingData, testingId)
+            .call({ from: account })
+            .then(function(result) {
+              //console.log(result);
+              if (result) {
+                contract.methods
+                  .getDataDetails(testingId)
+                  .call({ from: account })
+                  .then(function(result) {
+                    var IPFSstring =
+                      ethers.utils.parseBytes32String(result[4]) === ""
+                        ? "No File"
+                        : ethers.utils.parseBytes32String(result[4]) +
+                          ethers.utils.parseBytes32String(result[5]);
+                    verifyHtml =
+                      "True" +
+                      "<br>Account Original: " +
+                      result[0] +
+                      "<br>Time and Date First Inserted :<br> " +
+                      unixTimeToDate(result[2]) +
+                      "<br>IPFS file: " +
+                      IPFSstring;
+                    $("#getVerifyHashDiv").html("Data	Integrity: " + verifyHtml);
+                  });
+              } else
+                $("#getVerifyHashDiv").html("Data Integrity: " + verifyHtml);
+            });
+        } else $("#getVerifyHashDiv").html("Data Integrity: ID doesn't exists");
+      });
   });
 
   //IPFS ADD FILES
@@ -694,7 +743,6 @@ window.addEventListener("load", () => {
         }
       });
   });
-
 });
 
 async function openFile(id) {
@@ -747,9 +795,8 @@ function printGetResultDiv(
   );
 }
 
-function generateNewID (){
+function generateNewID() {
   // do{
   //
   // }while();
-
 }

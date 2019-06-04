@@ -168,8 +168,8 @@ contract Data {
      return balances[_from];
   }
 
-  function getDataShareFromAddressID(address _owner, uint _id) public view returns (uint) {
-    return  addressToCopyrights[_owner][_id].data;
+  function getDataShareFromAddressID(address _owner, uint _id) public view returns (uint, uint) {
+    return  (addressToCopyrights[_owner][_id].data, addressToCopyrights[_owner][_id].date);
   }
 
 
