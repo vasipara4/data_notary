@@ -504,6 +504,7 @@ window.addEventListener("load", () => {
         if (user.id === idOfItem) {
           title = user.title;
           description = user.description;
+          console.log(title);
         }
       });
 
