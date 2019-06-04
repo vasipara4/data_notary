@@ -489,6 +489,7 @@ window.addEventListener("load", () => {
     account = account[0];
     var stringsTitleDescID = async () => {
       stringsTitleDescID = await ajaxGet();
+      return stringsTitleDescID;
     };
     const items = await contractEtherJS.getItemsBuyable(account);
     console.log("before loop");
