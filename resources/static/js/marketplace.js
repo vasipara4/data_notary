@@ -487,7 +487,7 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    const stringsTitleDescID = ajaxGet();
+    const stringsTitleDescID = await ajaxGet();
     const items = await contractEtherJS.getItemsBuyable(account);
 
     for (var i = 0; i < items[1].length; i++) {
