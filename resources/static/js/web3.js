@@ -479,7 +479,7 @@ window.addEventListener("load", () => {
         .then(function(result) {
           if (result == false) {
             $("#postResultDiv").html(
-              "Do not close the window until transaction is confirmed"
+              "<b>Do not close the window until transaction is confirmed</b>"
             );
             elementLoading.classList.add("running");
             contract.methods
