@@ -1,3 +1,37 @@
+//print div of marketplace
+function printMarketplace(i, _isYours, title, description, ipfsAddress, date, idOfItem, valueWei, submitButton) {
+  if (i % 3 === 0) $("#marketplaceContainer").append(`<div class="row">`);
+$("#marketplaceContainer").append(
+  `<div class="col-sm-4">
+    <form id="buyItem` +
+    i +
+    `" class="formdataBuy" ${_isYours}> <div class="card card-price">
+      <div class="card-img"></div><div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
+      Extra Content (IPFS): ` +
+    ipfsAddress +
+    `</li><li> Date Inserted: ` +
+    date +
+    `</li><li>ID of File: ` +
+    `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
+    idOfItem +
+    `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
+    valueWei +
+    ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value=${submitButton}>
+      </div></div></form></div>`
+);
+if (i % 3 === 2) $("#marketplaceContainer").append(`</div>`);
+}
+
+
+// DO GET
+async function ajaxGet() {
+  const result = await $.ajax({
+    type: "GET",
+    url: window.location.origin + "/api/users/strings"
+  });
+  return result;
+}
+
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
@@ -487,10 +521,11 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    const stringsTitleDescID = await $.ajax({
-      type: "GET",
-      url: window.location.origin + "/api/users/strings"
-    });
+    var stringsTitleDescID = (async () {return ajaxGet; } )();
+    // await $.ajax({
+    //   type: "GET",
+    //   url: window.location.origin + "/api/users/strings"
+    // });
     console.log(stringsTitleDescID);
     const items = await contractEtherJS.getItemsBuyable(account);
 
@@ -530,34 +565,4 @@ window.addEventListener("load", () => {
     }
   })();
 
-  // DO GET
-  async function ajaxGet() {
-    const result = await $.ajax({
-      type: "GET",
-      url: window.location.origin + "/api/users/strings"
-    });
-    return result;
-  }
 });
-
-function printMarketplace(i, _isYours, title, description, ipfsAddress, date, idOfItem, valueWei, submitButton) {
-  if (i % 3 === 0) $("#marketplaceContainer").append(`<div class="row">`);
-$("#marketplaceContainer").append(
-  `<div class="col-sm-4">
-    <form id="buyItem` +
-    i +
-    `" class="formdataBuy" ${_isYours}> <div class="card card-price">
-      <div class="card-img"></div><div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
-      Extra Content (IPFS): ` +
-    ipfsAddress +
-    `</li><li> Date Inserted: ` +
-    date +
-    `</li><li>ID of File: ` +
-    `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
-    idOfItem +
-    `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
-    valueWei +
-    ` Wei</div><input type="Submit" class="btn btn-primary btn-lg btn-block buy-now" value=${submitButton}>
-      </div></div></form></div>`
-);
-if (i % 3 === 2) $("#marketplaceContainer").append(`</div>`);}
