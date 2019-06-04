@@ -491,6 +491,7 @@ window.addEventListener("load", () => {
       type: "GET",
       url: window.location.origin + "/api/users/strings"
     });
+    console.log(stringsTitleDescID);
     const items = await contractEtherJS.getItemsBuyable(account);
 
     for (var i = 0; i < items[1].length; i++) {
@@ -524,6 +525,7 @@ window.addEventListener("load", () => {
           : ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) +
             ethers.utils.parseBytes32String(items[0][i].addressIPFS[1]);
       var valueWei = items[0][i].valueWei.toString();
+      console.log("Print problem");
       printMarketplace(i, _isYours, title, description, ipfsAddress, date, idOfItem, valueWei, submitButton);
     }
   })();
