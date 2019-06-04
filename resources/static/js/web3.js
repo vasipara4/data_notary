@@ -458,7 +458,7 @@ window.addEventListener("load", () => {
         type: "function"
       }
     ],
-    "0xad5ee299c14f397cff5ef80b630c687a5f0901b9"
+    "0x023a7b6319ac7a5398013c56497ec9ebc8c911bd"
   );
 
   //POST Ethereum & Db

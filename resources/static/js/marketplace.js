@@ -422,7 +422,7 @@ window.addEventListener("load", () => {
     }
   ];
   //Web3 Init Contract
-  const contractAddress = "0xad5ee299c14f397cff5ef80b630c687a5f0901b9";
+  const contractAddress = "0x023a7b6319ac7a5398013c56497ec9ebc8c911bd";
   const contract = new web3.eth.Contract(abi, contractAddress);
 
   //EtherJS SECTION
