@@ -422,16 +422,16 @@ window.addEventListener("load", () => {
     }
   ];
   //Web3 Init Contract
-  let contractAddress = "0x468678792dab4bf18ca6729cd840961675ea9992";
+  const contractAddress = "0x468678792dab4bf18ca6729cd840961675ea9992";
   const contract = new web3.eth.Contract(abi, contractAddress);
 
   //EtherJS SECTION
   // Connect to the network
-  let providerEtherJS = new ethers.providers.Web3Provider(
+  const providerEtherJS = new ethers.providers.Web3Provider(
     window.web3.currentProvider
   );
   // The Contract interface
-  let contractEtherJS = new ethers.Contract(
+  const contractEtherJS = new ethers.Contract(
     contractAddress,
     abi,
     providerEtherJS
@@ -487,8 +487,11 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    var stringsTitleDescID = await ajaxGet();
-    let items = await contractEtherJS.getItemsBuyable(account);
+    const stringsTitleDescID = await $.ajax({
+      type: "GET",
+      url: window.location.origin + "/api/users/strings"
+    });
+    const items = await contractEtherJS.getItemsBuyable(account);
 
     for (var i = 0; i < items[1].length; i++) {
       if (i % 3 == 0) $("#marketplaceContainer").append(`<div class="row">`);
@@ -498,11 +501,11 @@ window.addEventListener("load", () => {
       var _isYours = items[2][i];
       var submitButton;
       $.each(stringsTitleDescID, function(i, user) {
-       if(user.id == idOfItem){
-         title = user.title;
-         description = user.description;
-       }
-    });
+        if (user.id == idOfItem) {
+          title = user.title;
+          description = user.description;
+        }
+      });
 
       if (_isYours) {
         _isYours = `onsubmit="return false;"`;
@@ -550,7 +553,7 @@ window.addEventListener("load", () => {
         // $.each(result, function(i, user) {
         //   if(user.id == )
         return result;
-      //  });
+        //  });
       },
       error: function(e) {
         console.log("ERROR: ", e);
