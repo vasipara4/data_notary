@@ -1,3 +1,33 @@
+function unixTimeToDate(unix_timestamp) {
+  var date = new Date(unix_timestamp * 1000);
+  var day = "0" + date.getDate();
+  var month = "0" + (date.getMonth() + 1);
+  var year = date.getFullYear();
+
+  // Hours part from the timestamp
+  var hours = date.getHours();
+  // Minutes part from the timestamp
+  var minutes = "0" + date.getMinutes();
+  // Seconds part from the timestamp
+  var seconds = "0" + date.getSeconds();
+
+  // Will display time in 10:30:23 format
+  var formattedTime =
+    hours +
+    ":" +
+    minutes.substr(-2) +
+    ":" +
+    seconds.substr(-2) +
+    " " +
+    day.substr(-2) +
+    "/" +
+    month.substr(-2) +
+    "/" +
+    year;
+  return formattedTime;
+}
+
+
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
@@ -665,34 +695,6 @@ window.addEventListener("load", () => {
       });
   });
 
-  function unixTimeToDate(unix_timestamp) {
-    var date = new Date(unix_timestamp * 1000);
-    var day = "0" + date.getDate();
-    var month = "0" + (date.getMonth() + 1);
-    var year = date.getFullYear();
-
-    // Hours part from the timestamp
-    var hours = date.getHours();
-    // Minutes part from the timestamp
-    var minutes = "0" + date.getMinutes();
-    // Seconds part from the timestamp
-    var seconds = "0" + date.getSeconds();
-
-    // Will display time in 10:30:23 format
-    var formattedTime =
-      hours +
-      ":" +
-      minutes.substr(-2) +
-      ":" +
-      seconds.substr(-2) +
-      " " +
-      day.substr(-2) +
-      "/" +
-      month.substr(-2) +
-      "/" +
-      year;
-    return formattedTime;
-  }
 });
 
 async function openFile(id) {
