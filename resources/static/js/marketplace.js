@@ -502,6 +502,9 @@ window.addEventListener("load", () => {
           description = user.description;
         }
       });
+
+    ]console.log("In loop");
+    console.log(stringsTitleDescID);
       //if user hasn't added contents to our contract through our app => don't show his contents
       if(typeof title === 'undefined') continue;
 
