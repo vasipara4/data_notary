@@ -521,7 +521,7 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    var stringsTitleDescID = (async function(){ return ajaxGet; })();
+    var stringsTitleDescID = (async () {return ajaxGet; } )();
     // await $.ajax({
     //   type: "GET",
     //   url: window.location.origin + "/api/users/strings"
