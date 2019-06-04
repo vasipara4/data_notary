@@ -501,7 +501,7 @@ window.addEventListener("load", () => {
       var _isYours = items[2][i];
       var submitButton;
       $.each(stringsTitleDescID, function(i, user) {
-        if (user.id === idOfItem) {
+        if (user.id.toString() === idOfItem) {
           title = user.title;
           description = user.description;
         }
