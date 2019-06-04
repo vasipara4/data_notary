@@ -488,8 +488,8 @@ window.addEventListener("load", () => {
     account = await web3.eth.getAccounts();
     account = account[0];
     var stringsTitleDescID = async () => {
-      stringsTitleDescID = await ajaxGet();
-      return stringsTitleDescID;
+      const resultOfAjax = await ajaxGet();
+      return resultOfAjax;
     };
     const items = await contractEtherJS.getItemsBuyable(account);
     console.log("before loop");
@@ -542,15 +542,18 @@ window.addEventListener("load", () => {
     }
   })();
 
-  // DO GET
-  async function ajaxGet() {
-    const result = await $.ajax({
-      type: "GET",
-      url: window.location.origin + "/api/users/strings"
-    });
-    return result;
-  }
+
 });
+
+// DO GET
+async function ajaxGet() {
+  const result = await $.ajax({
+    type: "GET",
+    url: window.location.origin + "/api/users/strings"
+  });
+  return result;
+}
+
 
 function printMarketplace(
   i,
