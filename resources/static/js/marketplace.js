@@ -503,7 +503,7 @@ window.addEventListener("load", () => {
         }
       });
 
-    ]console.log("In loop");
+    console.log("In loop");
     console.log(stringsTitleDescID);
       //if user hasn't added contents to our contract through our app => don't show his contents
       if(typeof title === 'undefined') continue;
