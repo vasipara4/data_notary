@@ -477,7 +477,7 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    $("#accountName").val(account);
+    $("#accountName").html("Account: "+account);
     // const stringsIDtxBlockHash = await $.ajax({
     //   type: "GET",
     //   url: window.location.origin + "/api/users/strings"
