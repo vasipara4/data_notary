@@ -487,9 +487,10 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    const stringsTitleDescID = await ajaxGet();
+    var stringsTitleDescID = async () => {stringsTitleDescID = ajaxGet()};
     const items = await contractEtherJS.getItemsBuyable(account);
     console.log("before loop");
+    console.log(stringsTitleDescID);
     for (var i = 0; i < items[1].length; i++) {
       var title;
       var description;
