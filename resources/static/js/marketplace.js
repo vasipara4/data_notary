@@ -615,7 +615,7 @@ function printMarketplace(
       idOfItem +
       `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
       valueWei +
-      ` Wei</div><input type="Submit" id="buyItem${i}Submit" class="btn btn-primary btn-lg btn-block buy-now" value=${submitButton}>
+      ` Wei</div><input type="Submit" id="buyItem${i}Submit" class="btn btn-primary btn-md btn-block buy-now" value=${submitButton}>
       </div></div></form></div>`
   );
   if (i % 3 === 2) $("#marketplaceContainer").append(`</div>`);
