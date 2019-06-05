@@ -554,7 +554,7 @@ window.addEventListener("load", () => {
         _isYours = "";
         submitButton = `"Buy Now"`;
       }
-      var ownerOfData = items[0][i].submitter.toHexString();
+      var ownerOfData = items[0][i].submitter;
       var data = items[0][i].data.toHexString();
       var date = unixTimeToDate(items[0][i].date.toString());
       var ipfsAddress =
