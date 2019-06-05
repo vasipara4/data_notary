@@ -101,6 +101,55 @@ window.addEventListener("load", () => {
 		"type": "function"
 	},
 	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "getItemsPurchased",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "submitter",
+						"type": "address"
+					},
+					{
+						"name": "data",
+						"type": "uint256"
+					},
+					{
+						"name": "date",
+						"type": "uint256"
+					},
+					{
+						"name": "valueWei",
+						"type": "uint256"
+					},
+					{
+						"name": "addressIPFS",
+						"type": "bytes32[2]"
+					}
+				],
+				"name": "",
+				"type": "tuple[]"
+			},
+			{
+				"name": "",
+				"type": "bool[]"
+			},
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -315,6 +364,24 @@ window.addEventListener("load", () => {
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"name": "_valueWei",
+				"type": "uint256"
+			}
+		],
+		"name": "updateWeiValue",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [
 			{
@@ -455,7 +522,7 @@ window.addEventListener("load", () => {
 		"type": "function"
 	}
 ],
-    "0x74d304117d98f5baec8974200d34fc76acb7590f"
+    "0xd4d7d130ddf67ece9702ab6b008655ebb8a67fe0"
   );
 
   //POST Ethereum & Db

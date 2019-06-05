@@ -23,7 +23,6 @@ contract Data {
   uint[] private idIndexes;
   mapping(address => uint256) private balances;
 
-
   //MODIFIERS SECTION
   modifier originalDataExisting(uint _id){
       require(idToData[_id].submitter != address(0));
@@ -50,9 +49,7 @@ contract Data {
   }
 
 
-  //payable
-
-  //send to contract
+  //payable & money
   function takeCopyrights(uint _id) canYouBuyCopyrights(_id) newCopyrightsAddressEmpty(_id) public payable {
     if ( msg.value == idToData[_id].valueWei && (msg.value +  balances[idToData[_id].submitter] >= balances[idToData[_id].submitter])){
       addressToCopyrights[msg.sender][_id].data = idToData[_id].data;
@@ -81,6 +78,9 @@ contract Data {
     (idToData[_id].addressIPFS[0], idToData[_id].addressIPFS[1]) = (_addressIPFS[0],_addressIPFS[1]);
   }
 
+  function updateWeiValue(uint _id, uint _valueWei) public onlySubmitter(_id){
+    idToData[_id].valueWei = _valueWei;
+  }
 
 
   // VIEW FUNCTIONS
@@ -142,27 +142,38 @@ contract Data {
   }
 
   function getOwnItems(address _owner)public view returns (dataObject[] memory, bool[] memory, uint[] memory) {
+    uint localId = 0;
     dataObject[] memory items = new dataObject[](idIndexes.length);
     uint[] memory _id = new uint[](idIndexes.length);
     bool[] memory _isNotEmpty = new bool[](idIndexes.length);
     for(uint i=0; i < idIndexes.length;i++){
-        _isNotEmpty[i] = false;
       if(idToData[idIndexes[i]].submitter == _owner){
-        items[i]= idToData[idIndexes[i]];
-        _isNotEmpty[i] = true;
-        _id[i]=idIndexes[i];
-      }
-      else if(addressToCopyrights[_owner][idIndexes[i]].date != 0){
-        items[i]= idToData[idIndexes[i]];
-        items[i].date = addressToCopyrights[_owner][idIndexes[i]].date;
-        items[i].valueWei = 0;
-        _isNotEmpty[i] = true;
-        _id[i]=idIndexes[i];
+        items[localId]= idToData[idIndexes[i]];
+        _isNotEmpty[localId] = true;
+        _id[i]=idIndexes[localId];
+        localId++;
       }
     }
     return (items, _isNotEmpty, _id);
   }
 
+  function getItemsPurchased(address _owner)public view returns (dataObject[] memory, bool[] memory, uint[] memory) {
+    uint localId = 0;
+    dataObject[] memory items = new dataObject[](idIndexes.length);
+    uint[] memory _id = new uint[](idIndexes.length);
+    bool[] memory _isNotEmpty = new bool[](idIndexes.length);
+    for(uint i=0; i < idIndexes.length;i++){
+      if(addressToCopyrights[_owner][idIndexes[i]].date != 0){
+        items[localId]= idToData[idIndexes[i]];
+        items[localId].date = addressToCopyrights[_owner][idIndexes[i]].date;
+        items[localId].valueWei = 0;
+        _isNotEmpty[localId] = true;
+        _id[localId]=idIndexes[i];
+        localId++;
+      }
+    }
+    return (items, _isNotEmpty, _id);
+  }
 
   function getBalance (address _from) public view returns (uint){
      return balances[_from];
