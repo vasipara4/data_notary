@@ -572,13 +572,13 @@ window.addEventListener("load", () => {
     event.preventDefault();
 
     var withdrawValueWei = $("#withdrawValueWei").val();
-    // contract.methods
-    //   .withdrawFunds(withdrawValueWei)
-    //   .send({ from: account })
-    //   .then(function(res) {
-    //     location.reload();
-    //   })
-    //   .catch(e => console.log(e));
+    contract.methods
+      .withdrawFunds(withdrawValueWei)
+      .send({ from: account })
+      .then(function(res) {
+        location.reload();
+      })
+      .catch(e => console.log(e));
   });
 
   //Update Price button
@@ -587,13 +587,13 @@ window.addEventListener("load", () => {
     event.preventDefault();
     var idOfFileUpdate = $("#idOfFileUpdate").val();
     var newValueWei = $("#updateValueWei").val();
-    contract.methods
-      .()
-      .send({ from: account })
-      .then(function(res) {
-        location.reload();
-      })
-      .catch(e => console.log(e));
+    // contract.methods
+    //   .()
+    //   .send({ from: account })
+    //   .then(function(res) {
+    //     location.reload();
+    //   })
+    //   .catch(e => console.log(e));
   });
 
   //convert Unix Time to Date
