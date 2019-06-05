@@ -146,8 +146,6 @@ exports.buy = (req, res) => {
   var dateServer = Math.floor(new Date() / 1000);
   console.log("Server Time:" + dateServer);
   console.log("Tx Time:" + req.body.timestamp);
-  console.log(url_file);
-  console.log(req.body.submitter);
   //VALIDATION RULES:
   //dateServer can be smaller than block.timestamp for 10 seconds
   //after 150 seconds the POST request is canceled
@@ -167,7 +165,7 @@ exports.buy = (req, res) => {
       message: "Error"
     });
   }
-  console.log(req.body.gasUsed);
+
   var id = req.body.id + req.body.submitter;
   // Create a new User model
   const saveToDBbuy = new UserModelDB({
@@ -187,8 +185,6 @@ exports.buy = (req, res) => {
     .call({ from: req.body.submitter })
     .then(function(result) {
       ethereumTimestamp = result[1];
-      console.log(ethereumTimestamp);
-      console.log(req.body.timestamp);
       //timestamp must be the same as in Ethereum
       if (req.body.timestamp != ethereumTimestamp) {
         return res.status(400).send({
@@ -200,7 +196,6 @@ exports.buy = (req, res) => {
       saveToDBbuy
         .save()
         .then(data => {
-          console.log("mpike mesa");
           res.send("confirmed");
         })
         .catch(err => {
