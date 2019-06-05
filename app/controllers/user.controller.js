@@ -16,8 +16,8 @@ exports.save = (req, res) => {
     dateServer < req.body.timestamp - 50 ||
     dateServer > req.body.timestamp + 150
   ) {
+    fs.unlink(__basedir + "/public" + url_file);
     return res.status(400).send({
-      fs.unlink(__basedir + "/public" + url_file);
       message: "Error: POST timeout"
     });
   }
