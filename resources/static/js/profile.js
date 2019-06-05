@@ -474,7 +474,7 @@ window.addEventListener("load", () => {
           .getResponseHeader("Content-Disposition")
           .split("=")[1];
         console.log(fileName);
-        response.addHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");
+        response.addHeader("Content-Disposition","attachment; filename=\"" + fileName + "\"");
         var a = document.createElement("a");
         var url = window.URL.createObjectURL(response);
         a.href = url;
