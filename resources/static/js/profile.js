@@ -623,7 +623,7 @@ window.addEventListener("load", () => {
 
 function downloadBlob(blob, filename) {
   // Create an object URL for the blob object
-  const url = URL.createObjectURL(blob);
+  const url = window.URL.createObjectURL(blob);
 
   // Create a new anchor element
   const a = document.createElement("a");
@@ -634,7 +634,7 @@ function downloadBlob(blob, filename) {
   // for one-off downloads of the blob content
   const clickHandler = () => {
     setTimeout(() => {
-      URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(url);
       this.removeEventListener("click", clickHandler);
     }, 150);
   };
