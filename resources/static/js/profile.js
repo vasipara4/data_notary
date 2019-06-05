@@ -487,7 +487,6 @@ window.addEventListener("load", () => {
                 txHash = user.transactionHash;
                 blockHash = user.blockHash;
                 stringsIDtxBlockHash.splice(index,1);
-                console.log(stringsIDtxBlockHash);
                 return false;
               }
             });
