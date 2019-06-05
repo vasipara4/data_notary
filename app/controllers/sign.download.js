@@ -27,7 +27,7 @@ exports.download = (req, res) => {
     .call({ from: "0xc5bc9893289dfb4549646f7e176bb3f479100518" })
     .then(function(result) {
       //Getting the data hash of buyer
-      dataToBeVerified = result;
+      dataToBeVerified = result[0];
       contract.methods
         .getDataDetails(id)
         .call({ from: "0xc5bc9893289dfb4549646f7e176bb3f479100518" })
