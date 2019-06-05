@@ -88,7 +88,7 @@ module.exports = function(app) {
   app.post("/api/users/buy", upload.none(), users.buy);
 
   // request download
-  app.post("/api/sign/download", sign.download);
+  app.post("/api/sign/download", upload.none(), sign.download);
 
   //Attach a file to IPFS
   app.post("/api/ipfs/save", uploadIPFS.single("file"), (req, res) => {
