@@ -469,6 +469,8 @@ window.addEventListener("load", () => {
             (async function() {
               const sendData = await $.ajax({
                 type: "POST",
+                enctype: "multipart/form-data",
+                contentType: false,
                 url: window.location.origin + "/api/users/buy",
                 data: formData,
                 processData: false,
