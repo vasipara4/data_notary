@@ -486,6 +486,7 @@ window.addEventListener("load", () => {
               ) {
                 txHash = user.transactionHash;
                 blockHash = user.blockHash;
+                return false;
               }
             });
             var ipfsAddress =

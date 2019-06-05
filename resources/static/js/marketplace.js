@@ -540,7 +540,7 @@ window.addEventListener("load", () => {
         if (user.id.toString() === idOfItem) {
           title = user.title;
           description = user.description;
-          break;
+          return false;
         }
       });
       //if user hasn't added contents to our contract through our app => don't show his contents
