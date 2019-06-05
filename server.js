@@ -1,5 +1,4 @@
 var express = require("express");
-var bodyParser = require('body-parser');
 var helmet = require('helmet');
 
 var app = express();
@@ -393,7 +392,7 @@ global.contract = new web3.eth.Contract(
 );
 
 app.use(helmet());
-app.use(bodyParser.json()); 
+//app.use(express.urlencoded())
 app.use(express.static("resources"));
 app.use(express.static("public"));
 
