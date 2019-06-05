@@ -392,7 +392,7 @@ global.contract = new web3.eth.Contract(
 );
 
 app.use(helmet());
-//app.use(express.urlencoded())
+app.use(express.urlencoded())
 app.use(express.static("resources"));
 app.use(express.static("public"));
 
