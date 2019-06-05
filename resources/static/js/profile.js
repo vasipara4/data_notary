@@ -441,8 +441,8 @@ window.addEventListener("load", () => {
     providerEtherJS
   );
 
-  // Download button with Ajax POST
-  $("#downloadForm").submit(function(event) {
+  // Generate signature
+  $("#generateSign").submit(function(event) {
     event.preventDefault();
     var downloadID = $("#downloadId").val();
     var signature = web3.eth.accounts.sign(
@@ -454,31 +454,9 @@ window.addEventListener("load", () => {
         : $("#digitalSignature").val()
     );
     $("#digitalSignature").val("");
-    var sendData = new FormData();
-    sendData.append("account", account);
-    sendData.append("id", downloadID);
-    sendData.append("signature", signature.signature);
-
-    $.ajax({
-      type: "POST",
-      enctype: "multipart/form-data",
-      contentType: false,
-      url: window.location.origin + "/api/sign/download",
-      data: sendData,
-      processData: false,
-      xhrFields: {
-        responseType: "blob"
-      },
-      success: function(response, status, xhr) {
-        var fileName = xhr
-          .getResponseHeader("Content-Disposition")
-          .split("=")[1];
-        var type = xhr.getResponseHeader("Content-Type");
-        var blob = new Blob([this.response], { type: type });
-        console.log(fileName);
-        downloadBlob(blob, fileName);
-      }
-    });
+    $("#digitalSignatureToPost").val(signature.signature);
+    $("idToPost").val(downloadID);
+    $("#downloadId").val("");
   });
 
   //Init Your Copyrights Wallet
