@@ -479,13 +479,15 @@ window.addEventListener("load", () => {
             emptyWallet = 0;
             var txHash, blockHash;
             var pendingId = items[2][i].toString();
-            $.each(stringsIDtxBlockHash, function(i, user) {
+            $.each(stringsIDtxBlockHash, function(index, user) {
               if (
                 user.id.toString() === pendingId ||
                 user.id.toString() === pendingId + account
               ) {
                 txHash = user.transactionHash;
                 blockHash = user.blockHash;
+                stringsIDtxBlockHash.splice(index,1);
+                console.log(stringsIDtxBlockHash);
                 return false;
               }
             });

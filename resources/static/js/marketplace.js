@@ -536,10 +536,11 @@ window.addEventListener("load", () => {
       var idOfItem = items[1][i].toString();
       var _isYours = items[2][i];
       var submitButton;
-      $.each(stringsTitleDescID, function(i, user) {
+      $.each(stringsTitleDescID, function(index, user) {
         if (user.id.toString() === idOfItem) {
           title = user.title;
           description = user.description;
+          stringsTitleDescID.splice(index,1);
           return false;
         }
       });
