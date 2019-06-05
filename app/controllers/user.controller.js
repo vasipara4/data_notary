@@ -1,4 +1,5 @@
 const UserModelDB = require("../models/user.model.js");
+const fs = require('fs');
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
@@ -16,6 +17,7 @@ exports.save = (req, res) => {
     dateServer > req.body.timestamp + 150
   ) {
     return res.status(400).send({
+      fs.unlink(__basedir + "/public" + url_file);
       message: "Error: POST timeout"
     });
   }
@@ -28,6 +30,7 @@ exports.save = (req, res) => {
 
   //Account must be a valid Ethereum Address
   if (!web3.utils.isAddress(req.body.submitter)) {
+    fs.unlink(__basedir + "/public" + url_file);
     return res.status(400).send({
       message: "Error"
     });
@@ -44,8 +47,24 @@ exports.save = (req, res) => {
     transactionHash: req.body.transactionHash,
     blockHash: req.body.blockHash
   });
+
+  if (
+    typeof req.body.title !== "string" ||
+    typeof req.body.description !== "string" ||
+    typeof req.body.gasUsed !== "string" ||
+    typeof req.body.transactionHash !== "string" ||
+    typeof req.body.blockHash !== "string"
+  ) {
+    fs.unlink(__basedir + "/public" + url_file);
+    return res.status(400).send({
+      message: "Error"
+    });
+  }
+
   var ethereumTimestamp;
-  contract.methods
+  contract.methods.dataExists(req.body.id).call({from:req.body.submitter}).then(function(result){
+    if(result){
+    contract.methods
     .getDataDetails(req.body.id)
     .call({ from: req.body.submitter })
     .then(function(result) {
@@ -69,7 +88,14 @@ exports.save = (req, res) => {
             message: err.message
           });
         });
-    });
+    });}
+    else{
+      fs.unlink(__basedir + "/public" + url_file);
+      return res.status(400).send({
+        message: "Error"
+      });
+    }
+  });
 };
 
 // Fetch all Users
@@ -113,7 +139,6 @@ exports.findStrings = (req, res) => {
       });
     });
 };
-
 
 exports.buy = (req, res) => {
   var url_file = "PurchasedItem";

@@ -181,6 +181,10 @@ global.contract = new web3.eth.Contract(
 			{
 				"name": "",
 				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -384,7 +388,7 @@ global.contract = new web3.eth.Contract(
 		"type": "function"
 	}
 ],
-  "0x023a7b6319ac7a5398013c56497ec9ebc8c911bd"
+  "0x74d304117d98f5baec8974200d34fc76acb7590f"
 );
 
 app.use(helmet());

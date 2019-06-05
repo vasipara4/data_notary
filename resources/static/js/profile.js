@@ -218,6 +218,10 @@ window.addEventListener("load", () => {
 			{
 				"name": "",
 				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -422,7 +426,7 @@ window.addEventListener("load", () => {
 	}
 ];
   //Web3 Init Contract
-  let contractAddress = "0x023a7b6319ac7a5398013c56497ec9ebc8c911bd";
+  let contractAddress = "0x74d304117d98f5baec8974200d34fc76acb7590f";
   const contract = new web3.eth.Contract(abi, contractAddress);
 
   //EtherJS SECTION
@@ -436,7 +440,6 @@ window.addEventListener("load", () => {
     abi,
     providerEtherJS
   );
-
 
   // Download button with Ajax POST
   $("#downloadForm").submit(function(event) {
@@ -463,12 +466,20 @@ window.addEventListener("load", () => {
       url: window.location.origin + "/api/sign/download",
       data: sendData,
       processData: false,
-      success: function(user) {
-        console.log(user);
+      xhrFields: {
+        responseType: "blob"
       },
-      error: function(e) {
-        alert("Error!");
-        console.log("ERROR: ", e);
+      success: function(response, status, xhr) {
+        var fileName = xhr
+          .getResponseHeader("Content-Disposition")
+          .split("=")[1];
+        console.log(fileName);
+        var a = document.createElement("a");
+        var url = window.URL.createObjectURL(response);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
       }
     });
   });
@@ -477,11 +488,11 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
-    $("#accountName").html("Account: "+account);
-    // const stringsIDtxBlockHash = await $.ajax({
-    //   type: "GET",
-    //   url: window.location.origin + "/api/users/strings"
-    // });
+    $("#accountName").html("Account: " + account);
+    const stringsIDtxBlockHash = await $.ajax({
+      type: "GET",
+      url: window.location.origin + "/api/users/strings"
+    });
     contractEtherJS
       .getOwnItems(account)
       .then(function(items) {
@@ -491,12 +502,15 @@ window.addEventListener("load", () => {
             emptyWallet = 0;
             var txHash, blockHash;
             var pendingId = items[2][i].toString();
-            // $.each(stringsIDtxBlockHash, function(i, user) {
-            //   if (user.id.toString() === pendingId || user.id.toString() === pendingId+account) {
-            //     txHash = user.transactionHash;
-            //     blockHash = user.blockHash;
-            //   }
-            // });
+            $.each(stringsIDtxBlockHash, function(i, user) {
+              if (
+                user.id.toString() === pendingId ||
+                user.id.toString() === pendingId + account
+              ) {
+                txHash = user.transactionHash;
+                blockHash = user.blockHash;
+              }
+            });
             var ipfsAddress =
               ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
                 ? "Empty"
@@ -517,6 +531,10 @@ window.addEventListener("load", () => {
                 ipfsAddress +
                 `</p><p>Date: ` +
                 unixTimeToDate(items[0][i].date.toString()) +
+                `</p><p>Transaction Hash: ` +
+                txHash +
+                `</p><p>Block Hash: ` +
+                blockHash +
                 `</p>`
             );
 
@@ -562,8 +580,8 @@ window.addEventListener("load", () => {
       .catch(e => console.log(e));
   });
 
-//convert Unix Time to Date
-    function unixTimeToDate(unix_timestamp) {
+  //convert Unix Time to Date
+  function unixTimeToDate(unix_timestamp) {
     var date = new Date(unix_timestamp * 1000);
     var day = "0" + date.getDate();
     var month = "0" + (date.getMonth() + 1);
