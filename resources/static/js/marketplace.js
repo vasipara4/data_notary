@@ -529,7 +529,7 @@ window.addEventListener("load", () => {
       url: window.location.origin + "/api/users/strings"
     });
     const items = await contractEtherJS.getItemsBuyable(account);
-
+    console.log(stringsTitleDescID);
     for (var i = 0; i < items[1].length; i++) {
       var title;
       var description;
@@ -540,6 +540,7 @@ window.addEventListener("load", () => {
         if (user.id.toString() === idOfItem) {
           title = user.title;
           description = user.description;
+          break;
         }
       });
       //if user hasn't added contents to our contract through our app => don't show his contents
@@ -577,14 +578,6 @@ window.addEventListener("load", () => {
     }
   })();
 
-  // DO GET
-  async function ajaxGet() {
-    const result = await $.ajax({
-      type: "GET",
-      url: window.location.origin + "/api/users/strings"
-    });
-    return result;
-  }
 });
 
 function printMarketplace(
