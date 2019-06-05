@@ -531,8 +531,9 @@ window.addEventListener("load", () => {
         contract.method
           .getDataShareFromAddressID(account, idRequest)
           .call({ from: account })
-          .then(function(result) {
-            formData.append("timestamp", result[1]);
+          .then(function(timestamp) {
+            formData.append("timestamp", timestamp[1]);
+            console.log("PRE AJAX");
             $.ajax({
               type: "POST",
               enctype: "multipart/form-data",

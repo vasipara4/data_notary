@@ -1,5 +1,5 @@
 const UserModelDB = require("../models/user.model.js");
-const fs = require('fs');
+const fs = require("fs");
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
@@ -62,40 +62,43 @@ exports.save = (req, res) => {
   }
 
   var ethereumTimestamp;
-  contract.methods.dataExists(req.body.id).call({from:req.body.submitter}).then(function(result){
-    if(result){
-    contract.methods
-    .getDataDetails(req.body.id)
+  contract.methods
+    .dataExists(req.body.id)
     .call({ from: req.body.submitter })
     .then(function(result) {
-      ethereumTimestamp = result[2];
+      if (result) {
+        contract.methods
+          .getDataDetails(req.body.id)
+          .call({ from: req.body.submitter })
+          .then(function(result) {
+            ethereumTimestamp = result[2];
 
-      //timestamp must be the same as in Ethereum
-      if (req.body.timestamp != ethereumTimestamp) {
+            //timestamp must be the same as in Ethereum
+            if (req.body.timestamp != ethereumTimestamp) {
+              return res.status(400).send({
+                message: "Valid Error"
+              });
+            }
+
+            // Save in the MongoDB
+            saveToDB
+              .save()
+              .then(data => {
+                res.send(data);
+              })
+              .catch(err => {
+                res.status(500).send({
+                  message: err.message
+                });
+              });
+          });
+      } else {
+        fs.unlink(__basedir + "/public" + url_file);
         return res.status(400).send({
-          message: "Valid Error"
+          message: "Error"
         });
       }
-
-      // Save in the MongoDB
-      saveToDB
-        .save()
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          res.status(500).send({
-            message: err.message
-          });
-        });
-    });}
-    else{
-      fs.unlink(__basedir + "/public" + url_file);
-      return res.status(400).send({
-        message: "Error"
-      });
-    }
-  });
+    });
 };
 
 // Fetch all Users
@@ -164,7 +167,7 @@ exports.buy = (req, res) => {
       message: "Error"
     });
   }
-console.log(req.body.gasUsed);
+  console.log(req.body.gasUsed);
   var id = req.body.id + req.body.submitter;
   // Create a new User model
   const saveToDBbuy = new UserModelDB({
