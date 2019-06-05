@@ -474,6 +474,7 @@ window.addEventListener("load", () => {
           .getResponseHeader("Content-Disposition")
           .split("=")[1];
         console.log(fileName);
+        response.addHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");
         var a = document.createElement("a");
         var url = window.URL.createObjectURL(response);
         a.href = url;
@@ -573,6 +574,21 @@ window.addEventListener("load", () => {
     var withdrawValueWei = $("#withdrawValueWei").val();
     contract.methods
       .withdrawFunds(withdrawValueWei)
+      .send({ from: account })
+      .then(function(res) {
+        location.reload();
+      })
+      .catch(e => console.log(e));
+  });
+
+  //Update Price button
+  $("#UpdateWeiForm").submit(function(event) {
+    // Prevent the form from submitting via the browser.
+    event.preventDefault();
+    var idOfFileUpdate = $("#idOfFileUpdate").val();
+    var newValueWei = $("#updateValueWei").val();
+    contract.methods
+      .()
       .send({ from: account })
       .then(function(res) {
         location.reload();

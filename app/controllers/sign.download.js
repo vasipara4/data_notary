@@ -1,5 +1,5 @@
 const FindFile = require("../models/user.model.js");
-const ethers = require('ethers');
+const ethers = require("ethers");
 const path = require("path");
 
 exports.download = (req, res) => {
@@ -42,9 +42,11 @@ exports.download = (req, res) => {
 
           FindFile.find({ id: id }).then(result => {
             var url = result[0].url;
-            console.log(result);
-            res.addHeader("Content-Disposition","attachment; filename=\"download."+path.extname(url)+"\"");
-            res.download( __basedir + "/public" + url, 'download'+ path.extname(url))
+            console.log("Download File");
+            res.download(
+              __basedir + "/public" + url,
+              "download" + path.extname(url)
+            );
           });
         });
     });
