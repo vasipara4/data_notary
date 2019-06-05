@@ -100,7 +100,6 @@ exports.save = (req, res) => {
 
 // Fetch all Users
 exports.findAll = (req, res) => {
-  console.log("Fetch all Users");
   var usersProjection = {
     __v: false,
     _id: false
@@ -119,7 +118,6 @@ exports.findAll = (req, res) => {
 
 // Fetch only Title/Desc/ID
 exports.findStrings = (req, res) => {
-  console.log("Fetch Title/Desc/ID");
   var usersProjection = {
     __v: false,
     _id: false,

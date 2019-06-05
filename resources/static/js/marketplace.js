@@ -445,7 +445,6 @@ window.addEventListener("load", () => {
   $("body").on("submit", ".formdataBuy", function submit(e) {
     e.preventDefault();
     var formId = $(this).attr("id"); //currentThis.id;
-    console.log(formId);
     var weiValueForm = formId + "Value";
     var idItemForm = formId + "ID";
     var idSubmit = formId + "Submit";

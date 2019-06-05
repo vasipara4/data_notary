@@ -42,7 +42,6 @@ window.addEventListener("load", () => {
     var networkIdPromise = web3.eth.net.getId(); // web3.version.network;
     Promise.all([networkIdPromise, accountsPromise])
       .then(function(result) {
-        //console.log(result[0]);
         networkVersion = result[0];
         var accounts = result[1];
         account = accounts[0];
@@ -79,11 +78,6 @@ window.addEventListener("load", () => {
     account = accounts[0];
   });
 
-  //console.log(web3.eth.net.getId());
-
-  /*web3.eth.getAccounts().then((f) => {
-    account = f[0];
-   });*/
 
   const contract = new web3.eth.Contract(
     [
@@ -502,7 +496,7 @@ window.addEventListener("load", () => {
                     );
                     elementLoading.classList.remove("running");
                   });
-                console.log(result);
+
               })
               .catch(function(error) {
                 $("#postResultDiv").html("");
@@ -594,7 +588,7 @@ window.addEventListener("load", () => {
               );
             });
         });
-        console.log("Success: ", result);
+
       },
       error: function(e) {
         $("#getResultDiv").html("<strong>Error</strong>");
@@ -610,7 +604,6 @@ window.addEventListener("load", () => {
     var testingData;
     var testingId = $("#verify_id").val();
     testingData = openFile("uploadTestFile");
-    console.log(testingData);
     Promise.all([openFile("uploadTestFile")]).then(function(result) {
       testingData = result[0];
       testingData = web3.utils.keccak256(testingData);
@@ -623,7 +616,7 @@ window.addEventListener("load", () => {
               .verifyHash(testingData, testingId)
               .call({ from: account })
               .then(function(result) {
-                //console.log(result);
+
                 if (result) {
                   contract.methods
                     .getDataDetails(testingId)
@@ -669,7 +662,7 @@ window.addEventListener("load", () => {
             .verifyHash(testingData, testingId)
             .call({ from: account })
             .then(function(result) {
-              //console.log(result);
+
               if (result) {
                 contract.methods
                   .getDataDetails(testingId)
@@ -729,7 +722,7 @@ window.addEventListener("load", () => {
                   $("#resultIPFS").html(
                     "<p>IPFS address: " + resultIPFS[0].hash + "</p>"
                   );
-                  console.log(resultIPFS);
+
                 })
                 .catch(function(error) {
                   ipfsElementLoading.classList.remove("running");

@@ -6,9 +6,6 @@ exports.download = (req, res) => {
   var id = req.body.id;
   var signature = req.body.digitalSignatureToPost;
   var account = req.body.account;
-  console.log(id);
-  console.log(signature);
-  console.log(account);
   if (typeof id != "string" || typeof account != "string") {
     return res.status(400).send({
       message: "Error"

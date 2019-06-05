@@ -456,7 +456,7 @@ window.addEventListener("load", () => {
     $("#digitalSignature").val("");
     $("#digitalSignatureToPost").val(signature.signature);
     $("#idToPost").val(downloadID);
-    $("#accountToPost").val(account);
+
     $("#downloadId").val("");
   });
 
@@ -464,6 +464,7 @@ window.addEventListener("load", () => {
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
+    $("#accountToPost").val(account);
     $("#accountName").html("Account: " + account);
     const stringsIDtxBlockHash = await $.ajax({
       type: "GET",
