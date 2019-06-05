@@ -464,6 +464,7 @@ window.addEventListener("load", () => {
       enctype: "multipart/form-data",
       url: window.location.origin + "/api/sign/download",
       data: sendData,
+      processData: false,
       xhrFields: {
         responseType: "blob"
       },
