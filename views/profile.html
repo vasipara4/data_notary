@@ -91,7 +91,7 @@
                 Generate Your Digital Signature
               </button>
             </form>
-              <form method="post" action="api/sign/download">
+              <form method="post" action="/api/sign/download" enctype="multipart/form-data">
                 <input type="text" name="id" id="idToPost" hidden>
                 <input type="text" name="account" id="accountToPost" hidden>
                   <label  for="digitalSignatureToPost">Your signature:</label>
