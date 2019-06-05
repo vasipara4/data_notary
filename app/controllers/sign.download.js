@@ -4,7 +4,7 @@ const path = require("path");
 
 exports.download = (req, res) => {
   var id = req.body.id;
-  var signature = req.body.signature;
+  var signature = req.body.digitalSignatureToPost;
   var account = req.body.account;
   if (typeof id != "string" || typeof account != "string") {
     return res.status(400).send({
@@ -44,7 +44,7 @@ exports.download = (req, res) => {
             var url = result[0].url;
             var fileName = "download" + path.extname(url);
             console.log("Download File");
-            res.set("Content-disposition", "attachment; filename=" + fileName);
+            //res.set("Content-disposition", "attachment; filename=" + fileName);
             res.download(__basedir + "/public" + url, fileName);
           });
         });

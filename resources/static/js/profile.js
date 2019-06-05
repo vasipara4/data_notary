@@ -455,7 +455,8 @@ window.addEventListener("load", () => {
     );
     $("#digitalSignature").val("");
     $("#digitalSignatureToPost").val(signature.signature);
-    $("idToPost").val(downloadID);
+    $("#idToPost").val(downloadID);
+    $("#accountToPost").val(account);
     $("#downloadId").val("");
   });
 
