@@ -462,6 +462,7 @@ window.addEventListener("load", () => {
     $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
+      contentType: false,
       url: window.location.origin + "/api/sign/download",
       data: sendData,
       processData: false,
