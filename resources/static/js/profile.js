@@ -685,13 +685,12 @@ window.addEventListener("load", () => {
     event.preventDefault();
     var idOfFileUpdate = $("#idOfFileUpdate").val();
     var newValueWei = $("#updateValueWei").val();
-    // contract.methods
-    //   .()
-    //   .send({ from: account })
-    //   .then(function(res) {
-    //     location.reload();
-    //   })
-    //   .catch(e => console.log(e));
+    contract.methods.updateWeiValue(idOfFileUpdate,newValueWei)
+      .send({ from: account })
+      .then(function(res) {
+        location.reload();
+      })
+      .catch(e => console.log(e));
   });
 
   //convert Unix Time to Date
