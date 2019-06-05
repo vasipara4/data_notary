@@ -586,7 +586,7 @@ window.addEventListener("load", () => {
 
         if (emptyWallet) {
           $("#showYourData").append(
-            `<li class="list-group-item"><strong>Wallet Empty of Original Files</strong></li>`
+            `<li class="list-group-item"><strong>No Original Files</strong></li>`
           );
           return;
         }
