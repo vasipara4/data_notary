@@ -43,6 +43,7 @@ exports.download = (req, res) => {
           FindFile.find({ id: id }).then(result => {
             var url = result[0].url;
             console.log(result);
+            res.addHeader("Content-Disposition","attachment; filename=\"download."path.extname(url)+"\"");
             res.download( __basedir + "/public" + url, 'download'+ path.extname(url))
           });
         });
