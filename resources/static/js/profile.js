@@ -462,10 +462,8 @@ window.addEventListener("load", () => {
     $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
-      contentType: false,
       url: window.location.origin + "/api/sign/download",
       data: sendData,
-      processData: false,
       xhrFields: {
         responseType: "blob"
       },
@@ -473,22 +471,10 @@ window.addEventListener("load", () => {
         var fileName = xhr
           .getResponseHeader("Content-Disposition")
           .split("=")[1];
-        var type = xhr.getResponseHeader('Content-Type');
+        var type = xhr.getResponseHeader("Content-Type");
         var blob = new Blob([this.response], { type: type });
         console.log(fileName);
-        var a = document.createElement("a");
-        var url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = fileName;
-        const clickHandler = () => {
-          setTimeout(() => {
-            //URL.revokeObjectURL(url);
-            window.URL.revokeObjectURL(url);
-            this.removeEventListener("click", clickHandler);
-          }, 150);
-        };
-        a.addEventListener("click", clickHandler, false);
-        a.click();
+        downloadBlob(blob, filename);
       }
     });
   });
@@ -634,3 +620,26 @@ window.addEventListener("load", () => {
     return formattedTime;
   }
 });
+
+function downloadBlob(blob, filename) {
+  // Create an object URL for the blob object
+  const url = URL.createObjectURL(blob);
+
+  // Create a new anchor element
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename || "download";
+
+  // Click handler that releases the object URL after the element has been clicked
+  // for one-off downloads of the blob content
+  const clickHandler = () => {
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+      this.removeEventListener("click", clickHandler);
+    }, 150);
+  };
+
+  //Α one-off download of the blob content
+  a.addEventListener("click", clickHandler, false);
+  a.click();
+}
