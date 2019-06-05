@@ -42,11 +42,10 @@ exports.download = (req, res) => {
 
           FindFile.find({ id: id }).then(result => {
             var url = result[0].url;
+            var fileName = "download" + path.extname(url);
             console.log("Download File");
-            res.download(
-              __basedir + "/public" + url,
-              "download" + path.extname(url)
-            );
+            res.set("Content-disposition", "attachment; filename=" + fileName);
+            res.download(__basedir + "/public" + url, fileName);
           });
         });
     });
