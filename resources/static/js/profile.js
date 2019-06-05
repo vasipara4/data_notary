@@ -476,7 +476,7 @@ window.addEventListener("load", () => {
         var type = xhr.getResponseHeader("Content-Type");
         var blob = new Blob([this.response], { type: type });
         console.log(fileName);
-        downloadBlob(blob, filename);
+        downloadBlob(blob, fileName);
       }
     });
   });
