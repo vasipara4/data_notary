@@ -41,15 +41,7 @@ window.addEventListener("load", () => {
     account = accounts[0];
   });
 
-  /*web3.currentProvider.publicConfigStore.on('update', function(accountsChanged){
-    account = accountsChanged;
-  });
 
-  //console.log(web3.eth.net.getId());
-
-  /*web3.eth.getAccounts().then((f) => {
-    account = f[0];
-   });*/
   let abi = [
     {
       constant: false,
@@ -528,12 +520,11 @@ window.addEventListener("load", () => {
         formData.append("transactionHash", result.transactionHash);
         formData.append("blockHash", result.blockHash);
         formData.append("gasUsed", result.gasUsed);
-        contract.method
+        contract.methods
           .getDataShareFromAddressID(account, idRequest)
           .call({ from: account })
           .then(function(timestamp) {
             formData.append("timestamp", timestamp[1]);
-            console.log("PRE AJAX");
             $.ajax({
               type: "POST",
               enctype: "multipart/form-data",
