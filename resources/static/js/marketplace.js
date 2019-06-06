@@ -658,12 +658,12 @@ function printMarketplace(
   valueWei,
   submitButton
 ) {
-  if (i % 3 === 0) $("#marketplaceContainer").append(`<div class="row">`);
+  if (i % 3 === 0) $("#marketplaceContainer").append(`<div class="row" style="display:flex;flex-direction:row;">`);
   $("#marketplaceContainer").append(
     `<div class="col-sm-4">
     <form id="buyItem` +
       i +
-      `" class="formdataBuy" ${_isYours}> <div class="card card-price equal">
+      `" class="formdataBuy" ${_isYours}> <div class="card card-price">
       <div class="card-img"></div><div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
       Extra Content (IPFS):  ${ipfsAddress}  </li><li> Date Inserted: ` +
       date +
