@@ -493,7 +493,7 @@ window.addEventListener("load", () => {
     }
   ];
   //Web3 Init Contract
-  let contractAddress = "0xd4d7d130ddf67ece9702ab6b008655ebb8a67fe0";
+  let contractAddress = "0x16b969018717c3fc0e34522f1bf928b6e4f3a95b";
   const contract = new web3.eth.Contract(abi, contractAddress);
 
   //EtherJS SECTION
@@ -549,8 +549,8 @@ window.addEventListener("load", () => {
           var txHash = "";
           var blockHash = "";
           var idFromEthereumCall = items[2][i].toString();
-          console.log(idFromEthereumCall);
           console.log(items[2][i].toString());
+          console.log(idFromEthereumCall);
           $.each(stringsIDtxBlockHash, function(index, user) {
             if (user.id.toString() === idFromEthereumCall) {
               txHash = user.transactionHash;

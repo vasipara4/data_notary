@@ -150,7 +150,7 @@ contract Data {
       if(idToData[idIndexes[i]].submitter == _owner){
         items[localId]= idToData[idIndexes[i]];
         _isNotEmpty[localId] = true;
-        _id[i]=idIndexes[localId];
+        _id[localId]=idIndexes[i];
         localId++;
       }
     }
