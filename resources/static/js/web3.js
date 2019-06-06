@@ -758,26 +758,6 @@ window.addEventListener("load", () => {
       });
   });
 
-  //ID Generator
-  function generateID(){
-    var idRequest;
-    var idExist = 1;
-    idRequest = ethers.utils.randomBytes(32);
-    idRequest = ethers.utils.bigNumberify(idRequest);
-    idRequest = idRequest.toString();
-    console.log(idRequest);
-    // do {
-    //   contracts.methods.dataExists(idRequest).call({from: account}).then(function(result){
-    //     if(!result) idExist = 0;
-    //   });
-    // } while (idExist);
-    $("#id").val(idRequest);
-    return;
-  }
-
-
-
-
 
   //IPFS ADD FILES
   $("#IPFSform").submit(function(event) {
@@ -881,8 +861,19 @@ function printGetResultDiv(
   );
 }
 
-function generateNewID() {
-  // do{
-  //
-  // }while();
+//ID Generator
+function generateID(){
+  var idRequest;
+  var idExist = 1;
+  idRequest = ethers.utils.randomBytes(32);
+  idRequest = ethers.utils.bigNumberify(idRequest);
+  idRequest = idRequest.toString();
+  console.log(idRequest);
+  // do {
+  //   contracts.methods.dataExists(idRequest).call({from: account}).then(function(result){
+  //     if(!result) idExist = 0;
+  //   });
+  // } while (idExist);
+  $("#id").val(idRequest);
+  return;
 }
