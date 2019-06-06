@@ -525,7 +525,7 @@ window.addEventListener("load", () => {
   );
 
   //ID Generator
-  function generateID() {
+  $('#generatorButton').on('click', function(event){
     var idRequest;
     var idExist = 1;
     do {
@@ -541,7 +541,7 @@ window.addEventListener("load", () => {
     } while (idExist);
     $("#id").val(idRequest);
     return;
-  }
+});
 
   //POST Ethereum & Db
   $("#userForm").submit(function(event) {
