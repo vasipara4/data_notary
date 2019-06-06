@@ -636,7 +636,7 @@ window.addEventListener("load", () => {
         $.each(result, function(i, user) {
           var addressIPFS = "";
           contract.methods
-            .getDataAddressIPFS(user.id.toString())
+            .getDataAddressIPFS(user.id.split('0x'))
             .call({ from: account })
             .then(function(result) {
               addressIPFS =
@@ -647,7 +647,7 @@ window.addEventListener("load", () => {
               printGetResultDiv(
                 user.submitter,
                 user.gasUsed,
-                user.id,
+                user.id.split('0x'),
                 user.url,
                 user.description,
                 addressIPFS,
