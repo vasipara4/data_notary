@@ -78,471 +78,470 @@ window.addEventListener("load", () => {
     account = accounts[0];
   });
 
-
   const contract = new web3.eth.Contract(
     [
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawFunds",
-		"outputs": [
-			{
-				"name": "success",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "getItemsPurchased",
-		"outputs": [
-			{
-				"components": [
-					{
-						"name": "submitter",
-						"type": "address"
-					},
-					{
-						"name": "data",
-						"type": "uint256"
-					},
-					{
-						"name": "date",
-						"type": "uint256"
-					},
-					{
-						"name": "valueWei",
-						"type": "uint256"
-					},
-					{
-						"name": "addressIPFS",
-						"type": "bytes32[2]"
-					}
-				],
-				"name": "",
-				"type": "tuple[]"
-			},
-			{
-				"name": "",
-				"type": "bool[]"
-			},
-			{
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_data",
-				"type": "uint256"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			},
-			{
-				"name": "_valueWei",
-				"type": "uint256"
-			}
-		],
-		"name": "dataWrite",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "dataIsYourData",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getDataAddressIPFS",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bytes32"
-			},
-			{
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_addressIPFS",
-				"type": "bytes32[2]"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "addAddressIPFS",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "getOwnItems",
-		"outputs": [
-			{
-				"components": [
-					{
-						"name": "submitter",
-						"type": "address"
-					},
-					{
-						"name": "data",
-						"type": "uint256"
-					},
-					{
-						"name": "date",
-						"type": "uint256"
-					},
-					{
-						"name": "valueWei",
-						"type": "uint256"
-					},
-					{
-						"name": "addressIPFS",
-						"type": "bytes32[2]"
-					}
-				],
-				"name": "",
-				"type": "tuple[]"
-			},
-			{
-				"name": "",
-				"type": "bool[]"
-			},
-			{
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getDataShareFromAddressID",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_data",
-				"type": "uint256"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "verifyHash",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "dataExists",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "takeCopyrights",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			},
-			{
-				"name": "_valueWei",
-				"type": "uint256"
-			}
-		],
-		"name": "updateWeiValue",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getTimestamp",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "getDataDetails",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "bytes32"
-			},
-			{
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getNumBuyable",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "getItemsBuyable",
-		"outputs": [
-			{
-				"components": [
-					{
-						"name": "submitter",
-						"type": "address"
-					},
-					{
-						"name": "data",
-						"type": "uint256"
-					},
-					{
-						"name": "date",
-						"type": "uint256"
-					},
-					{
-						"name": "valueWei",
-						"type": "uint256"
-					},
-					{
-						"name": "addressIPFS",
-						"type": "bytes32[2]"
-					}
-				],
-				"name": "",
-				"type": "tuple[]"
-			},
-			{
-				"name": "",
-				"type": "uint256[]"
-			},
-			{
-				"name": "",
-				"type": "bool[]"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_from",
-				"type": "address"
-			}
-		],
-		"name": "getBalance",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	}
-],
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "amount",
+            type: "uint256"
+          }
+        ],
+        name: "withdrawFunds",
+        outputs: [
+          {
+            name: "success",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_owner",
+            type: "address"
+          }
+        ],
+        name: "getItemsPurchased",
+        outputs: [
+          {
+            components: [
+              {
+                name: "submitter",
+                type: "address"
+              },
+              {
+                name: "data",
+                type: "uint256"
+              },
+              {
+                name: "date",
+                type: "uint256"
+              },
+              {
+                name: "valueWei",
+                type: "uint256"
+              },
+              {
+                name: "addressIPFS",
+                type: "bytes32[2]"
+              }
+            ],
+            name: "",
+            type: "tuple[]"
+          },
+          {
+            name: "",
+            type: "bool[]"
+          },
+          {
+            name: "",
+            type: "uint256[]"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "_data",
+            type: "uint256"
+          },
+          {
+            name: "_id",
+            type: "uint256"
+          },
+          {
+            name: "_valueWei",
+            type: "uint256"
+          }
+        ],
+        name: "dataWrite",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "dataIsYourData",
+        outputs: [
+          {
+            name: "",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getDataAddressIPFS",
+        outputs: [
+          {
+            name: "",
+            type: "bytes32"
+          },
+          {
+            name: "",
+            type: "bytes32"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "_addressIPFS",
+            type: "bytes32[2]"
+          },
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "addAddressIPFS",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_owner",
+            type: "address"
+          }
+        ],
+        name: "getOwnItems",
+        outputs: [
+          {
+            components: [
+              {
+                name: "submitter",
+                type: "address"
+              },
+              {
+                name: "data",
+                type: "uint256"
+              },
+              {
+                name: "date",
+                type: "uint256"
+              },
+              {
+                name: "valueWei",
+                type: "uint256"
+              },
+              {
+                name: "addressIPFS",
+                type: "bytes32[2]"
+              }
+            ],
+            name: "",
+            type: "tuple[]"
+          },
+          {
+            name: "",
+            type: "bool[]"
+          },
+          {
+            name: "",
+            type: "uint256[]"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_owner",
+            type: "address"
+          },
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getDataShareFromAddressID",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          },
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_data",
+            type: "uint256"
+          },
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "verifyHash",
+        outputs: [
+          {
+            name: "",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "dataExists",
+        outputs: [
+          {
+            name: "",
+            type: "bool"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "takeCopyrights",
+        outputs: [],
+        payable: true,
+        stateMutability: "payable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          },
+          {
+            name: "_valueWei",
+            type: "uint256"
+          }
+        ],
+        name: "updateWeiValue",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getTimestamp",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_id",
+            type: "uint256"
+          }
+        ],
+        name: "getDataDetails",
+        outputs: [
+          {
+            name: "",
+            type: "address"
+          },
+          {
+            name: "",
+            type: "uint256"
+          },
+          {
+            name: "",
+            type: "uint256"
+          },
+          {
+            name: "",
+            type: "uint256"
+          },
+          {
+            name: "",
+            type: "bytes32"
+          },
+          {
+            name: "",
+            type: "bytes32"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: "getNumBuyable",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_owner",
+            type: "address"
+          }
+        ],
+        name: "getItemsBuyable",
+        outputs: [
+          {
+            components: [
+              {
+                name: "submitter",
+                type: "address"
+              },
+              {
+                name: "data",
+                type: "uint256"
+              },
+              {
+                name: "date",
+                type: "uint256"
+              },
+              {
+                name: "valueWei",
+                type: "uint256"
+              },
+              {
+                name: "addressIPFS",
+                type: "bytes32[2]"
+              }
+            ],
+            name: "",
+            type: "tuple[]"
+          },
+          {
+            name: "",
+            type: "uint256[]"
+          },
+          {
+            name: "",
+            type: "bool[]"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "_from",
+            type: "address"
+          }
+        ],
+        name: "getBalance",
+        outputs: [
+          {
+            name: "",
+            type: "uint256"
+          }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      }
+    ],
     "0x16b969018717c3fc0e34522f1bf928b6e4f3a95b"
   );
 
-
   //ID Generator
-  function generateID(){
+  function generateID() {
     var idRequest;
     var idExist = 1;
-    idRequest = ethers.utils.randomBytes(32);
-    idRequest = ethers.utils.bigNumberify(idRequest);
-    idRequest = idRequest.toString();
     do {
-      contracts.methods.dataExists(idRequest).call({from: account}).then(function(result){
-        if(!result) idExist = 0;
-      });
+      idRequest = ethers.utils.randomBytes(32);
+      idRequest = ethers.utils.bigNumberify(idRequest);
+      idRequest = idRequest.toString();
+      contracts.methods
+        .dataExists(idRequest)
+        .call({ from: account })
+        .then(function(result) {
+          if (!result) idExist = 0;
+        });
     } while (idExist);
     $("#id").val(idRequest);
     return;
   }
-
-
 
   //POST Ethereum & Db
   $("#userForm").submit(function(event) {
@@ -582,7 +581,6 @@ window.addEventListener("load", () => {
                     );
                     elementLoading.classList.remove("running");
                   });
-
               })
               .catch(function(error) {
                 $("#postResultDiv").html("");
@@ -654,7 +652,7 @@ window.addEventListener("load", () => {
         $("#getResultDiv").empty();
         $.each(result, function(i, user) {
           var addressIPFS = "";
-          var idOfDB = user.id.split('0x');
+          var idOfDB = user.id.split("0x");
           contract.methods
             .getDataAddressIPFS(idOfDB[0])
             .call({ from: account })
@@ -675,7 +673,6 @@ window.addEventListener("load", () => {
               );
             });
         });
-
       },
       error: function(e) {
         $("#getResultDiv").html("<strong>Error</strong>");
@@ -703,7 +700,6 @@ window.addEventListener("load", () => {
               .verifyHash(testingData, testingId)
               .call({ from: account })
               .then(function(result) {
-
                 if (result) {
                   contract.methods
                     .getDataDetails(testingId)
@@ -749,7 +745,6 @@ window.addEventListener("load", () => {
             .verifyHash(testingData, testingId)
             .call({ from: account })
             .then(function(result) {
-
               if (result) {
                 contract.methods
                   .getDataDetails(testingId)
@@ -776,7 +771,6 @@ window.addEventListener("load", () => {
         } else $("#getVerifyHashDiv").html("Data Integrity: ID doesn't exists");
       });
   });
-
 
   //IPFS ADD FILES
   $("#IPFSform").submit(function(event) {
@@ -810,7 +804,6 @@ window.addEventListener("load", () => {
                   $("#resultIPFS").html(
                     "<p>IPFS address: " + resultIPFS[0].hash + "</p>"
                   );
-
                 })
                 .catch(function(error) {
                   ipfsElementLoading.classList.remove("running");
