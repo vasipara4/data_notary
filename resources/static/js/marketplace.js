@@ -662,9 +662,9 @@ function printMarketplace(
 ) {
   if (i % 3 === 0)
     $("#marketplaceContainer").append(
-      `<div class="row" style="display:flex;flex-direction:row;">`
+      `<div class="row" id="row${i}" style="display:flex;flex-direction:row;">`
     );
-  $("#marketplaceContainer").append(
+  $(`#row${i}`).append(
     `<div class="col-sm-4">
     <form id="buyItem` +
       i +
