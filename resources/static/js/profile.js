@@ -610,9 +610,9 @@ window.addEventListener("load", () => {
           emptyWallet = 0;
           var txHash = "";
           var blockHash = "";
-          var idFromEthereumCall = items[2][i].toString();
+          var idFromEthereumCallPurchased = items[2][i].toString();
           $.each(stringsIDtxBlockHash, function(index, user) {
-            if (user.id.toString() === idFromEthereumCall + account) {
+            if (user.id.toString() === idFromEthereumCallPurchased + account) {
               txHash = user.transactionHash;
               blockHash = user.blockHash;
               stringsIDtxBlockHash.splice(index, 1);
@@ -629,7 +629,7 @@ window.addEventListener("load", () => {
           var valueWei = "Notary Mode (Purchased)";
           $("#showYourData").append(
             `<li class="list-group-item"><p>ID:` +
-              idFromEthereumCall +
+              idFromEthereumCallPurchased +
               `</p><p>Data hash: ` +
               items[0][i].data.toHexString() +
               `</p><p>Price: ` +
