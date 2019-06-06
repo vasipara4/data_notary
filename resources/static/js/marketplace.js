@@ -41,7 +41,6 @@ window.addEventListener("load", () => {
     account = accounts[0];
   });
 
-
   let abi = [
     {
       constant: false,
@@ -580,7 +579,7 @@ window.addEventListener("load", () => {
       year;
     return formattedTime;
   }
-
+  const miletusIPFS = "http://miletus.dynu.net:8080/ipfs/";
   //Calculate Marketplace Variables
   (async function() {
     account = await web3.eth.getAccounts();
@@ -618,11 +617,18 @@ window.addEventListener("load", () => {
       var ownerOfData = items[0][i].submitter;
       var data = items[0][i].data.toHexString();
       var date = unixTimeToDate(items[0][i].date.toString());
+      const ipfsAddressPart =
+        ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) +
+        ethers.utils.parseBytes32String(items[0][i].addressIPFS[1]);
       var ipfsAddress =
         ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
           ? "Empty"
-          : ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) +
-            ethers.utils.parseBytes32String(items[0][i].addressIPFS[1]);
+          : `<a href="` +
+            miletusIPFS +
+            ipfsAddressPart +
+            `">` +
+            ipfsAddressPart +
+            `</a>`;
       var valueWei = items[0][i].valueWei.toString();
       printMarketplace(
         i,
@@ -659,9 +665,7 @@ function printMarketplace(
       i +
       `" class="formdataBuy" ${_isYours}> <div class="card card-price">
       <div class="card-img"></div><div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
-      Extra Content (IPFS): ` +
-      ipfsAddress +
-      `</li><li> Date Inserted: ` +
+      Extra Content (IPFS):  ${ipfsAddress}  </li><li> Date Inserted: ` +
       date +
       `</li><li> Owner: ${_owner}</li><li>ID of File: ` +
       `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
