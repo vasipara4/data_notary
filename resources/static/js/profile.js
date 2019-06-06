@@ -549,11 +549,13 @@ window.addEventListener("load", () => {
           var txHash = "";
           var blockHash = "";
           var idFromEthereumCall = items[2][i].toString();
+          console.log(idFromEthereumCall);
+          console.log(items[2][i].toString());
           $.each(stringsIDtxBlockHash, function(index, user) {
             if (user.id.toString() === idFromEthereumCall) {
               txHash = user.transactionHash;
               blockHash = user.blockHash;
-              //stringsIDtxBlockHash.splice(index, 1);
+              stringsIDtxBlockHash.splice(index, 1);
               return false;
             }
           });
@@ -615,7 +617,7 @@ window.addEventListener("load", () => {
             if (user.id.toString() === idFromEthereumCallPurchased + account) {
               txHash = user.transactionHash;
               blockHash = user.blockHash;
-              //stringsIDtxBlockHash.splice(index, 1);
+              stringsIDtxBlockHash.splice(index, 1);
               return false;
             }
           });
