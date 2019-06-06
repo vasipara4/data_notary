@@ -664,7 +664,7 @@ function printMarketplace(
     $("#marketplaceContainer").append(
       `<div class="row" id="row${i}" style="display:flex;flex-direction:row;">`
     );
-  $(`#row${i}`).append(
+  $(`#row${i/3}`).append(
     `<div class="col-sm-4">
     <form id="buyItem` +
       i +
