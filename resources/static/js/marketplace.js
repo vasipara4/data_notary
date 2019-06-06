@@ -631,7 +631,7 @@ window.addEventListener("load", () => {
             `</a>`;
       var valueWei = items[0][i].valueWei.toString();
       printMarketplace(
-        i,
+        i, items[1].length,
         _isYours,
         ownerOfData,
         title,
@@ -647,7 +647,7 @@ window.addEventListener("load", () => {
 });
 
 function printMarketplace(
-  i,
+  i,length,
   _isYours,
   _owner,
   title,
@@ -676,4 +676,5 @@ function printMarketplace(
       </div></div></form></div>`
   );
   if (i % 3 === 2) $("#marketplaceContainer").append(`</div>`);
+  if (i === length -1 &&  i % 3 !== 2)  $("#marketplaceContainer").append(`</div>`);
 }
