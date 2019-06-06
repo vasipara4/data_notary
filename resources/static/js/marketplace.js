@@ -623,7 +623,7 @@ window.addEventListener("load", () => {
       var ipfsAddress =
         ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
           ? "Empty"
-          : `<a href="` +
+          : `<a target="_blank" href="` +
             miletusIPFS +
             ipfsAddressPart +
             `">` +
