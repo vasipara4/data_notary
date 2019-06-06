@@ -532,7 +532,7 @@ window.addEventListener("load", () => {
       idRequest = ethers.utils.randomBytes(32);
       idRequest = ethers.utils.bigNumberify(idRequest);
       idRequest = idRequest.toString();
-      contracts.methods
+      contract.methods
         .dataExists(idRequest)
         .call({ from: account })
         .then(function(result) {
