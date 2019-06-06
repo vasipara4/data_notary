@@ -660,7 +660,7 @@ function printMarketplace(
 ) {
   if (i % 3 === 0) $("#marketplaceContainer").append(`<div class="row">`);
   $("#marketplaceContainer").append(
-    `<div class="col-sm-4 row-eq-height">
+    `<div class="col-sm-4 row row-eq-height">
     <form id="buyItem` +
       i +
       `" class="formdataBuy" ${_isYours}> <div class="card card-price">
