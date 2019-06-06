@@ -525,6 +525,25 @@ window.addEventListener("load", () => {
     "0x16b969018717c3fc0e34522f1bf928b6e4f3a95b"
   );
 
+
+  //ID Generator
+  function generateID(){
+    var idRequest;
+    var idExist = 1;
+    idRequest = ethers.utils.randomBytes(32);
+    idRequest = ethers.utils.bigNumberify(idRequest);
+    idRequest = idRequest.toString();
+    do {
+      contracts.methods.dataExists(idRequest).call({from: account}).then(function(result){
+        if(!result) idExist = 0;
+      });
+    } while (idExist);
+    $("#id").val(idRequest);
+    return;
+  }
+
+
+
   //POST Ethereum & Db
   $("#userForm").submit(function(event) {
     // Prevent the form from submitting via the browser.
@@ -859,21 +878,4 @@ function printGetResultDiv(
       unixTimeToDate(_timestamp) +
       "</div></div>"
   );
-}
-
-//ID Generator
-function generateID(){
-  var idRequest;
-  var idExist = 1;
-  idRequest = ethers.utils.randomBytes(32);
-  idRequest = ethers.utils.bigNumberify(idRequest);
-  idRequest = idRequest.toString();
-  console.log(idRequest);
-  // do {
-  //   contracts.methods.dataExists(idRequest).call({from: account}).then(function(result){
-  //     if(!result) idExist = 0;
-  //   });
-  // } while (idExist);
-  $("#id").val(idRequest);
-  return;
 }
