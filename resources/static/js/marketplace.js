@@ -668,7 +668,7 @@ function printMarketplace(
   $(`#row${parseInt(i/3)}`).append(
     `<form id="buyItem` +
       i +
-      `" class="formdataBuy" ${_isYours}> <div class="card card-price" style="display:flex;flex-direction:row;">
+      `" class="formdataBuy" ${_isYours}> <div class="card card-price" style="display:flex;flex-direction:column;">
       <div class="card-img"></div><div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
       Extra Content (IPFS):  ${ipfsAddress}  </li><li> Date Inserted: ` +
       date +
