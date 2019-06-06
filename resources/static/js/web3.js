@@ -827,7 +827,7 @@ async function openFile(id) {
   var readfile = new Promise((resolve, reject) => {
     let fr = new FileReader();
     fr.onload = x => resolve(fr.result);
-    fr.readAsText(input); // or readAsText(file) to get raw content
+    fr.readAsArrayBuffer(input); // or readAsText(file) to get raw content
   });
   var result = await readfile;
   return result;
