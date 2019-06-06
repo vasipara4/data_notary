@@ -525,23 +525,22 @@ window.addEventListener("load", () => {
   );
 
   //ID Generator
-  $('#generatorButton').on('click', function(event){
+  $("#generatorButton").on("click", function(event) {
     var idRequest;
-    var idExist = 1;
-    do {
-      idRequest = ethers.utils.randomBytes(32);
-      idRequest = ethers.utils.bigNumberify(idRequest);
-      idRequest = idRequest.toString();
-      contract.methods
-        .dataExists(idRequest)
-        .call({ from: account })
-        .then(function(result) {
-          if (!result) idExist = 0;
-        });
-    } while (idExist);
-    $("#id").val(idRequest);
-    return;
-});
+    var idExist;
+    (async function() {
+      do {
+        idRequest = ethers.utils.randomBytes(32);
+        idRequest = ethers.utils.bigNumberify(idRequest);
+        idRequest = idRequest.toString();
+        idExist = await contract.methods
+          .dataExists(idRequest)
+          .call({ from: account });
+      } while (idExist);
+      $("#id").val(idRequest);
+      return;
+    })();
+  });
 
   //POST Ethereum & Db
   $("#userForm").submit(function(event) {
