@@ -553,7 +553,7 @@ window.addEventListener("load", () => {
             if (user.id.toString() === idFromEthereumCall) {
               txHash = user.transactionHash;
               blockHash = user.blockHash;
-              stringsIDtxBlockHash.splice(index, 1);
+              //stringsIDtxBlockHash.splice(index, 1);
               return false;
             }
           });
@@ -615,7 +615,7 @@ window.addEventListener("load", () => {
             if (user.id.toString() === idFromEthereumCallPurchased + account) {
               txHash = user.transactionHash;
               blockHash = user.blockHash;
-              stringsIDtxBlockHash.splice(index, 1);
+              //stringsIDtxBlockHash.splice(index, 1);
               return false;
             }
           });
