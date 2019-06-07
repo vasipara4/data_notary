@@ -662,7 +662,7 @@ function printMarketplace(
 ) {
   if (i % 3 === 0)
     $("#marketplaceContainer").append(
-      `<div class="row is-flex" id="row${i}" >`
+      `<div class="row is-flex" id="row${parseInt(i/3)}" >`
     );
   $(`#row${parseInt(i/3)}`).append(
     `<div class="col-sm-4">
