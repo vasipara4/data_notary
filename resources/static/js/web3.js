@@ -828,7 +828,7 @@ async function openFile(id) {
   var input = document.getElementById(id).files[0];
   var readfile = new Promise((resolve, reject) => {
     let fr = new FileReader();
-    fr.onload = x => {var arrayBuffer = fr.result
+    fr.onload = x => {var arrayBuffer = fr.result;
       var bytes = new Uint8Array(arrayBuffer);
       resolve(bytes);
     }
