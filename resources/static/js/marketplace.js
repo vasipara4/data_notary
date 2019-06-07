@@ -660,9 +660,9 @@ function printMarketplace(
   valueWei,
   submitButton
 ) {
-  if (i % 3 === 0)
+  if (i === 0)
     $("#marketplaceContainer").append(
-      `<div id="row" >`
+      `<div class="row" id="row" >`
     );
   $(`#row`).append(
     `<div class="col-sm-4">
@@ -681,10 +681,9 @@ function printMarketplace(
       </div></div> </form></div>`
   );
 
-  if (i % 3 === 2) $("#marketplaceContainer").append(`</div>`);
-  if (i === length - 1){
-    $(`#row`).append(`<div class="col-sm-4">`;
-    $(`#row`).append(`<div class="col-sm-4">`;
-    $(`#row`).append(`<div class="col-sm-4">`;
+  if (i === length - 1  ){
+    $(`#row`).append(`<div class="col-sm-4"></div>`;
+    $(`#row`).append(`<div class="col-sm-4"></div>`;
+    $(`#row`).append(`<div class="col-sm-4"></div>`;
     $("#marketplaceContainer").append(`</div>`);}
 }
