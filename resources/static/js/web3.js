@@ -557,7 +557,7 @@ window.addEventListener("load", () => {
       fileArrayBuffer = new Uint8Array(fileArrayBuffer);
       fileArrayBuffer = ethers.utils.bigNumberify(fileArrayBuffer);
       console.log(fileArrayBuffer);
-      fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer.toString());
+      //fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer.toString());
       contract.methods
         .dataExists($("#id").val())
         .call({ from: account })
