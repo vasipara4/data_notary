@@ -550,11 +550,13 @@ window.addEventListener("load", () => {
     var id_val = $("#id").val();
     console.log(id_val);
     var weiValue = $("#weiValue").val();
-    var txtFileAsString; // = openFile();
+    var fileArrayBuffer; // = openFile();
 
     Promise.all([openFile("file")]).then(function(result) {
-      txtFileAsString = result[0];
-      txtFileAsString = web3.utils.keccak256(txtFileAsString);
+      fileArrayBuffer = result[0];
+      fileArrayBuffer = new Uint8Array(fileArrayBuffer);
+      fileArrayBuffer = ethers.utils.bigNumberify(fileArrayBuffer);
+      fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer);
       contract.methods
         .dataExists($("#id").val())
         .call({ from: account })
@@ -565,7 +567,7 @@ window.addEventListener("load", () => {
             );
             elementLoading.classList.add("running");
             contract.methods
-              .dataWrite(txtFileAsString, id_val, weiValue)
+              .dataWrite(fileArrayBuffer, id_val, weiValue)
               .send({ from: account })
               .then(function(result) {
                 contract.methods
