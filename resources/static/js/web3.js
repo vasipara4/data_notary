@@ -555,13 +555,13 @@ window.addEventListener("load", () => {
     Promise.all([openFile("file")]).then(function(result) {
       fileArrayBuffer = result[0];
       console.log(fileArrayBuffer);
-      fileArrayBuffer = new Uint8Array(fileArrayBuffer);
-      console.log(fileArrayBuffer);
       fileArrayBuffer = ethers.utils.bigNumberify(fileArrayBuffer);
       console.log(fileArrayBuffer);
-      //fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer.toString());
+      fileArrayBuffer = fileArrayBuffer.toString();
+      console.log(fileArrayBuffer);
+           //fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer.toString());
       contract.methods
-        .dataExists($("#id").val())
+        .dataExists(id_val)
         .call({ from: account })
         .then(function(result) {
           if (result == false) {
