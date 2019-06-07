@@ -665,7 +665,7 @@ function printMarketplace(
       `<div class="row" id="row${i}" style="display:flex; flex-wrap: wrap;align-content: space-between;">`
     );
   $(`#row${parseInt(i/3)}`).append(
-    `<div class="col-sm-4 card card-price" style="flex-grow: 1;justify-content: space-between;">
+    `<div class="col-sm-4 card card-price col-md-offset-2" style="flex-grow: 1;justify-content: space-between;">
     <form id="buyItem` +
       i +
       `" class="formdataBuy" ${_isYours}>
