@@ -548,19 +548,12 @@ window.addEventListener("load", () => {
     event.preventDefault();
     var elementLoading = document.getElementById("insertLoading");
     var id_val = $("#id").val();
-    console.log(id_val);
     var weiValue = $("#weiValue").val();
     var fileArrayBuffer; // = openFile();
 
     Promise.all([openFile("file")]).then(function(result) {
       fileArrayBuffer = result[0];
-      console.log(fileArrayBuffer);
       fileArrayBuffer= ethers.utils.keccak256(fileArrayBuffer);
-      //fileArrayBuffer = ethers.utils.bigNumberify(fileArrayBuffer);
-      console.log(fileArrayBuffer);
-      // fileArray = fileArrayBuffer.toString();
-      // console.log(fileArray);
-           //fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer.toString());
       contract.methods
         .dataExists(id_val)
         .call({ from: account })

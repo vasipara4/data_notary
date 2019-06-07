@@ -47,9 +47,9 @@
             <input type="text" class="form-control" name="description" id="description" placeholder="Enter file's description" required />
           </div>
           <div class="form-group">
-            <label for="file">Text file <font size="2">(size limit 16MB)</font>:
+            <label for="file">File <font size="2">(size limit 16MB):</font>:
             </label>
-            <input type="file" name="file" id="file" onchange="showFileName()" accept="text/plain" required />
+            <input type="file" name="file" id="file" onchange="showFileName()" required />
             <label for="file" class="btn-1">Upload</label>
             <div id="file-upload-filename"></div>
           </div>
@@ -95,7 +95,7 @@
         <form id="verifyForm">
           <div class="form-group">
             <label for="uploadTestFile">Text file:</label>
-            <input type="file" id="uploadTestFile" accept="text/plain" required />
+            <input type="file" id="uploadTestFile" required />
             <label for="uploadTestFile" class="btn-1">Upload</label>
           </div>
           <div class="form-group">
