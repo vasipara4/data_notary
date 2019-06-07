@@ -662,9 +662,9 @@ function printMarketplace(
 ) {
   if (i % 3 === 0)
     $("#marketplaceContainer").append(
-      `<div class="row is-flex" id="row${parseInt(i/3)}" >`
+      `<div id="row" >`
     );
-  $(`#row${parseInt(i/3)}`).append(
+  $(`#row`).append(
     `<div class="col-sm-4">
     <form id="buyItem` +
       i +
@@ -680,7 +680,11 @@ function printMarketplace(
       ` Wei</div><input type="Submit" id="buyItem${i}Submit" class="btn btn-primary btn-md btn-block buy-now" value=${submitButton}>
       </div></div> </form></div>`
   );
+
   if (i % 3 === 2) $("#marketplaceContainer").append(`</div>`);
-  if (i === length - 1 && i % 3 !== 2)
-    $("#marketplaceContainer").append(`</div>`);
+  if (i === length - 1){
+    $(`#row`).append(`<div class="col-sm-4">`;
+    $(`#row`).append(`<div class="col-sm-4">`;
+    $(`#row`).append(`<div class="col-sm-4">`;
+    $("#marketplaceContainer").append(`</div>`);}
 }
