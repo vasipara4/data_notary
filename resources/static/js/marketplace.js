@@ -682,8 +682,8 @@ function printMarketplace(
   );
 
   if (i === length - 1  ){
-    $(`#row`).append(`<div class="col-sm-4"></div>`);
-    $(`#row`).append(`<div class="col-sm-4"></div>`);
-    $(`#row`).append(`<div class="col-sm-4"></div>`);
+    $(`#row`).append(`<div class="col-sm-4"><br></div>`);
+    $(`#row`).append(`<div class="col-sm-4"><br></div>`);
+    $(`#row`).append(`<div class="col-sm-4"><br></div>`);
     $("#marketplaceContainer").append(`</div>`);}
 }
