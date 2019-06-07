@@ -662,13 +662,13 @@ function printMarketplace(
 ) {
   if (i % 3 === 0)
     $("#marketplaceContainer").append(
-      `<div class="row" id="row${i}" style="display:flex;flex-wrap: wrap;">`
+      `<div class="row is-flex" id="row${i}" >`
     );
   $(`#row${parseInt(i/3)}`).append(
     `<div class="col-sm-4">
     <form id="buyItem` +
       i +
-      `" class="formdataBuy" ${_isYours} > <div class="card card-price" style="flex-grow: 1;height:100%;">
+      `" class="formdataBuy" ${_isYours} > <div class="card card-price">
       <div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
       Extra Content (IPFS):  ${ipfsAddress}  </li><li> Date Inserted: ` +
       date +
