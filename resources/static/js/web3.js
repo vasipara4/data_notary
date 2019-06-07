@@ -555,7 +555,7 @@ window.addEventListener("load", () => {
     Promise.all([openFile("file")]).then(function(result) {
       fileArrayBuffer = result[0];
       fileArrayBuffer = new Uint8Array(fileArrayBuffer);
-      fileArrayBuffer = ethers.utils.bigNumberify(fileArrayBuffer);
+      fileArrayBuffer = ethers.utils.bigNumberify(fileArrayBuffer).toString();
       fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer);
       contract.methods
         .dataExists($("#id").val())
