@@ -832,11 +832,10 @@ async function openFile(id) {
       var bytes = new Uint8Array(arrayBuffer);
       resolve(bytes);
     }
-  }};
+  };
     fr.readAsArrayBuffer(input); // or readAsText(file) to get raw content
   });
   var result = await readfile;
-  result =
   return result;
 }
 
