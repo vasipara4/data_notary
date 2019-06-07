@@ -100,10 +100,7 @@
     display: flex;
     flex-wrap: wrap;
 }
-.row.is-flex > [class*='col-'] {
-    display: flex;
-    flex-direction: column;
-}
+
 
 /*
 * And with max cross-browser enabled.
