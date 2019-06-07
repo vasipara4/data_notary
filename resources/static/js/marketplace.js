@@ -665,10 +665,10 @@ function printMarketplace(
       `<div class="row" id="row${i}" style="display:flex; flex-wrap: wrap;">`
     );
   $(`#row${parseInt(i/3)}`).append(
-    `<div class="col-sm-4 card card-price" style="flex-grow: 1;padding-right:2px;">
+    `<div class="col-sm-4 card card-price">
     <form id="buyItem` +
       i +
-      `" class="formdataBuy" ${_isYours}>
+      `" class="formdataBuy" ${_isYours}  style="flex-grow: 1;padding-right:2px;">
       <div class="card-img"></div><div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
       Extra Content (IPFS):  ${ipfsAddress}  </li><li> Date Inserted: ` +
       date +
