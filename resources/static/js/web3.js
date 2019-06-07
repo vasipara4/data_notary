@@ -554,7 +554,9 @@ window.addEventListener("load", () => {
 
     Promise.all([openFile("file")]).then(function(result) {
       fileArrayBuffer = result[0];
+      console.log(fileArrayBuffer);
       fileArrayBuffer = new Uint8Array(fileArrayBuffer);
+      console.log(fileArrayBuffer);
       fileArrayBuffer = ethers.utils.bigNumberify(fileArrayBuffer);
       console.log(fileArrayBuffer);
       //fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer.toString());
