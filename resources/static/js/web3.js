@@ -548,6 +548,7 @@ window.addEventListener("load", () => {
     event.preventDefault();
     var elementLoading = document.getElementById("insertLoading");
     var id_val = $("#id").val();
+    console.log(id_val);
     var weiValue = $("#weiValue").val();
     var txtFileAsString; // = openFile();
 
