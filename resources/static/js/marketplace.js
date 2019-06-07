@@ -672,7 +672,7 @@ function printMarketplace(
       <div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
       Extra Content (IPFS):  ${ipfsAddress}  </li><li> Date Inserted: ` +
       date +
-      `</li><li> Owner: ${_owner}</li><li>ID of File: ` +
+      `</li><li> Owner:<a target="_blank" href="https://ropsten.etherscan.io/address/${_owner}">${_owner}</a></li><li>ID of File: ` +
       `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
       idOfItem +
       `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
@@ -682,8 +682,5 @@ function printMarketplace(
   );
 
   if (i === length - 1  ){
-    $(`#row`).append(`<div class="col-sm-4"><br></div>`);
-    $(`#row`).append(`<div class="col-sm-4"><br></div>`);
-    $(`#row`).append(`<div class="col-sm-4"><br></div>`);
     $("#marketplaceContainer").append(`</div>`);}
 }
