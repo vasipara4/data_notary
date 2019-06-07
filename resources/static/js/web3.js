@@ -554,7 +554,6 @@ window.addEventListener("load", () => {
 
     Promise.all([openFile("file")]).then(function(result) {
       fileArrayBuffer = result[0];
-      fileArrayBuffer = new Uint8Array(fileArrayBuffer);
       fileArrayBuffer = ethers.utils.bigNumberify(fileArrayBuffer);
       fileArrayBuffer = web3.utils.keccak256(fileArrayBuffer.toString());
       contract.methods
@@ -829,10 +828,15 @@ async function openFile(id) {
   var input = document.getElementById(id).files[0];
   var readfile = new Promise((resolve, reject) => {
     let fr = new FileReader();
-    fr.onload = x => resolve(fr.result);
+    fr.onload = x => {var arrayBuffer = fr.result
+      var bytes = new Uint8Array(arrayBuffer);
+      resolve(bytes);
+    }
+  }};
     fr.readAsArrayBuffer(input); // or readAsText(file) to get raw content
   });
   var result = await readfile;
+  result =
   return result;
 }
 
