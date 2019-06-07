@@ -662,7 +662,7 @@ function printMarketplace(
 ) {
   if (i % 3 === 0)
     $("#marketplaceContainer").append(
-      `<div class="row" id="row${i}" style="display:flex; flex-wrap: wrap;justify-content: space-around;">`
+      `<div class="row" id="row${i}" style="display:flex; flex-wrap: wrap;align-content: space-between;">`
     );
   $(`#row${parseInt(i/3)}`).append(
     `<div class="col-sm-4 card card-price" style="flex-grow: 1;">
