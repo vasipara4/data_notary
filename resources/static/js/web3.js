@@ -689,7 +689,7 @@ window.addEventListener("load", () => {
     testingData = openFile("uploadTestFile");
     Promise.all([openFile("uploadTestFile")]).then(function(result) {
       testingData = result[0];
-      testingData = web3.utils.keccak256(testingData);
+      testingData = ethers.utils.keccak256(testingData);
       contract.methods
         .dataExists(testingId)
         .call({ from: account })
