@@ -546,7 +546,9 @@ window.addEventListener("load", () => {
           var blockHash = "";
           var type = "";
           var hashFromEthereumCall = items[0][i].data.toString();
+          console.log(hashFromEthereumCall);
           $.each(stringsIDtxBlockHash, function(index, user) {
+            console.log(user.hash.toString());
             if (user.hash.toString() === hashFromEthereumCall) {
               txHash = user.transactionHash;
               blockHash = user.blockHash;

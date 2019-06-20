@@ -598,7 +598,7 @@ window.addEventListener("load", () => {
       var type = "";
       var submitButton;
       $.each(stringsTitleDescID, function(index, user) {
-        if (user.id.toString() === idOfItem) {
+        if (user.hash.toString() === idOfItem) {
           title = user.title;
           description = user.description;
           type = user.type;

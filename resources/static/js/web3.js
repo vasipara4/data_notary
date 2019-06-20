@@ -594,8 +594,8 @@ window.addEventListener("load", () => {
                 alert(error);
               });
           } else {
-            console.log("Data already exists");
-            alert("Data already exists");
+            console.log("File already exists");
+            alert("File already exists!\n Check Marketplace if it's available");
           }
         });
     });
@@ -623,13 +623,16 @@ window.addEventListener("load", () => {
       processData: false,
       success: function(user) {
         $("#postResultDiv").html(
-          "<p>" + "Post Successfully!<br>File uploaded!" + "</p>"
+          "<p>" + "Notarization Successfully!<br>File uploaded!" + "</p>"
         );
+        var elementLoading = document.getElementById("insertLoading");
         elementLoading.classList.remove("running");
       },
       error: function(e) {
         alert("Error!");
         $("#postResultDiv").html("");
+        var elementLoading = document.getElementById("insertLoading");
+        elementLoading.classList.remove("running");
         console.log("ERROR: ", e);
       }
     });
