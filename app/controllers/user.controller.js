@@ -102,7 +102,7 @@ exports.save = (req, res) => {
           message: "Error"
         });
       }
-    });
+    }).catch(err=>console.log(err));
 };
 
 // // Fetch all Users
@@ -176,7 +176,7 @@ exports.buy = (req, res) => {
     title: "PurchasedItem",
     description: "PurchasedItem",
     type: req.body.type,
-    id: id,
+    hash: id,
     timestamp: req.body.timestamp,
     submitter: req.body.submitter,
     gasUsed: req.body.gasUsed,
