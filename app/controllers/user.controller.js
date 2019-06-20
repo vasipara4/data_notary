@@ -89,6 +89,8 @@ exports.save = (req, res) => {
                 res.send(data);
               })
               .catch(err => {
+                console.log(err);
+                fs.unlink(__basedir + "/public" + url_file);
                 res.status(500).send({
                   message: err.message
                 });
