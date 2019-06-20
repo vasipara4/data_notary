@@ -15,7 +15,6 @@ contract Marketplace{
     uint date;
     uint valueWei;
     bytes32[2] addressIPFS;
-    bytes32 title;
   }
 
   struct dataShare {
@@ -74,10 +73,10 @@ contract Marketplace{
 
 
   //WRITE DATA SECTION
-  function dataWrite(uint _hash, uint _valueWei, bytes32 title) public originalDataNew(_hash)  {
+  function dataWrite(uint _hash, uint _valueWei) public originalDataNew(_hash)  {
       bytes32[2] memory ipfsAddress;
       //uint hashedData = uint(keccak256(abi.encodePacked(_data, uint(now))));
-      dataToSubmission[_hash] = dataObject(msg.sender, _hash, now, _valueWei, ipfsAddress, title);
+      dataToSubmission[_hash] = dataObject(msg.sender, _hash, now, _valueWei, ipfsAddress);
       idIndexes.push(_hash);
   }
 
