@@ -49,19 +49,19 @@ exports.save = (req, res) => {
     blockHash: req.body.blockHash
   });
 
-  if (
-    typeof req.body.title !== "string" ||
-    typeof req.body.description !== "string" ||
-    typeof req.body.gasUsed !== "string" ||
-    typeof req.body.type !== "string" ||
-    typeof req.body.transactionHash !== "string" ||
-    typeof req.body.blockHash !== "string"
-  ) {
-    fs.unlink(__basedir + "/public" + url_file);
-    return res.status(400).send({
-      message: "Error"
-    });
-  }
+  // if (
+  //   typeof req.body.title !== "string" ||
+  //   typeof req.body.description !== "string" ||
+  //   typeof req.body.gasUsed !== "string" ||
+  //   typeof req.body.type !== "string" ||
+  //   typeof req.body.transactionHash !== "string" ||
+  //   typeof req.body.blockHash !== "string"
+  // ) {
+  //   fs.unlink(__basedir + "/public" + url_file);
+  //   return res.status(400).send({
+  //     message: "Error"
+  //   });
+  // }
 
   var ethereumTimestamp;
   contract.methods

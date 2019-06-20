@@ -558,6 +558,7 @@ window.addEventListener("load", () => {
       fileArrayBuffer = result[0];
       fileArrayBuffer = ethers.utils.keccak256(fileArrayBuffer);
       hashNumber = ethers.utils.bigNumberify(fileArrayBuffer);
+      console.log(hashNumber);
       contract.methods
         .dataExists(fileArrayBuffer)
         .call({ from: account })
@@ -576,6 +577,7 @@ window.addEventListener("load", () => {
                   .call({ from: account })
                   .then(function(setTimestamp) {
                     hashNumber = hashNumber.toString();
+                    console.log(hashNumber);
                     ajaxPost( hashNumber,
                       setTimestamp,
                       result.gasUsed,
