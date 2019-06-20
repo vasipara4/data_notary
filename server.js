@@ -42,10 +42,6 @@ global.contract = new web3.eth.Contract(
 			{
 				"name": "_valueWei",
 				"type": "uint256"
-			},
-			{
-				"name": "title",
-				"type": "bytes32"
 			}
 		],
 		"name": "dataWrite",
@@ -455,7 +451,7 @@ global.contract = new web3.eth.Contract(
 		"type": "function"
 	}
 ],
-  "0x38eafd708f86a0992386073934da6a0a84d5a311"
+  "0xa89fc3f6dde67bc1d0c0c144d15c420f7be385f2"
 );
 
 app.use(helmet());
