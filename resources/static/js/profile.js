@@ -545,7 +545,7 @@ window.addEventListener("load", () => {
           var txHash = "";
           var blockHash = "";
           var type = "";
-          var hashFromEthereumCall = items[0][i].data.toHexString();
+          var hashFromEthereumCall = items[0][i].data.toString();
           $.each(stringsIDtxBlockHash, function(index, user) {
             if (user.hash.toString() === hashFromEthereumCall) {
               txHash = user.transactionHash;
@@ -608,7 +608,7 @@ window.addEventListener("load", () => {
           var txHash = "";
           var blockHash = "";
           var type = "";
-          var hashFromEthereumCallPurchased = items[0][i].data.toHexString();
+          var hashFromEthereumCallPurchased = items[0][i].data.toString();
           $.each(stringsIDtxBlockHash, function(index, user) {
             if (user.hash.toString() === hashFromEthereumCallPurchased + account) {
               txHash = user.transactionHash;

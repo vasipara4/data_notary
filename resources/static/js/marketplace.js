@@ -595,12 +595,11 @@ window.addEventListener("load", () => {
       var description;
       console.log(items[1][i]);
       var idOfItem = items[1][i].toString();
-      var idOfItemHex = items[1][i].toHexString();
       var _isYours = items[2][i];
       var type = "";
       var submitButton;
       $.each(stringsTitleDescID, function(index, user) {
-        if (user.hash.toString() === idOfItemHex) {
+        if (user.hash.toString() === idOfItem) {
           title = user.title;
           description = user.description;
           type = user.type;

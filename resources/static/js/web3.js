@@ -557,7 +557,8 @@ window.addEventListener("load", () => {
     Promise.all([openFile("file")]).then(function(result) {
       fileArrayBuffer = result[0];
       fileArrayBuffer = ethers.utils.keccak256(fileArrayBuffer);
-      hashNumber = fileArrayBuffer.toString();
+      hashNumber = ethers.utils.bigNumberify(fileArrayBuffer);
+      hashNumber = hashNumber.toString();
       contract.methods
         .dataExists(fileArrayBuffer)
         .call({ from: account })
