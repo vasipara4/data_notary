@@ -4,6 +4,7 @@ const path = require("path");
 
 exports.download = (req, res) => {
   var id = req.body.id;
+
   var signature = req.body.digitalSignatureToPost;
   var account = req.body.account;
   if (typeof id != "string" || typeof account != "string") {
@@ -13,7 +14,7 @@ exports.download = (req, res) => {
   }
 
   var accountToBeVerified = web3.eth.accounts.recover(id, signature);
-
+  //id = id.toString();
   if (account != accountToBeVerified) {
     return res.status(400).send({
       message: "Error"

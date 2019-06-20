@@ -39,11 +39,12 @@ exports.save = (req, res) => {
   const saveToDB = new UserModelDB({
     title: req.body.title,
     description: req.body.description,
-    id: req.body.id,
+    hash: req.body.hash,
     timestamp: req.body.timestamp,
     submitter: req.body.submitter,
     gasUsed: req.body.gasUsed,
     url: url_file,
+    type: req.body.type,
     transactionHash: req.body.transactionHash,
     blockHash: req.body.blockHash
   });
@@ -52,6 +53,7 @@ exports.save = (req, res) => {
     typeof req.body.title !== "string" ||
     typeof req.body.description !== "string" ||
     typeof req.body.gasUsed !== "string" ||
+    typeof req.body.type !== "string" ||
     typeof req.body.transactionHash !== "string" ||
     typeof req.body.blockHash !== "string"
   ) {
@@ -63,12 +65,12 @@ exports.save = (req, res) => {
 
   var ethereumTimestamp;
   contract.methods
-    .dataExists(req.body.id)
+    .dataExists(req.body.hash)
     .call({ from: req.body.submitter })
     .then(function(result) {
       if (result) {
         contract.methods
-          .getDataDetails(req.body.id)
+          .getDataDetails(req.body.hash)
           .call({ from: req.body.submitter })
           .then(function(result) {
             ethereumTimestamp = result[2];
@@ -76,7 +78,7 @@ exports.save = (req, res) => {
             //timestamp must be the same as in Ethereum
             if (req.body.timestamp != ethereumTimestamp) {
               return res.status(400).send({
-                message: "Valid Error"
+                message: "VALIDATION Error"
               });
             }
 
@@ -101,23 +103,23 @@ exports.save = (req, res) => {
     });
 };
 
-// Fetch all Users
-exports.findAll = (req, res) => {
-  var usersProjection = {
-    __v: false,
-    _id: false
-  };
-
-  UserModelDB.find({}, usersProjection)
-    .then(users => {
-      res.send(users);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message
-      });
-    });
-};
+// // Fetch all Users
+// exports.findAll = (req, res) => {
+//   var usersProjection = {
+//     __v: false,
+//     _id: false
+//   };
+//
+//   UserModelDB.find({}, usersProjection)
+//     .then(users => {
+//       res.send(users);
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message: err.message
+//       });
+//     });
+// };
 
 // Fetch only Title/Desc/ID
 exports.findStrings = (req, res) => {
@@ -166,11 +168,12 @@ exports.buy = (req, res) => {
     });
   }
 
-  var id = req.body.id + req.body.submitter;
+  var id = req.body.hash + req.body.submitter;
   // Create a new User model
   const saveToDBbuy = new UserModelDB({
     title: "PurchasedItem",
     description: "PurchasedItem",
+    type: req.body.type,
     id: id,
     timestamp: req.body.timestamp,
     submitter: req.body.submitter,
@@ -181,7 +184,7 @@ exports.buy = (req, res) => {
   });
   var ethereumTimestamp;
   contract.methods
-    .getDataShareFromAddressID(req.body.submitter, req.body.id)
+    .getDataShareFromAddressID(req.body.submitter, req.body.hash)
     .call({ from: req.body.submitter })
     .then(function(result) {
       ethereumTimestamp = result[1];

@@ -12,7 +12,11 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  id: {
+  type: {
+    type: String,
+    required: true
+  },
+  hash: {
     type: String,
     unique: true,
     required: true

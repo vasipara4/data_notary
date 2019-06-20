@@ -118,7 +118,7 @@ module.exports = function(app) {
   });
 
   // Retrieve all Users' Info
-  app.get("/api/users/all", users.findAll);
+//  app.get("/api/users/all", users.findAll);
 
   app.get("/api/users/strings", users.findStrings);
 

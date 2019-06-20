@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="container">
     <nav class="navbar">
       <ul class="nav nav-tabs">
         <li role="presentation" class="active">
@@ -42,9 +42,9 @@
         <form id="userForm" enctype="multipart/form-data">
           <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" class="form-control" name="title" id="title" placeholder="Enter file's title" required />
+            <input type="text" class="form-control" name="title" id="title" placeholder="Enter file's title" maxlength="32" required />
             <label for="description">Description:</label>
-            <input type="text" class="form-control" name="description" id="description" placeholder="Enter file's description" required />
+            <input type="text" class="form-control" name="description" id="description" placeholder="Enter file's description" maxlength="128" required />
           </div>
           <div class="form-group">
             <label for="file">File <font size="2">(size limit 16MB)</font>:
@@ -52,6 +52,19 @@
             <input type="file" name="file" id="file" onchange="showFileName()" required />
             <label for="file" class="btn-1">Upload</label>
             <div id="file-upload-filename"></div>
+            <div>
+            <label class="radio-inline">
+     <input type="radio" name="optradio" value="Document" checked>Document
+   </label>
+   <label class="radio-inline">
+     <input type="radio" name="optradio" value="Image">Image
+   </label>
+   <label class="radio-inline">
+     <input type="radio" name="optradio" value="Video">Video
+   </label>
+   <label class="radio-inline">
+     <input type="radio" name="optradio" value="Other">Other
+   </label></div>
           </div>
           <div class="form-group">
             <label for="weiValue">Enter Price of Copyrights in Wei:</label>
@@ -64,26 +77,14 @@
               <p>Max Price: (2^256 -1) Wei</p>
             </details>
           </div>
-          <div class="form-group">
-            <label for="id">ID:</label><div class="input-group">
-            <input type="number" name="id" class="form-control width100" id="id" placeholder="Enter positive number" min="0" required /> <span class="input-group-btn">
-        <button class="btn btn-info" id="generatorButton" type="button">Generate ID</button>
-   </span></div>
-          </div>
+
           <button type="submit" id="insertLoading" class="btn btn-default ld-ext-right">
-            Insert Data in Eth + Db
+            Insert Data in our Blockchain Service
             <div class="ld ld-ring ld-spin"></div>
           </button>
         </form>
       </div>
       <div id="postResultDiv"></div>
-      <br />
-      <div>
-        <button id="allUsers" type="button" class="btn btn-default ">
-          Show Data in Database
-        </button>
-        <div id="getResultDiv" style="margin-top:10px;word-break:break-all;"></div>
-      </div>
     </div>
 
     <div class="col-sm-2"></div>
@@ -99,8 +100,8 @@
             <label for="uploadTestFile" class="btn-1">Upload</label>
           </div>
           <div class="form-group">
-            <label for="verify_id">Enter ID:</label>
-            <input type="number" class="form-control" id="verify_id" placeholder="Enter positive number" min="0" required />
+            <label for="verifyForm_address">Enter Address:</label>
+            <input type="text" class="form-control" id="verifyForm_address" placeholder="Hex representation" required />
           </div>
           <button type="submit" class="btn btn-default">
             Verify
@@ -111,21 +112,16 @@
         </form>
       </div>
       <div>
-        <div id="getVerifyDiv">
-          <ul class="list-group"></ul>
-        </div>
-      </div>
-      <div>
         <h3>Check Data Integrity from Hash</h3>
         <hr />
         <form id="verifyHash">
           <div class="form-group">
-            <label for="verify_hashId">Enter ID:</label>
-            <input type="number" class="form-control" id="verify_hashId" placeholder="ID file" required />
+            <label for="verifyFromHashId">Enter File's Hash:</label>
+            <input type="number" class="form-control" id="verifyFromHashId" placeholder="Keccak-256 Hash" required />
           </div>
           <div class="form-group">
-            <label for="verify_hashValue">Enter Hash:</label>
-            <input type="text" class="form-control" id="verify_hashValue" placeholder="Hex representation" required />
+            <label for="verifyFromHashAddress">Enter Owner Address:</label>
+            <input type="text" class="form-control" id="verifyFromHashAddress" placeholder="Hex representation" required />
           </div>
           <button type="submit" class="btn btn-default">Verify
           </button>
@@ -175,8 +171,6 @@
         "The file is going to be in Marketplace (Notary and Marketplace Mode)"
       );
     }
-    //var weiInput = document.getElementById("weiValue");
-    //weiInput.addEventListener("change", weiEther());
   </script>
 </body>
 

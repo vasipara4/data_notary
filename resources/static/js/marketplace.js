@@ -42,449 +42,461 @@ window.addEventListener("load", () => {
   });
 
   let abi = [
-    {
-      constant: false,
-      inputs: [
-        {
-          name: "amount",
-          type: "uint256"
-        }
-      ],
-      name: "withdrawFunds",
-      outputs: [
-        {
-          name: "success",
-          type: "bool"
-        }
-      ],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_owner",
-          type: "address"
-        }
-      ],
-      name: "getItemsPurchased",
-      outputs: [
-        {
-          components: [
-            {
-              name: "submitter",
-              type: "address"
-            },
-            {
-              name: "data",
-              type: "uint256"
-            },
-            {
-              name: "date",
-              type: "uint256"
-            },
-            {
-              name: "valueWei",
-              type: "uint256"
-            },
-            {
-              name: "addressIPFS",
-              type: "bytes32[2]"
-            }
-          ],
-          name: "",
-          type: "tuple[]"
-        },
-        {
-          name: "",
-          type: "bool[]"
-        },
-        {
-          name: "",
-          type: "uint256[]"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: false,
-      inputs: [
-        {
-          name: "_data",
-          type: "uint256"
-        },
-        {
-          name: "_id",
-          type: "uint256"
-        },
-        {
-          name: "_valueWei",
-          type: "uint256"
-        }
-      ],
-      name: "dataWrite",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "dataIsYourData",
-      outputs: [
-        {
-          name: "",
-          type: "bool"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "getDataAddressIPFS",
-      outputs: [
-        {
-          name: "",
-          type: "bytes32"
-        },
-        {
-          name: "",
-          type: "bytes32"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: false,
-      inputs: [
-        {
-          name: "_addressIPFS",
-          type: "bytes32[2]"
-        },
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "addAddressIPFS",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_owner",
-          type: "address"
-        }
-      ],
-      name: "getOwnItems",
-      outputs: [
-        {
-          components: [
-            {
-              name: "submitter",
-              type: "address"
-            },
-            {
-              name: "data",
-              type: "uint256"
-            },
-            {
-              name: "date",
-              type: "uint256"
-            },
-            {
-              name: "valueWei",
-              type: "uint256"
-            },
-            {
-              name: "addressIPFS",
-              type: "bytes32[2]"
-            }
-          ],
-          name: "",
-          type: "tuple[]"
-        },
-        {
-          name: "",
-          type: "bool[]"
-        },
-        {
-          name: "",
-          type: "uint256[]"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_owner",
-          type: "address"
-        },
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "getDataShareFromAddressID",
-      outputs: [
-        {
-          name: "",
-          type: "uint256"
-        },
-        {
-          name: "",
-          type: "uint256"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_data",
-          type: "uint256"
-        },
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "verifyHash",
-      outputs: [
-        {
-          name: "",
-          type: "bool"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "dataExists",
-      outputs: [
-        {
-          name: "",
-          type: "bool"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: false,
-      inputs: [
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "takeCopyrights",
-      outputs: [],
-      payable: true,
-      stateMutability: "payable",
-      type: "function"
-    },
-    {
-      constant: false,
-      inputs: [
-        {
-          name: "_id",
-          type: "uint256"
-        },
-        {
-          name: "_valueWei",
-          type: "uint256"
-        }
-      ],
-      name: "updateWeiValue",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "getTimestamp",
-      outputs: [
-        {
-          name: "",
-          type: "uint256"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_id",
-          type: "uint256"
-        }
-      ],
-      name: "getDataDetails",
-      outputs: [
-        {
-          name: "",
-          type: "address"
-        },
-        {
-          name: "",
-          type: "uint256"
-        },
-        {
-          name: "",
-          type: "uint256"
-        },
-        {
-          name: "",
-          type: "uint256"
-        },
-        {
-          name: "",
-          type: "bytes32"
-        },
-        {
-          name: "",
-          type: "bytes32"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [],
-      name: "getNumBuyable",
-      outputs: [
-        {
-          name: "",
-          type: "uint256"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_owner",
-          type: "address"
-        }
-      ],
-      name: "getItemsBuyable",
-      outputs: [
-        {
-          components: [
-            {
-              name: "submitter",
-              type: "address"
-            },
-            {
-              name: "data",
-              type: "uint256"
-            },
-            {
-              name: "date",
-              type: "uint256"
-            },
-            {
-              name: "valueWei",
-              type: "uint256"
-            },
-            {
-              name: "addressIPFS",
-              type: "bytes32[2]"
-            }
-          ],
-          name: "",
-          type: "tuple[]"
-        },
-        {
-          name: "",
-          type: "uint256[]"
-        },
-        {
-          name: "",
-          type: "bool[]"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "_from",
-          type: "address"
-        }
-      ],
-      name: "getBalance",
-      outputs: [
-        {
-          name: "",
-          type: "uint256"
-        }
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-    }
-  ];
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawFunds",
+		"outputs": [
+			{
+				"name": "success",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "getItemsPurchased",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "submitter",
+						"type": "address"
+					},
+					{
+						"name": "data",
+						"type": "uint256"
+					},
+					{
+						"name": "date",
+						"type": "uint256"
+					},
+					{
+						"name": "valueWei",
+						"type": "uint256"
+					},
+					{
+						"name": "addressIPFS",
+						"type": "bytes32[2]"
+					},
+					{
+						"name": "title",
+						"type": "bytes32"
+					}
+				],
+				"name": "",
+				"type": "tuple[]"
+			},
+			{
+				"name": "",
+				"type": "bool[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			},
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "verifyHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			}
+		],
+		"name": "getDataAddressIPFS",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			},
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_addressIPFS",
+				"type": "bytes32[2]"
+			},
+			{
+				"name": "_hash",
+				"type": "uint256"
+			}
+		],
+		"name": "addAddressIPFS",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "getOwnItems",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "submitter",
+						"type": "address"
+					},
+					{
+						"name": "data",
+						"type": "uint256"
+					},
+					{
+						"name": "date",
+						"type": "uint256"
+					},
+					{
+						"name": "valueWei",
+						"type": "uint256"
+					},
+					{
+						"name": "addressIPFS",
+						"type": "bytes32[2]"
+					},
+					{
+						"name": "title",
+						"type": "bytes32"
+					}
+				],
+				"name": "",
+				"type": "tuple[]"
+			},
+			{
+				"name": "",
+				"type": "bool[]"
+			},
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"name": "_hash",
+				"type": "uint256"
+			}
+		],
+		"name": "getDataShareFromAddressID",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			}
+		],
+		"name": "dataExists",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			}
+		],
+		"name": "takeCopyrights",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			},
+			{
+				"name": "_valueWei",
+				"type": "uint256"
+			},
+			{
+				"name": "title",
+				"type": "bytes32"
+			}
+		],
+		"name": "dataWrite",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			},
+			{
+				"name": "_valueWei",
+				"type": "uint256"
+			}
+		],
+		"name": "updateWeiValue",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			}
+		],
+		"name": "getTimestamp",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			},
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "dataIsYourData",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_hash",
+				"type": "uint256"
+			}
+		],
+		"name": "getDataDetails",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "bytes32"
+			},
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getNumBuyable",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "getItemsBuyable",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "submitter",
+						"type": "address"
+					},
+					{
+						"name": "data",
+						"type": "uint256"
+					},
+					{
+						"name": "date",
+						"type": "uint256"
+					},
+					{
+						"name": "valueWei",
+						"type": "uint256"
+					},
+					{
+						"name": "addressIPFS",
+						"type": "bytes32[2]"
+					},
+					{
+						"name": "title",
+						"type": "bytes32"
+					}
+				],
+				"name": "",
+				"type": "tuple[]"
+			},
+			{
+				"name": "",
+				"type": "uint256[]"
+			},
+			{
+				"name": "",
+				"type": "bool[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_from",
+				"type": "address"
+			}
+		],
+		"name": "getBalance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
   //Web3 Init Contract
-  const contractAddress = "0x16b969018717c3fc0e34522f1bf928b6e4f3a95b";
+  const contractAddress = "0xc18ab269ce7a9baca8e5d848f4e748177cd3ae4f";
   const contract = new web3.eth.Contract(abi, contractAddress);
 
   //EtherJS SECTION
@@ -505,9 +517,11 @@ window.addEventListener("load", () => {
     var formId = $(this).attr("id"); //currentThis.id;
     var weiValueForm = formId + "Value";
     var idItemForm = formId + "ID";
+    var typeID = formId + "type";
     var idSubmit = formId + "Submit";
     var weiToPay = $("#" + weiValueForm).val();
     var idRequest = $("#" + idItemForm).val();
+    var type = $("#"+typeID).val();
     $("#" + idSubmit).attr("value", "Do NOT close the Marketplace");
     contract.methods
       .takeCopyrights(idRequest)
@@ -515,10 +529,11 @@ window.addEventListener("load", () => {
       .then(function(result) {
         var formData = new FormData();
         formData.append("submitter", account);
-        formData.append("id", idRequest);
+        formData.append("hash", idRequest);
         formData.append("transactionHash", result.transactionHash);
         formData.append("blockHash", result.blockHash);
         formData.append("gasUsed", result.gasUsed);
+        formData.append("type",type)
         contract.methods
           .getDataShareFromAddressID(account, idRequest)
           .call({ from: account })
@@ -579,6 +594,8 @@ window.addEventListener("load", () => {
       year;
     return formattedTime;
   }
+
+
   const miletusIPFS = "http://miletus.dynu.net:8080/ipfs/";
   //Calculate Marketplace Variables
   (async function() {
@@ -594,18 +611,20 @@ window.addEventListener("load", () => {
       var description;
       var idOfItem = items[1][i].toString();
       var _isYours = items[2][i];
+      var type = "";
       var submitButton;
       $.each(stringsTitleDescID, function(index, user) {
         if (user.id.toString() === idOfItem) {
           title = user.title;
           description = user.description;
+          type = user.type;
           stringsTitleDescID.splice(index, 1);
           return false;
         }
       });
       //if user hasn't added contents to our contract through our app => don't show his contents
       if (typeof title === "undefined") continue;
-
+      type = type === "" ? "" : `<li>Type: ${type} </li><<input id="buyItem${i}type"  type ="hidden"  value ="${type}" readonly />`;
       //if content is yours => make submit disable
       if (_isYours) {
         _isYours = `onsubmit="return false;"`;
@@ -639,7 +658,7 @@ window.addEventListener("load", () => {
         description,
         ipfsAddress,
         date,
-        idOfItem,
+        idOfItem, type,
         valueWei,
         submitButton
       );
@@ -656,7 +675,7 @@ function printMarketplace(
   description,
   ipfsAddress,
   date,
-  idOfItem,
+  idOfItem, type,
   valueWei,
   submitButton
 ) {
@@ -670,11 +689,11 @@ function printMarketplace(
       i +
       `" class="formdataBuy" ${_isYours} > <div class="card card-price">
       <div class="card-body"><div class="lead">${title}</div><ul class="details"><li>${description}</li><li>
-      Extra Content (IPFS):  ${ipfsAddress}  </li><li> Date Inserted: ` +
+      Extra Content (IPFS):  ${ipfsAddress}  </li>${type}<li> Date Inserted: ` +
       date +
-      `</li><li> Owner:<a target="_blank" href="https://ropsten.etherscan.io/address/${_owner}">${_owner}</a></li><li>ID of File: ` +
+      `</li><li> Owner:<a target="_blank" href="https://ropsten.etherscan.io/address/${_owner}">${_owner}</a></li><li>Hash of File: ` +
       `<input id="buyItem${i}ID"  type = "hidden"  value = "${idOfItem}" readonly />` +
-      idOfItem +
+      idOfItem.toHexString() +
       `</li></ul><div class="price"><input id="buyItem${i}Value"  type = "hidden" value = "${valueWei}" readonly />` +
       valueWei +
       ` Wei</div><input type="Submit" id="buyItem${i}Submit" class="btn btn-primary btn-md btn-block buy-now" value=${submitButton}>

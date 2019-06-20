@@ -64,6 +64,10 @@ global.contract = new web3.eth.Contract(
 					{
 						"name": "addressIPFS",
 						"type": "bytes32[2]"
+					},
+					{
+						"name": "title",
+						"type": "bytes32"
 					}
 				],
 				"name": "",
@@ -72,10 +76,6 @@ global.contract = new web3.eth.Contract(
 			{
 				"name": "",
 				"type": "bool[]"
-			},
-			{
-				"name": "",
-				"type": "uint256[]"
 			}
 		],
 		"payable": false,
@@ -83,36 +83,18 @@ global.contract = new web3.eth.Contract(
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_data",
-				"type": "uint256"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			},
-			{
-				"name": "_valueWei",
-				"type": "uint256"
-			}
-		],
-		"name": "dataWrite",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_id",
+				"name": "_hash",
 				"type": "uint256"
+			},
+			{
+				"name": "_owner",
+				"type": "address"
 			}
 		],
-		"name": "dataIsYourData",
+		"name": "verifyHash",
 		"outputs": [
 			{
 				"name": "",
@@ -127,7 +109,7 @@ global.contract = new web3.eth.Contract(
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_id",
+				"name": "_hash",
 				"type": "uint256"
 			}
 		],
@@ -154,7 +136,7 @@ global.contract = new web3.eth.Contract(
 				"type": "bytes32[2]"
 			},
 			{
-				"name": "_id",
+				"name": "_hash",
 				"type": "uint256"
 			}
 		],
@@ -195,6 +177,10 @@ global.contract = new web3.eth.Contract(
 					{
 						"name": "addressIPFS",
 						"type": "bytes32[2]"
+					},
+					{
+						"name": "title",
+						"type": "bytes32"
 					}
 				],
 				"name": "",
@@ -221,7 +207,7 @@ global.contract = new web3.eth.Contract(
 				"type": "address"
 			},
 			{
-				"name": "_id",
+				"name": "_hash",
 				"type": "uint256"
 			}
 		],
@@ -244,30 +230,7 @@ global.contract = new web3.eth.Contract(
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_data",
-				"type": "uint256"
-			},
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "verifyHash",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
+				"name": "_hash",
 				"type": "uint256"
 			}
 		],
@@ -286,7 +249,7 @@ global.contract = new web3.eth.Contract(
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_id",
+				"name": "_hash",
 				"type": "uint256"
 			}
 		],
@@ -300,7 +263,29 @@ global.contract = new web3.eth.Contract(
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_id",
+				"name": "_hash",
+				"type": "uint256"
+			},
+			{
+				"name": "_valueWei",
+				"type": "uint256"
+			},
+			{
+				"name": "title",
+				"type": "bytes32"
+			}
+		],
+		"name": "dataWrite",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_hash",
 				"type": "uint256"
 			},
 			{
@@ -318,7 +303,7 @@ global.contract = new web3.eth.Contract(
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_id",
+				"name": "_hash",
 				"type": "uint256"
 			}
 		],
@@ -337,7 +322,30 @@ global.contract = new web3.eth.Contract(
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_id",
+				"name": "_hash",
+				"type": "uint256"
+			},
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "dataIsYourData",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_hash",
 				"type": "uint256"
 			}
 		],
@@ -417,6 +425,10 @@ global.contract = new web3.eth.Contract(
 					{
 						"name": "addressIPFS",
 						"type": "bytes32[2]"
+					},
+					{
+						"name": "title",
+						"type": "bytes32"
 					}
 				],
 				"name": "",
@@ -455,12 +467,12 @@ global.contract = new web3.eth.Contract(
 		"type": "function"
 	}
 ],
-  "0x16b969018717c3fc0e34522f1bf928b6e4f3a95b"
+  "0xc18ab269ce7a9baca8e5d848f4e748177cd3ae4f"
 );
 
 app.use(helmet());
 app.use(express.static("resources"));
-app.use(express.static("public"));
+//app.use(express.static("public"));
 
 global.__basedir = __dirname;
 

@@ -1,8 +1,14 @@
 pragma solidity >=0.5.7;
+
+import "https://github.com/OpenZeppelin/openzeppelin-solidity/contracts/math/SafeMath.sol";
+
 // Enable the ABI v2 Coder
 pragma experimental ABIEncoderV2;
 
 contract Data {
+
+    using SafeMath for uint256;
+
    struct dataObject {
     address submitter;
     uint256 data;
@@ -51,16 +57,16 @@ contract Data {
 
   //payable & money
   function takeCopyrights(uint _id) canYouBuyCopyrights(_id) newCopyrightsAddressEmpty(_id) public payable {
-    if ( msg.value == idToData[_id].valueWei && (msg.value +  balances[idToData[_id].submitter] >= balances[idToData[_id].submitter])){
+    if ( msg.value >= idToData[_id].valueWei){
       addressToCopyrights[msg.sender][_id].data = idToData[_id].data;
       addressToCopyrights[msg.sender][_id].date = now;
-      balances[idToData[_id].submitter] += msg.value;
+      balances[idToData[_id].submitter] = balances[idToData[_id].submitter].add(msg.value);
     }
   }
 
     function withdrawFunds(uint amount) public returns(bool success) {
     require(balances[msg.sender] >= amount); // guards up front
-    balances[msg.sender] -= amount;         // optimistic accounting
+    balances[msg.sender] =  balances[msg.sender].sub(amount);         // optimistic accounting
     msg.sender.transfer(amount);            // transfer
     return true;
 }
