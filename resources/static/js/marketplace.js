@@ -591,7 +591,7 @@ window.addEventListener("load", () => {
     });
     const items = await contractEtherJS.getItemsBuyable(account);
     for (var i = 0; i < items[1].length; i++) {
-      var title;
+      var title = "";
       var description;
       console.log(items[1][i]);
       var idOfItem = items[1][i];
@@ -608,7 +608,7 @@ window.addEventListener("load", () => {
         }
       });
       //if user hasn't added contents to our contract through our app => don't show his contents
-      if (typeof title === "undefined") continue;
+      if (typeof title === "") continue;
       type = type === "" ? "" : `<li>Type: ${type} </li><<input id="buyItem${i}type"  type ="hidden"  value ="${type}" readonly />`;
       //if content is yours => make submit disable
       if (_isYours) {

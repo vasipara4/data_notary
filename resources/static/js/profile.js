@@ -557,7 +557,6 @@ window.addEventListener("load", () => {
           });
           blockHash = blockHash === "" ? `` : `<p>Block Hash: ${blockHash}</p>`;
           txHash = txHash === "" ? "" : `<p>Transaction Hash: ${txHash} </p>`;
-          console.log(type);
           type = (type === "") ? "" : `<p>Type: ${type} </p>`;
           var ipfsAddress =
             ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
@@ -573,7 +572,7 @@ window.addEventListener("load", () => {
               items[0][i].data.toHexString() +
               `</p><p>Price: ` +
               valueWei +
-              `</p><p>IPFS Address: ` +
+              `</p>`+ type +`<p>IPFS Address: ` +
               ipfsAddress +
               `</p><p>Date: ` +
               unixTimeToDate(items[0][i].date.toString()) +
@@ -631,9 +630,9 @@ window.addEventListener("load", () => {
           $("#showYourData").append(
             `<li class="list-group-item"><p>Data hash: ` +
               items[0][i].data.toHexString() +
-              `</p>` + type + `<p>Price: ` +
+              `</p><p>Price: ` +
               valueWei +
-              `</p><p>IPFS Address: ` +
+              `</p>`+type+`<p>IPFS Address: ` +
               ipfsAddress +
               `</p><p>Date: ` +
               unixTimeToDate(items[0][i].date.toString()) +
