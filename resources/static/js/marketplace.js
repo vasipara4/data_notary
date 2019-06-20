@@ -594,12 +594,12 @@ window.addEventListener("load", () => {
       var title;
       var description;
       console.log(items[1][i]);
-      var idOfItem = items[1][i].toString();
+      var idOfItem = items[1][i];
       var _isYours = items[2][i];
       var type = "";
       var submitButton;
       $.each(stringsTitleDescID, function(index, user) {
-        if (user.hash.toString() === idOfItem) {
+        if (user.hash.toString() === idOfItem.toString()) {
           title = user.title;
           description = user.description;
           type = user.type;

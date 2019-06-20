@@ -557,7 +557,8 @@ window.addEventListener("load", () => {
           });
           blockHash = blockHash === "" ? `` : `<p>Block Hash: ${blockHash}</p>`;
           txHash = txHash === "" ? "" : `<p>Transaction Hash: ${txHash} </p>`;
-          type = type === "" ? "" : `<p>Type: ${type} </p>`;
+          console.log(type);
+          type = (type === "") ? "" : `<p>Type: ${type} </p>`;
           var ipfsAddress =
             ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
               ? "Empty"
