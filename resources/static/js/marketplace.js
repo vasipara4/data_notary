@@ -593,7 +593,6 @@ window.addEventListener("load", () => {
     for (var i = 0; i < items[1].length; i++) {
       var title = "";
       var description;
-      console.log(items[1][i]);
       var idOfItem = items[1][i];
       var _isYours = items[2][i];
       var type = "";

@@ -558,10 +558,9 @@ window.addEventListener("load", () => {
       fileArrayBuffer = result[0];
       fileArrayBuffer = ethers.utils.keccak256(fileArrayBuffer);
       hashNumber = ethers.utils.bigNumberify(fileArrayBuffer);
-      console.log(hashNumber);
       hashNumber = hashNumber.toString();
       contract.methods
-        .dataExists(fileArrayBuffer)
+        .dataExists(hashNumber)
         .call({ from: account })
         .then(function(result) {
           if (result == false) {
@@ -570,11 +569,11 @@ window.addEventListener("load", () => {
             );
             elementLoading.classList.add("running");
             contract.methods
-              .dataWrite(fileArrayBuffer, weiValue)
+              .dataWrite(hashNumber, weiValue)
               .send({ from: account })
               .then(function(result) {
                 contract.methods
-                  .getTimestamp(fileArrayBuffer)
+                  .getTimestamp(hashNumber)
                   .call({ from: account })
                   .then(function(setTimestamp) {
                     ajaxPost( hashNumber,
