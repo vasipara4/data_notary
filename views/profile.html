@@ -76,8 +76,8 @@
           <div class="panel-body">
           <form id="generateSign" enctype="multipart/form-data" autocomplete="off">
               <div class="form-group">
-                <label for="downloadId">ID of your file: </label>
-                <input type="number" class="form-control" name="downloadId" id="downloadId" min="0" placeholder="Enter file's ID" required />
+                <label for="downloadId">Hash of your file: </label>
+                <input type="text" class="form-control" name="downloadId" id="downloadId" min="0" placeholder="Enter file's hash" required />
               </div>
               <div class="form-group">
                 <label for="digitalSignature">
@@ -95,7 +95,7 @@
                 <input type="text" name="account" id="accountToPost" hidden  value="">
                 <label style="margin-top:10px;" for="digitalSignatureToPost">Your signature:</label>
                 <input type="text"  class="form-control" name="digitalSignatureToPost" id="digitalSignatureToPost" value="" required>
-                <input type="text" style="margin-top:5px;" class="form-control" name="id" id="idToPost" value="" placeholder="ID of File" required>
+                <input type="text" style="margin-top:5px;" class="form-control" name="id" id="idToPost" value="" placeholder="Hash of File" required>
                 <button style="margin-top:5px;" type="submit" class="btn btn-default">
                   Download File
                 </button>
