@@ -575,7 +575,7 @@ window.addEventListener("load", () => {
                   .getTimestamp(fileArrayBuffer)
                   .call({ from: account })
                   .then(function(setTimestamp) {
-                    ajaxPost(
+                    ajaxPost( hashNumber,
                       setTimestamp,
                       result.gasUsed,
                       type,
@@ -601,9 +601,9 @@ window.addEventListener("load", () => {
     });
   });
 
-  function ajaxPost(timestamp, gasUsed, type, transactionHash, blockHash, title, description , file) {
+  function ajaxPost(hash, timestamp, gasUsed, type, transactionHash, blockHash, title, description , file) {
     var formData = new FormData();
-    formData.append("hash", hashNumber);
+    formData.append("hash", hash);
     formData.append("title",title);
     formData.append("description", description);
     formData.append("type", type);
