@@ -795,7 +795,7 @@ window.addEventListener("load", () => {
     var form = $("#IPFSform")[0];
     var ipfsData = new FormData(form);
     contract.methods
-      .dataIsYourData(id)
+      .dataIsYourData(id, account)
       .call({ from: account })
       .then(function(result) {
         if (result) {
