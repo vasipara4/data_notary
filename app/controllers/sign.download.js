@@ -3,7 +3,7 @@ const ethers = require("ethers");
 const path = require("path");
 
 exports.download = (req, res) => {
-  var id = req.body.id;
+  var id = req.body.hash;
 
   var signature = req.body.digitalSignatureToPost;
   var account = req.body.account;
@@ -41,7 +41,7 @@ exports.download = (req, res) => {
             });
           }
 
-          FindFile.find({ id: id }).then(result => {
+          FindFile.find({ hash: id }).then(result => {
             var url = result[0].url;
             var fileName = "download" + path.extname(url);
             console.log("Download File");
