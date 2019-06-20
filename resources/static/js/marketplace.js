@@ -608,8 +608,8 @@ window.addEventListener("load", () => {
         }
       });
       //if user hasn't added contents to our contract through our app => don't show his contents
-      if (typeof title === "") continue;
-      type = type === "" ? "" : `<li>Type: ${type} </li><<input id="buyItem${i}type"  type ="hidden"  value ="${type}" readonly />`;
+      if (title === "") continue;
+      type = type === "" ? "" : `<li>Type: ${type} </li><input id="buyItem${i}type"  type ="hidden"  value ="${type}" readonly />`;
       //if content is yours => make submit disable
       if (_isYours) {
         _isYours = `onsubmit="return false;"`;
