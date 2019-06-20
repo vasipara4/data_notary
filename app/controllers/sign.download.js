@@ -41,7 +41,7 @@ exports.download = (req, res) => {
             });
           }
 
-          FindFile.find({ hash: id }).then(result => {
+          FindFile.find({ hash: dataOriginal.toString() }).then(result => {
             var url = result[0].url;
             var fileName = "download" + path.extname(url);
             console.log("Download File");
