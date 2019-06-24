@@ -80,6 +80,15 @@ contract Marketplace{
       idIndexes.push(_hash);
   }
 
+  function dataWriteWithKeccak(string memory _input, uint _valueWei) public{
+    uint _hash;
+    bytes32[2] memory ipfsAddress;
+    _hash = uint(keccak256(abi.encodePacked(_input)));
+    require(dataToSubmission[_hash].submitter == address(0));
+    dataToSubmission[_hash] = dataObject(msg.sender, _hash, now, _valueWei, ipfsAddress);
+    idIndexes.push(_hash);
+  }
+
   function addAddressIPFS(bytes32[2] memory _addressIPFS, uint _hash) public onlySubmitter(_hash){
     (dataToSubmission[_hash].addressIPFS[0], dataToSubmission[_hash].addressIPFS[1]) = (_addressIPFS[0],_addressIPFS[1]);
   }
