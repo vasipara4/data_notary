@@ -157,7 +157,7 @@ exports.fileIntegrity = (req, res) => {
     });
   }
   console.log(hash);
-  address = address.toLowerCase();
+  //address = address.toLowerCase();
   console.log(address);
   UserModelDB.findOne({ hash: hash, submitter: address })
     .then(users => {

@@ -765,7 +765,7 @@ window.addEventListener("load", () => {
       return;
     }
     fileData.append("hash", hashfile);
-    fileData.append("address", addressOwner);
+    fileData.append("address", addressOwner.toLowerCase());
     $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
