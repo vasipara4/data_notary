@@ -1,5 +1,6 @@
 const UserModelDB = require("../models/user.model.js");
 const fs = require("fs");
+var ethers = require("ethers");
 
 // Save FormData - User to MongoDB
 exports.save = (req, res) => {
@@ -148,7 +149,6 @@ exports.findStrings = (req, res) => {
 
 //Check file integrity
 exports.fileIntegrity = (req, res) => {
-  var ethers = require("ethers");
   var hash = req.body.hash;
   var address = req.body.address;
   if (!web3.utils.isAddress(address)) {
@@ -163,7 +163,7 @@ exports.fileIntegrity = (req, res) => {
     .then(users => {
       console.log(users);
       var hashOfDb;
-      var url = __basedir + "/public" + users.url;
+      var url = __basedir + "/public" + users[0].url;
       fs.readFile(url, function(err, data) {
         if (err) {
           return res.status(400).send({
