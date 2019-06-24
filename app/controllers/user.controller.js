@@ -156,12 +156,12 @@ exports.fileIntegrity = (req, res) => {
       message: "Error"
     });
   }
-  address = address.toLowerCase();
-  console.log(address);
+
   UserModelDB.findOne({ hash: hash, submitter: address })
     .then(users => {
+      console.log(users);
       var hashOfDb;
-      var url = __basedir + "/public" + users[0].url;
+      var url = __basedir + "/public" + users.url;
       fs.readFile(url, function(err, data) {
         if (err) {
           return res.status(400).send({
