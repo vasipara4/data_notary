@@ -168,24 +168,22 @@ exports.fileIntegrity = (req, res) => {
             message: "Error"
           });
         }
-        var dataUint8 = new Uint8Array(data);
+        const dataUint8 = new Uint8Array(data);
         hashOfDb = ethers.utils.keccak256(dataUint8);
         console.log(hashOfDb);
         hashOfDb = ethers.utils.bigNumberify(hashDb).toString();
         console.log(hashOfDb);
         if (hashOfDb === hash) {
-          return res.send("True");
+          res.send("True");
         } else {
-          return res.send("False");
+          res.send("False");
         }
       });
     })
     .catch(err => {
-      res.status(500).send({
-        message: "Error"
-      });
-
-    return res.status(500).send({
+      res.send("Not Found in our Database");
+    });
+    return res.status(400).send({
       message: "Error"
     });
 };
