@@ -49,19 +49,19 @@ exports.save = (req, res) => {
     blockHash: req.body.blockHash
   });
 
-  // if (
-  //   typeof req.body.title !== "string" ||
-  //   typeof req.body.description !== "string" ||
-  //   typeof req.body.gasUsed !== "string" ||
-  //   typeof req.body.type !== "string" ||
-  //   typeof req.body.transactionHash !== "string" ||
-  //   typeof req.body.blockHash !== "string"
-  // ) {
-  //   fs.unlink(__basedir + "/public" + url_file);
-  //   return res.status(400).send({
-  //     message: "Error"
-  //   });
-  // }
+  if (
+    typeof req.body.title !== "string" ||
+    typeof req.body.description !== "string" ||
+    typeof req.body.gasUsed !== "string" ||
+    typeof req.body.type !== "string" ||
+    typeof req.body.transactionHash !== "string" ||
+    typeof req.body.blockHash !== "string"
+  ) {
+    fs.unlink(__basedir + "/public" + url_file);
+    return res.status(400).send({
+      message: "Error"
+    });
+  }
 
   var ethereumTimestamp;
   contract.methods
@@ -102,7 +102,8 @@ exports.save = (req, res) => {
           message: "Error"
         });
       }
-    }).catch(err=>console.log(err));
+    })
+    .catch(err => console.log(err));
 };
 
 // // Fetch all Users
@@ -123,7 +124,7 @@ exports.save = (req, res) => {
 //     });
 // };
 
-// Fetch only Title/Desc/ID
+// Fetch only Title/Desc/Hash
 exports.findStrings = (req, res) => {
   var usersProjection = {
     __v: false,
@@ -145,6 +146,51 @@ exports.findStrings = (req, res) => {
     });
 };
 
+
+//Check file integrity
+exports.fileIntegrity = (req, res) => {
+  var ethers = require('ethers');
+  var hash = req.body.hash;
+  var address = req.body.address;
+  if (!web3.utils.isAddress(address)) {
+    return res.status(400).send({
+      message: "Error"
+    });
+  }
+
+  UserModelDB.findOne({ hash: hash, submitter: address})
+    .then(users => {
+      var hashOfDb;
+      var url = __basedir + "/public" + users.url;
+      fs.readFile(url , function(err, data) {
+        if (err) {
+          return res.status(400).send({
+            message: "Error"
+          });
+        }
+          const dataUint8 = new Uint8Array(data);
+          hashOfDb = ethers.utils.keccak256(dataUint8);
+          hashOfDb = ethers.utils.bigNumberify(hashDb).toString();
+          if (hashOfDb === hash) {
+            res.send("True");
+          }
+          else {
+            res.send("False");
+          }
+
+      });
+
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+};
+
+
+
+//Buy process
 exports.buy = (req, res) => {
   var url_file = "PurchasedItem";
   var dateServer = Math.floor(new Date() / 1000);
