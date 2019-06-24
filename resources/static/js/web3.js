@@ -774,7 +774,7 @@ window.addEventListener("load", () => {
       data: fileData,
       processData: false,
       success: function(result) {
-        $("#getVerifyDbHashDiv").html("File Integrity: " + result);
+        $("#getVerifyDbHashDiv").html("File Integrity: " + result + "<br><br>");
       },
       error: function(e) {
         console.log("ERROR: ", e);
