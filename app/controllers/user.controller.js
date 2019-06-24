@@ -146,10 +146,9 @@ exports.findStrings = (req, res) => {
     });
 };
 
-
 //Check file integrity
 exports.fileIntegrity = (req, res) => {
-  var ethers = require('ethers');
+  var ethers = require("ethers");
   var hash = req.body.hash;
   var address = req.body.address;
   if (!web3.utils.isAddress(address)) {
@@ -157,36 +156,32 @@ exports.fileIntegrity = (req, res) => {
       message: "Error"
     });
   }
-
-  UserModelDB.findOne({ hash: hash, submitter: address.toString()})
+  address = address.toLowerCase();
+  console.log(address);
+  UserModelDB.findOne({ hash: hash, submitter: address })
     .then(users => {
       var hashOfDb;
       var url = __basedir + "/public" + users[0].url;
-      fs.readFile(url , function(err, data) {
+      fs.readFile(url, function(err, data) {
         if (err) {
           return res.status(400).send({
             message: "Error"
           });
         }
-          const dataUint8 = new Uint8Array(data);
-          hashOfDb = ethers.utils.keccak256(dataUint8);
-          hashOfDb = ethers.utils.bigNumberify(hashDb).toString();
-          if (hashOfDb === hash) {
-            res.send("True");
-          }
-          else {
-            res.send("False");
-          }
-
+        const dataUint8 = new Uint8Array(data);
+        hashOfDb = ethers.utils.keccak256(dataUint8);
+        hashOfDb = ethers.utils.bigNumberify(hashDb).toString();
+        if (hashOfDb === hash) {
+          res.send("True");
+        } else {
+          res.send("False");
+        }
       });
-
     })
     .catch(err => {
       res.send("False");
     });
 };
-
-
 
 //Buy process
 exports.buy = (req, res) => {
