@@ -168,7 +168,7 @@ exports.fileIntegrity = (req, res) => {
             message: "Error"
           });
         }
-        const dataUint8 = new Uint8Array(data);
+        var dataUint8 = new Uint8Array(data);
         hashOfDb = ethers.utils.keccak256(dataUint8);
         console.log(hashOfDb);
         hashOfDb = ethers.utils.bigNumberify(hashDb).toString();
@@ -183,9 +183,7 @@ exports.fileIntegrity = (req, res) => {
     .catch(err => {
       res.send("Not Found in our Database");
     });
-    return res.status(400).send({
-      message: "Error"
-    });
+
 };
 
 //Buy process
