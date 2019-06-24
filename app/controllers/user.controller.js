@@ -159,9 +159,8 @@ exports.fileIntegrity = (req, res) => {
 
   UserModelDB.findOne({ hash: hash, submitter: address })
     .then(users => {
-
       var hashOfDb;
-      var url = __basedir + "/public" + users[0].url;
+      var url = __basedir + "/public" + users.url;
       console.log(url);
       fs.readFile(url, function(err, data) {
         if (err) {
