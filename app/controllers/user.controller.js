@@ -156,8 +156,8 @@ exports.fileIntegrity = (req, res) => {
       message: "Error"
     });
   }
-console.log(hash);
-  UserModelDB.findOne({ hash: hash, submitter: address })
+address = address.toLowerCase();
+  UserModelDB.findOne({ 'hash': hash, 'submitter': address })
     .then(users => {
       console.log(users);
       var hashOfDb;
