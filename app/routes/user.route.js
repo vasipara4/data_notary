@@ -29,7 +29,7 @@ module.exports = function(app) {
         randomValueHex(40) +
           req.body.submitter +
           randomValueHex(5) +
-          req.body.id +
+          req.body.hash +
           path.extname(file.originalname)
       );
     }

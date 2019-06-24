@@ -158,10 +158,10 @@ exports.fileIntegrity = (req, res) => {
     });
   }
 
-  UserModelDB.findOne({ "hash": hash, "submitter": address})
+  UserModelDB.findOne({ hash: hash, submitter: address})
     .then(users => {
       var hashOfDb;
-      var url = __basedir + "/public" + users.url;
+      var url = __basedir + "/public" + users[0].url;
       fs.readFile(url , function(err, data) {
         if (err) {
           return res.status(400).send({
@@ -182,9 +182,7 @@ exports.fileIntegrity = (req, res) => {
 
     })
     .catch(err => {
-      res.status(500).send({
-        message: err.message
-      });
+      res.send("False");
     });
 };
 
