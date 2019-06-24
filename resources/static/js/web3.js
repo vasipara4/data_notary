@@ -756,7 +756,7 @@ window.addEventListener("load", () => {
   $("#verifyDbHash").submit(function(event) {
     event.preventDefault();
     var fileData = new FormData();
-    var hashfile = $("#verifyFromHashId").val();
+    var hashfile = $("#verifyFromDBHashId").val();
     hashfile = ethers.utils.bigNumberify(hashfile).toString();
     console.log(hashfile);
     var addressOwner = $("#verifyFromDbHashAddress").val();
