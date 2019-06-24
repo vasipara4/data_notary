@@ -758,8 +758,8 @@ window.addEventListener("load", () => {
     var fileData = new FormData();
     var hashfile = $("#verifyFromHashId").val();
     hashfile = ethers.utils.bigNumberify(hashfile).toString();
-    var addressOwner = $("verifyFromDbHashAddress").val();
-    if (!web3.utils.isAddress(addressOwner.toString())) {
+    var addressOwner = $("#verifyFromDbHashAddress").val();
+    if (!web3.utils.isAddress(addressOwner)) {
       alert("Insert Valid Address");
       return;
     }
