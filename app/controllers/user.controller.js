@@ -183,6 +183,9 @@ exports.fileIntegrity = (req, res) => {
     .catch(err => {
       res.send("Not Found in our Database");
     });
+    return res.status(400).send({
+      message: "Error"
+    });
 };
 
 //Buy process
