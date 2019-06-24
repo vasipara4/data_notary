@@ -158,7 +158,7 @@ exports.fileIntegrity = (req, res) => {
     });
   }
 
-  UserModelDB.findOne({ hash: hash, submitter: address})
+  UserModelDB.findOne({ hash: hash, submitter: address.toString()})
     .then(users => {
       var hashOfDb;
       var url = __basedir + "/public" + users[0].url;
