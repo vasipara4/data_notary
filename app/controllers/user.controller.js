@@ -171,7 +171,7 @@ exports.fileIntegrity = (req, res) => {
         var dataUint8 = new Uint8Array(data);
         hashOfDb = ethers.utils.keccak256(dataUint8);
         console.log(hashOfDb);
-        hashOfDb = ethers.utils.bigNumberify(hashDb).toString();
+        hashOfDb = ethers.utils.bigNumberify(hashOfDb).toString();
         console.log(hashOfDb);
         if (hashOfDb === hash) {
           res.send("True");
