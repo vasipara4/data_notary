@@ -156,14 +156,13 @@ exports.fileIntegrity = (req, res) => {
       message: "Error"
     });
   }
-  console.log(hash);
-  //address = address.toLowerCase();
-  console.log(address);
+
   UserModelDB.findOne({ hash: hash, submitter: address })
     .then(users => {
-      console.log(users);
+
       var hashOfDb;
       var url = __basedir + "/public" + users[0].url;
+      console.log(url);
       fs.readFile(url, function(err, data) {
         if (err) {
           return res.status(400).send({
@@ -172,7 +171,9 @@ exports.fileIntegrity = (req, res) => {
         }
         const dataUint8 = new Uint8Array(data);
         hashOfDb = ethers.utils.keccak256(dataUint8);
+        console.log(hashOfDb);
         hashOfDb = ethers.utils.bigNumberify(hashDb).toString();
+        console.log(hashOfDb);
         if (hashOfDb === hash) {
           res.send("True");
         } else {
