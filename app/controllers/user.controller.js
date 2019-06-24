@@ -179,7 +179,7 @@ address = address.toLowerCase();
       });
     })
     .catch(err => {
-      res.send("Not in our Database");
+      res.send("Not Found in our Database");
     });
 };
 
