@@ -758,7 +758,6 @@ window.addEventListener("load", () => {
     var fileData = new FormData();
     var hashfile = $("#verifyFromDBHashId").val();
     hashfile = ethers.utils.bigNumberify(hashfile).toString();
-    console.log(hashfile);
     var addressOwner = $("#verifyFromDbHashAddress").val();
     if (!web3.utils.isAddress(addressOwner)) {
       alert("Insert Valid Address");
@@ -774,7 +773,7 @@ window.addEventListener("load", () => {
       data: fileData,
       processData: false,
       success: function(result) {
-        $("#getVerifyDbHashDiv").html("File Integrity: " + result + "<br><br>");
+        $("#getVerifyDbHashDiv").html("File Integrity: " + result + "<hr><hr>");
       },
       error: function(e) {
         console.log("ERROR: ", e);
