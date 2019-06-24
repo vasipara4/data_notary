@@ -156,7 +156,9 @@ exports.fileIntegrity = (req, res) => {
       message: "Error"
     });
   }
-console.log(hash);
+  console.log(hash);
+  address = address.toLowerCase();
+  console.log(address);
   UserModelDB.findOne({ hash: hash, submitter: address })
     .then(users => {
       console.log(users);
@@ -179,7 +181,7 @@ console.log(hash);
       });
     })
     .catch(err => {
-      res.send("False");
+      res.send("Not Found in our Database");
     });
 };
 
