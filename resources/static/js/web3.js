@@ -672,24 +672,41 @@ window.addEventListener("load", () => {
                     .getDataDetails(testingData)
                     .call({ from: account })
                     .then(function(result) {
-                      var IPFSstring =
-                        ethers.utils.parseBytes32String(result[4]) === ""
-                          ? "No File"
-                          : ethers.utils.parseBytes32String(result[4]) +
-                            ethers.utils.parseBytes32String(result[5]);
-                      verifyHtml =
-                        "True" +
-                        "<br>Account Original: " +
-                        result[0] +
-                        "<br><br>Data: " +
-                        web3.utils.toHex(result[1]) +
-                        "<br><br>Unix Date: " +
-                        result[2] +
-                        "<br>Time and Date :<br> " +
-                        unixTimeToDate(result[2]) +
-                        "<br>IPFS file: " +
-                        IPFSstring;
-                      $("#getVerifyDiv").html("Data	Integrity: " + verifyHtml);
+                      contract.methods
+                        .getDataShareFromAddressID(
+                          testingFileOwnerAdress,
+                          testingData
+                        )
+                        .call({ from: account })
+                        .then(function(dataBought) {
+                          var timeShare =
+                            dataBought[0] == "0"
+                              ? ""
+                              : "<br>Time and Date Shared :<br> " +
+                                unixTimeToDate(dataBought[1]);
+                          var addressShared =
+                            dataBought[0] == "0"
+                              ? ""
+                              : "<br>Address Shared: " + testingFileOwnerAdress;
+                          var IPFSstring =
+                            ethers.utils.parseBytes32String(result[4]) === ""
+                              ? "No File"
+                              : ethers.utils.parseBytes32String(result[4]) +
+                                ethers.utils.parseBytes32String(result[5]);
+                          verifyHtml =
+                            "True" +
+                            "<br>Account Original: " +
+                            result[0] +
+                            "<br>Time and Date First Inserted :<br> " +
+                            unixTimeToDate(result[2]) +
+                            "<br>IPFS file: " +
+                            IPFSstring +
+                            addressShared +
+                            timeShare;
+                          $("#getVerifyHashDiv").html(
+                            "Data	Integrity: " + verifyHtml
+                          );
+                        });
                     });
                 } else $("#getVerifyDiv").html("Data Integrity: " + verifyHtml);
               });
@@ -725,15 +742,15 @@ window.addEventListener("load", () => {
                       )
                       .call({ from: account })
                       .then(function(dataBought) {
-                        console.log(dataBought);
                         var timeShare =
                           dataBought[0] == "0"
                             ? ""
                             : "<br>Time and Date Shared :<br> " +
                               unixTimeToDate(dataBought[1]);
-                        var addressShared = dataBought[0] == "0"
-                          ? ""
-                          : "<br>Address Shared: " + testingFileOwnerAdress;
+                        var addressShared =
+                          dataBought[0] == "0"
+                            ? ""
+                            : "<br>Address Shared: " + testingFileOwnerAdress;
                         var IPFSstring =
                           ethers.utils.parseBytes32String(result[4]) === ""
                             ? "No File"
@@ -746,7 +763,8 @@ window.addEventListener("load", () => {
                           "<br>Time and Date First Inserted :<br> " +
                           unixTimeToDate(result[2]) +
                           "<br>IPFS file: " +
-                          IPFSstring + addressShared +
+                          IPFSstring +
+                          addressShared +
                           timeShare;
                         $("#getVerifyHashDiv").html(
                           "Data	Integrity: " + verifyHtml
