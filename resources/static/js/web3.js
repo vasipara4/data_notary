@@ -743,7 +743,6 @@ window.addEventListener("load", () => {
                           unixTimeToDate(result[2]) +
                           "<br>IPFS file: " +
                           IPFSstring +
-                          addressShare +
                           timeShare;
                         $("#getVerifyHashDiv").html(
                           "Data	Integrity: " + verifyHtml
