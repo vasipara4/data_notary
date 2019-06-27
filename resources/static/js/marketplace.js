@@ -592,7 +592,7 @@ window.addEventListener("load", () => {
     });
     console.log("GET REQ");
     const items = await contractEtherJS.getItemsBuyable(account);
-    console.log("get items Buyable");
+    console.log(items);
     for (var i = 0; i < items[1].length; i++) {
       var title = "";
       var description;
