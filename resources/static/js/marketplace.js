@@ -584,12 +584,15 @@ window.addEventListener("load", () => {
   //Calculate Marketplace Variables
   (async function() {
     account = await web3.eth.getAccounts();
+    console.log("Get Accounts");
     account = account[0];
     const stringsTitleDescID = await $.ajax({
       type: "GET",
       url: window.location.origin + "/api/users/strings"
     });
+    console.log("GET REQ");
     const items = await contractEtherJS.getItemsBuyable(account);
+    console.log("get items Buyable");
     for (var i = 0; i < items[1].length; i++) {
       var title = "";
       var description;
