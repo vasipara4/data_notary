@@ -590,7 +590,7 @@ window.addEventListener("load", () => {
       type: "GET",
       url: window.location.origin + "/api/users/strings"
     });
-    console.log("GET REQ");
+    console.log(stringsTitleDescID);
     const items = await contractEtherJS.getItemsBuyable(account);
     console.log(items);
     for (var i = 0; i < items[1].length; i++) {
