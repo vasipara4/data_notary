@@ -725,13 +725,8 @@ window.addEventListener("load", () => {
                       )
                       .call({ from: account })
                       .then(function(dataBought) {
-                        var addressShare =
-                          dataBought[0] == ""
-                            ? ""
-                            : "<br> Address Share: " +
-                              ethers.utils.hexlify(ethers.utils.bigNumberify(dataBought[0]));
                         var timeShare =
-                          dataBought[1] == ""
+                          dataBought[0] == "0x00"
                             ? ""
                             : "<br>Time and Date Shared :<br> " +
                               unixTimeToDate(dataBought[1]);
