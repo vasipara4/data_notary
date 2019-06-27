@@ -546,6 +546,7 @@ window.addEventListener("load", () => {
     event.preventDefault();
     var elementLoading = document.getElementById("insertLoading");
     var type = $("input:radio[name=optradio]:checked").val();
+    var radioSaveToDb = $("input:radio[name=radioSaveToDb]:checked").val();
     var weiValue = $("#weiValue").val();
     var fileArrayBuffer;
     var hashNumber;
@@ -564,14 +565,19 @@ window.addEventListener("load", () => {
         .call({ from: account })
         .then(function(result) {
           if (result == false) {
-            $("#postResultDiv").html(
-              "<b>Do not close this Window until uploading is done</b>"
-            );
-            elementLoading.classList.add("running");
+            if (radioSaveToDb === "Yes") {
+              $("#postResultDiv").html(
+                "<b>Please, wait. <br>Do not close the Window until uploading is done</b>"
+              );
+              elementLoading.classList.add("running");
+            }
             contract.methods
               .dataWrite(hashNumber, weiValue)
               .send({ from: account })
               .then(function(result) {
+                if (radioSaveToDb === "No") {
+                  return;
+                }
                 contract.methods
                   .getTimestamp(hashNumber)
                   .call({ from: account })
@@ -730,20 +736,29 @@ window.addEventListener("load", () => {
                   .getDataDetails(testingData)
                   .call({ from: account })
                   .then(function(result) {
-                    var IPFSstring =
-                      ethers.utils.parseBytes32String(result[4]) === ""
-                        ? "No File"
-                        : ethers.utils.parseBytes32String(result[4]) +
-                          ethers.utils.parseBytes32String(result[5]);
-                    verifyHtml =
-                      "True" +
-                      "<br>Account Original: " +
-                      result[0] +
-                      "<br>Time and Date First Inserted :<br> " +
-                      unixTimeToDate(result[2]) +
-                      "<br>IPFS file: " +
-                      IPFSstring;
-                    $("#getVerifyHashDiv").html("Data	Integrity: " + verifyHtml);
+                    contract.methods
+                      .getDataShareFromAddressID()
+                      .call({ from: account })
+                      .then(function(dataBought) {
+                        var addressShare = dataBought[0] == "" ? "" : "<br> Address Share:" + dataBought[0];
+                        var timeShare = dataBought[1] == "" ? "" : "<br>Time and Date Shared :<br> " + unixTimeToDate(dataBought[1]);
+                        var IPFSstring =
+                          ethers.utils.parseBytes32String(result[4]) === ""
+                            ? "No File"
+                            : ethers.utils.parseBytes32String(result[4]) +
+                              ethers.utils.parseBytes32String(result[5]);
+                        verifyHtml =
+                          "True" +
+                          "<br>Account Original: " +
+                          result[0] +
+                          "<br>Time and Date First Inserted :<br> " +
+                          unixTimeToDate(result[2]) +
+                          "<br>IPFS file: " +
+                          IPFSstring + addressShare + timeShare;
+                        $("#getVerifyHashDiv").html(
+                          "Data	Integrity: " + verifyHtml
+                        );
+                      });
                   });
               } else
                 $("#getVerifyHashDiv").html("Data Integrity: " + verifyHtml);
