@@ -740,7 +740,7 @@ window.addEventListener("load", () => {
                       .getDataShareFromAddressID(testingFileOwnerAdress, testingData)
                       .call({ from: account })
                       .then(function(dataBought) {
-                        var addressShare = dataBought[0] == "" ? "" : "<br> Address Share:" + dataBought[0].toHexString();
+                        var addressShare = dataBought[0] == "" ? "" : "<br> Address Share:" + web3.utils.toHex(new BigNumber(dataBought[0]));
                         var timeShare = dataBought[1] == "" ? "" : "<br>Time and Date Shared :<br> " + unixTimeToDate(dataBought[1]);
                         var IPFSstring =
                           ethers.utils.parseBytes32String(result[4]) === ""
