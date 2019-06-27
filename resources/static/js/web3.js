@@ -725,6 +725,7 @@ window.addEventListener("load", () => {
                       )
                       .call({ from: account })
                       .then(function(dataBought) {
+                        console.log(dataBought);
                         var timeShare =
                           dataBought[0] == "0x00"
                             ? ""
