@@ -601,6 +601,8 @@ window.addEventListener("load", () => {
       var type = "";
       var submitButton;
       $.each(stringsTitleDescID, function(index, user) {
+        console.log(user.hash.toString());
+        console.log(idOfItem.toString()));
         if (user.hash.toString() === idOfItem.toString()) {
           title = user.title;
           description = user.description;
