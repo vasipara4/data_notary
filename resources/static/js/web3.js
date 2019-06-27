@@ -522,24 +522,6 @@ window.addEventListener("load", () => {
     "0xa89fc3f6dde67bc1d0c0c144d15c420f7be385f2"
   );
 
-  //ID Generator
-  $("#generatorButton").on("click", function(event) {
-    var idRequest;
-    var idExist;
-    (async function() {
-      do {
-        idRequest = ethers.utils.randomBytes(32);
-        idRequest = ethers.utils.bigNumberify(idRequest);
-        idRequest = idRequest.toString();
-        idExist = await contract.methods
-          .dataExists(idRequest)
-          .call({ from: account });
-      } while (idExist);
-      $("#id").val(idRequest);
-      return;
-    })();
-  });
-
   //POST Ethereum & Db
   $("#userForm").submit(function(event) {
     // Prevent the form from submitting via the browser.
@@ -737,11 +719,22 @@ window.addEventListener("load", () => {
                   .call({ from: account })
                   .then(function(result) {
                     contract.methods
-                      .getDataShareFromAddressID(testingFileOwnerAdress, testingData)
+                      .getDataShareFromAddressID(
+                        testingFileOwnerAdress,
+                        testingData
+                      )
                       .call({ from: account })
                       .then(function(dataBought) {
-                        var addressShare = dataBought[0] == "" ? "" : "<br> Address Share:" + ethers.utils.hexlify(dataBought[0]);
-                        var timeShare = dataBought[1] == "" ? "" : "<br>Time and Date Shared :<br> " + unixTimeToDate(dataBought[1]);
+                        var addressShare =
+                          dataBought[0] == ""
+                            ? ""
+                            : "<br> Address Share: " +
+                              ethers.utils.hexlify(ethers.utils.bigNumberify(dataBought[0]));
+                        var timeShare =
+                          dataBought[1] == ""
+                            ? ""
+                            : "<br>Time and Date Shared :<br> " +
+                              unixTimeToDate(dataBought[1]);
                         var IPFSstring =
                           ethers.utils.parseBytes32String(result[4]) === ""
                             ? "No File"
@@ -754,7 +747,9 @@ window.addEventListener("load", () => {
                           "<br>Time and Date First Inserted :<br> " +
                           unixTimeToDate(result[2]) +
                           "<br>IPFS file: " +
-                          IPFSstring + addressShare + timeShare;
+                          IPFSstring +
+                          addressShare +
+                          timeShare;
                         $("#getVerifyHashDiv").html(
                           "Data	Integrity: " + verifyHtml
                         );
