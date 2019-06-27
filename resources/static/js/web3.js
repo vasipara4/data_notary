@@ -727,10 +727,13 @@ window.addEventListener("load", () => {
                       .then(function(dataBought) {
                         console.log(dataBought);
                         var timeShare =
-                          dataBought[0] == "0x00"
+                          dataBought[0] == "0"
                             ? ""
                             : "<br>Time and Date Shared :<br> " +
                               unixTimeToDate(dataBought[1]);
+                        var addressShared = dataBought[0] == "0"
+                          ? ""
+                          : "<br>Address Shared: " + testingFileOwnerAdress;
                         var IPFSstring =
                           ethers.utils.parseBytes32String(result[4]) === ""
                             ? "No File"
@@ -743,7 +746,7 @@ window.addEventListener("load", () => {
                           "<br>Time and Date First Inserted :<br> " +
                           unixTimeToDate(result[2]) +
                           "<br>IPFS file: " +
-                          IPFSstring +
+                          IPFSstring + addressShared +
                           timeShare;
                         $("#getVerifyHashDiv").html(
                           "Data	Integrity: " + verifyHtml
