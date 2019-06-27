@@ -737,7 +737,7 @@ window.addEventListener("load", () => {
                   .call({ from: account })
                   .then(function(result) {
                     contract.methods
-                      .getDataShareFromAddressID()
+                      .getDataShareFromAddressID(testingFileOwnerAdress, testingData)
                       .call({ from: account })
                       .then(function(dataBought) {
                         var addressShare = dataBought[0] == "" ? "" : "<br> Address Share:" + dataBought[0];
