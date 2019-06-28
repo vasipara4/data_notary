@@ -23,7 +23,6 @@ contract Marketplace{
   }
 
 
-
   mapping (uint => dataObject) private dataToSubmission;
   mapping (address => mapping (uint => dataShare) ) private addressToCopyrights;
   uint[] private idIndexes;
@@ -45,8 +44,8 @@ contract Marketplace{
     _;
   }
 
-  modifier newCopyrightsAddressEmpty(uint _hash) {
-    require(addressToCopyrights[msg.sender][_hash].date == 0);
+  modifier newCopyrightsAddressEmpty(address _to, uint _hash) {
+    require(addressToCopyrights[_to][_hash].date == 0);
     _;
   }
   modifier canYouBuyCopyrights(uint _hash) {
@@ -54,9 +53,13 @@ contract Marketplace{
     _;
   }
 
+  modifier rightsToRate(address _to, uint _hash){
+	require (dataToSubmission[_hash].data == addressToCopyrights[msg.sender][_hash].data && dataToSubmission[_hash].submitter == _to);
+	_;
+}
 
   //payable & money
-  function takeCopyrights(uint _hash) canYouBuyCopyrights(_hash) newCopyrightsAddressEmpty(_hash) public payable {
+  function takeCopyrights(uint _hash) canYouBuyCopyrights(_hash) newCopyrightsAddressEmpty(msg.sender, _hash) public payable {
     if ( msg.value >= dataToSubmission[_hash].valueWei){
       addressToCopyrights[msg.sender][_hash].data = dataToSubmission[_hash].data;
       addressToCopyrights[msg.sender][_hash].date = now;
@@ -67,7 +70,7 @@ contract Marketplace{
     function withdrawFunds(uint amount) public returns(bool success) {
     require(balances[msg.sender] >= amount);
     balances[msg.sender] =  balances[msg.sender].sub(amount);
-    msg.sender.transfer(amount);  // transfer
+    msg.sender.transfer(amount);
     return true;
 }
 
@@ -80,17 +83,23 @@ contract Marketplace{
       idIndexes.push(_hash);
   }
 
-  function dataWriteWithKeccak(string memory _input, uint _valueWei) public{
+  function dataWriteWithKeccak(string memory _input) public{
     uint _hash;
     bytes32[2] memory ipfsAddress;
     _hash = uint(keccak256(abi.encodePacked(_input)));
     require(dataToSubmission[_hash].submitter == address(0));
-    dataToSubmission[_hash] = dataObject(msg.sender, _hash, now, _valueWei, ipfsAddress);
+    dataToSubmission[_hash] = dataObject(msg.sender, _hash, now, 0, ipfsAddress);
     idIndexes.push(_hash);
   }
 
   function addAddressIPFS(bytes32[2] memory _addressIPFS, uint _hash) public onlySubmitter(_hash){
     (dataToSubmission[_hash].addressIPFS[0], dataToSubmission[_hash].addressIPFS[1]) = (_addressIPFS[0],_addressIPFS[1]);
+  }
+
+  function shareOwnership(address _to, uint _hash) newCopyrightsAddressEmpty(_to, _hash) public{
+      require(dataToSubmission[_hash].submitter == msg.sender );
+      addressToCopyrights[_to][_hash].data = _hash;
+      addressToCopyrights[_to][_hash].date = now;
   }
 
   function updateWeiValue(uint _hash, uint _valueWei) public onlySubmitter(_hash){
@@ -175,7 +184,6 @@ contract Marketplace{
   function getItemsPurchased(address _owner)public view returns (dataObject[] memory, bool[] memory) {
     uint localId = 0;
     dataObject[] memory items = new dataObject[](idIndexes.length);
-    //uint[] memory _hash = new uint[](idIndexes.length);
     bool[] memory _isNotEmpty = new bool[](idIndexes.length);
     for(uint i=0; i < idIndexes.length;i++){
       if(addressToCopyrights[_owner][idIndexes[i]].date != 0){
@@ -183,7 +191,7 @@ contract Marketplace{
         items[localId].date = addressToCopyrights[_owner][idIndexes[i]].date;
         items[localId].valueWei = 0;
         _isNotEmpty[localId] = true;
-        //_hash[localId]=idIndexes[i];
+
         localId++;
       }
     }
