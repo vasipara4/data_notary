@@ -255,7 +255,7 @@ window.addEventListener("load", () => {
       .updateWeiValue(hashOfFileUpdate, newValueWei)
       .send({ from: account })
       .then(function(res) {
-        location.reload();
+        console.log(res);
       })
       .catch(e => console.log(e));
   });
@@ -296,7 +296,7 @@ window.addEventListener("load", () => {
     var hashOfFile = $("#hashOfFileToSend").val();
     var toAddress = $("#addressToOwnYourFile").val();
     contract.methods.shareOwnership(toAddress, hashOfFile).send({from:account}).then(function(result){
-      location.reload();
+      console.log(result);
     });
 
 });
