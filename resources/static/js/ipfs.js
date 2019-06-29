@@ -1,3 +1,4 @@
+const ipfs = window.IpfsHttpClient();
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
@@ -50,7 +51,7 @@ window.addEventListener("load", () => {
     // Time to reload your interface with accounts[0]!
     account = accounts[0];
   });
-  const ipfs = window.IpfsHttpClient();
+
   const addressContract = "0xfc291dc329d996a908fc8c0a8f6606ddd5f7984b";
   const abi = [
     {
@@ -302,6 +303,7 @@ window.addEventListener("load", () => {
     // Prevent the form from submitting via the browser.
     event.preventDefault();
     $("#resultIPFS").html("");
+    ipfsElementLoading.classList.add("running");
     var ipfsElementLoading = document.getElementById("insertIPFS");
     var ipfsInput = document.getElementById("file");
     var id = $("#idOfIPFS").val();
@@ -315,7 +317,7 @@ window.addEventListener("load", () => {
         .call({ from: account })
         .then(function(result) {
           if (result) {
-            ipfsElementLoading.classList.add("running");
+
             contract.methods
               .addAddressIPFS(ipfsHashToBytes32(ipfsHash), id)
               .send({ from: account })
@@ -345,6 +347,7 @@ window.addEventListener("load", () => {
                 alert(error);
               });
           } else {
+            ipfsElementLoading.classList.remove("running");
             alert("Insert only on your own Ethereum Submission");
           }
         });
