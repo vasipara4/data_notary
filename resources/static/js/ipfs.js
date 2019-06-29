@@ -50,7 +50,7 @@ window.addEventListener("load", () => {
     // Time to reload your interface with accounts[0]!
     account = accounts[0];
   });
-  const ipfs = window.IpfsHttpClient("localhost", "5001");
+  const ipfs = window.IpfsHttpClient();
   const addressContract = "0xfc291dc329d996a908fc8c0a8f6606ddd5f7984b";
   const abi = [
     {
