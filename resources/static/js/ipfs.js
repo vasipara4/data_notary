@@ -357,3 +357,10 @@ function ipfsHashToBytes32(hash) {
   var hashPart2 = ethers.utils.formatBytes32String(hash.slice(31, hash.length));
   return new Array(hashPart1, hashPart2);
 }
+
+function showFileName() {
+  var input = document.getElementById("file");
+  var infoArea = document.getElementById("file-upload-filename");
+  var fileName = input.files[0].name;
+  infoArea.textContent = "Selected: " + fileName;
+}
