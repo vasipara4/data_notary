@@ -310,6 +310,7 @@ window.addEventListener("load", () => {
     var idSubmit = formId + "Submit";
     var weiToPay = $("#" + weiValueForm).val();
     var idRequest = $("#" + idItemForm).val();
+    console.log(idRequest);
     var type = $("#" + typeID).val();
     $("#" + idSubmit).attr("value", "Do NOT close the Marketplace");
     contract.methods
@@ -328,6 +329,7 @@ window.addEventListener("load", () => {
           .call({ from: account })
           .then(function(timestamp) {
             formData.append("timestamp", timestamp[1]);
+            console.log(timestamp[1]);
             $.ajax({
               type: "POST",
               enctype: "multipart/form-data",

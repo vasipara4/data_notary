@@ -3,7 +3,6 @@ module.exports = function(app) {
   const multer = require("multer");
   const path = require("path");
   var crypto = require("crypto");
-
   var ipfs = ipfsClient("localhost", "5001", { protocol: "http" });
 
   var express = require("express");
@@ -63,7 +62,10 @@ module.exports = function(app) {
   });
 
   app.get("/profile.html", (req, res) => {
-    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate, proxy-revalidate");
+    res.header(
+      "Cache-Control",
+      "private, no-cache, no-store, must-revalidate, proxy-revalidate"
+    );
     res.header("Expires", "-1");
     res.header("Pragma", "no-cache");
     res.sendFile(pathOfHtml + "profile.html");
@@ -113,15 +115,14 @@ module.exports = function(app) {
     //options: {onlyHash: true, progress: (prog) => {console.log(`received: ${prog}`)}}
     var resultIPFS = ipfs.add(req.file.buffer, (err, result) => {
       if (err) {
-        throw err;
+        return res.status(400).send({
+          message: "Error"
+        });
       }
       console.log(result);
       res.json(result);
     });
   });
-
-  // Retrieve all Users' Info
-//  app.get("/api/users/all", users.findAll);
 
   app.get("/api/users/strings", users.findStrings);
 

@@ -1,5 +1,3 @@
-
-const ipfs = window.IpfsHttpClient('localhost', '5001');
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
@@ -311,49 +309,45 @@ window.addEventListener("load", () => {
     var id = $("#idOfIPFS").val();
     var form = $("#IPFSform")[0];
     var ipfsData = new FormData(form);
-    ipfs.add(ipfsInput.files[0], { onlyHash: true }, function(err, res) {
-      if (err) return;
-      var ipfsHash = res.hash;
-      contract.methods
-        .dataIsYourData(id, account)
-        .call({ from: account })
-        .then(function(result) {
-          if (result) {
-
-            contract.methods
-              .addAddressIPFS(ipfsHashToBytes32(ipfsHash), id)
-              .send({ from: account })
-              .then(function(result) {
-                $.ajax({
-                  type: "POST",
-                  enctype: "multipart/form-data",
-                  contentType: false,
-                  url: window.location.origin + "/api/ipfs/save",
-                  data: ipfsData,
-                  processData: false,
-                  success: function(resultIPFS) {
-                    $("#resultIPFS").html(
-                      "<p>IPFS address: " + resultIPFS[0].hash + "</p>"
-                    );
-                    ipfsElementLoading.classList.remove("running");
-                  },
-                  error: function(e) {
-                    ipfsElementLoading.classList.remove("running");
-                    alert("Error!");
-                    console.log("ERROR: ", e);
-                  }
+    var ipfsHash;
+    contract.methods
+      .dataIsYourData(id, account)
+      .call({ from: account })
+      .then(function(result) {
+        if (result) {
+          $.ajax({
+            type: "POST",
+            enctype: "multipart/form-data",
+            contentType: false,
+            url: window.location.origin + "/api/ipfs/save",
+            data: ipfsData,
+            processData: false,
+            success: function(resultIPFS) {
+              contract.methods
+                .addAddressIPFS(ipfsHashToBytes32(resultIPFS.hash), id)
+                .send({ from: account })
+                .then(function(result) {
+                  $("#resultIPFS").html(
+                    "<p>IPFS address: " + resultIPFS.hash + "</p>"
+                  );
+                  ipfsElementLoading.classList.remove("running");
+                })
+                .catch(function(error) {
+                  ipfsElementLoading.classList.remove("running");
+                  alert(error);
                 });
-              })
-              .catch(function(error) {
-                ipfsElementLoading.classList.remove("running");
-                alert(error);
-              });
-          } else {
-            ipfsElementLoading.classList.remove("running");
-            alert("Insert only on your own Ethereum Submission");
-          }
-        });
-    });
+            },
+            error: function(e) {
+              ipfsElementLoading.classList.remove("running");
+              alert("Error!");
+              console.log("ERROR: ", e);
+            }
+          });
+        } else {
+          ipfsElementLoading.classList.remove("running");
+          alert("Insert only on your own Ethereum Submission");
+        }
+      });
   });
 });
 
