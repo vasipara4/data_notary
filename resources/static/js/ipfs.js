@@ -311,7 +311,7 @@ window.addEventListener("load", () => {
     var id = $("#idOfIPFS").val();
     var form = $("#IPFSform")[0];
     var ipfsData = new FormData(form);
-    ipfs.add(ipfsInput, { onlyHash: true }, function(err, res) {
+    ipfs.add(ipfsInput.files[0], { onlyHash: true }, function(err, res) {
       if (err) return;
       var ipfsHash = res.hash;
       contract.methods
