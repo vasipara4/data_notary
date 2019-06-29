@@ -308,6 +308,7 @@ window.addEventListener("load", () => {
     var idItemForm = formId + "ID";
     var typeID = formId + "type";
     var idSubmit = formId + "Submit";
+    var formData = new FormData();
     var weiToPay = $("#" + weiValueForm).val();
     var idRequest = $("#" + idItemForm).val();
     console.log(idRequest);
@@ -317,7 +318,6 @@ window.addEventListener("load", () => {
       .takeCopyrights(idRequest)
       .send({ from: account, value: weiToPay })
       .then(function(result) {
-        var formData = new FormData();
         formData.append("submitter", account);
         formData.append("hash", idRequest);
         formData.append("transactionHash", result.transactionHash);
