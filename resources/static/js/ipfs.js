@@ -1,5 +1,5 @@
 
-const ipfs = window.IpfsHttpClient('localhost', '5001');
+const ipfs = window.IpfsHttpClient();
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
