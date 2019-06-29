@@ -1,4 +1,5 @@
-const ipfs = window.IpfsHttpClient();
+var ipfsClient = require('ipfs-http-client');
+var ipfs = ipfsClient();
 window.addEventListener("load", () => {
   var account;
   const desiredNetwork = 3;
