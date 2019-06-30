@@ -621,7 +621,7 @@ async function openFile(id) {
       var bytes = new Uint8Array(arrayBuffer);
       resolve(bytes);
     };
-    fr.readAsArrayBuffer(input); // or readAsText(file) to get raw content
+    fr.readAsArrayBuffer(input); 
   });
   var result = await readfile;
   return result;

@@ -11,7 +11,7 @@ global.web3 = new Web3(
 web3.eth.net
   .getNetworkType()
   .then(result => console.log("Ethereum network:" + result));
-//const net = require('net');
+
 global.contract = new web3.eth.Contract(
   [
     {
@@ -260,7 +260,6 @@ global.contract = new web3.eth.Contract(
 
 app.use(helmet());
 app.use(express.static("resources"));
-//app.use(express.static("public"));
 
 global.__basedir = __dirname;
 

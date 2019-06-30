@@ -13,7 +13,7 @@ exports.save = (req, res) => {
   //dateServer can be smaller than block.timestamp for 50 seconds
   //after 150 seconds the POST request is canceled
   // MUST: req.body.timestamp -50 < dateServer OR dateServer < req.body.timestamp + 150 to be valid
-  // WHY : stop AJAX POSTS that they're not by the users
+  // WHY : stop AJAX POSTS that they're not by the users.
   if (
     dateServer < req.body.timestamp - 50 ||
     dateServer > req.body.timestamp + 150
@@ -105,10 +105,16 @@ exports.save = (req, res) => {
         });
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      fs.unlink(__basedir + "/public" + url_file);
+      return res.status(400).send({
+        message: "Error"
+      });
+    });
 };
 
-// Fetch only Title/Desc/Hash
+// Fetch only Title/Desc/Hashes
 exports.findStrings = (req, res) => {
   var usersProjection = {
     __v: false,
@@ -166,5 +172,4 @@ exports.fileIntegrity = (req, res) => {
     .catch(err => {
       res.send("Not Found in our Database");
     });
-
 };

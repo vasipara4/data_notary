@@ -53,11 +53,7 @@ contract Marketplace{
     _;
   }
 
-  modifier rightsToRate(address _to, uint _hash){
-	require (dataToSubmission[_hash].data == addressToCopyrights[msg.sender][_hash].data && dataToSubmission[_hash].submitter == _to);
-	_;
-}
-
+ 
   //payable & money
   function takeCopyrights(uint _hash) canYouBuyCopyrights(_hash) newCopyrightsAddressEmpty(msg.sender, _hash) public payable {
     if ( msg.value >= dataToSubmission[_hash].valueWei){
