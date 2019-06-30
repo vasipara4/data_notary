@@ -49,7 +49,7 @@
           <div class="form-group">
             <label for="file">File <font size="2">(size limit 16MB)</font>:
             </label>
-            <input type="file" name="file" id="file" onchange="showFileName(`file-upload-filename`)" required />
+            <input type="file" name="file" id="file" onchange="showFileName(`file`,`file-upload-filename`)" required />
             <label for="file" class="btn-1">Upload</label>
             <div id="file-upload-filename"></div>
             <div>
@@ -107,7 +107,7 @@
         <form id="verifyForm">
           <div class="form-group">
             <label for="uploadTestFile">File:</label>
-            <input type="file" id="uploadTestFile" onchange="showFileName(`file-upload-filename-verify`)" required />
+            <input type="file" id="uploadTestFile" onchange="showFileName(`uploadTestFile`,`file-upload-filename-verify`)" required />
             <label for="uploadTestFile" class="btn-1">Upload</label>
           </div>
           <div id="file-upload-filename-verify"></div>

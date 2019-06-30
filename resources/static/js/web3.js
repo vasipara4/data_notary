@@ -627,8 +627,8 @@ async function openFile(id) {
   return result;
 }
 
-function showFileName(id) {
-  var input = document.getElementById("file");
+function showFileName(file,id) {
+  var input = document.getElementById(file);
   var infoArea = document.getElementById(id);
   var fileName = input.files[0].name;
   infoArea.textContent = "Selected: " + fileName;
