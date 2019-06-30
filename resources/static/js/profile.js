@@ -344,6 +344,7 @@ window.addEventListener("load", () => {
           var blockHash = "";
           var type = "";
           var title = "";
+          var mode = "<p>Original File - Notarization Service</p>";
           var hashFromEthereumCall = items[0][i].data.toString();
           $.each(stringsForOriginalItems, function(index, user) {
             if (user.hash.toString() === hashFromEthereumCall) {
@@ -358,7 +359,7 @@ window.addEventListener("load", () => {
           blockHash = blockHash === "" ? `` : `<p>Block Hash: ${blockHash}</p>`;
           txHash = txHash === "" ? "" : `<p>Transaction Hash: ${txHash} </p>`;
           type = type === "" ? "" : `<p>Type: ${type} </p>`;
-          title = title === "" ? "" : `<p>Type: ${title} </p>`;
+          title = title === "" ? "" : `<p>Title: ${title} </p>`;
           var ipfsAddress =
             ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
               ? "Empty"
@@ -381,7 +382,7 @@ window.addEventListener("load", () => {
               ipfsAddress +
               `</p><p>Date: ` +
               unixTimeToDate(items[0][i].date.toString()) +
-              `</p>` +
+              `</p>`+ mode +
               txHash +
               blockHash +
               `</li>`
@@ -426,7 +427,7 @@ window.addEventListener("load", () => {
               return false;
             }
           });
-          title = title === "" ? "" : `<p>Type: ${title} </p>`;
+          title = title === "" ? "" : `<p>Title: ${title} </p>`;
           type = type === "" ? "" : `<p>Type: ${type} </p>`;
           var ipfsAddress =
             ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
