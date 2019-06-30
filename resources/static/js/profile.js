@@ -330,6 +330,8 @@ window.addEventListener("load", () => {
       url: window.location.origin + "/api/users/strings"
     });
 
+    const stringsForOriginalItems = stringsIDtxBlockHash;
+
     //Items Inserted (Original)
     contractEtherJS
       .getOwnItems(account)
@@ -341,19 +343,22 @@ window.addEventListener("load", () => {
           var txHash = "";
           var blockHash = "";
           var type = "";
+          var title = "";
           var hashFromEthereumCall = items[0][i].data.toString();
-          $.each(stringsIDtxBlockHash, function(index, user) {
+          $.each(stringsForOriginalItems, function(index, user) {
             if (user.hash.toString() === hashFromEthereumCall) {
               txHash = user.transactionHash;
               blockHash = user.blockHash;
               type = user.type;
-              stringsIDtxBlockHash.splice(index, 1);
+              title = user.title;
+              stringsForOriginalItems.splice(index, 1);
               return false;
             }
           });
           blockHash = blockHash === "" ? `` : `<p>Block Hash: ${blockHash}</p>`;
           txHash = txHash === "" ? "" : `<p>Transaction Hash: ${txHash} </p>`;
           type = type === "" ? "" : `<p>Type: ${type} </p>`;
+          title = title === "" ? "" : `<p>Type: ${title} </p>`;
           var ipfsAddress =
             ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
               ? "Empty"
@@ -364,7 +369,9 @@ window.addEventListener("load", () => {
               ? "Notary Mode"
               : ethers.utils.formatUnits(items[0][i].valueWei, 9) + " Gwei";
           $("#showYourData").append(
-            `<li class="list-group-item"><p>Data hash: ` +
+            `<li class="list-group-item">` +
+              title +
+              `<p>Data hash: ` +
               items[0][i].data.toHexString() +
               `</p><p>Price: ` +
               valueWei +
@@ -406,32 +413,33 @@ window.addEventListener("load", () => {
           var txHash = "";
           var blockHash = "";
           var type = "";
+          var title = "";
           var hashFromEthereumCallPurchased = items[0][i].data.toString();
           $.each(stringsIDtxBlockHash, function(index, user) {
             if (
               user.hash.toString() ===
-              hashFromEthereumCallPurchased + account
+              hashFromEthereumCallPurchased
             ) {
-              txHash = user.transactionHash;
-              blockHash = user.blockHash;
               type = user.type;
+              title = user.title;
               stringsIDtxBlockHash.splice(index, 1);
               return false;
             }
           });
-          blockHash = blockHash === "" ? `` : `<p>Block Hash: ${blockHash}</p>`;
-          txHash = txHash === "" ? "" : `<p>Transaction Hash: ${txHash} </p>`;
+          title = title === "" ? "" : `<p>Type: ${title} </p>`;
           type = type === "" ? "" : `<p>Type: ${type} </p>`;
           var ipfsAddress =
             ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) == ""
               ? "Empty"
               : ethers.utils.parseBytes32String(items[0][i].addressIPFS[0]) +
                 ethers.utils.parseBytes32String(items[0][i].addressIPFS[1]);
-          var valueWei = "Notary Mode (Purchased)";
+          var valueWei = "Purchased";
           $("#showYourData").append(
-            `<li class="list-group-item"><p>Data hash: ` +
+            `<li class="list-group-item">` +
+              title +
+              `<p>Data hash: ` +
               items[0][i].data.toHexString() +
-              `</p><p>Price: ` +
+              `</p><p>Mode: ` +
               valueWei +
               `</p>` +
               type +

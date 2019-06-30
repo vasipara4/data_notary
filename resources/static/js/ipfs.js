@@ -323,8 +323,6 @@ window.addEventListener("load", () => {
             data: ipfsData,
             processData: false,
             success: function(resultIPFS) {
-              console.log(resultIPFS);
-              console.log("With 0"+resultIPFS[0].hash);
               contract.methods
                 .addAddressIPFS(ipfsHashToBytes32(resultIPFS[0].hash), id)
                 .send({ from: account })

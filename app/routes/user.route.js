@@ -86,9 +86,6 @@ module.exports = function(app) {
   // Save a User's Info to MongoDB
   app.post("/api/users/save", upload.single("file"), users.save);
 
-  // Save a User's Info to MongoDB
-  app.post("/api/users/buy", upload.none(), users.buy);
-
   //Check file Integrity
   app.post("/api/db/verify", upload.none(), users.fileIntegrity);
 

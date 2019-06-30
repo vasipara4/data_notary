@@ -303,52 +303,22 @@ window.addEventListener("load", () => {
   //Buy Request
   $("body").on("submit", ".formdataBuy", function submit(e) {
     e.preventDefault();
-    var formId = $(this).attr("id"); //currentThis.id;
+    var formId = $(this).attr("id");
     var weiValueForm = formId + "Value";
     var idItemForm = formId + "ID";
     var typeID = formId + "type";
     var idSubmit = formId + "Submit";
-    var formData = new FormData();
     var weiToPay = $("#" + weiValueForm).val();
     var idRequest = $("#" + idItemForm).val();
-    console.log(idRequest);
-    var type = $("#" + typeID).val();
-    $("#" + idSubmit).attr("value", "Do NOT close the Marketplace");
+
+    $("#" + idSubmit).attr("value", "Loading...");
     contract.methods
       .takeCopyrights(idRequest)
       .send({ from: account, value: weiToPay })
       .then(function(result) {
-        formData.append("submitter", account);
-        formData.append("hash", idRequest);
-        formData.append("transactionHash", result.transactionHash);
-        formData.append("blockHash", result.blockHash);
-        formData.append("gasUsed", result.gasUsed);
-        formData.append("type", type);
-        contract.methods
-          .getDataShareFromAddressID(account, idRequest)
-          .call({ from: account })
-          .then(function(timestamp) {
-            formData.append("timestamp", timestamp[1]);
-            console.log(timestamp[1]);
-            $.ajax({
-              type: "POST",
-              enctype: "multipart/form-data",
-              contentType: false,
-              url: window.location.origin + "/api/users/buy",
-              data: formData,
-              processData: false,
-              success: function() {
-                console.log("Transaction Completed!");
-                $("#" + idSubmit).attr("value", "You Have It");
-                $("#" + idSubmit).attr("disabled", true);
-              },
-              error: function(e) {
-                $("#" + idSubmit).attr("value", "You have it");
-                console.log("ERROR: ", e);
-                alert("Transaction & block Hash haven't saved");
-              }
-            });
-          });
+        console.log("Transaction Completed!");
+        $("#" + idSubmit).attr("value", "You Have It");
+        $("#" + idSubmit).attr("disabled", true);
       })
       .catch(e => {
         console.log(e);
@@ -386,8 +356,10 @@ window.addEventListener("load", () => {
     return formattedTime;
   }
 
+  //Address for href IPFS items => IPFS gateway
   const miletusIPFS = "http://miletus.dynu.net:8080/ipfs/";
-  //Calculate Marketplace Variables
+
+  //Calculate Marketplace Variables & after print them
   (async function() {
     account = await web3.eth.getAccounts();
     account = account[0];
@@ -460,6 +432,7 @@ window.addEventListener("load", () => {
   })();
 });
 
+//Print Marketplace
 function printMarketplace(
   i,
   length,
