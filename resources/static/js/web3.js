@@ -610,56 +610,6 @@ window.addEventListener("load", () => {
       }
     });
   });
-
-  //IPFS ADD FILES
-  // $("#IPFSform").submit(function(event) {
-  //   // Prevent the form from submitting via the browser.
-  //   event.preventDefault();
-  //   $("#resultIPFS").html("");
-  //   var ipfsElementLoading = document.getElementById("insertIPFS");
-  //   var id = $("#idOfIPFS").val();
-  //   var form = $("#IPFSform")[0];
-  //   var ipfsData = new FormData(form);
-  //   contract.methods
-  //     .dataIsYourData(id, account)
-  //     .call({ from: account })
-  //     .then(function(result) {
-  //       if (result) {
-  //         ipfsElementLoading.classList.add("running");
-  //         $.ajax({
-  //           type: "POST",
-  //           enctype: "multipart/form-data",
-  //           contentType: false,
-  //           url: window.location.origin + "/api/ipfs/save",
-  //           data: ipfsData,
-  //           processData: false,
-  //           success: function(resultIPFS) {
-  //             var addressIPFS = resultIPFS[0].hash;
-  //             contract.methods
-  //               .addAddressIPFS(ipfsHashToBytes32(addressIPFS), id)
-  //               .send({ from: account })
-  //               .then(function(result) {
-  //                 ipfsElementLoading.classList.remove("running");
-  //                 $("#resultIPFS").html(
-  //                   "<p>IPFS address: " + resultIPFS[0].hash + "</p>"
-  //                 );
-  //               })
-  //               .catch(function(error) {
-  //                 ipfsElementLoading.classList.remove("running");
-  //                 alert(error);
-  //               });
-  //           },
-  //           error: function(e) {
-  //             ipfsElementLoading.classList.remove("running");
-  //             alert("Error!");
-  //             console.log("ERROR: ", e);
-  //           }
-  //         });
-  //       } else {
-  //         alert("Insert only on your Ethereum Submission");
-  //       }
-  //     });
-  // });
 });
 
 async function openFile(id) {
@@ -677,9 +627,9 @@ async function openFile(id) {
   return result;
 }
 
-function showFileName() {
+function showFileName(id) {
   var input = document.getElementById("file");
-  var infoArea = document.getElementById("file-upload-filename");
+  var infoArea = document.getElementById(id);
   var fileName = input.files[0].name;
   infoArea.textContent = "Selected: " + fileName;
 }
