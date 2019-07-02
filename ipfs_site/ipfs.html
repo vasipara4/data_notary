@@ -3,7 +3,7 @@
 
 <head>
   <title>IPFS upload</title>
-  <link rel="shortcut icon" type="image/png" href="static/images/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta http-equiv="X-UA-Compatible" content="ie-edge" />
   <meta charset="utf-8" />
@@ -15,11 +15,11 @@
         charset="utf-8"
         type="text/javascript">
 </script>
-  <script src="/static/js/ipfs.js"></script>
-  <link rel="stylesheet" type="text/css" href="/static/css/loading.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/cards.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/loading-btn.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/component.css" />
+  <script src="ipfs.js"></script>
+  <link rel="stylesheet" type="text/css" href="loading.css" />
+  <link rel="stylesheet" type="text/css" href="cards.css" />
+  <link rel="stylesheet" type="text/css" href="loading-btn.css" />
+  <link rel="stylesheet" type="text/css" href="component.css" />
 </head>
 
 <body>
@@ -28,7 +28,6 @@
       <ul class="nav nav-tabs">
         <li role="presentation"><a href="index.html">Data Notary</a></li>
         <li role="presentation" class="active"><a href="#">IPFS</a></li>
-        <li role="presentation"><a href="marketplace.html">Marketplace</a></li>
         <li role="presentation"><a href="profile.html">Profile</a></li>
       </ul>
     </nav>
@@ -38,10 +37,8 @@
       <hr />
       <form id="IPFSform" enctype="multipart/form-data">
         <div class="form-group">
-          <label>File <font size="2">(size limit 16MB)</font>:</label>
-          <input type="file" name="file" id="file" onchange="showFileName()" required />
-          <label for="file" class="btn-1">IPFS Upload</label>
-          <div id="file-upload-filename"> </div>
+          <label>File address:</label>
+          <input class="form-control" type="text" name="file" id="file" placeholder="Enter existing IPFS Address" required />
         </div>
         <div class="form-group">
           <label for="id">Your Submission File Hash:</label>
@@ -60,7 +57,7 @@
       <div class="card card-default">
         <a href="https://ipfs.io/" class="card-link" target="_blank">
           <span class="card-img">
-            <img src="/static/images/IPFS_logo.png" class="img-responsive">
+            <img src="IPFS_logo.png" class="img-responsive">
           </span>
           <span class="card-body">
             <span class="h3 heading">IPFS</span>
@@ -68,12 +65,6 @@
           </span>
         </a>
       </div>
-      <div>
-      <p> We have opened our IPFS Gateway!</p>
-      <p>Reach your files on : http://miletus.dynu.net:8080/ipfs/ + Your IPFS address</p>
-      <h4> Our decentralized website is at IPFS address: QmZfV5mfUMKyuKTBLtuGVV3qYpZZjYLyTW7EzWNWby5rkm </h4>
-    </div>
-
     </div>
 </body>
 

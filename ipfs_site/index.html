@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Data Notary</title>
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript"></script>
+  <script src="web3.js"></script>
+  <link rel="stylesheet" type="text/css" href="loading.css" />
+  <link rel="stylesheet" type="text/css" href="loading-btn.css" />
+  <link rel="stylesheet" type="text/css" href="cards.css" />
+  <link rel="stylesheet" type="text/css" href="component.css" />
+</head>
+
+<body>
+  <div class="container" id="container">
+    <nav class="navbar">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active">
+          <a href="#">Data Notary</a>
+        </li>
+        <li role="presentation"><a href="ipfs.html">IPFS</a></li>
+        <li role="presentation"><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+    <hr />
+    <div class="col-sm-5">
+      <h3>Notarization Service Only</h3>
+      <hr />
+
+      <div>
+        <form id="userForm" enctype="multipart/form-data">
+
+          <div class="form-group">
+            <label for="file">File <font size="2">(size limit 16MB)</font>:
+            </label>
+            <input type="file" name="file" id="file" onchange="showFileName(`file`,`file-upload-filename`)" required />
+            <label for="file" class="btn-1">Upload</label>
+            <div id="file-upload-filename"></div>
+
+
+          </div>
+          <div class="form-group">
+
+            <input type="hidden" name="weiValue" class="form-control" id="weiValue" min="0" value="0" oninput="weiEther()" required />
+
+          </div>
+
+          <button type="submit" id="insertLoading" class="btn btn-default ld-ext-right">
+            Notary Data in our Blockchain Service
+            <div class="ld ld-ring ld-spin"></div>
+          </button>
+        </form>
+      </div>
+      <div id="postResultDiv"></div>
+
+    </div>
+
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-5">
+      <h3>Check Data Integrity from file</h3>
+      <hr />
+      <div>
+        <form id="verifyForm">
+          <div class="form-group">
+            <label for="uploadTestFile">File:</label>
+            <input type="file" id="uploadTestFile" onchange="showFileName(`uploadTestFile`,`file-upload-filename-verify`)" required />
+            <label for="uploadTestFile" class="btn-1">Upload</label>
+          </div>
+          <div id="file-upload-filename-verify"></div>
+          <div class="form-group">
+            <label for="verifyForm_address">Enter Owner Address:</label>
+            <input type="text" class="form-control" id="verifyForm_address" placeholder="Hex representation" required />
+          </div>
+          <button type="submit" class="btn btn-default">
+            Verify
+          </button>
+          <div id="getVerifyDiv">
+            <ul class="list-group"></ul>
+          </div>
+        </form>
+      </div>
+      <div>
+        <hr />
+        <h3>Check Data Integrity from Hash</h3>
+        <hr />
+        <form id="verifyHash">
+          <div class="form-group">
+            <label for="verifyFromHashId">Enter File's Hash:</label>
+            <input type="text" class="form-control" id="verifyFromHashId" placeholder="Keccak-256 Hash" required />
+          </div>
+          <div class="form-group">
+            <label for="verifyFromHashAddress">Enter Owner Address:</label>
+            <input type="text" class="form-control" id="verifyFromHashAddress" placeholder="Hex representation" required />
+          </div>
+          <button type="submit" class="btn btn-default">Verify
+          </button>
+        </form>
+        <div id="getVerifyHashDiv">
+          <ul class="list-group"></ul>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</body>
+
+</html>

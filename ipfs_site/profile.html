@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Your Profile</title>
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+  <meta charset="utf-8" />
+  <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache" />
+  <meta HTTP-EQUIV="Expires" CONTENT="-1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript"></script>
+  <script src="profile.js"></script>
+  <link rel="stylesheet" type="text/css" href="cards.css" />
+  <link rel="stylesheet" type="text/css" href="component.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <ul class="nav nav-tabs">
+        <li role="presentation"><a href="index.html">Data Notary</a></li>
+        <li role="presentation"><a href="ipfs.html">IPFS</a></li>
+        <li role="presentation" class="active"><a href="#">Profile</a></li>
+      </ul>
+    </nav>
+    <span id="accountName"></span>
+    <hr />
+
+    <div class="col-sm-6" id="BalanceContainer">
+      <div class="panel-group">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Your Ether Wallet</div>
+          <div class="panel-body"><span id="withdrawEtherNumber">You can withdraw: </span>
+            <div>
+              <form id="withdrawForm" enctype="multipart/form-data">
+                <br><input type="number" class="form-control" name="valueInWei" id="withdrawValueWei" min="0" placeholder="Value in Wei" required />
+                <br> <input type="submit" class="btn-1" value="Withdraw">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-group">
+          <div class="panel panel-primary">
+            <div class="panel-heading">File Wallet</div>
+
+            <div class="panel-body">
+              <ul class="list-group" style="word-break:break-all;" id="showYourData"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-6" id="PropertiesContainer">
+            <div class="panel-group">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4>Update one of your own File price </h4>
+          </div>
+          <div class="panel-body">
+            <form id="UpdateWeiForm" enctype="multipart/form-data" autocomplete="off">
+              <div class="form-group">
+                <label for="hashOfFileUpdate">Hash of your file: </label>
+                <input type="text" class="form-control" id="hashOfFileUpdate" placeholder="Enter file's keccak256" required />
+              </div>
+              <div class="form-group">
+                <label for="updateValueWei"> Update price of wei:
+                </label>
+                  <input type="number" class="form-control" id="updateValueWei" min="0" placeholder="New Wei Price" required />
+              </div>
+              <button type="submit" class="btn btn-default">
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-group">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4>Send existing owned file to Address </h4>
+          </div>
+          <div class="panel-body">
+            <form id="SendHashToAddress" enctype="multipart/form-data" autocomplete="off">
+              <div class="form-group">
+                <label for="hashOfFileToSend">Hash of your file: </label>
+                <input type="text" class="form-control" id="hashOfFileToSend" placeholder="Enter file's keccak256" required />
+              </div>
+              <div class="form-group">
+                <label for="addressToOwnYourFile">to Address:
+                </label>
+                  <input type="text" class="form-control" id="addressToOwnYourFile" placeholder="Hex representation" required />
+              </div>
+              <button type="submit" class="btn btn-default">
+                Send
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</body>
+
+</html>
