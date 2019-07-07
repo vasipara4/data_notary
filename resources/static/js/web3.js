@@ -507,7 +507,7 @@ window.addEventListener("load", () => {
                             IPFSstring +
                             addressShared +
                             timeShare;
-                          $("#getVerifyHashDiv").html(
+                          $("#getVerifyDiv").html(
                             "Data	Integrity: " + verifyHtml
                           );
                         });
@@ -621,7 +621,7 @@ async function openFile(id) {
       var bytes = new Uint8Array(arrayBuffer);
       resolve(bytes);
     };
-    fr.readAsArrayBuffer(input); 
+    fr.readAsArrayBuffer(input);
   });
   var result = await readfile;
   return result;
