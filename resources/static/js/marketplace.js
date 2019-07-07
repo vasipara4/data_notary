@@ -447,8 +447,10 @@ function printMarketplace(
   valueWei,
   submitButton
 ) {
-  //if (i === 0) $("#marketplaceContainer").append(`<div class="row" id="row" >`);
-  $(`#marketplaceContainer`).append(
+  var round = (i-(i%3))/3 ;
+  if (i%3 ===0) $("#marketplaceContainer").append(`<div class="row" id="row${round}" >`);
+
+  $(`#row${round}`).append(
     `<div class="col-sm-4">
     <form id="buyItem` +
       i +
@@ -465,7 +467,7 @@ function printMarketplace(
       </div></div> </form></div>`
   );
 
-  // if (i === length - 1) {
-  //   $("#marketplaceContainer").append(`</div>`);
-  // }
+  if (i === length - 1 || i% 3 === 2) {
+    $(`#row${round}`).append(`</div>`);
+  }
 }
