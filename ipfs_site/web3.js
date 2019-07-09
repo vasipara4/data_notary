@@ -430,7 +430,7 @@ window.addEventListener("load", () => {
                             IPFSstring +
                             addressShared +
                             timeShare;
-                          $("#getVerifyHashDiv").html(
+                          $("#getVerifyDiv").html(
                             "Data	Integrity: " + verifyHtml
                           );
                         });
