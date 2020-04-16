@@ -1,4 +1,4 @@
-# # Notarization, Marketplace & Wallet
+# # Decentralized Notarization, Marketplace & Wallet (Ethereum DApp)
 
 Υλοποίηση της αποκεντρωμένης Εφαρμογής
 
@@ -407,3 +407,7 @@ public/uploads/
 * [Cryptozombies - Solidity Tutorial](https://cryptozombies.io/)
 * [Web3 Docs](https://web3js.readthedocs.io/)
 * [Ethers Docs](https://docs.ethers.io/ethers.js/html/)
+
+
+### Ομαλή Λειτουργία Site
+Για να χρησιμοποιήσετε το site θα πρέπει να έχετε εγκατεστημένο το extension του [Metamask](https://metamask.io/). Η ανάπτυξη του dapp έγινε με την έκδοση 6.6
